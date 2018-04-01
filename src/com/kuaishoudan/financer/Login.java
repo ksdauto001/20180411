@@ -40,7 +40,7 @@ public class Login {
 		TrainCase tc = CaseUtil.getCaseByid("TI-1-011");
 	//	login(tc.getPhone(), tc.getPwd());
 
-		String result ="12";// Util2.getloginphone(driver);
+		String result ="1244";// Util2.getloginphone(driver);
 System.out.println(tc.getPhone()+"@@!");
 		Assert.assertEquals(result, tc.getPhone());
 	}
