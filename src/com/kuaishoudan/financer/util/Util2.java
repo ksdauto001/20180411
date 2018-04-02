@@ -52,6 +52,15 @@ public class Util2 {
 		
 
 	}
+	//向上滑动
+	public static void swipeToUp(AppiumDriver driver, int during) {
+		int width = driver.manage().window().getSize().width;
+		int height = driver.manage().window().getSize().height;
+	//System.out.print(width+"@"+height);
+		for(int i= 0;i<2;i++)
+		driver.swipe(width / 2, height *3 /4, width / 2,height /4, during);
+		// wait for page loading12801321
+	}
 
 	
 

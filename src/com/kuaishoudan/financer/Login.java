@@ -1,6 +1,8 @@
 package com.kuaishoudan.financer;
 
 
+import java.util.concurrent.TimeUnit;
+
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidElement;
 
@@ -38,10 +40,10 @@ public class Login {
 	@Test
 	public void test5() throws InterruptedException {
 		TrainCase tc = CaseUtil.getCaseByid("TI-1-011");
-	//	login(tc.getPhone(), tc.getPwd());
+		login("daiq2@kuaishoudan.com", "123456");
 
 		String result ="1244";// Util2.getloginphone(driver);
-System.out.println(tc.getPhone()+"@@!");
+//System.out.println(tc.getPhone()+"@@!");
 		Assert.assertEquals(result, tc.getPhone());
 	}
 
@@ -53,23 +55,19 @@ System.out.println(tc.getPhone()+"@@!");
 	 * @param driver
 	 * @throws InterruptedException
 	 */
-	public void login(String phone, String pwd) throws InterruptedException {
+	public void login(String username, String pwd) throws InterruptedException {
 
-		Thread.sleep(2000);
-
+		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS); 
+		
 		driver.findElement(
-				By.id("com.winsion.inception:id/et_user_center_phone")).clear();
-		driver.findElement(By.id("com.winsion.inception:id/et_user_center_pwd"))
+				By.id("com.kuaishoudan.financer:id/edit_account")).clear();
+		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_password"))
 				.clear();
-		driver.findElement(
-				By.id("com.winsion.inception:id/et_user_center_phone"))
-				.sendKeys(phone);
+		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_account")).sendKeys(username);
+		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_password")).sendKeys(pwd);
+		driver.findElement(By.id("com.kuaishoudan.financer:id/btn_login")).click();
 
-		driver.findElement(By.id("com.winsion.inception:id/et_user_center_pwd"))
-				.sendKeys(pwd);
+		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS); 
 
-		driver.findElement(
-				By.id("com.winsion.inception:id/bt_user_center_login")).click();
-		Thread.sleep(2000);
 	}
 }
