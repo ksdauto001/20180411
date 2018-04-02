@@ -83,7 +83,7 @@ public class ControlTest {
     	driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
    // 	
     	driver.findElement(By.id("com.kuaishoudan.financer:id/btn_ok")).click();//两种证上传——确定按钮
-    Thread.sleep(3000);
+    Thread.sleep(4000);
     	driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_confirm")).click();//上传完-确定按钮
     	driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
     	driver.findElement(By.id("com.kuaishoudan.financer:id/dialog_custom_confirm")).click();//提醒确定是
@@ -157,7 +157,7 @@ public class ControlTest {
     	driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
    // 	
     	driver.findElement(By.id("com.kuaishoudan.financer:id/btn_ok")).click();//两种证上传——确定按钮
-    Thread.sleep(3000);
+    Thread.sleep(4000);
     	driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_confirm")).click();//上传完-确定按钮
     	driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
     	driver.findElement(By.id("com.kuaishoudan.financer:id/dialog_custom_confirm")).click();//提醒确定是
