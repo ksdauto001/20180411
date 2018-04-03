@@ -4,7 +4,6 @@
 	<classpathentry kind="lib" path="lib/activation.jar"/>
 	<classpathentry kind="lib" path="lib/java-client-3.0.0.jar"/>
 	<classpathentry kind="lib" path="lib/reportng-1.1.4.jar"/>
-	<classpathentry kind="lib" path="lib/selenium-java-2.44.0.jar"/>
 	<classpathentry kind="lib" path="lib/selenium-server-standalone-2.45.0.jar"/>
 	<classpathentry kind="lib" path="lib/testng-5.12.jar"/>
 	<classpathentry kind="lib" path="lib/velocity-dep-1.4.jar"/>
@@ -14,5 +13,6 @@
 	<classpathentry kind="lib" path="lib/httpcore-4.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/json.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/selenium-java-2.44.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
