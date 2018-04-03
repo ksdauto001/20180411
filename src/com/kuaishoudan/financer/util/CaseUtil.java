@@ -41,13 +41,14 @@ public class CaseUtil {
 			System.out.println("========"+ksd.getCaseid()+"@@"+ksd.getRemark()+ksd.getPhone());
 */
 		
-		List<KSDCase> testcase=getCases(1);
+		/*List<KSDCase> testcase=getCases(1);
 		
 		System.out.println(testcase.size());
 		for(int i=0;i<testcase.size();i++) {
 			KSDCase ksd=testcase.get(i);
-			System.out.println("==="+ksd.getCaseid()+ksd.getUsername()+ksd.getCartype()+ksd.getBusinessname()+ksd.getPhone() );
-		}
+			System.out.println(ksd.getCarprice()+"==="+ksd.getCaseid()+ksd.getUsername()+ksd.getCartype()+ksd.getBusinessname()+ksd.getPhone() );
+		}*/
+		
 	}
 
 	
