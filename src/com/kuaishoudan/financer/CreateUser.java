@@ -11,7 +11,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.kuaishoudan.financer.bean.TrainCase;
 import com.kuaishoudan.financer.util.CaseUtil;
 import com.kuaishoudan.financer.util.Util2;
 
@@ -38,12 +37,12 @@ public class CreateUser {
 	// 创建用户
 	@Test
 	public void test5() throws InterruptedException {
-		TrainCase tc = CaseUtil.getCaseByid("TI-1-011");
+	//	TrainCase tc = CaseUtil.getCaseByid("TI-1-011");
 
 
 		String result ="1244";// Util2.getloginphone(driver);
 //System.out.println(tc.getPhone()+"@@!");
-		Assert.assertEquals(result, tc.getPhone());
+		Assert.assertEquals(result,"");
 	}
 	
 
