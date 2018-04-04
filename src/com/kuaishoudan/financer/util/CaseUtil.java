@@ -4,9 +4,13 @@ package com.kuaishoudan.financer.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 
 
@@ -48,6 +52,41 @@ public class CaseUtil {
 			KSDCase ksd=testcase.get(i);
 			System.out.println(ksd.getCarprice()+"==="+ksd.getCaseid()+ksd.getUsername()+ksd.getCartype()+ksd.getBusinessname()+ksd.getPhone() );
 		}*/
+		/*DecimalFormat df = new DecimalFormat("#.00");
+		for(int i=0;i<100;i++){
+			//double x=2+(double)(Math.random()*2.0);
+		
+
+			double sqdk=Double.parseDouble(df.format(2+Math.random() * 997));
+			double cljg=Double.parseDouble(df.format(2+Math.random() * 997));
+			System.out.println(cljg+"="+sqdk);
+			if(cljg<=sqdk){
+				System.out.println(sqdk);break;
+			}else{
+				System.out.println("**"+i);
+			}
+			
+		}*/
+	/*	for(int i=0;i<20;i++){
+			String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+			System.out.println(uuid);
+			Calendar calendar = Calendar.getInstance();
+			System.out.println("现在："+calendar.getTime().getTime()+ (int)(Math.random()*89+10));	
+		}*/
+	
+		/* for (int i = 0; i < 9; i++) {//9代表循环九次，产生九个随机号码
+			 
+	            String number = "1";//定义电话号码以139开头
+	            Random random = new Random();//定义random，产生随机数
+	            for (int j = 0; j < 10; j++) {
+	                //生成0~9 随机数
+	                number += random.nextInt(9);
+	            }
+	            System.out.println(number);//输出一个电话号码
+	        }*/
+		for(int q=0;q<10;q++)
+		System.out.println(RandomValue.getChineseName());
+		
 		
 	}
 
