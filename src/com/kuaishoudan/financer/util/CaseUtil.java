@@ -84,8 +84,8 @@ public class CaseUtil {
 	            }
 	            System.out.println(number);//输出一个电话号码
 	        }*/
-		for(int q=0;q<10;q++)
-		System.out.println(RandomValue.getChineseName());
+		//for(int q=0;q<10;q++)
+
 		
 		
 	}

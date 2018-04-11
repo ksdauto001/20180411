@@ -51,11 +51,12 @@ public class ControlTest {
 	}
 	static int p=1;
 	
-	@Test(invocationCount =3, threadPoolSize = 1)
+	@Test(invocationCount =1, threadPoolSize = 1)
 	public void test1() throws InterruptedException, IOException{
 
 	
-			Util2.addTest(driver, devicename,p);
+			//Util2.addTest(driver, devicename,p);
+		Util2.addZjjtest(driver, devicename, p);
 			p++;
 
 	}
