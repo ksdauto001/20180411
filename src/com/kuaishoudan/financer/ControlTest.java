@@ -28,6 +28,7 @@ import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.android.AndroidKeyMetastate;
 
 public class ControlTest {
+	
 	public AppiumDriver<AndroidElement> driver=null;
 	String devicename="";
 	@BeforeTest
