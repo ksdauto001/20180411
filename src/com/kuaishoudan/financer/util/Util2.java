@@ -26,7 +26,7 @@ public class Util2 {
 		// set up appium
 		File classpathRoot = new File(System.getProperty("user.dir"));
 		File appDir = new File(classpathRoot, "apps");
-		File app = new File(appDir, "financer_ceshi_2.4.0.0_24000_2018-04-09.apk");//financerfinalVersionjiagusign.apk
+		File app = new File(appDir, "financer_ceshiPack_2.4.0.0_24000_2018-04-11.apk");//financerfinalVersionjiagusign.apk
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		capabilities.setCapability("device", "Android");
 		capabilities.setCapability("platformName", "Android");

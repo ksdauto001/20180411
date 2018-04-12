@@ -13,9 +13,11 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
@@ -50,8 +52,11 @@ public class TestLogin {
 			username = properties.getProperty("username");
 			pwd = properties.getProperty("password");
 			System.out.println("++++++++" + baseUrl);
-
+			Thread.sleep(1000);
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -69,13 +74,14 @@ public class TestLogin {
 
 	//	testDFP(driver);//待分配
 	//	testYFP(driver);//已分配
-		testYLR(driver);//已录入
+	//	testYLR(driver);//已录入
+		testYSQHT(driver);//已出合同
 		// System.out.println(a.get(0).findElement(By.id(id)));
 		// driver.findElement(By.linkText("客户")).click();
 		// driver.findElement(By.linkText("已分配")).click();
 		// driver.findElement(By.linkText("合同管理")).click();
 		try {
-			Thread.sleep(12000);
+			Thread.sleep(22000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -187,19 +193,121 @@ public class TestLogin {
 	//已录入
 	public void testYLR(WebDriver driver){
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-		driver.findElement(By.linkText("已录入")).click();
+		driver.findElement(By.linkText("客户")).click();
+		driver.findElement(By.linkText("已录入")).click();	
+		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+		clickItem("刘浩亮");	
+		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+		driver.findElement(By.className("requestpayout_detail_btn_box")).findElement(By.xpath("//a/div")).click();//通知审核结果
+		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+		driver.findElement(By.name("purchase_tax")).sendKeys("12000.12");//购置税
+		driver.findElement(By.name("gps_charge")).sendKeys("13000.13");//GPS费
+		driver.findElement(By.name("insurance")).sendKeys("14000.14");//GPS费
+		driver.findElement(By.name("service_charge")).sendKeys("15000.15");//服务费
+		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+		driver.findElement(By.id("review_sub")).click();//确定按钮
+		
+		
+		
+	}
+	//已通过
+	public void  testYTG(WebDriver driver){
+		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+		driver.findElement(By.linkText("客户")).click();
+		driver.findElement(By.linkText("已通过")).click();
 		
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-		clickItem("刘浩亮");
-		//driver.findElement(By.id("sendAuditResult")).click();//通知审核结果
 	}
+	//已申请合同 （上传图片还没做）
+	public void testYSQHT(WebDriver driver){
+		
+		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
+		driver.findElement(By.linkText("客户")).click();
+		driver.findElement(By.linkText("合同管理")).click();
+		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
+		clickItem("刘浩亮");
+		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
+		
+		
+		((JavascriptExecutor) driver)
+		.executeScript("window.scrollTo(0,1250)"); // 向下滑动
+	
+		System.out.println(driver.findElement(
+				By.xpath("//div[@class='requestpayout_detail_container'][3]/div/div[4]/a[2]/div")).getText()
+				);
+		driver.findElement(
+				By.xpath("//div[@class='requestpayout_detail_container'][3]/div/div[4]/a[2]/div"))
+				.click();// 同意按钮
+		
+		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+		driver.findElement(By.name("vin")).sendKeys("AAAAASSSSSDDDDDQQ");
+		
+		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+		
+		((JavascriptExecutor) driver)
+		.executeScript("	document.getElementsByClassName('file_upload_btn')[0].style.display='block';"); 
+		driver.findElement(By.className("file_upload_layer")).click();///上传
+		//driver.findElement(By.name("file")).;
+		String path=System.getProperty("user.dir");
+		System.out.println(path);
+		driver.findElement(By.name("file")).sendKeys(path+"/20180409104900.jpg");
+		
+		try {
+			//Thread.sleep(2000);
+			Runtime.getRuntime().exec("autoit1.exe");
+			//Thread.sleep(2000);
+		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}/*catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+	
 
+		 driver.findElement(By.partialLinkText("确认")).click();//确认按钮
+		 try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 driver.manage().timeouts().implicitlyWait(308, TimeUnit.SECONDS);
+		 driver.findElement(By.linkText("确定")).click();//确定按钮
+		
+		
+		
+	}
+/*	public void  clickItem1(String name){
+		List<WebElement> items=driver.findElements(By.xpath("//ul[@class='finance_list']/li"));//className("list_item")
+	//	List<WebElement> items=driver.findElements(By.xpath("//div[@class='list_item']/div[2]/div[3]/dl[6]/dd"));//className("list_item")
+		
+		System.out.println("项目数"+items.size());	
+		for(int i=0;i<4;i++){
+			System.out.println(i);
+		WebElement   item=	items.get(i).findElement(By.xpath("//div[2]/div[3]/dl[6]/dd"));
+		//	WebElement   item=	items.get(i);
+			System.out.println("=="+item.getText());
+				if(item.getText().contains(name)){
+					System.out.println("@"+item.getText());	
+					item.click();
+					break;
+				}
+		}
+	}*/
 	public void  clickItem(String name){
 		List<WebElement> items=driver.findElements(By.className("list_item"));//className("list_item")
-		System.out.println(items.size());	
-		for(int i=0;i<items.size();i++){
-		WebElement   item=	items.get(i).findElement(By.xpath("//div[2]/div[3]/dl[6]/dd"));
+	//	List<WebElement> items=driver.findElements(By.xpath("//div[@class='list_item']/div[2]/div[3]/dl[6]/dd"));//className("list_item")
+		
+		System.out.println("项目数"+items.size());	
+		for(int i=1;i<=items.size();i++){
+			System.out.println(i);
+		WebElement   item=	items.get(i).findElement(By.xpath("//ul[@class='finance_list']/li["+i+"]/div[2]/div[3]/dl[6]/dd"));
+		//	WebElement   item=	items.get(i);
+			System.out.println("=="+item.getText());
 				if(item.getText().contains(name)){
+					System.out.println("@"+item.getText());	
 					item.click();
 					break;
 				}
