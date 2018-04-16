@@ -43,7 +43,7 @@ public class ControlTest {
 		br.readLine();
 		devicename=br.readLine().replaceAll("device", "").trim();
 		System.out.println(devicename);
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 	}
 
 	@AfterTest
@@ -60,8 +60,8 @@ public class ControlTest {
 			//Util2.addTest(driver, devicename,p);
 	//	Util2.addZjjtest(driver, devicename, p);
 	//	testSQHT(driver);
-	//	testHTSQQK(driver);
-		testSQQK(driver);
+		testHTSQQK(driver);
+	//	testSQQK(driver);
 			p++;
 
 	}
@@ -196,7 +196,7 @@ int height = driver.manage().window().getSize().height;
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	driver.findElement(By.id("com.kuaishoudan.financer:id/tv_countdown")).click();
+	driver.findElement(By.id("com.kuaishoudan.financer:id/tv_countdown")).click();//倒计时确认
 	}
 	
 	
