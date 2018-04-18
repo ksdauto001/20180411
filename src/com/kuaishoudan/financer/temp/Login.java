@@ -21,7 +21,7 @@ public class Login {
 	@BeforeTest
 	public void setUp() throws Exception {
 
-		driver = Util2.getdriver();
+		driver = AppUtil.getdriver();
 	
 		Thread.sleep(500);
 	}

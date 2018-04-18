@@ -20,7 +20,7 @@ import com.kuaishoudan.financer.bean.KSDCase;
 import com.kuaishoudan.financer.util.CaseUtil;
 import com.kuaishoudan.financer.util.IdCardGenerator;
 import com.kuaishoudan.financer.util.Util1;
-import com.kuaishoudan.financer.util.Util2;
+import com.kuaishoudan.financer.util.AppUtil;
 import com.kuaishoudan.financer.web.LoginWeb;
 
 import io.appium.java_client.AppiumDriver;
@@ -34,7 +34,7 @@ public class ControlTest {
 	String devicename="";
 	@BeforeTest
 	public void setUp() throws Exception {
-		driver =   Util2.getdriver();
+		driver =   AppUtil.getdriver();
 	
 		Process process=Runtime.getRuntime().exec("adb devices");
 		process.waitFor();
@@ -67,7 +67,7 @@ public class ControlTest {
 	}
 	//@Test(invocationCount = 2, threadPoolSize = 1)
 	public void test2() throws InterruptedException, IOException{
-		Util2.addZjjtest(driver, devicename, p);
+		AppUtil.addZjjtest(driver, devicename, p);
 		p++;
 	}
 	//@Test
@@ -89,7 +89,7 @@ public class ControlTest {
 		.click();//申请合同
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.findElements(By.id("com.kuaishoudan.financer:id/check_group")).get(2).click();//不安装   选择GPS安装方式
-		Util2.swipeToUp(driver, 1000);
+		AppUtil.swipeToUp(driver, 1000);
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	//	driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add")).click();//添加照片
 	//	Util1.upload(driver);

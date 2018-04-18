@@ -12,7 +12,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.kuaishoudan.financer.util.CaseUtil;
-import com.kuaishoudan.financer.util.Util2;
+import com.kuaishoudan.financer.util.AppUtil;
 
 public class QYxjdk {
 	public AppiumDriver<AndroidElement> driver;
@@ -20,7 +20,7 @@ public class QYxjdk {
 	@BeforeTest
 	public void setUp() throws Exception {
 
-		driver = Util2.getdriver();
+		driver = AppUtil.getdriver();
 	
 		Thread.sleep(500);
 	}
@@ -68,7 +68,7 @@ driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add_loan")).click();//
 	driver.findElements(By.id("com.kuaishoudan.financer:id/text_product")).get(0).click();//第一个产品
 
 
-		Util2.swipeToUp(driver, 800);//向上滑动
+		AppUtil.swipeToUp(driver, 800);//向上滑动
 
 	driver.findElement(By.id("com.kuaishoudan.financer:id/text_supplier")).click();//所属商户
 	driver.findElements(By.id("com.kuaishoudan.financer:id/tv_name")).get(0).click();//所属商户列表

@@ -11,7 +11,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import com.kuaishoudan.financer.util.CaseUtil;
-import com.kuaishoudan.financer.util.Util2;
+import com.kuaishoudan.financer.util.AppUtil;
 
 public class GRxjdk {
 
@@ -20,7 +20,7 @@ public class GRxjdk {
 	@BeforeTest
 	public void setUp() throws Exception {
 
-		driver = Util2.getdriver();
+		driver = AppUtil.getdriver();
 	
 		Thread.sleep(500);
 	}

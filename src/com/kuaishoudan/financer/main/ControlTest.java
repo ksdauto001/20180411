@@ -1,11 +1,18 @@
 package com.kuaishoudan.financer.main;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
-import com.kuaishoudan.financer.util.Util2;
+import com.kuaishoudan.financer.util.AppSPUtil;
+import com.kuaishoudan.financer.util.AppUtil;
+import com.kuaishoudan.financer.util.WebSPUtil;
+import com.kuaishoudan.financer.util.WebUtil;
 import com.kuaishoudan.financer.web.LoginWeb;
 
 import io.appium.java_client.AppiumDriver;
@@ -13,163 +20,186 @@ import io.appium.java_client.android.AndroidElement;
 
 public class ControlTest {
 	public AppiumDriver<AndroidElement> driver;
-	
+	String devicename="";
+	public  WebDriver webdriver;
 	/**
 	 * @param args
+	 * @throws Exception 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
+		ControlTest ct=	new 	ControlTest();
+		
+		System.out.println("***@");
+		ct.setUp();//准备数据
+		ct.setUp2();
+	//  ct.loginWeb("liuhl@jizhicar.com");//登录
+	//	ct.dfp();//待分配
+	//	ct.webDksp();//已录入到申请合同
+	//	ct.appSqht();
+	//	ct.webSpht();
+	//	ct.appSqqk();
+		
+	//	ct.sp1();
+	//	ct.sp2();
+	//	ct.sp3();
+	//	ct.sp4();
+		ct.sp6();
+		ct.tearDown();
+	}
+	public void setUp() throws IOException, InterruptedException{
+		driver =   AppUtil.getdriver();
+		
+		Process process=Runtime.getRuntime().exec("adb devices");
+		process.waitFor();
+		InputStreamReader isr=new InputStreamReader(process.getInputStream());
+		BufferedReader br = new BufferedReader(isr);
+		br.readLine();
+		devicename=br.readLine().replaceAll("device", "").trim();
+		System.out.println(devicename);
+		Thread.sleep(3000);
+	}
+	//web
+	public void setUp2() throws IOException, InterruptedException{
+		webdriver=WebUtil.getdriver();
+		
+	}
+	public void loginWeb(String username){
+	//	String username="liuhl@jizhicar.com";
 
+		WebUtil.login(webdriver, username);//登录
+	}
+	/**
+	 * 创建用户，进件，待审批
+	 */
+	public  void  dfp(){
+		AppUtil.addTest(driver, devicename,1);
+	}
+	/**
+	 * web
+	 */
+	public void webDksp(){
+	
+	
+		//	WebUtil.testDFP(webdriver);//待分配
+		//	WebUtil.testYFP(webdriver);//已分配
+		//	WebUtil.testYLR(webdriver);//已录入
+	
+		//AppUtil.addTest(driver, devicename,1);
+	}
+	//App申请合同
+	public void appSqht(){
+		//
+		AppSPUtil.testSQHT(driver);
+		
+	}
+	//web审批合同
+	public void webSpht(){
+		//
+		WebUtil.testYSQHT(webdriver);//申请合同审批
+		
+	}
+	//申请请款
+	public void appSqqk(){
+		AppSPUtil.testHTSQQK(driver);
+		driver.findElement(By.id("com.kuaishoudan.financer.test:id/toolbar_back")).click();//返回按钮
+		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+		driver.findElement(By.id("com.kuaishoudan.financer.test:id/toolbar_loan_status")).click();//流程。。。
+		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+		driver.findElement(By.id("com.kuaishoudan.financer.test:id/text_customer_look_status")).click();//查看进度
+		
+	}
+	
+	//请款审批同意专员
+	public void sp1(){
+
+
+			
+			try {
+			String	spname = WebSPUtil.getSPname(driver);//从app获取审批人名字			
+			System.out.println("###"+spname);
+			String[]  strs=spname.split(",");
+			 String itename=strs[1];
+			String email=WebSPUtil.nameToemail(strs[0]);
+			WebSPUtil.testSP1(webdriver, email, itename);	//请款审批同意专员
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+	}
+	//
+	public void sp2(){
 		try {
-			new ControlTest().test1();
-			new LoginWeb().loginWeb();
-		} catch (MalformedURLException | InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			String	spname = WebSPUtil.getSPname(driver);//从app获取审批人名字			
+			System.out.println("###"+spname);
+			String[]  strs=spname.split(",");
+			 String itename=strs[1];
+			String email=WebSPUtil.nameToemail(strs[0]);
+			WebSPUtil.testSP2(webdriver, email, itename);	//请款审批同意专员
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
-	/**
-	 * 个人建贷款
-	 * @throws MalformedURLException
-	 * @throws InterruptedException
-	 */
-	public void test1() throws MalformedURLException, InterruptedException{
-		driver = Util2.getdriver();
-		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS); 
-/*			driver.findElement(By.id("com.kuaishoudan.financer:id/edit_account")).sendKeys("daiq2@kuaishoudan.com");
-		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_password")).sendKeys("123456");
-		driver.findElement(By.id("com.kuaishoudan.financer:id/btn_login")).click();*/
-	//	Thread.sleep(1000);
-		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_custom_img")).click();//+号
-		driver.findElement(By.id("com.kuaishoudan.financer:id/menu_manual_input")).click();
-		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS); 
-		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_name")).sendKeys("张研13");//
-		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_phone")).sendKeys("15022002073");//
-		driver.findElement(By.id("com.kuaishoudan.financer:id/text_id_type")).click();//点击身份证
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.findElements(By.id("com.kuaishoudan.financer:id/text_select")).get(2).click();//点击军官证 
-		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_id_code")).sendKeys("123225");//证件号码	*****	
-		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_id_address")).sendKeys("户籍地址9");
-		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_confirm")).click();//确认
-		driver.findElement(By.id("com.kuaishoudan.financer:id/dialog_custom_cancel")).click();//以后再说
-	//	driver.findElement(By.id("com.kuaishoudan.financer:id/dialog_custom_confirm")).click();//马上进件
-
-		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS); 
-
-		driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add_loan")).click();//进件
-		driver.findElement(By.id("com.kuaishoudan.financer:id/btn_select_order_type_individual")).click();//去申请
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.findElement(By.id("com.kuaishoudan.financer:id/check_old_car")).click();//二手车
-		driver.findElement(By.id("com.kuaishoudan.financer:id/text_brand")).click();//品牌车系
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.findElements(By.id("com.kuaishoudan.financer:id/item_brand_item")).get(2).click();//车辆品牌（奥迪）
-		driver.findElements(By.id("com.kuaishoudan.financer:id/item_series_item")).get(1).click();//车辆型号
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_price")).sendKeys("13.58");//车辆价格
-		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_loan")).sendKeys("13.58");//申请贷款
-		driver.findElement(By.id("com.kuaishoudan.financer:id/text_periods")).click();//还款期数
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.findElements(By.id("com.kuaishoudan.financer:id/text_select")).get(2).click();//还款期数周期
-		driver.findElement(By.id("com.kuaishoudan.financer:id/text_product")).click();//金融产品
-    	driver.findElements(By.id("com.kuaishoudan.financer:id/text_product")).get(0).click();//第一个产品
-    	driver.findElement(By.id("com.kuaishoudan.financer:id/text_supplier")).click();//所属商户
-    	driver.findElements(By.id("com.kuaishoudan.financer:id/tv_name")).get(0).click();//所属商户列表
-    	driver.findElement(By.id("com.kuaishoudan.financer:id/edit_remark")).sendKeys("备注1");//备注
-    	driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_next")).click();//下一步
-    	driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-    	driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add")).click();//上传照片
-    	driver.findElement(By.id("com.kuaishoudan.financer:id/dialog_photo_select_btn_gallery")).click();//从相册选择
-    	driver.findElements(By.id("com.kuaishoudan.financer:id/iv_thumb")).get(0).click();//添加图片（身份证）
-    	driver.findElements(By.id("com.kuaishoudan.financer:id/iv_thumb")).get(1).click();//添加图片（驾驶证）
-    	driver.findElements(By.id("com.kuaishoudan.financer:id/iv_thumb")).get(1).click();//添加图片（驾驶证）
-    	driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-   // 	
-    	driver.findElement(By.id("com.kuaishoudan.financer:id/btn_ok")).click();//两种证上传——确定按钮
-    Thread.sleep(4000);
-    	driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_confirm")).click();//上传完-确定按钮
-    	driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-    	driver.findElement(By.id("com.kuaishoudan.financer:id/dialog_custom_confirm")).click();//提醒确定是
-    	
-   // 	driver.findElement(By.id("com.kuaishoudan.financer:id/tv_guide_know")).click();//我知道了
-   // 	driver.findElement(By.id("com.kuaishoudan.financer:id/tv_guide_know")).click();//我知道了
-   //	driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back")).click();//返回按钮
-    	
-		driver.close();
-		driver.quit();
+	
+	public void sp3(){
+		try {
+			String	spname = WebSPUtil.getSPname(driver);//从app获取审批人名字			
+			System.out.println("###"+spname);
+			String[]  strs=spname.split(",");
+			 String itename=strs[1];
+			String email=WebSPUtil.nameToemail(strs[0]);
+			WebSPUtil.testSP3(webdriver, email, itename);	//请款审批同意专员
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
-	/**
-	 * 企业建贷款
-	 * @throws MalformedURLException
-	 * @throws InterruptedException
-	 */
-	public void test2() throws MalformedURLException, InterruptedException{
-		driver = Util2.getdriver();
-		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS); 
-/*			driver.findElement(By.id("com.kuaishoudan.financer:id/edit_account")).sendKeys("daiq2@kuaishoudan.com");
-		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_password")).sendKeys("123456");
-		driver.findElement(By.id("com.kuaishoudan.financer:id/btn_login")).click();*/
-	//	Thread.sleep(1000);
-		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_custom_img")).click();//+号
-		driver.findElement(By.id("com.kuaishoudan.financer:id/menu_manual_input")).click();
-		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS); 
-		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_name")).sendKeys("张研14");//
-		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_phone")).sendKeys("15022002074");//
-		driver.findElement(By.id("com.kuaishoudan.financer:id/text_id_type")).click();//点击身份证
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.findElements(By.id("com.kuaishoudan.financer:id/text_select")).get(2).click();//点击军官证 
-		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_id_code")).sendKeys("123224");//证件号码	*****	
-		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_id_address")).sendKeys("户籍地址9");
-		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_confirm")).click();//确认
-		driver.findElement(By.id("com.kuaishoudan.financer:id/dialog_custom_cancel")).click();//以后再说
-	//	driver.findElement(By.id("com.kuaishoudan.financer:id/dialog_custom_confirm")).click();//马上进件
-
-		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS); 
-
-		driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add_loan")).click();//进件
-		driver.findElement(By.id("com.kuaishoudan.financer:id/btn_select_order_type_company")).click();//去申请
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_company_name")).sendKeys("企业名称1");//企业名称
-		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_company_business_license")).sendKeys("营业执照号1");//营业执照号
-		driver.findElement(By.id("com.kuaishoudan.financer:id/check_old_car")).click();//二手车
-		driver.findElement(By.id("com.kuaishoudan.financer:id/text_brand")).click();//品牌车系
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.findElements(By.id("com.kuaishoudan.financer:id/item_brand_item")).get(2).click();//车辆品牌（奥迪）
-		driver.findElements(By.id("com.kuaishoudan.financer:id/item_series_item")).get(1).click();//车辆型号
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_price")).sendKeys("13.58");//车辆价格
-		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_loan")).sendKeys("13.58");//申请贷款
-		driver.findElement(By.id("com.kuaishoudan.financer:id/text_periods")).click();//还款期数
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.findElements(By.id("com.kuaishoudan.financer:id/text_select")).get(2).click();//还款期数周期
-		driver.findElement(By.id("com.kuaishoudan.financer:id/text_product")).click();//金融产品
-		driver.findElements(By.id("com.kuaishoudan.financer:id/text_product")).get(0).click();//第一个产品
-
-
-			Util2.swipeToUp(driver, 800);//向上滑动
-
-		driver.findElement(By.id("com.kuaishoudan.financer:id/text_supplier")).click();//所属商户
-		driver.findElements(By.id("com.kuaishoudan.financer:id/tv_name")).get(0).click();//所属商户列表
-		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_remark")).sendKeys("备注1");//备注
-    	driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_next")).click();//下一步
-    	driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-    	driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add")).click();//上传照片
-    	driver.findElement(By.id("com.kuaishoudan.financer:id/dialog_photo_select_btn_gallery")).click();//从相册选择
-    	driver.findElements(By.id("com.kuaishoudan.financer:id/iv_thumb")).get(0).click();//添加图片（身份证）
-    	driver.findElements(By.id("com.kuaishoudan.financer:id/iv_thumb")).get(1).click();//添加图片（驾驶证）
-    	driver.findElements(By.id("com.kuaishoudan.financer:id/iv_thumb")).get(1).click();//添加图片（驾驶证）
-    	driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-   // 	
-    	driver.findElement(By.id("com.kuaishoudan.financer:id/btn_ok")).click();//两种证上传——确定按钮
-    Thread.sleep(4000);
-    	driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_confirm")).click();//上传完-确定按钮
-    	driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-    	driver.findElement(By.id("com.kuaishoudan.financer:id/dialog_custom_confirm")).click();//提醒确定是
-    	
-   // 	driver.findElement(By.id("com.kuaishoudan.financer:id/tv_guide_know")).click();//我知道了
-   // 	driver.findElement(By.id("com.kuaishoudan.financer:id/tv_guide_know")).click();//我知道了
-   //	driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back")).click();//返回按钮
-    	
-		driver.close();
+	public void sp4(){
+		try {
+			String	spname = WebSPUtil.getSPname(driver);//从app获取审批人名字			
+			System.out.println("###"+spname);
+			String[]  strs=spname.split(",");
+			 String itename=strs[1];
+			String email=WebSPUtil.nameToemail(strs[0]);
+			WebSPUtil.testSP4(webdriver, email, itename);	//请款审批同意专员
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	public void sp6(){
+		try {
+			String	spname = WebSPUtil.getSPname(driver);//从app获取审批人名字			
+			System.out.println("###"+spname);
+			String[]  strs=spname.split(",");
+			 String itename=strs[1];
+			String email=WebSPUtil.nameToemail(strs[0]);
+			WebSPUtil.testSP5(webdriver, email, itename);	//请款审批同意专员
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	public void tearDown() throws Exception {
+		
 		driver.quit();
+		webdriver.quit();
 	}
 }

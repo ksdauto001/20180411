@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 
 import com.kuaishoudan.financer.bean.KSDCase;
 import com.kuaishoudan.financer.util.CaseUtil;
-import com.kuaishoudan.financer.util.Util2;
+import com.kuaishoudan.financer.util.AppUtil;
 import com.kuaishoudan.financer.web.LoginWeb;
 
 import io.appium.java_client.AppiumDriver;
@@ -28,7 +28,7 @@ public class ControlTest2 {
 	String devicename="";
 	@BeforeTest
 	public void setUp() throws Exception {
-		driver =   Util2.getdriver();
+		driver =   AppUtil.getdriver();
 
 		Thread.sleep(1000);
 		Process process=Runtime.getRuntime().exec("adb devices");
@@ -160,7 +160,7 @@ public class ControlTest2 {
 	 */
 	//@Test
 	public void testqy() throws MalformedURLException, InterruptedException{
-		driver = Util2.getdriver();
+		driver = AppUtil.getdriver();
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS); 
 /*			driver.findElement(By.id("com.kuaishoudan.financer:id/edit_account")).sendKeys("daiq2@kuaishoudan.com");
 		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_password")).sendKeys("123456");
@@ -202,7 +202,7 @@ public class ControlTest2 {
 		driver.findElements(By.id("com.kuaishoudan.financer:id/text_product")).get(0).click();//第一个产品
 
 
-			Util2.swipeToUp(driver, 800);//向上滑动
+			AppUtil.swipeToUp(driver, 800);//向上滑动
 
 		driver.findElement(By.id("com.kuaishoudan.financer:id/text_supplier")).click();//所属商户
 		driver.findElements(By.id("com.kuaishoudan.financer:id/tv_name")).get(0).click();//所属商户列表

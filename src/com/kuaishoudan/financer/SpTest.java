@@ -13,7 +13,7 @@ import org.openqa.selenium.By;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.kuaishoudan.financer.util.Util2;
+import com.kuaishoudan.financer.util.AppUtil;
 import com.kuaishoudan.financer.web.TestSP;
 
 public class SpTest {
@@ -29,7 +29,7 @@ public class SpTest {
 	String devicename="";
 	@BeforeTest
 	public void setUp() throws Exception {
-		driver =   Util2.getdriver();
+		driver =   AppUtil.getdriver();
 	
 		Process process=Runtime.getRuntime().exec("adb devices");
 		process.waitFor();
