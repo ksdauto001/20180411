@@ -29,8 +29,10 @@ public class AppSPUtil {
 		driver.findElement(
 				By.id("com.kuaishoudan.financer.test:id/tv_apply_compact")).click();// 申请合同
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		int gxs=driver.findElements(By.id("com.kuaishoudan.financer.test:id/check_group")).size();//勾选数
+		System.out.println("gxs"+gxs);
 		driver.findElements(By.id("com.kuaishoudan.financer.test:id/check_group"))
-				.get(2).click();// 不安装 选择GPS安装方式
+				.get(gxs-1).click();// 不安装 选择GPS安装方式
 		AppUtil.swipeToUp(driver, 1000);
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		 driver.findElement(By.id("com.kuaishoudan.financer.test:id/btn_add")).click();//添加照片
@@ -225,10 +227,10 @@ public class AppSPUtil {
 			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 			//
 
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			driver.findElement(By.id("com.kuaishoudan.financer.test:id/btn_ok"))
 			.click();// 两种证上传——确定按钮
-			Thread.sleep(8000);
+			Thread.sleep(57000);
 			driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 			driver.findElement(
 					By.id("com.kuaishoudan.financer.test:id/toolbar_submit"))
@@ -277,6 +279,27 @@ public class AppSPUtil {
 			// e.printStackTrace();
 		}
 		return acstatue;
+	}
+	
+	//BD经理登录审批
+	public static  void login(AppiumDriver<AndroidElement> driver,String username){
+		
+		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS); 
+		driver.findElement(By.id("com.kuaishoudan.financer.test:id/toolbar_back")).click();//返回
+		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS); 
+		driver.findElement(By.id("com.kuaishoudan.financer.test:id/toolbar_back")).click();//返回
+		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS); 
+		driver.findElement(By.id("com.kuaishoudan.financer.test:id/toolbar_menu")).click();//菜单
+		
+		driver.findElement(
+				By.id("com.kuaishoudan.financer:id/edit_account")).clear();
+		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_password"))
+				.clear();
+		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_account")).sendKeys(username);
+		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_password")).sendKeys("@123456");
+		driver.findElement(By.id("com.kuaishoudan.financer:id/btn_login")).click();
+
+		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS); 
 	}
 
 }

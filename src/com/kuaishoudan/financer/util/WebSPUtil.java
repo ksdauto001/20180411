@@ -17,6 +17,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -95,11 +96,12 @@ public class WebSPUtil {
 		driver.findElement(By.id("argee_sub")).click();// 确认
 
 		try {
-			Thread.sleep(13000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		WebUtil.logout(driver);
 	}
 
 	// 请款审批同意数据运营
@@ -134,11 +136,12 @@ public class WebSPUtil {
 		driver.findElement(By.id("argee_sub")).click();// 确认
 
 		try {
-			Thread.sleep(13000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		WebUtil.logout(driver);
 	}
 
 	// 请款审批审核组长
@@ -172,11 +175,12 @@ public class WebSPUtil {
 		driver.findElement(By.id("argee_sub")).click();// 确认
 
 		try {
-			Thread.sleep(13000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		WebUtil.logout(driver);
 	}
 
 	// 财务专员 审批
@@ -212,11 +216,12 @@ public class WebSPUtil {
 		driver.findElement(By.className("cancel")).click();// 稍后再说
 
 		try {
-			Thread.sleep(13000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		WebUtil.logout(driver);
 	}
 
 	// 财务专员 审批-已放款
@@ -238,6 +243,13 @@ public class WebSPUtil {
 		// driver.findElement(By.xpath("//div[@class='requestpayout_detail_btn_box']/a/div")).click();//确认回款
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		driver.findElement(By.linkText("确认")).click();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		WebUtil.logout(driver);
 	}
 
 	// 财务专员 审批-已回款-归档待处理
@@ -246,21 +258,47 @@ public class WebSPUtil {
 	//	String username = "liuhl@jizhicar.com";
 		login2(driver, email, "@123456");
 		driver.findElement(By.linkText("客户")).click();
+		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		driver.findElement(By.xpath("//ul[@class='slide_nav_bar']/li[6]/a"))
-				.click();
+				.click();//归档管理
+		
+		driver.manage().timeouts().implicitlyWait(23, TimeUnit.SECONDS);
 		driver.findElement(By.linkText("待处理")).click();
 		clickItemorder(driver, itename);
+
 		int height = driver.manage().window().getSize().height;
 		System.out.println("height" + height);
+//		Long aa=(Long) ((JavascriptExecutor) driver).executeScript("return  document.body.scrollHeight");
+//		System.out.println(aa);
+
+	//	((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)"); 
+
+
 		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
-				+ (height * 2 + 100) + ")"); // 向下滑动
-		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-		driver.findElement(
-				By.xpath("//div[@class='requestpayout_detail_btn_box']/div[2]"))
+				+ (height*2+400) + ")"); // 向下滑动
+		
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		driver.manage().timeouts().implicitlyWait(23, TimeUnit.SECONDS);
+
+		driver.findElements(
+				By.xpath("//div[@class='requestpayout_detail_btn_box']/div[2]")).get(1)
 				.click();// 确认归档
 
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		driver.findElement(By.className("flied_sub")).click();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		WebUtil.logout(driver);
 	}
 
 	// 审批待办
@@ -315,17 +353,13 @@ public class WebSPUtil {
 		String title=driver.findElement(By.id("com.kuaishoudan.financer.test:id/toolbar_title")).getText();
 		if("查看状态".equals(title)){
 			AppUtil.swipeToDown(driver, 1000);//向下滑动
-			System.out.println("下"+title);
+			System.out.println("下-----------"+title);
+			
 		}else{
-		
+	
 		driver.findElements(By.id("com.kuaishoudan.financer.test:id/text_name"))
 				.get(0).click();// 首页列表
 
-	/*	driver.findElements(
-				By.id("com.kuaishoudan.financer.test:id/text_product")).get(0)
-				.click();// 列表
-				
-*/
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.findElement(
 				By.id("com.kuaishoudan.financer.test:id/toolbar_loan_status"))
@@ -333,6 +367,7 @@ public class WebSPUtil {
 		
 		driver.findElement(By.id("com.kuaishoudan.financer.test:id/text_customer_look_status")).click();//查看进度
 		}
+		Thread.sleep(1000);
 		List<AndroidElement> statueitems = driver.findElements(By
 				.id("com.kuaishoudan.financer.test:id/ll_status"));
 		for (int i = 0; i < statueitems.size(); i++) {
@@ -349,7 +384,10 @@ public class WebSPUtil {
 								By.id("com.kuaishoudan.financer.test:id/item_name"))
 						.getText();	
 				String[]  strs=name.split("-");
-			
+				if(strs[0].contains("BD")){
+					/////////////////////////////////
+					////////////////////////////////////
+				}
 				String prename = statueitems
 						.get(i+1)
 						.findElement(
@@ -370,11 +408,24 @@ public class WebSPUtil {
 						.getText();	
 				String[]  strs=name.split("-");
 				spname=strs[1]+","+"刘浩亮";
+			}else if("回款结果/已回款".equals(statue)){
+				String name = statueitems
+						.get(i)
+						.findElement(
+								By.id("com.kuaishoudan.financer.test:id/item_name"))
+						.getText();	
+				String[]  strs=name.split("-");
+				spname=strs[1]+","+"刘浩亮";
 			}
 		}
 		return spname;
 	}
-	
+	//状态实际值
+	public static String getActual(AppiumDriver<AndroidElement> driver){
+		String actu=driver.findElement(By.id("com.kuaishoudan.financer.test:id/tv_laster_status")).getText();
+		return actu;
+		
+	}
 
 
 }

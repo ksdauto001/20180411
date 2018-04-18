@@ -121,8 +121,12 @@ public class WebUtil {
 								.implicitlyWait(8, TimeUnit.SECONDS);
 						((JavascriptExecutor) driver)
 								.executeScript("window.scrollTo(0, document.body.scrollHeight)"); // 向下滑动
-						driver.manage().timeouts()
-								.implicitlyWait(8, TimeUnit.SECONDS);
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 						fpr.click();
 						break;
 					}
@@ -148,7 +152,12 @@ public class WebUtil {
 			driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 		 	driver.findElement(By.id("delQDBtn")).click() ;//分配提醒确定
 			driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-		
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			driver.findElement(By.id("success_allot")).click();//确定按钮
 			
 		}
@@ -168,8 +177,13 @@ public class WebUtil {
 			}*/
 			clickItem(driver,"刘浩亮");
 			driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-			driver.findElement(
+	/*		driver.findElement(
 					By.xpath("//div[@class='requestpayout_detail_btn_box']/div"))
+					.click();// 开始录入!!!!!!!!!!!!!!!!
+*/			
+	
+			driver.findElement(
+					By.xpath("//div[@class='requestpayout_detail_btn_box']/div[3]"))
 					.click();// 开始录入
 			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.findElement(By.id("requestpayout_apply")).click();//确认申请
@@ -307,5 +321,15 @@ public class WebUtil {
 			
 			
 			
+		}
+		public static void logout(WebDriver driver){
+			driver.findElement(By.id("header_username")).click();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			driver.findElement(By.linkText("退出登录")).click();
 		}
 }

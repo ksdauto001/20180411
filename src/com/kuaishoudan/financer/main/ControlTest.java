@@ -33,17 +33,22 @@ public class ControlTest {
 		System.out.println("***@");
 		ct.setUp();//准备数据
 		ct.setUp2();
-	//  ct.loginWeb("liuhl@jizhicar.com");//登录
-	//	ct.dfp();//待分配
+		ct.loginWeb("liuhl@jizhicar.com");//登录
+	//	ct.dfp();//待分配app
 	//	ct.webDksp();//已录入到申请合同
-	//	ct.appSqht();
-	//	ct.webSpht();
-	//	ct.appSqqk();
+
+	//	ct.appSqht();//App申请合同
+
+		ct.webSpht();//web审核
+		ct.logoutWeb();
 		
-	//	ct.sp1();
-	//	ct.sp2();
-	//	ct.sp3();
-	//	ct.sp4();
+		ct.appSqqk();//
+		
+		ct.sp1();
+		ct.sp2();
+		ct.sp3();
+		ct.sp4();
+		ct.sp5();
 		ct.sp6();
 		ct.tearDown();
 	}
@@ -69,6 +74,11 @@ public class ControlTest {
 
 		WebUtil.login(webdriver, username);//登录
 	}
+	public void logoutWeb(){
+		//	String username="liuhl@jizhicar.com";
+
+			WebUtil.logout(webdriver );//登出
+		}
 	/**
 	 * 创建用户，进件，待审批
 	 */
@@ -80,12 +90,10 @@ public class ControlTest {
 	 */
 	public void webDksp(){
 	
-	
 		//	WebUtil.testDFP(webdriver);//待分配
-		//	WebUtil.testYFP(webdriver);//已分配
-		//	WebUtil.testYLR(webdriver);//已录入
-	
-		//AppUtil.addTest(driver, devicename,1);
+			WebUtil.testYFP(webdriver);//已分配
+			WebUtil.testYLR(webdriver);//已录入
+
 	}
 	//App申请合同
 	public void appSqht(){
@@ -181,7 +189,7 @@ public class ControlTest {
 				e.printStackTrace();
 			}
 	}
-	public void sp6(){
+	public void sp5(){
 		try {
 			String	spname = WebSPUtil.getSPname(driver);//从app获取审批人名字			
 			System.out.println("###"+spname);
@@ -196,6 +204,15 @@ public class ControlTest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+	}
+	//g
+	public void sp6(){
+		/*			String	spname = WebSPUtil.getSPname(driver);//从app获取审批人名字			
+		System.out.println("###"+spname);
+		String[]  strs=spname.split(",");
+		 String itename=strs[1];
+		String email=WebSPUtil.nameToemail(strs[0]);*/
+		WebSPUtil.testSP6(webdriver, "liuhl@jizhicar.com", "刘浩亮");	//请款审批同意专员
 	}
 	public void tearDown() throws Exception {
 		

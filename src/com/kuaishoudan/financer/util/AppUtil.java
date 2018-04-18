@@ -70,7 +70,7 @@ public class AppUtil {
 		int height = driver.manage().window().getSize().height;
 		// System.out.print(width+"@"+height);
 		for (int i = 0; i < 2; i++)
-			driver.swipe(width / 2, height  / 4, width / 2, height* 3 / 4,
+			driver.swipe(width / 2, height *3 / 4, width / 2, height-20,
 					during);
 		// wait for page loading12801321
 	}
@@ -180,7 +180,7 @@ public class AppUtil {
 		double sqdk = 0;
 		double cljg = 0;
 		String expectstatue = "正在处理";
-		DecimalFormat df = new DecimalFormat("#.00");
+		DecimalFormat df = new DecimalFormat("#.000");
 		boolean flag = false;
 		boolean cx = false;
 		for (int i = 0; i < 200; i++) {
@@ -383,7 +383,7 @@ public class AppUtil {
 		String expectstatue = "正在处理";
 		boolean flag = false;
 		boolean cx = false;
-		DecimalFormat df = new DecimalFormat("#.00");
+		DecimalFormat df = new DecimalFormat("#.000");
 		for (int i = 0; i < 200; i++) {
 			sqdk = Double.parseDouble(df.format(2 + Math.random() * 97));// 997
 			cljg = Double.parseDouble(df.format(2 + Math.random() * 97));
@@ -409,6 +409,7 @@ public class AppUtil {
 			try {
 
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			
 				/*
 				 * driver.findElement(
 				 * By.id("com.kuaishoudan.financer.test:id/edit_company_name"))
@@ -433,7 +434,8 @@ public class AppUtil {
 						.click();
 				Thread.sleep(500);
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				if ((int) (Math.random() * 2) == 0) {
+				int ran=(int) (Math.random() * 2);
+				if (ran == 0) {
 					driver.findElement(
 							By.id("com.kuaishoudan.financer.test:id/check_old_car"))
 							.click();// 二手车
@@ -550,6 +552,10 @@ public class AppUtil {
 				driver.findElement(
 						By.id("com.kuaishoudan.financer.test:id/toolbar_next"))
 						.click();// 下一步
+				if(ran==0){
+					//二手车
+				driver.findElement(By.id("com.kuaishoudan.financer.test:id/dialog_custom_confirm")).click();//订单常规
+				}
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 				driver.findElement(By.id("com.kuaishoudan.financer.test:id/btn_add"))
 						.click();// 上传照片
@@ -667,7 +673,7 @@ public class AppUtil {
 			//
 			driver.findElement(By.id("com.kuaishoudan.financer.test:id/btn_ok"))
 					.click();// 两种证上传——确定按钮
-			Thread.sleep(7000);
+			Thread.sleep(57000);
 			driver.findElement(
 					By.id("com.kuaishoudan.financer.test:id/toolbar_confirm"))
 					.click();// 上传完照片-确认按钮
