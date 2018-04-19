@@ -31,18 +31,20 @@ public class ControlTest {
 		ControlTest ct=	new 	ControlTest();
 		
 		System.out.println("***@");
-		ct.setUp();//准备数据
-		ct.setUp2();
-		ct.loginWeb("liuhl@jizhicar.com");//登录
+		ct.setUp();//app启动	
+		ct.setUp2();//web启动
 	//	ct.dfp();//待分配app
+
+
 	//	ct.webDksp();//已录入到申请合同
 
 	//	ct.appSqht();//App申请合同
+	
 
-		ct.webSpht();//web审核
-		ct.logoutWeb();
+	//	ct.webSpht();//web审核
+
 		
-		ct.appSqqk();//
+		ct.appSqqk();//app请款
 		
 		ct.sp1();
 		ct.sp2();
@@ -63,6 +65,9 @@ public class ControlTest {
 		devicename=br.readLine().replaceAll("device", "").trim();
 		System.out.println(devicename);
 		Thread.sleep(3000);
+	//	AppUtil.login(driver,devicename, "liuhl@jizhicar.com");//登录
+	//	AppSPUtil.loginBD(driver, "konglx@jizhicar.com");
+	//	AppUtil.logout(driver);
 	}
 	//web
 	public void setUp2() throws IOException, InterruptedException{
@@ -89,42 +94,40 @@ public class ControlTest {
 	 * web
 	 */
 	public void webDksp(){
-	
-		//	WebUtil.testDFP(webdriver);//待分配
+			WebUtil.login(webdriver, "liuhl@jizhicar.com");//登录
+			WebUtil.testDFP(webdriver);//待分配
 			WebUtil.testYFP(webdriver);//已分配
 			WebUtil.testYLR(webdriver);//已录入
+			WebUtil.logout(webdriver );//登出
 
 	}
 	//App申请合同
 	public void appSqht(){
-		//
+		
+
 		AppSPUtil.testSQHT(driver);
 		
 	}
 	//web审批合同
 	public void webSpht(){
-		//
+		WebUtil.login(webdriver, "liuhl@jizhicar.com");//登录
 		WebUtil.testYSQHT(webdriver);//申请合同审批
+		WebUtil.logout(webdriver );//登出
 		
 	}
 	//申请请款
 	public void appSqqk(){
-		AppSPUtil.testHTSQQK(driver);
-		driver.findElement(By.id("com.kuaishoudan.financer.test:id/toolbar_back")).click();//返回按钮
-		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-		driver.findElement(By.id("com.kuaishoudan.financer.test:id/toolbar_loan_status")).click();//流程。。。
-		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-		driver.findElement(By.id("com.kuaishoudan.financer.test:id/text_customer_look_status")).click();//查看进度
+		AppSPUtil.testHTSQQK(driver);//请款
+		System.out.println(AppUtil.getStatue(driver));
+		//AppUtil.look_status(driver);//查看进度
 		
 	}
 	
 	//请款审批同意专员
 	public void sp1(){
-
-
-			
 			try {
-			String	spname = WebSPUtil.getSPname(driver);//从app获取审批人名字			
+			
+			String	spname = AppSPUtil.getSPname(driver);//从app获取审批人名字			
 			System.out.println("###"+spname);
 			String[]  strs=spname.split(",");
 			 String itename=strs[1];
@@ -142,12 +145,18 @@ public class ControlTest {
 	//
 	public void sp2(){
 		try {
-			String	spname = WebSPUtil.getSPname(driver);//从app获取审批人名字			
+			String	spname = AppSPUtil.getSPname(driver);//从app获取审批人名字			
 			System.out.println("###"+spname);
+			if(spname.indexOf(",")==-1){
+				//bd操作
+				AppSPUtil.loginBD(driver,spname);
+				AppUtil.login(driver,devicename, "liuhl@jizhicar.com");//登录	
+			}else{
 			String[]  strs=spname.split(",");
 			 String itename=strs[1];
 			String email=WebSPUtil.nameToemail(strs[0]);
 			WebSPUtil.testSP2(webdriver, email, itename);	//请款审批同意专员
+			}
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -159,7 +168,7 @@ public class ControlTest {
 	
 	public void sp3(){
 		try {
-			String	spname = WebSPUtil.getSPname(driver);//从app获取审批人名字			
+			String	spname = AppSPUtil.getSPname(driver);//从app获取审批人名字			
 			System.out.println("###"+spname);
 			String[]  strs=spname.split(",");
 			 String itename=strs[1];
@@ -175,7 +184,8 @@ public class ControlTest {
 	}
 	public void sp4(){
 		try {
-			String	spname = WebSPUtil.getSPname(driver);//从app获取审批人名字			
+		
+			String	spname = AppSPUtil.getSPname(driver);//从app获取审批人名字			
 			System.out.println("###"+spname);
 			String[]  strs=spname.split(",");
 			 String itename=strs[1];
@@ -189,9 +199,10 @@ public class ControlTest {
 				e.printStackTrace();
 			}
 	}
+	//
 	public void sp5(){
 		try {
-			String	spname = WebSPUtil.getSPname(driver);//从app获取审批人名字			
+			String	spname = AppSPUtil.getSPname(driver);//从app获取审批人名字			
 			System.out.println("###"+spname);
 			String[]  strs=spname.split(",");
 			 String itename=strs[1];
@@ -205,13 +216,9 @@ public class ControlTest {
 				e.printStackTrace();
 			}
 	}
-	//g
+	//归档
 	public void sp6(){
-		/*			String	spname = WebSPUtil.getSPname(driver);//从app获取审批人名字			
-		System.out.println("###"+spname);
-		String[]  strs=spname.split(",");
-		 String itename=strs[1];
-		String email=WebSPUtil.nameToemail(strs[0]);*/
+
 		WebSPUtil.testSP6(webdriver, "liuhl@jizhicar.com", "刘浩亮");	//请款审批同意专员
 	}
 	public void tearDown() throws Exception {
