@@ -335,7 +335,7 @@ public class WebUtil {
 			 driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			driver.findElement(By.id("header_username")).click();
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

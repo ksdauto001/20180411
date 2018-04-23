@@ -33,15 +33,17 @@ public class ControlTest {
 		System.out.println("***@");
 		ct.setUp();//app启动	
 		ct.setUp2();//web启动
-	//	ct.dfp();//待分配app
+
+			for(int i=0;i<5;i++){
+		ct.dfp();//待分配app
 
 
-	//	ct.webDksp();//已录入到申请合同
+	ct.webDksp();//已录入到申请合同
 
-	//	ct.appSqht();//App申请合同
+		ct.appSqht();//App申请合同
 	
 
-	//	ct.webSpht();//web审核
+		ct.webSpht();//web审核
 
 		
 		ct.appSqqk();//app请款
@@ -49,10 +51,17 @@ public class ControlTest {
 		ct.sp1();
 		ct.sp2();
 		ct.sp3();
-		ct.sp4();
+		ct.back();
+			}
+		/*ct.sp4();
 		ct.sp5();
-		ct.sp6();
+		ct.sp6();*/
 		ct.tearDown();
+//		ct.back()
+	}
+
+	public void back(){
+		AppUtil.goback1(driver);
 	}
 	public void setUp() throws IOException, InterruptedException{
 		driver =   AppUtil.getdriver();
@@ -89,6 +98,7 @@ public class ControlTest {
 	 */
 	public  void  dfp(){
 		AppUtil.addTest(driver, devicename,1);
+	
 	}
 	/**
 	 * web
@@ -118,7 +128,7 @@ public class ControlTest {
 	//申请请款
 	public void appSqqk(){
 		AppSPUtil.testHTSQQK(driver);//请款
-		System.out.println(AppUtil.getStatue(driver));
+	//	System.out.println(AppUtil.getStatue(driver));
 		//AppUtil.look_status(driver);//查看进度
 		
 	}
@@ -149,7 +159,8 @@ public class ControlTest {
 			System.out.println("###"+spname);
 			if(spname.indexOf(",")==-1){
 				//bd操作
-				AppSPUtil.loginBD(driver,spname);
+				String email=WebSPUtil.nameToemail(spname);
+				AppSPUtil.loginBD(driver,email);
 				AppUtil.login(driver,devicename, "liuhl@jizhicar.com");//登录	
 			}else{
 			String[]  strs=spname.split(",");
@@ -165,15 +176,23 @@ public class ControlTest {
 				e.printStackTrace();
 			}
 	}
-	
+	//333
 	public void sp3(){
 		try {
+	
 			String	spname = AppSPUtil.getSPname(driver);//从app获取审批人名字			
-			System.out.println("###"+spname);
+			if(spname.indexOf(",")==-1){
+				//bd操作
+				
+				String email=WebSPUtil.nameToemail(spname);
+				AppSPUtil.loginBD(driver,email);
+				AppUtil.login(driver,devicename, "liuhl@jizhicar.com");//登录	
+			}else{
 			String[]  strs=spname.split(",");
 			 String itename=strs[1];
 			String email=WebSPUtil.nameToemail(strs[0]);
 			WebSPUtil.testSP3(webdriver, email, itename);	//请款审批同意专员
+			}
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -199,9 +218,10 @@ public class ControlTest {
 				e.printStackTrace();
 			}
 	}
-	//
+	//状态已放款
 	public void sp5(){
 		try {
+			
 			String	spname = AppSPUtil.getSPname(driver);//从app获取审批人名字			
 			System.out.println("###"+spname);
 			String[]  strs=spname.split(",");

@@ -66,8 +66,9 @@ public class WebSPUtil {
 
 	// 请款审批同意专员
 
-	public static void testSP1(WebDriver driver,String email,String itename) {
+	public static boolean testSP1(WebDriver driver,String email,String itename) {
 		//		String username="niun@jizhicar.com";
+		boolean flag=false;
 		login2(driver, email, "@123456");
 
 		clickItem(driver, itename);
@@ -81,7 +82,7 @@ public class WebSPUtil {
 		int height = driver.manage().window().getSize().height;
 		System.out.println("height" + height);
 		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
-				+ (height * 2 + 150) + ")"); // 向下滑动
+				+ (height * 2 + 200) + ")"); // 向下滑动
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -94,7 +95,7 @@ public class WebSPUtil {
 				.click();// 同意
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		driver.findElement(By.id("argee_sub")).click();// 确认
-
+		flag=true;
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -102,13 +103,14 @@ public class WebSPUtil {
 			e.printStackTrace();
 		}
 		WebUtil.logout(driver);
+		return flag;
 	}
 
 	// 请款审批同意数据运营
 
-	public static void testSP2(WebDriver driver,String email,String itename) {
+	public static boolean testSP2(WebDriver driver,String email,String itename) {
 	//	String username = "huangsx@jizhicar.com";
-		
+		boolean flag=false;
 		login2(driver, email, "@123456");
 
 		clickItem(driver, itename);
@@ -121,7 +123,7 @@ public class WebSPUtil {
 		int height = driver.manage().window().getSize().height;
 		System.out.println("height" + height);
 		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
-				+ (height * 2 + 100) + ")"); // 向下滑动
+				+ (height * 2 + 200) + ")"); // 向下滑动
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -134,7 +136,7 @@ public class WebSPUtil {
 				.click();// 同意
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		driver.findElement(By.id("argee_sub")).click();// 确认
-
+		flag=true;
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -142,12 +144,14 @@ public class WebSPUtil {
 			e.printStackTrace();
 		}
 		WebUtil.logout(driver);
+		return flag;
 	}
 
 	// 请款审批审核组长
 
-	public static void testSP3(WebDriver driver,String email,String itename) {
+	public static boolean testSP3(WebDriver driver,String email,String itename) {
 	//	String username = "xiny@jizhicar.com";
+		boolean flag=false;
 		login2(driver, email, "@123456");
 
 		clickItem(driver, itename);
@@ -160,7 +164,7 @@ public class WebSPUtil {
 		int height = driver.manage().window().getSize().height;
 		System.out.println("height" + height);
 		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
-				+ (height * 2 + 100) + ")"); // 向下滑动
+				+ (height * 2 + 200) + ")"); // 向下滑动
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -173,7 +177,7 @@ public class WebSPUtil {
 				.click();// 同意
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		driver.findElement(By.id("argee_sub")).click();// 确认
-
+		flag=true;
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -181,13 +185,15 @@ public class WebSPUtil {
 			e.printStackTrace();
 		}
 		WebUtil.logout(driver);
+		return flag;
 	}
 
 	// 财务专员 审批
 
-	public static void testSP4(WebDriver driver,String email,String itename) {
+	public static boolean testSP4(WebDriver driver,String email,String itename) {
 	///	String username = "sheny@jizhicar.com";
-		login2(driver, email, "@123456");
+		boolean flag=false;
+		login2(driver, email, "123456");
 
 		clickItem(driver, itename);
 		try {
@@ -199,7 +205,7 @@ public class WebSPUtil {
 		int height = driver.manage().window().getSize().height;
 		System.out.println("height" + height);
 		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
-				+ (height * 2 + 150) + ")"); // 向下滑动
+				+ (height * 2 + 200) + ")"); // 向下滑动
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -214,7 +220,7 @@ public class WebSPUtil {
 		driver.findElement(By.id("argee_sub")).click();//确认
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		driver.findElement(By.className("cancel")).click();// 稍后再说
-
+		flag=true;
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -222,20 +228,22 @@ public class WebSPUtil {
 			e.printStackTrace();
 		}
 		WebUtil.logout(driver);
+		return flag;
 	}
 
 	// 财务专员 审批-已放款
 
-	public static void testSP5(WebDriver driver,String email,String itename) {
+	public static boolean testSP5(WebDriver driver,String email,String itename) {
 	//	String username = "sheny@jizhicar.com";
-		login2(driver, email, "@123456");
+		boolean flag=false;
+		login2(driver, email, "123456");
 		driver.findElement(By.linkText("客户")).click();
 		driver.findElement(By.linkText("已通过")).click();
 		clickItemorder(driver, "刘浩亮");
 		int height = driver.manage().window().getSize().height;
 		System.out.println("height" + height);
 		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
-				+ (height * 2 + 100) + ")"); // 向下滑动
+				+ (height * 2 + 200) + ")"); // 向下滑动
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		driver.findElements(
 				By.xpath("//div[@class='requestpayout_detail_btn_box']/a/div"))
@@ -243,6 +251,7 @@ public class WebSPUtil {
 		// driver.findElement(By.xpath("//div[@class='requestpayout_detail_btn_box']/a/div")).click();//确认回款
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		driver.findElement(By.linkText("确认")).click();
+		flag=true;
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -250,12 +259,14 @@ public class WebSPUtil {
 			e.printStackTrace();
 		}
 		WebUtil.logout(driver);
+		return flag;
 	}
 
 	// 财务专员 审批-已回款-归档待处理
 
-	public static void testSP6(WebDriver driver,String email,String itename) {
+	public static boolean testSP6(WebDriver driver,String email,String itename) {
 	//	String username = "liuhl@jizhicar.com";
+		boolean flag=false;
 		login2(driver, email, "@123456");
 		driver.findElement(By.linkText("客户")).click();
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
@@ -292,6 +303,7 @@ public class WebSPUtil {
 
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		driver.findElement(By.className("flied_sub")).click();
+		flag=true;
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -299,6 +311,7 @@ public class WebSPUtil {
 			e.printStackTrace();
 		}
 		WebUtil.logout(driver);
+		return flag;
 	}
 
 	// 审批待办

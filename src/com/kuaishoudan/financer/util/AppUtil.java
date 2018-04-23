@@ -122,7 +122,7 @@ public class AppUtil {
 				Runtime.getRuntime().exec(
 						"adb -s " + devicename + " shell input text "
 								+ g.generate());// 证件号adb输入
-				Thread.sleep(800);
+				Thread.sleep(600);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_id_code"))
 						.click();// 证件号码 *****
@@ -146,7 +146,7 @@ public class AppUtil {
 			driver.findElement(
 					By.id("com.kuaishoudan.financer:id/edit_id_address"))
 					.click();// 地址
-			//
+			Thread.sleep(1000);
 			driver.findElement(
 					By.id("com.kuaishoudan.financer:id/toolbar_confirm"))
 					.click();// 确认
@@ -180,11 +180,11 @@ public class AppUtil {
 	 * @param devicename
 	 * @param k
 	 */
-	public static void addGr(AppiumDriver<AndroidElement> driver,
+	public static String addGr(AppiumDriver<AndroidElement> driver,
 			String devicename, int k) {
 		double sqdk = 0;
 		double cljg = 0;
-		String expectstatue = "正在处理";
+		String actualstatue="";
 		DecimalFormat df = new DecimalFormat("#.000");
 		boolean flag = false;
 		boolean cx = false;
@@ -198,7 +198,7 @@ public class AppUtil {
 		}
 
 		try {
-			driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
 
 			driver.findElement(
 					By.id("com.kuaishoudan.financer:id/btn_select_order_type_individual"))
@@ -214,6 +214,7 @@ public class AppUtil {
 			try {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				int ran=(int) (Math.random() * 2);
+				ran=1;//------------
 				if ( ran== 0) {
 					driver.findElement(
 							By.id("com.kuaishoudan.financer:id/check_old_car"))
@@ -334,10 +335,10 @@ public class AppUtil {
 						By.id("com.kuaishoudan.financer:id/toolbar_next"))
 						.click();// 下一步
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-				if(ran==0){
+				/*if(ran==0){
 					//二手车
 				driver.findElement(By.id("com.kuaishoudan.financer:id/dialog_custom_confirm")).click();//订单常规
-				}
+				}*/
 				driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 				driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add"))
 						.click();// 上传照片
@@ -363,15 +364,11 @@ public class AppUtil {
 						.click();
 
 			}
-			String acstatue = upload(driver);
-			try {
-				Assert.assertEquals(acstatue, expectstatue, "" + k);
-			} catch (java.lang.AssertionError e) {
-				// TODO Auto-generated catch block
-				// e.printStackTrace();
-				System.out.println(k + "" + e);
-			}
+			actualstatue = upload(driver);
+			
+			
 		}
+		return actualstatue;
 	}
 
 	/**
@@ -381,11 +378,11 @@ public class AppUtil {
 	 * @param devicename
 	 * @param k
 	 */
-	public static void addQy(AppiumDriver<AndroidElement> driver,
+	public static 	String addQy(AppiumDriver<AndroidElement> driver,
 			String devicename, int k) {
 		double sqdk = 0;
 		double cljg = 0;
-		String expectstatue = "正在处理";
+		String actualstatue="";
 		boolean flag = false;
 		boolean cx = false;
 		DecimalFormat df = new DecimalFormat("#.000");
@@ -440,6 +437,7 @@ public class AppUtil {
 				Thread.sleep(500);
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				int ran=(int) (Math.random() * 2);
+			ran=1;//------------
 				if (ran == 0) {
 					driver.findElement(
 							By.id("com.kuaishoudan.financer:id/check_old_car"))
@@ -603,15 +601,10 @@ public class AppUtil {
 						By.id("com.kuaishoudan.financer:id/toolbar_back"))
 						.click();
 			}
-			String acstatue = upload(driver);
-			try {
-				Assert.assertEquals(acstatue, expectstatue, "" + k);
-			} catch (java.lang.AssertionError e) {
-				// TODO Auto-generated catch block
-				// e.printStackTrace();
-				System.out.println(k + "" + e);
-			}
+			actualstatue = upload(driver);
+			
 		}
+		return actualstatue;
 	}
 
 	public static void addTest(AppiumDriver<AndroidElement> driver,
@@ -630,7 +623,7 @@ public class AppUtil {
 	// 再次进件
 	public static void zcjj(AppiumDriver<AndroidElement> driver) {
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -638,7 +631,15 @@ public class AppUtil {
 		driver.findElements(By.id("com.kuaishoudan.financer:id/text_name"))
 				.get(0).click();// 首页列表
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-	/*	//
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			String titletext=driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_title")).getText().trim();//标题文本
+		System.out.println(titletext);
+		if("贷款详情".equals(titletext))	{
 		driver.findElement(
 				By.id("com.kuaishoudan.financer:id/toolbar_loan_status"))
 				.click();
@@ -646,9 +647,9 @@ public class AppUtil {
 		driver.findElement(
 				By.id("com.kuaishoudan.financer:id/text_customer_algin_jinjian"))
 				.click(); //大于1次进件
-*/	
-			driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add_loan")).click();//第一次进件3
-
+		}else{
+			driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add_loan")).click();//第3次进件3
+		}
 	}
 
 	/**
@@ -678,7 +679,7 @@ public class AppUtil {
 			//
 			driver.findElement(By.id("com.kuaishoudan.financer:id/btn_ok"))
 					.click();// 两种证上传——确定按钮
-			Thread.sleep(37000);
+			Thread.sleep(12000);
 			driver.findElement(
 					By.id("com.kuaishoudan.financer:id/toolbar_confirm"))
 					.click();// 上传完照片-确认按钮
@@ -691,10 +692,10 @@ public class AppUtil {
 			// driver.findElement(By.id("com.kuaishoudan.financer:id/tv_guide_know")).click();//我知道了
 			// driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back")).click();//返回按钮
 			driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-			acstatue = driver
+	/*		acstatue = driver
 					.findElement(
 							By.id("com.kuaishoudan.financer:id/item_status"))
-					.getText().trim();
+					.getText().trim();*/
 
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -716,13 +717,8 @@ public class AppUtil {
 		try {
 			driver.findElement(
 					By.id("com.kuaishoudan.financer:id/toolbar_back")).click();// 返回按钮
-			swipeToDown(driver,1000);
-			/*
-			 * driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-			 * driver.findElement(
-			 * By.id("com.kuaishoudan.financer:id/toolbar_back")).click();//
-			 * 返回按钮
-			 */
+	
+			acstatue=AppSPUtil.getActstatue(driver);//状态值
 			} catch (org.openqa.selenium.WebDriverException e) {
 			// TODO Auto-generated catch block
 			// e.printStackTrace();
@@ -774,7 +770,7 @@ public class AppUtil {
 	//登出
 	public static void logout(AppiumDriver<AndroidElement> driver){
 		System.out.println("logout");
-		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
 		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_menu")).click();//菜单
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS); 
 		driver.findElement(By.id("com.kuaishoudan.financer:id/header_img")).click();//头像
@@ -799,20 +795,19 @@ public class AppUtil {
 	 */
 	public static String  getStatue(AppiumDriver<AndroidElement> driver){
 		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back")).click();//返回
-		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back")).click();//返回
-		swipeToDown(driver,1000);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String statue=driver.findElements(By.id("com.kuaishoudan.financer:id/tv_laster_status")).get(0).getText();
+		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back")).click();//返回
+		String statue=AppSPUtil.getActstatue(driver);//状态值
 		return statue;
 		
 	}
-	/**
+	/**(未使用)
 	 * 查看进度
 	 * @param driver
 	 */
@@ -824,6 +819,27 @@ public class AppUtil {
 		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_loan_status")).click();//流程。。。
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 		driver.findElement(By.id("com.kuaishoudan.financer:id/text_customer_look_status")).click();//查看进度
+	}
+	/**
+	 * 两次返回
+	 * @param driver
+	 */
+	public static void goback1(AppiumDriver<AndroidElement> driver){
+		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
+		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back")).click();//返回按钮
+		try {
+			Thread.sleep(1500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back")).click();//返回按钮
+		try {
+			Thread.sleep(1500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	   
 }
