@@ -19,27 +19,29 @@ import com.kuaishoudan.financer.util.WebUtil;
 
 public class Test2 {
 
-	public AppiumDriver<AndroidElement> driver=null;
-	String devicename="";
-	public  WebDriver webdriver=null;
+	public AppiumDriver<AndroidElement> driver = null;
+	String devicename = "";
+	public WebDriver webdriver = null;
+
 	@BeforeTest
 	public void setUp() throws Exception {
-	
-		webdriver=WebUtil.getdriver();
+
+		webdriver = WebUtil.getdriver();
 	}
+
 	@AfterTest
-	public void tearDown() throws Exception {	
-	
+	public void tearDown() throws Exception {
+
 		webdriver.quit();
 	}
-	//创建用户
-	@Test(invocationCount =1, threadPoolSize = 1)
-	public void test1() throws InterruptedException, IOException{
-		
+
+	// 创建用户
+	@Test(invocationCount = 1, threadPoolSize = 1)
+	public void test1() throws InterruptedException, IOException {
+
 		System.out.println("***1@");
 
 		Assert.assertEquals(true, true);
 	}
-	
 
 }

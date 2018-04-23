@@ -34,7 +34,7 @@ public class ControlTest {
 		ct.setUp();//app启动	
 		ct.setUp2();//web启动
 
-			for(int i=0;i<5;i++){
+			for(int i=0;i<1;i++){
 		ct.dfp();//待分配app
 
 

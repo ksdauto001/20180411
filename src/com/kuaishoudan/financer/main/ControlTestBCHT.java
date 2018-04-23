@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -14,13 +13,12 @@ import com.kuaishoudan.financer.util.AppSPUtil;
 import com.kuaishoudan.financer.util.AppUtil;
 import com.kuaishoudan.financer.util.WebSPUtil;
 import com.kuaishoudan.financer.util.WebUtil;
-import com.kuaishoudan.financer.util.ZcjjUtil;
 import com.kuaishoudan.financer.web.LoginWeb;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidElement;
 
-public class ControlTestZCJJ {
+public class ControlTestBCHT {
 	public AppiumDriver<AndroidElement> driver;
 	String devicename = "";
 	public WebDriver webdriver;
@@ -31,13 +29,7 @@ public class ControlTestZCJJ {
 	 */
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		ControlTestZCJJ ct = new ControlTestZCJJ();
-		ct.BCHT();
-
-	}
-
-	public void SQHT() throws Exception {
-		ControlTestZCJJ ct = new ControlTestZCJJ();
+		ControlTestBCHT ct = new ControlTestBCHT();
 
 		System.out.println("***@");
 		ct.setUp();// app启动
@@ -45,48 +37,19 @@ public class ControlTestZCJJ {
 
 		ct.dfp();// 待分配app
 
-		ct.webDksp();// 已录入到申请合同
-
-		ct.appSqht();// App申请合同
-
-		ct.webSpht();// web审核
-
-		ct.appSqqk();// app请款
-
-		ct.sp1();
-		ct.sp2();
-		ct.sp3();
-		;
-		/*
-		 * ct.sp4(); ct.sp5(); ct.sp6();
-		 */
-		ct.tearDown();
-		// ct.back()
-	}
-
-	public void BCHT() throws Exception {
-		ControlTestZCJJ ct = new ControlTestZCJJ();
-
-		System.out.println("***@");
-		ct.setUp();// app启动
-		ct.setUp2();// web启动
-
-		ct.dfp();// 待分配app
-
-		ct.webDksp();// 已录入
+		ct.webDksp();// 已录
 
 		ct.appBsqht();// App不申请合同-申请请款
 
 		ct.sp1();
 		ct.sp2();
 		ct.sp3();
-		;
+
 		/*
 		 * ct.sp4(); ct.sp5(); ct.sp6();
 		 */
 		ct.tearDown();
 		// ct.back()
-
 	}
 
 	public void back() {
@@ -127,19 +90,12 @@ public class ControlTestZCJJ {
 		WebUtil.logout(webdriver);// 登出
 	}
 
-	// App不申请合同
-	public void appBsqht() {
-
-		ZcjjUtil.testBCSQQK(driver);
-
-	}
-
 	/**
 	 * 创建用户，进件，待审批
 	 */
 	public void dfp() {
-		// AppUtil.addTest(driver, devicename,1);
-		AppUtil.addZjjtest(driver, devicename, 1);
+		AppUtil.addTest(driver, devicename, 1);
+
 	}
 
 	/**
@@ -154,10 +110,10 @@ public class ControlTestZCJJ {
 
 	}
 
-	// App申请合同
-	public void appSqht() {
+	// App不申请合同
+	public void appBsqht() {
 
-		ZcjjUtil.sqhtZCJJ(driver);
+		AppSPUtil.testBCSQQK(driver);
 
 	}
 
@@ -171,7 +127,9 @@ public class ControlTestZCJJ {
 
 	// 申请请款
 	public void appSqqk() {
-		ZcjjUtil.zcjjHTSQQK(driver);
+		AppSPUtil.testHTSQQK(driver);// 请款
+		// System.out.println(AppUtil.getStatue(driver));
+		// AppUtil.look_status(driver);//查看进度
 
 	}
 
@@ -179,7 +137,7 @@ public class ControlTestZCJJ {
 	public void sp1() {
 		try {
 
-			String spname = ZcjjUtil.getSPname(driver);// 从app获取审批人名字
+			String spname = AppSPUtil.getSPname(driver);// 从app获取审批人名字
 			System.out.println("###" + spname);
 			String[] strs = spname.split(",");
 			String itename = strs[1];
@@ -198,11 +156,12 @@ public class ControlTestZCJJ {
 	//
 	public void sp2() {
 		try {
-			String spname = ZcjjUtil.getSPname(driver);// 从app获取审批人名字
+			String spname = AppSPUtil.getSPname(driver);// 从app获取审批人名字
 			System.out.println("###" + spname);
 			if (spname.indexOf(",") == -1) {
 				// bd操作
-				AppSPUtil.loginBD(driver, spname);
+				String email = WebSPUtil.nameToemail(spname);
+				AppSPUtil.loginBD(driver, email);
 				AppUtil.login(driver, devicename, "liuhl@jizhicar.com");// 登录
 			} else {
 				String[] strs = spname.split(",");
@@ -223,10 +182,12 @@ public class ControlTestZCJJ {
 	public void sp3() {
 		try {
 
-			String spname = ZcjjUtil.getSPname(driver);// 从app获取审批人名字
+			String spname = AppSPUtil.getSPname(driver);// 从app获取审批人名字
 			if (spname.indexOf(",") == -1) {
 				// bd操作
-				AppSPUtil.loginBD(driver, spname);
+
+				String email = WebSPUtil.nameToemail(spname);
+				AppSPUtil.loginBD(driver, email);
 				AppUtil.login(driver, devicename, "liuhl@jizhicar.com");// 登录
 			} else {
 				String[] strs = spname.split(",");
@@ -246,7 +207,7 @@ public class ControlTestZCJJ {
 	public void sp4() {
 		try {
 
-			String spname = ZcjjUtil.getSPname(driver);// 从app获取审批人名字
+			String spname = AppSPUtil.getSPname(driver);// 从app获取审批人名字
 			System.out.println("###" + spname);
 			String[] strs = spname.split(",");
 			String itename = strs[1];
@@ -265,7 +226,7 @@ public class ControlTestZCJJ {
 	public void sp5() {
 		try {
 
-			String spname = ZcjjUtil.getSPname(driver);// 从app获取审批人名字
+			String spname = AppSPUtil.getSPname(driver);// 从app获取审批人名字
 			System.out.println("###" + spname);
 			String[] strs = spname.split(",");
 			String itename = strs[1];
@@ -291,5 +252,4 @@ public class ControlTestZCJJ {
 		driver.quit();
 		webdriver.quit();
 	}
-
 }
