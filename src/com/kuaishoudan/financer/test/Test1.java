@@ -1,4 +1,4 @@
-package com.kuaishoudan.financer;
+package com.kuaishoudan.financer.test;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidElement;
@@ -13,10 +13,10 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.kuaishoudan.financer.util.AppSPUtil;
-import com.kuaishoudan.financer.util.AppUtil;
-import com.kuaishoudan.financer.util.WebSPUtil;
-import com.kuaishoudan.financer.util.WebUtil;
+import com.kuaishoudan.financer.selenium.AppSPUtil;
+import com.kuaishoudan.financer.selenium.AppUtil;
+import com.kuaishoudan.financer.selenium.WebSPUtil;
+import com.kuaishoudan.financer.selenium.WebUtil;
 
 public class Test1 {
 

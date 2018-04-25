@@ -1,5 +1,8 @@
 package com.kuaishoudan.financer.util;
 
+import java.text.DecimalFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -114,9 +117,44 @@ public class RandomValue {
 	}
 
 	public static void main(String[] args) {
-		for (int i = 0; i < 100; i++) {
+	/*	for (int i = 0; i < 100; i++) {
 			System.out.println(getAddress());
 			// System.out.println(getTel());
+		}*/
+		
+		System.out.println("@");
+		Map map = new HashMap();
+		map.put("name", getChineseName());//名字
+		map.put("tel", getTel());//手机号
+		IdCardGenerator g = new IdCardGenerator();
+		map.put("id", g.generate());//身份证号
+		Calendar calendar = Calendar.getInstance();
+		String identitynum = calendar.getTime().getTime()
+				+ (int) (Math.random() * 89 + 10) + "";// 军官证号
+		map.put("identitynum", identitynum);
+		//System.out.println(map.get("identitynum"));
+		double sqdk = 0;
+		double cljg = 0;
+
+		DecimalFormat df = new DecimalFormat("#.000");
+		for (int i = 0; i < 200; i++) {
+			sqdk = Double.parseDouble(df.format(2 + Math.random() * 17));// Math.random()
+																			// *
+																			// 97));//
+																			// 997
+			cljg = Double.parseDouble(df.format(2 + Math.random() * 97));
+			// System.out.println(cljg+"="+sqdk);
+			if (cljg >= sqdk) {
+				break;
+			}
 		}
+		int ran = (int) (Math.random() * 2);
+		System.out.println(ran);
+		map.put("random", ran);
+		map.put("cljg",cljg );
+		map.put("sqdk",sqdk );
+		
+		
+		
 	}
 }

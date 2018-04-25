@@ -1,4 +1,4 @@
-package com.kuaishoudan.financer.util;
+package com.kuaishoudan.financer.selenium;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidElement;
@@ -23,7 +23,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.kuaishoudan.financer.util.IdCardGenerator;
-import com.kuaishoudan.financer.web.TestSP;
+
 
 public class WebSPUtil {
 

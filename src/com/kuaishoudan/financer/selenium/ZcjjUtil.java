@@ -1,4 +1,4 @@
-package com.kuaishoudan.financer.util;
+package com.kuaishoudan.financer.selenium;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidElement;
@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+
+import com.kuaishoudan.financer.util.IdCardGenerator;
 
 public class ZcjjUtil {
 
@@ -151,6 +153,14 @@ public class ZcjjUtil {
 			System.out.println("下-----------" + title);
 
 		} else {
+			String titletext = driver
+					.findElement(By.id("com.kuaishoudan.financer:id/toolbar_title"))
+					.getText().trim();// 标题文本
+			System.out.println(titletext);
+			if ("客户".equals(titletext)) {
+				driver.findElements(By.id("com.kuaishoudan.financer:id/text_name"))
+						.get(0).click();// 首页列表
+			}
 			driver.findElements(
 					By.id("com.kuaishoudan.financer:id/text_product")).get(0)
 					.click();// 常规产品列表
@@ -331,5 +341,85 @@ public class ZcjjUtil {
 		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back"))
 				.click();// 返回
 	}
+	// BD经理登录审批
+		public static boolean loginBD(AppiumDriver<AndroidElement> driver,
+				String username) {
+			boolean flag = false;
+			driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+			driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back"))
+					.click();// 返回
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back"))
+					.click();// 返回
+			driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back"))
+			.click();// 返回
+	driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+	try {
+		Thread.sleep(1000);
+	} catch (InterruptedException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+			AppUtil.logout(driver);// 退出登录
+			driver.findElement(By.id("com.kuaishoudan.financer:id/edit_account"))
+					.clear();
+			driver.findElement(By.id("com.kuaishoudan.financer:id/edit_password"))
+					.clear();
+			driver.findElement(By.id("com.kuaishoudan.financer:id/edit_account"))
+					.sendKeys(username);
+			driver.findElement(By.id("com.kuaishoudan.financer:id/edit_password"))
+					.sendKeys("@123456");
+			driver.findElement(By.id("com.kuaishoudan.financer:id/btn_login"))
+					.click();
+			driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_menu"))
+					.click();// 菜单
+			System.out
+					.println("菜单选项数量"
+							+ driver.findElements(
+									By.id("com.kuaishoudan.financer:id/design_menu_item_text"))
+									.size());
+			driver.findElements(
+					By.id("com.kuaishoudan.financer:id/design_menu_item_text"))
+					.get(7).click();// 消息
+			driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+			driver.findElements(By.id("com.kuaishoudan.financer:id/message_body"))
+					.get(0).click();// 点进同意贷款详情
+			driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
+
+			driver.findElement(By.id("com.kuaishoudan.financer:id/btn_check_agree"))
+					.click();// 同意按钮
+			driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
+			driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_finish"))
+					.click();// 确定按钮
+			driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
+			driver.findElement(
+					By.id("com.kuaishoudan.financer:id/dialog_custom_confirm"))
+					.click();// 提醒----确定按钮
+
+			AppUtil.logout(driver);// 退出登录
+			flag = true;
+			return flag;
+
+		}
+
 
 }

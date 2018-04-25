@@ -9,11 +9,12 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.kuaishoudan.financer.util.AppSPUtil;
-import com.kuaishoudan.financer.util.AppUtil;
-import com.kuaishoudan.financer.util.WebSPUtil;
-import com.kuaishoudan.financer.util.WebUtil;
-import com.kuaishoudan.financer.web.LoginWeb;
+import com.kuaishoudan.financer.selenium.AppSPUtil;
+import com.kuaishoudan.financer.selenium.AppUtil;
+import com.kuaishoudan.financer.selenium.WebSPUtil;
+import com.kuaishoudan.financer.selenium.WebUtil;
+import com.kuaishoudan.financer.selenium.ZcjjUtil;
+
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidElement;
@@ -157,17 +158,12 @@ public class ControlTest {
 		try {
 			String	spname = AppSPUtil.getSPname(driver);//从app获取审批人名字			
 			System.out.println("###"+spname);
-			if(spname.indexOf(",")==-1){
-				//bd操作
-				String email=WebSPUtil.nameToemail(spname);
-				AppSPUtil.loginBD(driver,email);
-				AppUtil.login(driver,devicename, "liuhl@jizhicar.com");//登录	
-			}else{
+		
 			String[]  strs=spname.split(",");
 			 String itename=strs[1];
 			String email=WebSPUtil.nameToemail(strs[0]);
 			WebSPUtil.testSP2(webdriver, email, itename);	//请款审批同意专员
-			}
+			
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -187,6 +183,12 @@ public class ControlTest {
 				String email=WebSPUtil.nameToemail(spname);
 				AppSPUtil.loginBD(driver,email);
 				AppUtil.login(driver,devicename, "liuhl@jizhicar.com");//登录	
+				Thread.sleep(1000);
+				String spname1 = AppSPUtil.getSPname(driver);// 从app获取审批人名字
+				String[] strs1 = spname1.split(",");
+				String itename1 = strs1[1];
+				String email1 = WebSPUtil.nameToemail(strs1[0]);
+				WebSPUtil.testSP3(webdriver, email1, itename1); // 请款审批同意专员
 			}else{
 			String[]  strs=spname.split(",");
 			 String itename=strs[1];

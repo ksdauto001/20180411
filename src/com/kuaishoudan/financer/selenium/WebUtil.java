@@ -1,4 +1,4 @@
-package com.kuaishoudan.financer.util;
+package com.kuaishoudan.financer.selenium;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,7 +13,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import com.kuaishoudan.financer.web.TestLogin;
+import com.kuaishoudan.financer.util.IdCardGenerator;
+
 
 public class WebUtil {
 

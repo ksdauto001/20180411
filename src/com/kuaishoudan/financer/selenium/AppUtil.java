@@ -1,4 +1,4 @@
-package com.kuaishoudan.financer.util;
+package com.kuaishoudan.financer.selenium;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -17,6 +17,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
+
+import com.kuaishoudan.financer.util.IdCardGenerator;
+import com.kuaishoudan.financer.util.RandomValue;
 
 public class AppUtil {
 
@@ -118,7 +121,7 @@ public class AppUtil {
 				driver.findElements(
 						By.id("com.kuaishoudan.financer:id/text_select"))
 						.get(1).click();// 点击身份证
-				Thread.sleep(300);
+				Thread.sleep(500);
 				Runtime.getRuntime().exec(
 						"adb -s " + devicename + " shell input text "
 								+ g.generate());// 证件号adb输入
@@ -217,7 +220,7 @@ public class AppUtil {
 			try {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				int ran = (int) (Math.random() * 2);
-				ran = 1;// ------------
+				ran = 0;// ------------
 				if (ran == 0) {
 					driver.findElement(
 							By.id("com.kuaishoudan.financer:id/check_old_car"))
@@ -259,7 +262,8 @@ public class AppUtil {
 							By.id("com.kuaishoudan.financer:id/toolbar_back"))
 							.click();
 				}
-				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+				//Thread.sleep(1000);
+				driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 				Runtime.getRuntime().exec(
 						"adb -s " + devicename + " shell input text " + cljg);
 				Thread.sleep(800);
@@ -272,7 +276,7 @@ public class AppUtil {
 				Thread.sleep(800);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_loan")).click();// 申请贷款
-				Thread.sleep(600);
+				Thread.sleep(800);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/text_periods"))
 						.click();// 还款期数 / 融资期限
@@ -328,24 +332,27 @@ public class AppUtil {
 							.click();
 				}
 
-				Thread.sleep(300);
+				Thread.sleep(500);
 
 				Runtime.getRuntime().exec(
 						"adb -s " + devicename + " shell input text beizhu1");
-				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+				Thread.sleep(200);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_remark"))
 						.click();// 备注
-				Thread.sleep(800);
+				Thread.sleep(1000);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/toolbar_next"))
 						.click();// 下一步
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-				/*
-				 * if(ran==0){ //二手车 driver.findElement(By.id(
-				 * "com.kuaishoudan.financer:id/dialog_custom_confirm"
-				 * )).click();//订单常规 }
-				 */
+				
+				/*  if(ran==0){ //二手车
+					  driver.findElement(By.id(
+				  
+				 "com.kuaishoudan.financer:id/dialog_custom_confirm"
+				  )).click();//订单常规 
+					  }*/
+				 
 				driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 				driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add"))
 						.click();// 上传照片
@@ -439,14 +446,14 @@ public class AppUtil {
 				Runtime.getRuntime().exec(
 						"adb -s " + devicename + " shell input text "
 								+ "yingyezz");
-				Thread.sleep(500);
+				Thread.sleep(600);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_company_business_license"))
 						.click();
-				Thread.sleep(500);
+				Thread.sleep(300);
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				int ran = (int) (Math.random() * 2);
-				ran = 1;// ------------
+				ran =0;// ------------
 				if (ran == 0) {
 					driver.findElement(
 							By.id("com.kuaishoudan.financer:id/check_old_car"))
@@ -488,20 +495,21 @@ public class AppUtil {
 							By.id("com.kuaishoudan.financer:id/toolbar_back"))
 							.click();
 				}
-				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			//	Thread.sleep(1000);
+				driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 				Runtime.getRuntime().exec(
 						"adb -s " + devicename + " shell input text " + cljg);
-				Thread.sleep(800);
+				Thread.sleep(500);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_price"))
 						.click();// 车辆价格
 				Thread.sleep(800);
 				Runtime.getRuntime().exec(
 						"adb -s " + devicename + " shell input text " + sqdk);
-				Thread.sleep(800);
+				Thread.sleep(500);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_loan")).click();// 申请贷款
-				Thread.sleep(600);
+				Thread.sleep(1000);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/text_periods"))
 						.click();// 还款期数
@@ -557,23 +565,23 @@ public class AppUtil {
 							.click();
 				}
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-				Thread.sleep(300);
+				Thread.sleep(600);
 				Runtime.getRuntime().exec(
 						"adb -s " + devicename + " shell input text beizhu1");
-
+				Thread.sleep(200);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_remark"))
 						.click();// 备注
-				Thread.sleep(800);
+				Thread.sleep(1000);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/toolbar_next"))
 						.click();// 下一步
-				if (ran == 0) {
+				/*if (ran == 0) {
 					// 二手车
 					driver.findElement(
 							By.id("com.kuaishoudan.financer:id/dialog_custom_confirm"))
 							.click();// 订单常规
-				}
+				}*/
 				driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 				driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add"))
 						.click();// 上传照片
@@ -764,23 +772,23 @@ public class AppUtil {
 		 * (By.id("com.kuaishoudan.financer:id/edit_password")) .clear();
 		 */
 		try {
-
+			driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
 			driver.findElement(
 					By.id("com.kuaishoudan.financer:id/edit_account")).clear();
 			Runtime.getRuntime().exec(
 					"adb -s " + devicename + " shell input text " + username);
-			Thread.sleep(500);
+			Thread.sleep(600);
 			driver.findElement(
 					By.id("com.kuaishoudan.financer:id/edit_account")).click();
-			Thread.sleep(500);
+			Thread.sleep(600);
 			Runtime.getRuntime().exec(
 					"adb -s " + devicename + " shell input text " + "@123456");
-			Thread.sleep(500);
+			Thread.sleep(600);
 			driver.findElement(
 					By.id("com.kuaishoudan.financer:id/edit_password")).click();
 			driver.findElement(By.id("com.kuaishoudan.financer:id/btn_login"))
 					.click();
-			Thread.sleep(8000);
+			Thread.sleep(3000);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -889,6 +897,23 @@ public class AppUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	/**
+	 * 一次返回
+	 * 
+	 * @param driver
+	 */
+	public static void goback0(AppiumDriver<AndroidElement> driver) {
+		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
+		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back"))
+				.click();// 返回按钮
+		try {
+			Thread.sleep(1500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

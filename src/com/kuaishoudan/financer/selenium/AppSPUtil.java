@@ -1,4 +1,4 @@
-package com.kuaishoudan.financer.util;
+package com.kuaishoudan.financer.selenium;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidElement;
@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+
+import com.kuaishoudan.financer.util.IdCardGenerator;
 
 public class AppSPUtil {
 
