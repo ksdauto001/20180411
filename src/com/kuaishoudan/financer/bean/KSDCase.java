@@ -11,14 +11,16 @@ public class KSDCase {
 	String  caseid;
 	String  casedesc;
 	String username;
-	String identitytype;//身份类型
+	int identitytype;//证件类型
 	String identitynum;//身份号
-	String cartype;
+	String  jgid;//军官证
+	int cartype;//新车二手车
 	String carbrand;//车辆品牌
-	String carprice;//车辆价格
-	String  sqdk;//申请贷款
-	String hkqs;//还款期数
-	String jrcp;//金融产品
+	String carseries;//车系
+	double carprice;//车辆价格
+	double  sqdk;//申请贷款
+	int  hkqs;//还款期数
+	String product;//金融产品
 	String  sssh;//所属商户
 	String businessname;//企业名称
 	String businessid;//企业名称
@@ -27,12 +29,26 @@ public class KSDCase {
 	String  phone;
 	String loginname;//登录名
 	String pwd;
-	String grhqy;//个人或企业
-	public String getGrhqy() {
-		return grhqy;
+	String address;//用户地址
+	int qygr;//个人企业
+	String rate;//费率
+	public String getRate() {
+		return rate;
 	}
-	public void setGrhqy(String grhqy) {
-		this.grhqy = grhqy;
+	public void setRate(String rate) {
+		this.rate = rate;
+	}
+	public String getCarseries() {
+		return carseries;
+	}
+	public void setCarseries(String carseries) {
+		this.carseries = carseries;
+	}
+	public int getQygr() {
+		return qygr;
+	}
+	public void setQygr(int qygr) {
+		this.qygr = qygr;
 	}
 	public String getLoginname() {
 		return loginname;
@@ -59,22 +75,11 @@ public class KSDCase {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getIdentitytype() {
-		return identitytype;
-	}
-	public void setIdentitytype(String identitytype) {
-		this.identitytype = identitytype;
-	}
-	public String getIdentitynum() {
-		return identitynum;
-	}
-	public void setIdentitynum(String identitynum) {
-		this.identitynum = identitynum;
-	}
-	public String getCartype() {
+	
+	public int getCartype() {
 		return cartype;
 	}
-	public void setCartype(String cartype) {
+	public void setCartype(int cartype) {
 		this.cartype = cartype;
 	}
 	public String getCarbrand() {
@@ -83,30 +88,9 @@ public class KSDCase {
 	public void setCarbrand(String carbrand) {
 		this.carbrand = carbrand;
 	}
-	public String getCarprice() {
-		return carprice;
-	}
-	public void setCarprice(String carprice) {
-		this.carprice = carprice;
-	}
-	public String getSqdk() {
-		return sqdk;
-	}
-	public void setSqdk(String sqdk) {
-		this.sqdk = sqdk;
-	}
-	public String getHkqs() {
-		return hkqs;
-	}
-	public void setHkqs(String hkqs) {
-		this.hkqs = hkqs;
-	}
-	public String getJrcp() {
-		return jrcp;
-	}
-	public void setJrcp(String jrcp) {
-		this.jrcp = jrcp;
-	}
+	
+	
+	
 	public String getSssh() {
 		return sssh;
 	}
@@ -148,6 +132,55 @@ public class KSDCase {
 	}
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
+	}
+	public int getIdentitytype() {
+		return identitytype;
+	}
+	public void setIdentitytype(int identitytype) {
+		this.identitytype = identitytype;
+	}
+	public String getIdentitynum() {
+		return identitynum;
+	}
+	public void setIdentitynum(String identitynum) {
+		this.identitynum = identitynum;
+	}
+	public double getCarprice() {
+		return carprice;
+	}
+	public void setCarprice(double carprice) {
+		this.carprice = carprice;
+	}
+	public double getSqdk() {
+		return sqdk;
+	}
+	public void setSqdk(double sqdk) {
+		this.sqdk = sqdk;
+	}
+	public int getHkqs() {
+		return hkqs;
+	}
+	public void setHkqs(int hkqs) {
+		this.hkqs = hkqs;
+	}
+	public String getProduct() {
+		return product;
+	}
+	public void setProduct(String product) {
+		this.product = product;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getJgid() {
+		return jgid;
+	}
+	public void setJgid(String jgid) {
+		this.jgid = jgid;
 	}
 
 

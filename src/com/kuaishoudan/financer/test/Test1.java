@@ -6,6 +6,7 @@ import io.appium.java_client.android.AndroidElement;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -13,17 +14,19 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.kuaishoudan.financer.bean.KSDCase;
 import com.kuaishoudan.financer.selenium.AppSPUtil;
 import com.kuaishoudan.financer.selenium.AppUtil;
 import com.kuaishoudan.financer.selenium.WebSPUtil;
 import com.kuaishoudan.financer.selenium.WebUtil;
+import com.kuaishoudan.financer.util.RandomValue;
 
 public class Test1 {
 
 	public AppiumDriver<AndroidElement> driver = null;
 	String devicename = "";
 	public WebDriver webdriver = null;
-
+	  KSDCase ksd=null;
 	@BeforeTest
 	public void setUp() throws Exception {
 		driver = AppUtil.getdriver();
@@ -37,6 +40,7 @@ public class Test1 {
 		System.out.println(devicename);
 		Thread.sleep(3000);
 		webdriver = WebUtil.getdriver();
+		 ksd=RandomValue.getRandom();
 	}
 
 	@AfterTest
@@ -50,7 +54,8 @@ public class Test1 {
 	public void test1() throws InterruptedException, IOException {
 
 		System.out.println("***1@");
-		boolean flag = AppUtil.createUser(driver, devicename, 1);
+		
+		boolean flag = AppUtil.createUser(driver, devicename, 1,ksd);
 		Assert.assertEquals(flag, true);
 	}
 
@@ -59,7 +64,7 @@ public class Test1 {
 	public void test2() throws InterruptedException, IOException {
 
 		System.out.println("***2@");
-		String str = AppUtil.addGr(driver, devicename, 1);
+		String str = AppUtil.addGr(driver, devicename, 1,ksd);
 		Assert.assertEquals(str, "待分配");
 	}
 
@@ -68,7 +73,7 @@ public class Test1 {
 	public void test3() throws InterruptedException, IOException {
 
 		System.out.println("***3@");
-		String str = AppUtil.addQy(driver, devicename, 1);
+		String str = AppUtil.addQy(driver, devicename, 1,ksd);
 		Assert.assertEquals(str, "待分配");
 	}
 

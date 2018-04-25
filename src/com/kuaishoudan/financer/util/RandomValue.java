@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.kuaishoudan.financer.bean.KSDCase;
+
 /**
  * 随机生成中文姓名，性别，Email，手机号，住址
  * 
@@ -122,16 +124,44 @@ public class RandomValue {
 			// System.out.println(getTel());
 		}*/
 		
+		
+	//	
+		
+/*	Map map=	getRandom();
+
+	
+System.out.println(""+map.get("name")+
+		","+map.get("tel")+
+		","+map.get("id")+
+		","+map.get("identitynum")+
+		","+map.get("gq")+
+		","+map.get("erx")+
+		","+map.get("cljg")+
+		","+map.get("sqdk")+
+		","+map.get("rzqx")
+		);*/
+		
+		KSDCase ksd=getRandom();;
+		System.out.println(ksd.getUsername()+ksd.getPhone()+ksd.getIdentitynum()
+				+ksd.getJgid()+ksd.getQygr()+ksd.getCartype()+ksd.getCarbrand()
+				+ksd.getCarseries()+ksd.getCarprice()+ksd.getSqdk()+ksd.getHkqs());
+	}
+	public static KSDCase  getRandom(){
 		System.out.println("@");
-		Map map = new HashMap();
+		KSDCase ksd=new KSDCase();
+		Map  map = new HashMap();
+		ksd.setUsername(getChineseName());
 		map.put("name", getChineseName());//名字
+		ksd.setPhone(getTel());
 		map.put("tel", getTel());//手机号
 		IdCardGenerator g = new IdCardGenerator();
+		ksd.setIdentitynum(g.generate());
 		map.put("id", g.generate());//身份证号
 		Calendar calendar = Calendar.getInstance();
-		String identitynum = calendar.getTime().getTime()
+		String jgnum = calendar.getTime().getTime()
 				+ (int) (Math.random() * 89 + 10) + "";// 军官证号
-		map.put("identitynum", identitynum);
+		map.put("identitynum", jgnum);
+		ksd.setJgid(jgnum);
 		//System.out.println(map.get("identitynum"));
 		double sqdk = 0;
 		double cljg = 0;
@@ -148,13 +178,26 @@ public class RandomValue {
 				break;
 			}
 		}
-		int ran = (int) (Math.random() * 2);
-		System.out.println(ran);
-		map.put("random", ran);
-		map.put("cljg",cljg );
+		int gq = (int) (Math.random() * 2);
+		int erx = (int) (Math.random() * 2);
+		int rzqx=(int) (Math.random() * 4);
+	
+		map.put("gq", gq);
+		map.put("erx", erx);
+		map.put("brand", "宝骏");
+		map.put("carserise", "宝骏630");
+		map.put("cljg",cljg);
 		map.put("sqdk",sqdk );
-		
-		
-		
+		map.put("rzqx", rzqx);
+		ksd.setAddress("address2");
+		ksd.setQygr(gq);
+		ksd.setCartype(erx);
+		ksd.setCarbrand("宝骏");
+		ksd.setCarseries("宝骏630");
+		ksd.setCarprice(cljg);
+		ksd.setSqdk(sqdk);
+		ksd.setHkqs(rzqx);
+		ksd.setRemark("beizhu1");
+		return ksd;
 	}
 }

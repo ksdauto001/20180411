@@ -35,24 +35,24 @@ public class CaseUtil {
 
 	/**
 	 * @param args
-	 */
+	 *//*
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 	//	String spath="C:\\12a.xls";
 
-/*		KSDCase ksd=getCaseByid("TI-1-001");
+		KSDCase ksd=getCaseByid("TI-1-001");
 			System.out.println("========"+ksd.getCaseid()+"@@"+ksd.getRemark()+ksd.getPhone());
-*/
+
 		
-		/*List<KSDCase> testcase=getCases(1);
+		List<KSDCase> testcase=getCases(1);
 		
 		System.out.println(testcase.size());
 		for(int i=0;i<testcase.size();i++) {
 			KSDCase ksd=testcase.get(i);
 			System.out.println(ksd.getCarprice()+"==="+ksd.getCaseid()+ksd.getUsername()+ksd.getCartype()+ksd.getBusinessname()+ksd.getPhone() );
-		}*/
-		/*DecimalFormat df = new DecimalFormat("#.00");
+		}
+		DecimalFormat df = new DecimalFormat("#.00");
 		for(int i=0;i<100;i++){
 			//double x=2+(double)(Math.random()*2.0);
 		
@@ -66,15 +66,15 @@ public class CaseUtil {
 				System.out.println("**"+i);
 			}
 			
-		}*/
-	/*	for(int i=0;i<20;i++){
+		}
+		for(int i=0;i<20;i++){
 			String uuid = UUID.randomUUID().toString().replaceAll("-", "");
 			System.out.println(uuid);
 			Calendar calendar = Calendar.getInstance();
 			System.out.println("现在："+calendar.getTime().getTime()+ (int)(Math.random()*89+10));	
-		}*/
+		}
 	
-		/* for (int i = 0; i < 9; i++) {//9代表循环九次，产生九个随机号码
+		 for (int i = 0; i < 9; i++) {//9代表循环九次，产生九个随机号码
 			 
 	            String number = "1";//定义电话号码以139开头
 	            Random random = new Random();//定义random，产生随机数
@@ -83,7 +83,7 @@ public class CaseUtil {
 	                number += random.nextInt(9);
 	            }
 	            System.out.println(number);//输出一个电话号码
-	        }*/
+	        }
 		//for(int q=0;q<10;q++)
 
 		
@@ -91,9 +91,9 @@ public class CaseUtil {
 	}
 
 	
-	/**
+	*//**
 	 * 读取Excel具体内容
-	 */
+	 *//*
 	 public static KSDCase  getCaseByid(String caseid){
 			String path=System.getProperty("user.dir")+"/testcase.xls";
 	   
@@ -154,9 +154,9 @@ public class CaseUtil {
 	    }
 	 
 	 
-	 /**
+	 *//**
 		 * 读取Excel具体内容
-		 */
+		 *//*
 		 public static List<KSDCase>  getCases(int n){
 				String path=System.getProperty("user.dir")+"/testcase.xls";
 			 List<KSDCase> cells1=new ArrayList<KSDCase>();
@@ -227,5 +227,5 @@ public class CaseUtil {
 		
 			
 			
-		
+		*/
 }

@@ -10,6 +10,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -18,6 +20,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 
+import com.kuaishoudan.financer.bean.KSDCase;
 import com.kuaishoudan.financer.util.IdCardGenerator;
 import com.kuaishoudan.financer.util.RandomValue;
 
@@ -86,14 +89,9 @@ public class AppUtil {
 	 * @param k
 	 */
 	public static boolean createUser(AppiumDriver<AndroidElement> driver,
-			String devicename, int k) {
+			String devicename, int k,KSDCase ksd) {
 		boolean flag = false;
-		IdCardGenerator g = new IdCardGenerator();
-		Calendar calendar = Calendar.getInstance();
 		try {
-			String identitynum = calendar.getTime().getTime()
-					+ (int) (Math.random() * 89 + 10) + "";// 军官证号
-			String phone = RandomValue.getTel();
 			driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
 
 			driver.findElement(
@@ -107,9 +105,9 @@ public class AppUtil {
 
 			driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 			driver.findElement(By.id("com.kuaishoudan.financer:id/edit_name"))
-					.sendKeys(RandomValue.getChineseName());// 名字
+					.sendKeys(ksd.getUsername());// 名字
 			Runtime.getRuntime().exec(
-					"adb -s " + devicename + " shell input text " + phone);
+					"adb -s " + devicename + " shell input text " + ksd.getPhone());
 			Thread.sleep(500);
 			driver.findElement(By.id("com.kuaishoudan.financer:id/edit_phone"))
 					.click();// 手机
@@ -124,7 +122,7 @@ public class AppUtil {
 				Thread.sleep(500);
 				Runtime.getRuntime().exec(
 						"adb -s " + devicename + " shell input text "
-								+ g.generate());// 证件号adb输入
+								+ ksd.getIdentitynum());// 证件号adb输入
 				Thread.sleep(600);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_id_code"))
@@ -135,8 +133,8 @@ public class AppUtil {
 						.get(2).click();// 点击军官证
 				Runtime.getRuntime().exec(
 						"adb -s " + devicename + " shell input text "
-								+ identitynum);// 证件号adb输入
-				Thread.sleep(700);
+								+ ksd.getJgid());// 证件号adb输入
+				Thread.sleep(600);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_id_code"))
 						.click();// 证件号码 *****
@@ -145,7 +143,7 @@ public class AppUtil {
 			Thread.sleep(500);
 
 			Runtime.getRuntime().exec(
-					"adb -s " + devicename + " shell input text address1");
+					"adb -s " + devicename + " shell input text "+ksd.getAddress());
 			driver.findElement(
 					By.id("com.kuaishoudan.financer:id/edit_id_address"))
 					.click();// 地址
@@ -184,24 +182,14 @@ public class AppUtil {
 	 * @param k
 	 */
 	public static String addGr(AppiumDriver<AndroidElement> driver,
-			String devicename, int k) {
-		double sqdk = 0;
-		double cljg = 0;
+			String devicename, int k,KSDCase ksd) {
+
+
 		String actualstatue = "";
-		DecimalFormat df = new DecimalFormat("#.000");
+
 		boolean flag = false;
 		boolean cx = false;
-		for (int i = 0; i < 200; i++) {
-			sqdk = Double.parseDouble(df.format(2 + Math.random() * 17));// Math.random()
-																			// *
-																			// 97));//
-																			// 997
-			cljg = Double.parseDouble(df.format(2 + Math.random() * 97));
-			// System.out.println(cljg+"="+sqdk);
-			if (cljg >= sqdk) {
-				break;
-			}
-		}
+
 
 		try {
 			driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
@@ -219,7 +207,7 @@ public class AppUtil {
 		if (!flag) {
 			try {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				int ran = (int) (Math.random() * 2);
+				int ran = ksd.getCartype();
 				ran = 0;// ------------
 				if (ran == 0) {
 					driver.findElement(
@@ -230,14 +218,22 @@ public class AppUtil {
 							By.id("com.kuaishoudan.financer:id/layout_new_car"))
 							.click();// 新车
 				}
-				driver.findElement(
-						By.id("com.kuaishoudan.financer:id/text_brand"))
-						.click();// 品牌车系
+			driver.findElement(
+						By.id("com.kuaishoudan.financer:id/text_brand")).click();// 品牌车系
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 				try {
-					driver.findElements(
-							By.id("com.kuaishoudan.financer:id/item_brand_item"))
-							.get(2).click();// 车辆品牌（奥迪）
+					List<AndroidElement> clpps=	driver.findElements(
+							By.id("com.kuaishoudan.financer:id/item_brand_item"));// 车辆品牌（奥迪）
+					for(int i=0;i<clpps.size();i++){
+						String brand=clpps.get(i).findElement(By.id("com.kuaishoudan.financer:id/text_brand")).getText();
+						System.out.println(brand);
+						if(ksd.getCarbrand().equals(brand)){
+							clpps.get(i).click();
+							break;
+						}
+						
+					}
+			//		clpps.get(2).click();//车辆品牌点
 					cx = true;
 				} catch (java.lang.IndexOutOfBoundsException e) {
 					// TODO Auto-generated catch block
@@ -248,9 +244,21 @@ public class AppUtil {
 				}
 				try {
 					if (cx) {
-						driver.findElements(
+					/*	driver.findElements(
 								By.id("com.kuaishoudan.financer:id/item_series_item"))
 								.get(1).click();// 车辆型号
+								*/
+						List<AndroidElement> seriess=	driver.findElements(
+								By.id("com.kuaishoudan.financer:id/text_series"));// 车辆品牌（奥迪）
+						for(int i=0;i<seriess.size();i++){
+							String series=seriess.get(i).getText();
+							System.out.println(series);
+							if(ksd.getCarseries().equals(series)){
+								seriess.get(i).click();//车辆型号
+								break;
+							}
+							
+						}
 					}
 				} catch (java.lang.IndexOutOfBoundsException e) {
 					// TODO Auto-generated catch block
@@ -265,14 +273,14 @@ public class AppUtil {
 				//Thread.sleep(1000);
 				driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 				Runtime.getRuntime().exec(
-						"adb -s " + devicename + " shell input text " + cljg);
+						"adb -s " + devicename + " shell input text " + ksd.getCarprice());
 				Thread.sleep(800);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_price"))
 						.click();// 车辆价格
 				Thread.sleep(800);
 				Runtime.getRuntime().exec(
-						"adb -s " + devicename + " shell input text " + sqdk);
+						"adb -s " + devicename + " shell input text " + ksd.getSqdk());
 				Thread.sleep(800);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_loan")).click();// 申请贷款
@@ -283,14 +291,22 @@ public class AppUtil {
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 				driver.findElements(
 						By.id("com.kuaishoudan.financer:id/text_select"))
-						.get((int) (Math.random() * 4)).click();// 还款期数周期 /融资期限
-				driver.findElement(
+						.get(ksd.getHkqs()).click();// 还款期数周期 /融资期限
+		driver.findElement(
 						By.id("com.kuaishoudan.financer:id/text_product"))
 						.click();// 金融产品
 				try {
-					driver.findElements(
-							By.id("com.kuaishoudan.financer:id/text_product"))
-							.get(0).click();// 第一个产品
+				List<	AndroidElement> producs=  driver.findElements(
+							By.id("com.kuaishoudan.financer:id/text_product"));
+					for(int i=0;i<producs.size();i++){
+						if(!(producs.get(i).getText().contains("平安银行"))){
+							ksd.setProduct(producs.get(i).getText() );
+							producs.get(i).click();// 第一个产品
+							break;
+						}
+					}
+					
+							//.get(0).click();// 第一个产品
 				} catch (java.lang.IndexOutOfBoundsException e) {
 					// TODO Auto-generated catch block
 					// e.printStackTrace();
@@ -304,9 +320,10 @@ public class AppUtil {
 						By.id("com.kuaishoudan.financer:id/text_feilv"))
 						.click();// 费率
 				try {
-					driver.findElements(
-							By.id("com.kuaishoudan.financer:id/text_select"))
-							.get(0).click();// 费率选项
+					List<AndroidElement> rates=	driver.findElements(By.id("com.kuaishoudan.financer:id/text_select"));
+					ksd.setRate( rates.get(0).getText());		
+					rates.get(0).click();// 费率选项
+							
 				} catch (java.lang.IndexOutOfBoundsException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -321,9 +338,13 @@ public class AppUtil {
 						By.id("com.kuaishoudan.financer:id/text_supplier"))
 						.click();// 所属商户
 				try {
-					driver.findElements(
+				AndroidElement  supplier=	driver.findElements(
 							By.id("com.kuaishoudan.financer:id/tv_name"))
-							.get(0).click();// 所属商户列表
+							.get(0);
+				ksd.setSssh(supplier.getText());
+				supplier.click();// 所属商户列表
+				
+					
 				} catch (java.lang.IndexOutOfBoundsException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -335,7 +356,7 @@ public class AppUtil {
 				Thread.sleep(500);
 
 				Runtime.getRuntime().exec(
-						"adb -s " + devicename + " shell input text beizhu1");
+						"adb -s " + devicename + " shell input text "+ksd.getRemark());
 				Thread.sleep(200);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_remark"))
@@ -392,7 +413,7 @@ public class AppUtil {
 	 * @param k
 	 */
 	public static String addQy(AppiumDriver<AndroidElement> driver,
-			String devicename, int k) {
+			String devicename, int k,KSDCase ksd) {
 		double sqdk = 0;
 		double cljg = 0;
 		String actualstatue = "";
@@ -452,7 +473,7 @@ public class AppUtil {
 						.click();
 				Thread.sleep(300);
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				int ran = (int) (Math.random() * 2);
+				int ran =ksd.getCartype();
 				ran =0;// ------------
 				if (ran == 0) {
 					driver.findElement(
@@ -468,9 +489,17 @@ public class AppUtil {
 						.click();// 品牌车系
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 				try {
-					driver.findElements(
-							By.id("com.kuaishoudan.financer:id/item_brand_item"))
-							.get(2).click();// 车辆品牌（奥迪）
+					List<AndroidElement> clpps=	driver.findElements(
+							By.id("com.kuaishoudan.financer:id/item_brand_item"));// 车辆品牌（奥迪）
+					for(int i=0;i<clpps.size();i++){
+						String brand=clpps.get(i).findElement(By.id("com.kuaishoudan.financer:id/text_brand")).getText();
+						System.out.println(brand);
+						if(ksd.getCarbrand().equals(brand)){
+							clpps.get(i).click();
+							break;
+						}
+						
+					}
 					cx = true;
 				} catch (java.lang.IndexOutOfBoundsException e) {
 					// TODO Auto-generated catch block
@@ -498,14 +527,14 @@ public class AppUtil {
 			//	Thread.sleep(1000);
 				driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 				Runtime.getRuntime().exec(
-						"adb -s " + devicename + " shell input text " + cljg);
+						"adb -s " + devicename + " shell input text " +ksd.getCarprice());
 				Thread.sleep(500);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_price"))
 						.click();// 车辆价格
 				Thread.sleep(800);
 				Runtime.getRuntime().exec(
-						"adb -s " + devicename + " shell input text " + sqdk);
+						"adb -s " + devicename + " shell input text " + ksd.getSqdk());
 				Thread.sleep(500);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_loan")).click();// 申请贷款
@@ -516,7 +545,7 @@ public class AppUtil {
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 				driver.findElements(
 						By.id("com.kuaishoudan.financer:id/text_select"))
-						.get((int) (Math.random() * 4)).click();// 还款期数周期
+						.get(ksd.getHkqs()).click();// 还款期数周期
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/text_product"))
 						.click();// 金融产品
@@ -632,12 +661,18 @@ public class AppUtil {
 
 	public static void addTest(AppiumDriver<AndroidElement> driver,
 			String devicename, int i) {
-		boolean flag = createUser(driver, devicename, i);
+		KSDCase ksd=RandomValue.getRandom();
+		System.out.println(ksd.getUsername()+ksd.getPhone()+ksd.getIdentitynum()
+				+ksd.getJgid()+ksd.getQygr()+ksd.getCartype()+ksd.getCarbrand()
+				+ksd.getCarseries()+ksd.getCarprice()+ksd.getSqdk()+ksd.getHkqs());
+		  int gq=ksd.getQygr();
+		boolean flag = createUser(driver, devicename, i,ksd);
 		if (flag) {
-			if ((int) (Math.random() * 2) == 0) {// 企业贷款
-				addQy(driver, devicename, i);
+			if (gq == 0) {// 企业贷款
+				addQy(driver, devicename, i,ksd);
 			} else {// 个人贷款
-				addGr(driver, devicename, i);
+				addGr(driver, devicename, i,ksd);
+			//
 			}
 		}
 
@@ -755,11 +790,16 @@ public class AppUtil {
 
 	public static void addZjjtest(AppiumDriver<AndroidElement> driver,
 			String devicename, int i) {
+		KSDCase ksd=RandomValue.getRandom();
+		System.out.println(ksd.getUsername()+ksd.getPhone()+ksd.getIdentitynum()
+				+ksd.getJgid()+ksd.getQygr()+ksd.getCartype()+ksd.getCarbrand()
+				+ksd.getCarseries()+ksd.getCarprice()+ksd.getSqdk()+ksd.getHkqs());
+		  int gq=ksd.getQygr();
 		AppUtil.zcjj(driver);
-		if ((int) (Math.random() * 2) == 0) {// 企业贷款
-			addQy(driver, devicename, i);
+		if (gq == 0) {// 企业贷款
+			addQy(driver, devicename, i,ksd);
 		} else {// 个人贷款
-			addGr(driver, devicename, i);
+			addGr(driver, devicename, i,ksd);
 		}
 	}
 
