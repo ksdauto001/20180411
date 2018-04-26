@@ -23,7 +23,7 @@ import com.kuaishoudan.financer.util.RandomValue;
 
 public class Test1 {
 
-	public AppiumDriver<AndroidElement> driver = null;
+	/*public AppiumDriver<AndroidElement> driver = null;
 	String devicename = "";
 	public WebDriver webdriver = null;
 	  KSDCase ksd=null;
@@ -231,5 +231,5 @@ public class Test1 {
 			e.printStackTrace();
 		}
 	}
-
+*/
 }

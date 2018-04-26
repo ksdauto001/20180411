@@ -1,5 +1,6 @@
 package com.kuaishoudan.financer.util;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -127,48 +128,34 @@ public class RandomValue {
 		
 	//	
 		
-/*	Map map=	getRandom();
-
-	
-System.out.println(""+map.get("name")+
-		","+map.get("tel")+
-		","+map.get("id")+
-		","+map.get("identitynum")+
-		","+map.get("gq")+
-		","+map.get("erx")+
-		","+map.get("cljg")+
-		","+map.get("sqdk")+
-		","+map.get("rzqx")
-		);*/
-		
-		KSDCase ksd=getRandom();;
+		/*KSDCase ksd=getRandom();;
 		System.out.println(ksd.getUsername()+ksd.getPhone()+ksd.getIdentitynum()
-				+ksd.getJgid()+ksd.getQygr()+ksd.getCartype()+ksd.getCarbrand()
-				+ksd.getCarseries()+ksd.getCarprice()+ksd.getSqdk()+ksd.getHkqs());
+			+""	+ksd.getJgid()+ksd.getQygr()+ksd.getCartype()+ksd.getCarbrand()
+				+ksd.getCarseries()+","+ksd.getCarprice()+","+ksd.getSqdk()+","+ksd.getHkqs()
+				+"\n  "+ksd.getPurchase_tax()+"\n "+ksd.getInsurance()+" \n"+ksd.getGps_charge()+"\n "+ksd.getService_charge()
+				+","+ksd.getRegisttype()+","+ksd.getPledge()
+				);*/
+/*
+		Map map=new HashMap();;
+		map.put("a", "a");*/
+	//	map.put("b", "b");
+	
+		String ff="长安新生 标准贷";
+		System.out.println(ff.split(" ")[0]);
 	}
 	public static KSDCase  getRandom(){
 		System.out.println("@");
-		KSDCase ksd=new KSDCase();
-		Map  map = new HashMap();
-		ksd.setUsername(getChineseName());
-		map.put("name", getChineseName());//名字
-		ksd.setPhone(getTel());
-		map.put("tel", getTel());//手机号
+
 		IdCardGenerator g = new IdCardGenerator();
-		ksd.setIdentitynum(g.generate());
-		map.put("id", g.generate());//身份证号
 		Calendar calendar = Calendar.getInstance();
 		String jgnum = calendar.getTime().getTime()
 				+ (int) (Math.random() * 89 + 10) + "";// 军官证号
-		map.put("identitynum", jgnum);
-		ksd.setJgid(jgnum);
-		//System.out.println(map.get("identitynum"));
 		double sqdk = 0;
 		double cljg = 0;
-
+		DecimalFormat df2 = new DecimalFormat("#.00");
 		DecimalFormat df = new DecimalFormat("#.000");
 		for (int i = 0; i < 200; i++) {
-			sqdk = Double.parseDouble(df.format(2 + Math.random() * 17));// Math.random()
+			sqdk = Double.parseDouble(df.format(2 + Math.random() * 97));// Math.random()
 																			// *
 																			// 97));//
 																			// 997
@@ -178,26 +165,42 @@ System.out.println(""+map.get("name")+
 				break;
 			}
 		}
+
+		String purchase_tax=new BigDecimal(Double.parseDouble(df2.format(1 + Math.random() * 999999999))+"").toString();
+		String gps_charge=new BigDecimal(Double.parseDouble(df2.format(1 + Math.random() * 999999999))+"" ).toString();
+		String insurance=new BigDecimal(Double.parseDouble(df2.format(1 + Math.random() * 999999999))+"").toString();
+		String service_charge=new BigDecimal(Double.parseDouble(df2.format(1 + Math.random() * 999999999))+"" ).toString();
+
+		int idtype=(int) (Math.random() * 2);
 		int gq = (int) (Math.random() * 2);
 		int erx = (int) (Math.random() * 2);
 		int rzqx=(int) (Math.random() * 4);
-	
-		map.put("gq", gq);
-		map.put("erx", erx);
-		map.put("brand", "宝骏");
-		map.put("carserise", "宝骏630");
-		map.put("cljg",cljg);
-		map.put("sqdk",sqdk );
-		map.put("rzqx", rzqx);
-		ksd.setAddress("address2");
-		ksd.setQygr(gq);
-		ksd.setCartype(erx);
+		int registtype=(int) (1+Math.random() * 3);
+		int pledge=(int) (1+Math.random() * 3);
+		KSDCase ksd=new KSDCase();	
+		ksd.setUsername(getChineseName());//名字
+		ksd.setPhone(getTel());//手机号
+		ksd.setAddress("address2");//地址
+		ksd.setIdentitynum(g.generate());//身份证
+		ksd.setJgid(jgnum);//军官id
+		ksd.setIdentitytype(idtype);//军官类型
+		ksd.setQygr(gq);//企业个人
+		ksd.setBusinessname("qiyemc");//企业名称
+		ksd.setBusinessid("yingyezzh");//企业执照
+		ksd.setCartype(erx);//新车二手车
 		ksd.setCarbrand("宝骏");
 		ksd.setCarseries("宝骏630");
-		ksd.setCarprice(cljg);
-		ksd.setSqdk(sqdk);
-		ksd.setHkqs(rzqx);
-		ksd.setRemark("beizhu1");
+		ksd.setCarprice(cljg);//车辆价格
+		ksd.setSqdk(sqdk);//申请贷款
+		ksd.setHkqs(rzqx);//融资期限
+		ksd.setRemark("beizhu1");//备注
+		ksd.setPurchase_tax(purchase_tax);//购置税
+		ksd.setGps_charge(gps_charge);//gps费
+		ksd.setInsurance(insurance);//保险费
+		ksd.setService_charge(service_charge);//服务费
+		ksd.setVin(g.getItemID(17));//车架号
+		ksd.setRegisttype(registtype);//上牌方	
+		ksd.setPledge(pledge);//抵押方
 		return ksd;
 	}
 }

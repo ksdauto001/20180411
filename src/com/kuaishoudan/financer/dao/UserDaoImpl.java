@@ -24,8 +24,10 @@ public class UserDaoImpl{
 
 	/*	Finance f=UserDaoImpl.getFinance("71238");
 		System.out.println(f.getFinanceid()+f.getUsername()+f.getBrandid()+f.getRate()+f.getProductname());*/
-		FinanceAdvence f=UserDaoImpl.getAdvence("1062474");
-		System.out.println(f.getFinanceid()+f.getUsername());
+		//FinanceAdvence f=UserDaoImpl.getAdvence("1062474");
+		//System.out.println(f.getFinanceid()+f.getUsername());
+		int a=gethave_system("易鑫融资租赁");
+		System.out.println(a);
 	}
 	public static Finance getFinance(String id) {
 
@@ -121,6 +123,33 @@ public class UserDaoImpl{
 			util.closeConn(conn);
 		}
 		return f;
+	}
+	public static int gethave_system(String organization_name) {
+		int have_system=1;
+	
+		String sql = " select max( have_system) from tb_organization where name =? and company_id=1000 ";
+		DBUtil util = new DBUtil();
+		Connection conn = util.openConnection();
+		try {
+
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, organization_name);
+
+			ResultSet rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				have_system=	rs.getInt(1);
+			
+			
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+			e.printStackTrace();
+		} finally {
+			util.closeConn(conn);
+		}
+		return have_system;
 	}
 
 }

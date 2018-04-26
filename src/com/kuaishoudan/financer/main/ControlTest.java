@@ -4,11 +4,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.kuaishoudan.financer.bean.KSDCase;
 import com.kuaishoudan.financer.selenium.AppSPUtil;
 import com.kuaishoudan.financer.selenium.AppUtil;
 import com.kuaishoudan.financer.selenium.WebSPUtil;
@@ -23,6 +25,7 @@ public class ControlTest {
 	public AppiumDriver<AndroidElement> driver;
 	String devicename="";
 	public  WebDriver webdriver;
+	KSDCase ksd=null;
 	/**
 	 * @param args
 	 * @throws Exception 
@@ -35,11 +38,10 @@ public class ControlTest {
 		ct.setUp();//app启动	
 		ct.setUp2();//web启动
 
-			for(int i=0;i<1;i++){
-		ct.dfp();//待分配app
-
-
-	ct.webDksp();//已录入到申请合同
+		for(int i=0;i<1;i++){
+				
+				ct.dfp();//待分配app
+				ct.webDksp();//已录入到申请合同
 
 		ct.appSqht();//App申请合同
 	
@@ -52,6 +54,7 @@ public class ControlTest {
 		ct.sp1();
 		ct.sp2();
 		ct.sp3();
+		
 		ct.back();
 			}
 		/*ct.sp4();
@@ -61,6 +64,9 @@ public class ControlTest {
 //		ct.back()
 	}
 
+	public void printparam(){
+		
+	}
 	public void back(){
 		AppUtil.goback1(driver);
 	}
@@ -98,8 +104,9 @@ public class ControlTest {
 	 * 创建用户，进件，待审批
 	 */
 	public  void  dfp(){
-		AppUtil.addTest(driver, devicename,1);
-	
+		 ksd=	AppUtil.addTest(driver, devicename,1);
+
+		 System.out.println("##==dfp"+ksd.getStatue());
 	}
 	/**
 	 * web
@@ -108,7 +115,7 @@ public class ControlTest {
 			WebUtil.login(webdriver, "liuhl@jizhicar.com");//登录
 			WebUtil.testDFP(webdriver);//待分配
 			WebUtil.testYFP(webdriver);//已分配
-			WebUtil.testYLR(webdriver);//已录入
+			WebUtil.testYLR(webdriver,ksd);//已录入
 			WebUtil.logout(webdriver );//登出
 
 	}
@@ -116,33 +123,34 @@ public class ControlTest {
 	public void appSqht(){
 		
 
-		AppSPUtil.testSQHT(driver);
+	ksd=	AppSPUtil.testSQHT(driver,ksd);
+
+	 System.out.println("##==="+ksd.getStatue());
 		
 	}
 	//web审批合同
 	public void webSpht(){
 		WebUtil.login(webdriver, "liuhl@jizhicar.com");//登录
-		WebUtil.testYSQHT(webdriver);//申请合同审批
+		WebUtil.testYSQHT(webdriver,ksd);//申请合同审批
 		WebUtil.logout(webdriver );//登出
+		 System.out.println("##==="+AppSPUtil.getActstatue(driver));
 		
 	}
 	//申请请款
 	public void appSqqk(){
-		AppSPUtil.testHTSQQK(driver);//请款
+		AppSPUtil.testHTSQQK(driver,ksd);//请款
 	//	System.out.println(AppUtil.getStatue(driver));
 		//AppUtil.look_status(driver);//查看进度
-		
+		 System.out.println("##===sqqk"+AppSPUtil.getActstatue(driver));
 	}
 	
 	//请款审批同意专员
 	public void sp1(){
 			try {
 			
-			String	spname = AppSPUtil.getSPname(driver);//从app获取审批人名字			
-			System.out.println("###"+spname);
-			String[]  strs=spname.split(",");
-			 String itename=strs[1];
-			String email=WebSPUtil.nameToemail(strs[0]);
+			Map<String,String> map= AppSPUtil.getSPname(driver);//从app获取审批人名字			
+			 String itename=map.get("prename");
+			String email=WebSPUtil.nameToemail(map.get("name"));
 			WebSPUtil.testSP1(webdriver, email, itename);	//请款审批同意专员
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -156,12 +164,10 @@ public class ControlTest {
 	//
 	public void sp2(){
 		try {
-			String	spname = AppSPUtil.getSPname(driver);//从app获取审批人名字			
-			System.out.println("###"+spname);
+			Map<String,String> map = AppSPUtil.getSPname(driver);//从app获取审批人名字			
+			 String itename=map.get("prename");
+				String email=WebSPUtil.nameToemail(map.get("name"));
 		
-			String[]  strs=spname.split(",");
-			 String itename=strs[1];
-			String email=WebSPUtil.nameToemail(strs[0]);
 			WebSPUtil.testSP2(webdriver, email, itename);	//请款审批同意专员
 			
 			} catch (InterruptedException e) {
@@ -176,23 +182,21 @@ public class ControlTest {
 	public void sp3(){
 		try {
 	
-			String	spname = AppSPUtil.getSPname(driver);//从app获取审批人名字			
-			if(spname.indexOf(",")==-1){
+			Map<String,String> map = AppSPUtil.getSPname(driver);//从app获取审批人名字			
+			if(map.size()==1){
 				//bd操作
 				
-				String email=WebSPUtil.nameToemail(spname);
+				String email=WebSPUtil.nameToemail(map.get("name"));
 				AppSPUtil.loginBD(driver,email);
 				AppUtil.login(driver,devicename, "liuhl@jizhicar.com");//登录	
 				Thread.sleep(1000);
-				String spname1 = AppSPUtil.getSPname(driver);// 从app获取审批人名字
-				String[] strs1 = spname1.split(",");
-				String itename1 = strs1[1];
-				String email1 = WebSPUtil.nameToemail(strs1[0]);
-				WebSPUtil.testSP3(webdriver, email1, itename1); // 请款审批同意专员
+				Map<String,String> map2 = AppSPUtil.getSPname(driver);// 从app获取审批人名字
+				String itename2=map2.get("prename");
+				String email2=WebSPUtil.nameToemail(map2.get("name"));				
+				WebSPUtil.testSP3(webdriver, email2, itename2); // 请款审批同意专员
 			}else{
-			String[]  strs=spname.split(",");
-			 String itename=strs[1];
-			String email=WebSPUtil.nameToemail(strs[0]);
+				 String itename=map.get("prename");
+					String email=WebSPUtil.nameToemail(map.get("name"));
 			WebSPUtil.testSP3(webdriver, email, itename);	//请款审批同意专员
 			}
 			} catch (InterruptedException e) {
@@ -206,11 +210,9 @@ public class ControlTest {
 	public void sp4(){
 		try {
 		
-			String	spname = AppSPUtil.getSPname(driver);//从app获取审批人名字			
-			System.out.println("###"+spname);
-			String[]  strs=spname.split(",");
-			 String itename=strs[1];
-			String email=WebSPUtil.nameToemail(strs[0]);
+			Map<String,String> map = AppSPUtil.getSPname(driver);//从app获取审批人名字			
+			 String itename=map.get("prename");
+				String email=WebSPUtil.nameToemail(map.get("name"));
 			WebSPUtil.testSP4(webdriver, email, itename);	//请款审批同意专员
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -224,11 +226,9 @@ public class ControlTest {
 	public void sp5(){
 		try {
 			
-			String	spname = AppSPUtil.getSPname(driver);//从app获取审批人名字			
-			System.out.println("###"+spname);
-			String[]  strs=spname.split(",");
-			 String itename=strs[1];
-			String email=WebSPUtil.nameToemail(strs[0]);
+			Map<String,String> map  = AppSPUtil.getSPname(driver);//从app获取审批人名字			
+			 String itename=map.get("prename");
+				String email=WebSPUtil.nameToemail(map.get("name"));
 			WebSPUtil.testSP5(webdriver, email, itename);	//请款审批同意专员
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block

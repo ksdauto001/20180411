@@ -80,7 +80,7 @@ public class WebSPUtil {
 		}
 
 		int height = driver.manage().window().getSize().height;
-		System.out.println("height" + height);
+	//	System.out.println("height" + height);
 		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
 				+ (height * 2 + 200) + ")"); // 向下滑动
 		try {
@@ -121,7 +121,7 @@ public class WebSPUtil {
 			e.printStackTrace();
 		}
 		int height = driver.manage().window().getSize().height;
-		System.out.println("height" + height);
+	//	System.out.println("height" + height);
 		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
 				+ (height * 2 + 200) + ")"); // 向下滑动
 		try {
@@ -162,7 +162,7 @@ public class WebSPUtil {
 			e.printStackTrace();
 		}
 		int height = driver.manage().window().getSize().height;
-		System.out.println("height" + height);
+	//	System.out.println("height" + height);
 		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
 				+ (height * 2 + 200) + ")"); // 向下滑动
 		try {
@@ -203,7 +203,7 @@ public class WebSPUtil {
 			e.printStackTrace();
 		}
 		int height = driver.manage().window().getSize().height;
-		System.out.println("height" + height);
+		//System.out.println("height" + height);
 		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
 				+ (height * 2 + 200) + ")"); // 向下滑动
 		try {
@@ -241,7 +241,7 @@ public class WebSPUtil {
 		driver.findElement(By.linkText("已通过")).click();
 		clickItemorder(driver, "刘浩亮");
 		int height = driver.manage().window().getSize().height;
-		System.out.println("height" + height);
+	//	System.out.println("height" + height);
 		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
 				+ (height * 2 + 200) + ")"); // 向下滑动
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
@@ -278,7 +278,7 @@ public class WebSPUtil {
 		clickItemorder(driver, itename);
 
 		int height = driver.manage().window().getSize().height;
-		System.out.println("height" + height);
+	//	System.out.println("height" + height);
 		// Long aa=(Long) ((JavascriptExecutor)
 		// driver).executeScript("return  document.body.scrollHeight");
 		// System.out.println(aa);
@@ -322,15 +322,15 @@ public class WebSPUtil {
 		// List<WebElement>
 		// items=driver.findElements(By.xpath("//div[@class='list_item']/div[2]/div[3]/dl[6]/dd"));//className("list_item")
 
-		System.out.println("项目数" + items.size());
+	//	System.out.println("项目数" + items.size());
 		for (int i = 1; i <= items.size(); i++) {
-			System.out.println(i);
+		//	System.out.println(i);
 			WebElement item = items.get(i - 1).findElement(
 					By.xpath("//ul[@class='todo_list']/li[" + i + "]/div/div"));
 			// WebElement item= items.get(i);
-			System.out.println("==" + item.getText());
+		//	System.out.println("==" + item.getText());
 			if (item.getText().contains(name)) {
-				System.out.println("@" + item.getText());
+				//System.out.println("@" + item.getText());
 				item.click();
 				break;
 			}
@@ -343,16 +343,16 @@ public class WebSPUtil {
 		// List<WebElement>
 		// items=driver.findElements(By.xpath("//div[@class='list_item']/div[2]/div[3]/dl[6]/dd"));//className("list_item")
 
-		System.out.println("项目数" + items.size());
+	//	System.out.println("项目数" + items.size());
 		for (int i = 1; i <= items.size(); i++) {
-			System.out.println(i);
+			//System.out.println(i);
 			WebElement item = items.get(i - 1).findElement(
 					By.xpath("//ul[@class='finance_list']/li[" + i
 							+ "]/div[2]/div[3]/dl[6]/dd"));
 			// WebElement item= items.get(i);
-			System.out.println("==" + item.getText());
+		//	System.out.println("==" + item.getText());
 			if (item.getText().contains(name)) {
-				System.out.println("@" + item.getText());
+				//System.out.println("@" + item.getText());
 				item.click();
 				break;
 			}

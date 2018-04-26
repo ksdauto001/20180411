@@ -10,7 +10,7 @@ public class KSDCase {
 
 	String  caseid;
 	String  casedesc;
-	String username;
+	String username;//用户名
 	int identitytype;//证件类型
 	String identitynum;//身份号
 	String  jgid;//军官证
@@ -32,6 +32,63 @@ public class KSDCase {
 	String address;//用户地址
 	int qygr;//个人企业
 	String rate;//费率
+	String statue;//状态
+	String purchase_tax;//购置税
+	String gps_charge;//gps费
+	String insurance;//保险费
+	String service_charge;//服务费
+	String vin;//车架号
+	int registtype;//上牌方
+	int pledge;//抵押方
+	
+	public int getRegisttype() {
+		return registtype;
+	}
+	public void setRegisttype(int registtype) {
+		this.registtype = registtype;
+	}
+	public int getPledge() {
+		return pledge;
+	}
+	public void setPledge(int pledge) {
+		this.pledge = pledge;
+	}
+	public String getVin() {
+		return vin;
+	}
+	public void setVin(String vin) {
+		this.vin = vin;
+	}
+	public String getPurchase_tax() {
+		return purchase_tax;
+	}
+	public void setPurchase_tax(String purchase_tax) {
+		this.purchase_tax = purchase_tax;
+	}
+	public String getGps_charge() {
+		return gps_charge;
+	}
+	public void setGps_charge(String gps_charge) {
+		this.gps_charge = gps_charge;
+	}
+	public String getInsurance() {
+		return insurance;
+	}
+	public void setInsurance(String insurance) {
+		this.insurance = insurance;
+	}
+	public String getService_charge() {
+		return service_charge;
+	}
+	public void setService_charge(String service_charge) {
+		this.service_charge = service_charge;
+	}
+	public String getStatue() {
+		return statue;
+	}
+	public void setStatue(String statue) {
+		this.statue = statue;
+	}
 	public String getRate() {
 		return rate;
 	}

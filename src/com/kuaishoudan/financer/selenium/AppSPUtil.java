@@ -4,11 +4,14 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidElement;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 
+import com.kuaishoudan.financer.bean.KSDCase;
 import com.kuaishoudan.financer.util.IdCardGenerator;
 
 public class AppSPUtil {
@@ -22,7 +25,7 @@ public class AppSPUtil {
 	}
 
 	// 申请合同**
-	public static String testSQHT(AppiumDriver<AndroidElement> driver) {
+	public static KSDCase testSQHT(AppiumDriver<AndroidElement> driver,KSDCase ksd) {
 		String actualstatue = "";
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.findElements(By.id("com.kuaishoudan.financer:id/text_name"))
@@ -47,11 +50,12 @@ public class AppSPUtil {
 		driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add"))
 				.click();// 添加照片
 		actualstatue = upload(driver);
-		return actualstatue;
+		ksd.setStatue(actualstatue);
+		return ksd;
 	}
 
 	// (申请合同)-申请请款
-	public static String testHTSQQK(AppiumDriver<AndroidElement> driver) {
+	public static String testHTSQQK(AppiumDriver<AndroidElement> driver,KSDCase ksd) {
 		String actualstatue = "";
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.findElements(By.id("com.kuaishoudan.financer:id/text_name"))
@@ -88,14 +92,14 @@ public class AppSPUtil {
 				.click();// 上牌方
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.findElements(By.id("com.kuaishoudan.financer:id/text_select"))
-				.get(0).click();
+				.get(ksd.getRegisttype()-1).click();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.findElement(
 				By.id("com.kuaishoudan.financer:id/tv_chekuan_diyafang"))
 				.click();// 抵押方
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.findElements(By.id("com.kuaishoudan.financer:id/text_select"))
-				.get(0).click();
+				.get(ksd.getPledge()-1).click();
 		driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
 
 		/*
@@ -130,7 +134,7 @@ public class AppSPUtil {
 	}
 
 	// 不出合同申请请款
-	public static void testBCSQQK(AppiumDriver<AndroidElement> driver) {
+	public static void testBCSQQK(AppiumDriver<AndroidElement> driver,KSDCase ksd) {
 		IdCardGenerator g = new IdCardGenerator();
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.findElements(By.id("com.kuaishoudan.financer:id/text_name"))
@@ -168,7 +172,7 @@ public class AppSPUtil {
 				.click();// xia下标
 		driver.findElement(
 				By.id("com.kuaishoudan.financer:id/et_chekuan_chejia"))
-				.sendKeys(g.getItemID(17));// 车架号
+				.sendKeys(ksd.getVin());// 车架号
 		driver.findElement(
 				By.id("com.kuaishoudan.financer:id/ll_chekuan_shangpaidiya"))
 				.click();// 上牌抵押地
@@ -186,14 +190,14 @@ public class AppSPUtil {
 				.click();// 上牌方
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.findElements(By.id("com.kuaishoudan.financer:id/text_select"))
-				.get(0).click();
+				.get(ksd.getRegisttype()-1).click();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.findElement(
 				By.id("com.kuaishoudan.financer:id/tv_chekuan_diyafang"))
 				.click();// 抵押方
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.findElements(By.id("com.kuaishoudan.financer:id/text_select"))
-				.get(0).click();
+				.get(ksd.getPledge()-1).click();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		/*
 		 * driver.findElement(By.id("com.kuaishoudan.financer:id/iv_check"))
@@ -315,11 +319,14 @@ public class AppSPUtil {
 
 			driver.findElement(
 					By.id("com.kuaishoudan.financer:id/toolbar_back")).click();// 返回按钮
-
+			Thread.sleep(1500);
 			acstatue = getActstatue(driver);// 状态值
 		} catch (org.openqa.selenium.WebDriverException e) {
 			// TODO Auto-generated catch block
 			// e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return acstatue;
 	}
@@ -341,7 +348,7 @@ public class AppSPUtil {
 				.click();// 返回
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -366,11 +373,7 @@ public class AppSPUtil {
 		}
 		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_menu"))
 				.click();// 菜单
-		System.out
-				.println("菜单选项数量"
-						+ driver.findElements(
-								By.id("com.kuaishoudan.financer:id/design_menu_item_text"))
-								.size());
+
 		driver.findElements(
 				By.id("com.kuaishoudan.financer:id/design_menu_item_text"))
 				.get(7).click();// 消息
@@ -395,9 +398,9 @@ public class AppSPUtil {
 
 	}
 
-	public static String getSPname(AppiumDriver<AndroidElement> driver)
+	public static Map<String,String> getSPname(AppiumDriver<AndroidElement> driver)
 			throws InterruptedException, IOException {
-
+		Map<String,String> map=new HashMap<String, String>();;
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		String spname = "";
 		String title = driver.findElement(
@@ -442,6 +445,7 @@ public class AppSPUtil {
 
 					spname = strs[1];
 					System.out.println("BD经理处理" + spname);
+					map.put("name", spname);
 					break;
 				} else {
 					String prename = statueitems
@@ -452,7 +456,8 @@ public class AppSPUtil {
 					String[] strspre = prename.split("-");
 					spname = strs[1] + "," + strspre[1];
 					System.out.println("正在处理" + spname);
-
+					map.put("name", strs[1]);
+					map.put("prename", strspre[1]);
 					break;
 				}
 			} else if ("放款审批/已放款".equals(statue)) {
@@ -463,6 +468,8 @@ public class AppSPUtil {
 						.getText();
 				String[] strs = name.split("-");
 				spname = strs[1] + "," + "刘浩亮";
+				map.put("name", strs[1]);
+				map.put("prename", "刘浩亮");
 			} else if ("回款结果/已回款".equals(statue)) {
 				String name = statueitems
 						.get(i)
@@ -471,13 +478,22 @@ public class AppSPUtil {
 						.getText();
 				String[] strs = name.split("-");
 				spname = strs[1] + "," + "刘浩亮";
+				map.put("name", strs[1]);
+				map.put("prename", "刘浩亮");
 			}
 		}
-		return spname;
+		//return spname;
+		return map;
 	}
 
 	// 状态实际值
 	public static String getActstatue(AppiumDriver<AndroidElement> driver) {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		AppUtil.swipeToDown(driver, 1000);
 		try {
 			Thread.sleep(1000);

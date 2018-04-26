@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import com.kuaishoudan.financer.bean.KSDCase;
 import com.kuaishoudan.financer.util.IdCardGenerator;
 
 
@@ -74,12 +75,10 @@ public class WebUtil {
 		List<WebElement> items = driver
 				.findElements(By
 						.xpath("//ul[@class='todo_list']/li/div[@class='item_detail']/div[@class='last_person']"));
-		System.out.println(items.size());
 		for (int i = 0; i < items.size(); i++) {
 			String name = items.get(i).getText();
-			System.out.println(name);
+			//System.out.println(name);
 			if (name.contains("刘浩亮")) {
-				System.out.println("包含");
 				items.get(i).click();
 				break;
 			}
@@ -94,12 +93,12 @@ public class WebUtil {
 
 		List<WebElement> ss = driver.findElements(By.className("personName"));
 		for (int i = 0; i < ss.size(); i++) {
-			System.out.println(i + ss.get(i).getText());
+			//System.out.println(i + ss.get(i).getText());
 			WebElement fpr = ss.get(i);
 			if (fpr.getText().contains("刘浩亮")) {
 				System.out.println(i);
 				if (i < 25) {
-					System.out.println("<25");
+					//System.out.println("<25");
 					fpr.click();
 					try {
 						Thread.sleep(2000);
@@ -114,7 +113,7 @@ public class WebUtil {
 
 					break;
 				} else {
-					System.out.println(">25");
+					//System.out.println(">25");
 					driver.manage().timeouts()
 							.implicitlyWait(8, TimeUnit.SECONDS);
 					((JavascriptExecutor) driver)
@@ -191,7 +190,7 @@ public class WebUtil {
 	}
 
 	// 已录入
-	public static void testYLR(WebDriver driver) {
+	public static void testYLR(WebDriver driver,KSDCase ksd) {
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 		driver.findElement(By.linkText("客户")).click();
 		driver.findElement(By.linkText("已录入")).click();
@@ -201,10 +200,10 @@ public class WebUtil {
 		driver.findElement(By.className("requestpayout_detail_btn_box"))
 				.findElement(By.xpath("//a/div")).click();// 通知审核结果
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-		driver.findElement(By.name("purchase_tax")).sendKeys("12000.12");// 购置税
-		driver.findElement(By.name("gps_charge")).sendKeys("13000.13");// GPS费
-		driver.findElement(By.name("insurance")).sendKeys("14000.14");// GPS费
-		driver.findElement(By.name("service_charge")).sendKeys("15000.15");// 服务费
+		driver.findElement(By.name("purchase_tax")).sendKeys(ksd.getPurchase_tax());// 购置税
+		driver.findElement(By.name("gps_charge")).sendKeys(ksd.getGps_charge());// GPS费
+		driver.findElement(By.name("insurance")).sendKeys(ksd.getInsurance());// 保险费
+		driver.findElement(By.name("service_charge")).sendKeys(ksd.getService_charge());// 服务费
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 		driver.findElement(By.id("review_sub")).click();// 确定按钮
 
@@ -225,16 +224,16 @@ public class WebUtil {
 		// List<WebElement>
 		// items=driver.findElements(By.xpath("//div[@class='list_item']/div[2]/div[3]/dl[6]/dd"));//className("list_item")
 
-		System.out.println("项目数" + items.size());
+		//System.out.println("项目数" + items.size());
 		for (int i = 1; i <= items.size(); i++) {
-			System.out.println(i);
+		//	System.out.println(i);
 			WebElement item = items.get(i - 1).findElement(
 					By.xpath("//ul[@class='finance_list']/li[" + i
 							+ "]/div[2]/div[3]/dl[6]/dd"));
 			// WebElement item= items.get(i);
-			System.out.println("==" + item.getText());
+		//	System.out.println("==" + item.getText());
 			if (item.getText().contains(name)) {
-				System.out.println("@" + item.getText());
+			//	System.out.println("@" + item.getText());
 				item.click();
 				break;
 			}
@@ -242,9 +241,7 @@ public class WebUtil {
 	}
 
 	// 已申请合同 （上传图片还没做） 新车 车架号不能重复
-	public static void testYSQHT(WebDriver driver) {
-		IdCardGenerator g = new IdCardGenerator();
-		// System.out.println(g.generate());
+	public static void testYSQHT(WebDriver driver,KSDCase ksd) {
 		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
 		driver.findElement(By.linkText("客户")).click();
 		driver.findElement(By.linkText("合同管理")).click();
@@ -274,7 +271,7 @@ public class WebUtil {
 		driver.findElements(By.className("go_forward")).get(1)
 				.findElement(By.xpath("div")).click(); // 同意按钮
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-		driver.findElement(By.id("carVin")).sendKeys(g.getItemID(17));// 车架号
+		driver.findElement(By.id("carVin")).sendKeys(ksd.getVin());// 车架号
 
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 		// driver.findElement(By.className("file_upload_layer")).click();///上传按钮
@@ -295,8 +292,8 @@ public class WebUtil {
 						+ "div1.appendChild(img); div1.appendChild(span1); div1.appendChild(span2);"
 						+ "div1.appendChild(div2);  div2.appendChild(em);");
 
-		String path = System.getProperty("user.dir");
-		System.out.println(path);
+//		String path = System.getProperty("user.dir");
+//		System.out.println(path);
 		// driver.findElement(By.name("file")).sendKeys("c:/20180401.jpg");
 		try {
 			Thread.sleep(3000);
