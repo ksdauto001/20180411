@@ -25,7 +25,8 @@ public class AppSPUtil {
 	}
 
 	// 申请合同**
-	public static KSDCase testSQHT(AppiumDriver<AndroidElement> driver,KSDCase ksd) {
+	public static KSDCase testSQHT(AppiumDriver<AndroidElement> driver,
+			KSDCase ksd) {
 		String actualstatue = "";
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.findElements(By.id("com.kuaishoudan.financer:id/text_name"))
@@ -55,7 +56,8 @@ public class AppSPUtil {
 	}
 
 	// (申请合同)-申请请款
-	public static String testHTSQQK(AppiumDriver<AndroidElement> driver,KSDCase ksd) {
+	public static String testHTSQQK(AppiumDriver<AndroidElement> driver,
+			KSDCase ksd) {
 		String actualstatue = "";
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.findElements(By.id("com.kuaishoudan.financer:id/text_name"))
@@ -92,14 +94,14 @@ public class AppSPUtil {
 				.click();// 上牌方
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.findElements(By.id("com.kuaishoudan.financer:id/text_select"))
-				.get(ksd.getRegisttype()-1).click();
+				.get(ksd.getRegisttype() - 1).click();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.findElement(
 				By.id("com.kuaishoudan.financer:id/tv_chekuan_diyafang"))
 				.click();// 抵押方
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.findElements(By.id("com.kuaishoudan.financer:id/text_select"))
-				.get(ksd.getPledge()-1).click();
+				.get(ksd.getPledge() - 1).click();
 		driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
 
 		/*
@@ -134,7 +136,8 @@ public class AppSPUtil {
 	}
 
 	// 不出合同申请请款
-	public static void testBCSQQK(AppiumDriver<AndroidElement> driver,KSDCase ksd) {
+	public static void testBCSQQK(AppiumDriver<AndroidElement> driver,
+			KSDCase ksd) {
 		IdCardGenerator g = new IdCardGenerator();
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.findElements(By.id("com.kuaishoudan.financer:id/text_name"))
@@ -190,14 +193,14 @@ public class AppSPUtil {
 				.click();// 上牌方
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.findElements(By.id("com.kuaishoudan.financer:id/text_select"))
-				.get(ksd.getRegisttype()-1).click();
+				.get(ksd.getRegisttype() - 1).click();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.findElement(
 				By.id("com.kuaishoudan.financer:id/tv_chekuan_diyafang"))
 				.click();// 抵押方
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.findElements(By.id("com.kuaishoudan.financer:id/text_select"))
-				.get(ksd.getPledge()-1).click();
+				.get(ksd.getPledge() - 1).click();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		/*
 		 * driver.findElement(By.id("com.kuaishoudan.financer:id/iv_check"))
@@ -348,10 +351,18 @@ public class AppSPUtil {
 				.click();// 返回
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		}
+		String titletext = driver
+				.findElement(By.id("com.kuaishoudan.financer:id/toolbar_title"))
+				.getText().trim();// 标题文本
+
+		if ("贷款详情".equals(titletext)) {
+			driver.findElement(
+					By.id("com.kuaishoudan.financer:id/toolbar_back")).click();// 返回
 		}
 		AppUtil.logout(driver);// 退出登录
 		driver.findElement(By.id("com.kuaishoudan.financer:id/edit_account"))
@@ -398,9 +409,11 @@ public class AppSPUtil {
 
 	}
 
-	public static Map<String,String> getSPname(AppiumDriver<AndroidElement> driver)
-			throws InterruptedException, IOException {
-		Map<String,String> map=new HashMap<String, String>();;
+	public static Map<String, String> getSPname(
+			AppiumDriver<AndroidElement> driver) throws InterruptedException,
+			IOException {
+		Map<String, String> map = new HashMap<String, String>();
+		;
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		String spname = "";
 		String title = driver.findElement(
@@ -482,7 +495,7 @@ public class AppSPUtil {
 				map.put("prename", "刘浩亮");
 			}
 		}
-		//return spname;
+		// return spname;
 		return map;
 	}
 

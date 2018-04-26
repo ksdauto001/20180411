@@ -12,7 +12,6 @@ public class DBUtil {
 	public static final String name = "com.mysql.jdbc.Driver";
 	public static final String user = "read_only";
 	public static final String password = "Jizhicar2014";
-//	public static final String url2 = "jdbc:mysql://210.14.150.134:3306/usercenter?characterEncoding=utf8";
 	public static Connection conn = null;
 	public PreparedStatement pst = null;
 
@@ -61,6 +60,5 @@ public class DBUtil {
 
 		return null;
 	}
-
 
 }

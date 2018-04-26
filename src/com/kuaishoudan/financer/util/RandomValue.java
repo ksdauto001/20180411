@@ -120,30 +120,35 @@ public class RandomValue {
 	}
 
 	public static void main(String[] args) {
-	/*	for (int i = 0; i < 100; i++) {
-			System.out.println(getAddress());
-			// System.out.println(getTel());
-		}*/
-		
-		
-	//	
-		
-		/*KSDCase ksd=getRandom();;
-		System.out.println(ksd.getUsername()+ksd.getPhone()+ksd.getIdentitynum()
-			+""	+ksd.getJgid()+ksd.getQygr()+ksd.getCartype()+ksd.getCarbrand()
-				+ksd.getCarseries()+","+ksd.getCarprice()+","+ksd.getSqdk()+","+ksd.getHkqs()
-				+"\n  "+ksd.getPurchase_tax()+"\n "+ksd.getInsurance()+" \n"+ksd.getGps_charge()+"\n "+ksd.getService_charge()
-				+","+ksd.getRegisttype()+","+ksd.getPledge()
-				);*/
-/*
-		Map map=new HashMap();;
-		map.put("a", "a");*/
-	//	map.put("b", "b");
-	
-		String ff="长安新生 标准贷";
+		/*
+		 * for (int i = 0; i < 100; i++) { System.out.println(getAddress()); //
+		 * System.out.println(getTel()); }
+		 */
+
+		//
+
+		/*
+		 * KSDCase ksd=getRandom();;
+		 * System.out.println(ksd.getUsername()+ksd.getPhone
+		 * ()+ksd.getIdentitynum() +""
+		 * +ksd.getJgid()+ksd.getQygr()+ksd.getCartype()+ksd.getCarbrand()
+		 * +ksd.getCarseries
+		 * ()+","+ksd.getCarprice()+","+ksd.getSqdk()+","+ksd.getHkqs()
+		 * +"\n  "+ksd
+		 * .getPurchase_tax()+"\n "+ksd.getInsurance()+" \n"+ksd.getGps_charge
+		 * ()+"\n "+ksd.getService_charge()
+		 * +","+ksd.getRegisttype()+","+ksd.getPledge() );
+		 */
+		/*
+		 * Map map=new HashMap();; map.put("a", "a");
+		 */
+		// map.put("b", "b");
+
+		String ff = "长安新生 标准贷";
 		System.out.println(ff.split(" ")[0]);
 	}
-	public static KSDCase  getRandom(){
+
+	public static KSDCase getRandom() {
 		System.out.println("@");
 
 		IdCardGenerator g = new IdCardGenerator();
@@ -166,41 +171,48 @@ public class RandomValue {
 			}
 		}
 
-		String purchase_tax=new BigDecimal(Double.parseDouble(df2.format(1 + Math.random() * 999999999))+"").toString();
-		String gps_charge=new BigDecimal(Double.parseDouble(df2.format(1 + Math.random() * 999999999))+"" ).toString();
-		String insurance=new BigDecimal(Double.parseDouble(df2.format(1 + Math.random() * 999999999))+"").toString();
-		String service_charge=new BigDecimal(Double.parseDouble(df2.format(1 + Math.random() * 999999999))+"" ).toString();
+		String purchase_tax = new BigDecimal(Double.parseDouble(df2
+				.format(1 + Math.random() * 999999999)) + "").toString();
+		String gps_charge = new BigDecimal(Double.parseDouble(df2
+				.format(1 + Math.random() * 999999999)) + "").toString();
+		String insurance = new BigDecimal(Double.parseDouble(df2
+				.format(1 + Math.random() * 999999999)) + "").toString();
+		String service_charge = new BigDecimal(Double.parseDouble(df2
+				.format(1 + Math.random() * 999999999)) + "").toString();
 
-		int idtype=(int) (Math.random() * 2);
+		int idtype = (int) (Math.random() * 2);
 		int gq = (int) (Math.random() * 2);
 		int erx = (int) (Math.random() * 2);
-		int rzqx=(int) (Math.random() * 4);
-		int registtype=(int) (1+Math.random() * 3);
-		int pledge=(int) (1+Math.random() * 3);
-		KSDCase ksd=new KSDCase();	
-		ksd.setUsername(getChineseName());//名字
-		ksd.setPhone(getTel());//手机号
-		ksd.setAddress("address2");//地址
-		ksd.setIdentitynum(g.generate());//身份证
-		ksd.setJgid(jgnum);//军官id
-		ksd.setIdentitytype(idtype);//军官类型
-		ksd.setQygr(gq);//企业个人
-		ksd.setBusinessname("qiyemc");//企业名称
-		ksd.setBusinessid("yingyezzh");//企业执照
-		ksd.setCartype(erx);//新车二手车
+		int rzqx = (int) (Math.random() * 4);
+		int registtype = (int) (1 + Math.random() * 3);
+		int pledge = (int) (1 + Math.random() * 3);
+		KSDCase ksd = new KSDCase();
+		ksd.setUsername(getChineseName());// 名字
+		ksd.setPhone(getTel());// 手机号
+		ksd.setAddress("address2");// 地址
+		ksd.setIdentitynum(g.generate());// 身份证
+		ksd.setJgid(jgnum);// 军官id
+		ksd.setIdentitytype(idtype);// 军官类型
+		ksd.setQygr(gq);// 企业个人
+		ksd.setBusinessname("qiyemc");// 企业名称
+		ksd.setBusinessid("yingyezzh");// 企业执照
+		ksd.setCartype(erx);// 新车二手车
 		ksd.setCarbrand("宝骏");
 		ksd.setCarseries("宝骏630");
-		ksd.setCarprice(cljg);//车辆价格
-		ksd.setSqdk(sqdk);//申请贷款
-		ksd.setHkqs(rzqx);//融资期限
-		ksd.setRemark("beizhu1");//备注
-		ksd.setPurchase_tax(purchase_tax);//购置税
-		ksd.setGps_charge(gps_charge);//gps费
-		ksd.setInsurance(insurance);//保险费
-		ksd.setService_charge(service_charge);//服务费
-		ksd.setVin(g.getItemID(17));//车架号
-		ksd.setRegisttype(registtype);//上牌方	
-		ksd.setPledge(pledge);//抵押方
+		ksd.setCarprice(cljg);// 车辆价格
+		ksd.setSqdk(sqdk);// 申请贷款
+		ksd.setHkqs(rzqx);// 融资期限
+		ksd.setRemark("beizhu1");// 备注
+		ksd.setPurchase_tax(purchase_tax);// 购置税
+		ksd.setGps_charge(gps_charge);// gps费
+		ksd.setInsurance(insurance);// 保险费
+		ksd.setService_charge(service_charge);// 服务费
+		ksd.setVin(g.getItemID(17));// 车架号
+		ksd.setRegisttype(registtype);// 上牌方
+		ksd.setPledge(pledge);// 抵押方
+		//ksd.setSssh("几节");//所属商户
+		ksd.setImgcount(4);// 图片数量
+		
 		return ksd;
 	}
 }

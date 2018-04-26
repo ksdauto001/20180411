@@ -18,7 +18,6 @@ import com.kuaishoudan.financer.selenium.WebSPUtil;
 import com.kuaishoudan.financer.selenium.WebUtil;
 import com.kuaishoudan.financer.selenium.ZcjjUtil;
 
-
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidElement;
 
@@ -26,7 +25,8 @@ public class ControlTestZCJJ {
 	public AppiumDriver<AndroidElement> driver;
 	String devicename = "";
 	public WebDriver webdriver;
-	KSDCase ksd=null;
+	KSDCase ksd = null;
+
 	/**
 	 * @param args
 	 * @throws Exception
@@ -71,7 +71,8 @@ public class ControlTestZCJJ {
 		System.out.println("***@");
 		ct.setUp();// app启动
 		ct.setUp2();// web启动
-	//	System.out.println(	"@@@@"+driver.findElement(By.id("com.kuaishoudan.financer:id/dialog_custom_message")).getText());
+		// System.out.println(
+		// "@@@@"+driver.findElement(By.id("com.kuaishoudan.financer:id/dialog_custom_message")).getText());
 
 		ct.dfp();// 待分配app
 
@@ -132,7 +133,7 @@ public class ControlTestZCJJ {
 	// App不申请合同
 	public void appBsqht() {
 
-		ZcjjUtil.testBCSQQK(driver,ksd);
+		ZcjjUtil.testBCSQQK(driver, ksd);
 
 	}
 
@@ -141,7 +142,7 @@ public class ControlTestZCJJ {
 	 */
 	public void dfp() {
 		// AppUtil.addTest(driver, devicename,1);
-	ksd=	AppUtil.addZjjtest(driver, devicename, 1);
+		ksd = AppUtil.addZjjtest(driver, devicename, 1);
 	}
 
 	/**
@@ -151,7 +152,7 @@ public class ControlTestZCJJ {
 		WebUtil.login(webdriver, "liuhl@jizhicar.com");// 登录
 		WebUtil.testDFP(webdriver);// 待分配
 		WebUtil.testYFP(webdriver);// 已分配
-		WebUtil.testYLR(webdriver,ksd);// 已录入
+		WebUtil.testYLR(webdriver, ksd);// 已录入
 		WebUtil.logout(webdriver);// 登出
 
 	}
@@ -159,14 +160,14 @@ public class ControlTestZCJJ {
 	// App申请合同
 	public void appSqht() {
 
-		ksd=ZcjjUtil.sqhtZCJJ(driver,ksd);
+		ksd = ZcjjUtil.sqhtZCJJ(driver, ksd);
 
 	}
 
 	// web审批合同
 	public void webSpht() {
 		WebUtil.login(webdriver, "liuhl@jizhicar.com");// 登录
-		WebUtil.testYSQHT(webdriver,ksd);// 申请合同审批
+		WebUtil.testYSQHT(webdriver, ksd);// 申请合同审批
 		WebUtil.logout(webdriver);// 登出
 
 	}
@@ -181,9 +182,9 @@ public class ControlTestZCJJ {
 	public void sp1() {
 		try {
 
-			Map<String,String> map= ZcjjUtil.getSPname(driver);// 从app获取审批人名字
-			 String itename=map.get("prename");
-				String email=WebSPUtil.nameToemail(map.get("name"));
+			Map<String, String> map = ZcjjUtil.getSPname(driver);// 从app获取审批人名字
+			String itename = map.get("prename");
+			String email = WebSPUtil.nameToemail(map.get("name"));
 			WebSPUtil.testSP1(webdriver, email, itename); // 请款审批同意专员
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -198,12 +199,12 @@ public class ControlTestZCJJ {
 	//
 	public void sp2() {
 		try {
-				
-			Map<String,String> map= ZcjjUtil.getSPname(driver);// 从app获取审批人名字				
-			String itename=map.get("prename");				
-			String email=WebSPUtil.nameToemail(map.get("name"));				
+
+			Map<String, String> map = ZcjjUtil.getSPname(driver);// 从app获取审批人名字
+			String itename = map.get("prename");
+			String email = WebSPUtil.nameToemail(map.get("name"));
 			WebSPUtil.testSP2(webdriver, email, itename); // 请款审批同意专员
-			
+
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -217,21 +218,21 @@ public class ControlTestZCJJ {
 	public void sp3() {
 		try {
 
-			Map<String,String> map= ZcjjUtil.getSPname(driver);// 从app获取审批人名字				
-			if (map.size()==1) {
+			Map<String, String> map = ZcjjUtil.getSPname(driver);// 从app获取审批人名字
+			if (map.size() == 1) {
 				// bd操作
-				String email=WebSPUtil.nameToemail(map.get("name"));
+				String email = WebSPUtil.nameToemail(map.get("name"));
 				ZcjjUtil.loginBD(driver, email);
 				AppUtil.login(driver, devicename, "liuhl@jizhicar.com");// 登录
 				Thread.sleep(1000);
-				Map<String,String> map2 = ZcjjUtil.getSPname(driver);// 从app获取审批人名字
-				String itename2=map2.get("prename");
-				String email2=WebSPUtil.nameToemail(map2.get("name"));	
+				Map<String, String> map2 = ZcjjUtil.getSPname(driver);// 从app获取审批人名字
+				String itename2 = map2.get("prename");
+				String email2 = WebSPUtil.nameToemail(map2.get("name"));
 				WebSPUtil.testSP3(webdriver, email2, itename2); // 请款审批同意专员
 			} else {
-		
-				String itename=map.get("prename");				
-				String email=WebSPUtil.nameToemail(map.get("name"));
+
+				String itename = map.get("prename");
+				String email = WebSPUtil.nameToemail(map.get("name"));
 				WebSPUtil.testSP3(webdriver, email, itename); // 请款审批同意专员
 			}
 		} catch (InterruptedException e) {
@@ -246,9 +247,9 @@ public class ControlTestZCJJ {
 	public void sp4() {
 		try {
 
-			Map<String,String> map= ZcjjUtil.getSPname(driver);// 从app获取审批人名字				
-			String itename=map.get("prename");				
-			String email=WebSPUtil.nameToemail(map.get("name"));
+			Map<String, String> map = ZcjjUtil.getSPname(driver);// 从app获取审批人名字
+			String itename = map.get("prename");
+			String email = WebSPUtil.nameToemail(map.get("name"));
 			WebSPUtil.testSP4(webdriver, email, itename); // 请款审批同意专员
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -263,9 +264,9 @@ public class ControlTestZCJJ {
 	public void sp5() {
 		try {
 
-			Map<String,String> map= ZcjjUtil.getSPname(driver);// 从app获取审批人名字				
-			String itename=map.get("prename");				
-			String email=WebSPUtil.nameToemail(map.get("name"));
+			Map<String, String> map = ZcjjUtil.getSPname(driver);// 从app获取审批人名字
+			String itename = map.get("prename");
+			String email = WebSPUtil.nameToemail(map.get("name"));
 			WebSPUtil.testSP5(webdriver, email, itename); // 请款审批同意专员
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
