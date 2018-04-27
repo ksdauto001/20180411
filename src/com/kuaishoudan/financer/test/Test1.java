@@ -15,15 +15,17 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.kuaishoudan.financer.bean.KSDCase;
+import com.kuaishoudan.financer.dao.UserDaoImpl;
 import com.kuaishoudan.financer.selenium.AppSPUtil;
 import com.kuaishoudan.financer.selenium.AppUtil;
 import com.kuaishoudan.financer.selenium.WebSPUtil;
 import com.kuaishoudan.financer.selenium.WebUtil;
+import com.kuaishoudan.financer.util.CaseUtil;
 import com.kuaishoudan.financer.util.RandomValue;
 
 public class Test1 {
 
-	/*public AppiumDriver<AndroidElement> driver = null;
+	public AppiumDriver<AndroidElement> driver = null;
 	String devicename = "";
 	public WebDriver webdriver = null;
 	  KSDCase ksd=null;
@@ -41,6 +43,16 @@ public class Test1 {
 		Thread.sleep(3000);
 		webdriver = WebUtil.getdriver();
 		 ksd=RandomValue.getRandom();
+		 System.out.println("名称" + ksd.getUsername() + "手机" + ksd.getPhone()
+					+ "身份证号" + ksd.getIdentitynum() + "身份类型"
+					+ ksd.getIdentitytype() + "军官" + ksd.getJgid() + "企业个人"
+					+ ksd.getQygr() + "车类型" + ksd.getCartype() + "车品牌"
+					+ ksd.getCarbrand() + "车系" + ksd.getCarseries() + "车价格"
+					+ ksd.getCarprice() + "贷款价格" + ksd.getSqdk() + "融资期限"
+					+ ksd.getHkqs() + "\n  " + ksd.getPurchase_tax() + "\n "
+					+ ksd.getInsurance() + " \n" + ksd.getGps_charge() + "\n "
+					+ ksd.getService_charge() + "," + ksd.getRegisttype() + ","
+					+ ksd.getPledge());
 	}
 
 	@AfterTest
@@ -49,187 +61,196 @@ public class Test1 {
 		webdriver.quit();
 	}
 
+
 	// 创建用户
-	@Test(invocationCount = 1, threadPoolSize = 1)
-	public void test1() throws InterruptedException, IOException {
-
-		System.out.println("***1@");
+	@Test(priority=1,invocationCount = 1, threadPoolSize = 1)
+		public void test1() throws InterruptedException, IOException {
+			System.out.println("***1@");
+			
+			boolean flag = AppUtil.createUser(driver, devicename, 1,ksd);
+			  Map<String,String> actual=UserDaoImpl.getCustomer(ksd);
+			  Map<String,String> expect=CaseUtil.getCustomer(ksd);
+				Assert.assertEquals(flag, true);
+			  Assert.assertEquals(actual, expect);
 		
-		boolean flag = AppUtil.createUser(driver, devicename, 1,ksd);
-		Assert.assertEquals(flag, true);
-	}
-
-	// 个人进件
-	@Test(invocationCount = 1, threadPoolSize = 1)
-	public void test2() throws InterruptedException, IOException {
-
-		System.out.println("***2@");
-		String str = AppUtil.addGr(driver, devicename, 1,ksd);
-		Assert.assertEquals(str, "待分配");
-	}
-
-	// 企业进件
-	// @Test(invocationCount =1, threadPoolSize = 1)
-	public void test3() throws InterruptedException, IOException {
-
-		System.out.println("***3@");
-		String str = AppUtil.addQy(driver, devicename, 1,ksd);
-		Assert.assertEquals(str, "待分配");
-	}
-
-	// web审批待分配
-	@Test(invocationCount = 1, threadPoolSize = 1)
-	public void test4() throws InterruptedException, IOException {
-
-		System.out.println("***4@");
-		WebUtil.login(webdriver, "liuhl@jizhicar.com");// 登录
-		WebUtil.testDFP(webdriver);// 待分配
-		WebUtil.logout(webdriver);// 登出
-	}
-
-	// web审批已分配
-	@Test(invocationCount = 1, threadPoolSize = 1)
-	public void test5() throws InterruptedException, IOException {
-
-		System.out.println("***5@");
-		WebUtil.login(webdriver, "liuhl@jizhicar.com");// 登录
-		WebUtil.testYFP(webdriver);// 已分配
-		WebUtil.logout(webdriver);// 登出
-	}
-
-	// web审批已录入
-	@Test(invocationCount = 1, threadPoolSize = 1)
-	public void test6() throws InterruptedException, IOException {
-
-		System.out.println("***5@");
-		WebUtil.login(webdriver, "liuhl@jizhicar.com");// 登录
-		WebUtil.testYLR(webdriver);// 已分配
-		WebUtil.logout(webdriver);// 登出
-	}
-
-	// app申请合同
-	@Test(invocationCount = 1, threadPoolSize = 1)
-	public void test7() throws InterruptedException, IOException {
-
-		String str = AppSPUtil.testSQHT(driver);
-		Assert.assertEquals(str, "已申请合同");
-	}
-
-	// web审批合同
-	@Test(invocationCount = 1, threadPoolSize = 1)
-	public void test8() {
-		WebUtil.login(webdriver, "liuhl@jizhicar.com");// 登录
-		WebUtil.testYSQHT(webdriver);// 申请合同审批
-		WebUtil.logout(webdriver);// 登出
-
-	}
-
-	// app申请请款
-	@Test(invocationCount = 1, threadPoolSize = 1)
-	public void test9() {
-		String str = AppSPUtil.testHTSQQK(driver);// 请款
-		Assert.assertEquals(str, "已请款");
-	}
-
-	// web请款审批同意专员1
-	@Test
-	public void test11() {
-
-		try {
-			String spname = AppSPUtil.getSPname(driver);// 从app获取审批人名字
-			String[] strs = spname.split(",");
-			String itename = strs[1];
-			String email = WebSPUtil.nameToemail(strs[0]);
-			boolean flag = WebSPUtil.testSP1(webdriver, email, itename); // 请款审批同意专员
-			Assert.assertEquals(flag, true);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-
-	}
-
-	@Test
-	public void test12() {
-		boolean flag = false;
-		try {
-			String spname = AppSPUtil.getSPname(driver);// 从app获取审批人名字
-			System.out.println("###" + spname);
-			if (spname.indexOf(",") == -1) {
-				// bd操作
-				String email = WebSPUtil.nameToemail(spname);
-				flag = AppSPUtil.loginBD(driver, email);
-				AppUtil.login(driver, devicename, "liuhl@jizhicar.com");// 登录
-
-			} else {
-				String[] strs = spname.split(",");
-				String itename = strs[1];
-				String email = WebSPUtil.nameToemail(strs[0]);
-				flag = WebSPUtil.testSP2(webdriver, email, itename); // 请款审批同意专员
-
+		// 个人进件或企业
+		@Test(priority=2,invocationCount = 1, threadPoolSize = 1)
+		public void test2() throws InterruptedException, IOException {
+		
+			if(ksd.getQygr()==1){
+				System.out.println("***2@");
+			ksd = AppUtil.addGr(driver, devicename, 1,ksd);
+			Assert.assertEquals(ksd.getStatue(), "待分配");
+			}else{
+				System.out.println("***3@");
+				ksd  = AppUtil.addQy(driver, devicename, 1,ksd);
+				Assert.assertEquals(ksd.getStatue(), "待分配");
 			}
-			Assert.assertEquals(flag, true);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-	}
+		// 企业进件
+		// @Test(invocationCount =1, threadPoolSize = 1)
+		public void test3() throws InterruptedException, IOException {
+			System.out.println("***3@");
+			ksd  = AppUtil.addQy(driver, devicename, 1,ksd);
+			Assert.assertEquals(ksd.getStatue(), "待分配");
+		}
+		// web审批待分配
+		@Test(priority=3,invocationCount = 1, threadPoolSize = 1)
+		public void test4() throws InterruptedException, IOException {
+			System.out.println("***4@");
+			WebUtil.login(webdriver, "liuhl@jizhicar.com");// 登录
+			WebUtil.testDFP(webdriver);// 待分配
+			WebUtil.logout(webdriver);// 登出
+		}
+		// web审批已分配
+		@Test(priority=4,invocationCount = 1, threadPoolSize = 1)
+		public void test5() throws InterruptedException, IOException {
+			System.out.println("***5@");
+			WebUtil.login(webdriver, "liuhl@jizhicar.com");// 登录
+			WebUtil.testYFP(webdriver);// 已分配
+			WebUtil.logout(webdriver);// 登出
+		}
 
-	// ---
-	@Test
-	public void test13() {
+		// web审批已录入
+		@Test(priority=5,invocationCount = 1, threadPoolSize = 1)
+		public void test6() throws InterruptedException, IOException {
+			System.out.println("***5@");
+			WebUtil.login(webdriver, "liuhl@jizhicar.com");// 登录
+			WebUtil.testYLR(webdriver,ksd);// 已分配
+			WebUtil.logout(webdriver);// 登出
+			  Map<String,String> actual=UserDaoImpl.getFinance(ksd);
+			  Map<String,String> expect=CaseUtil.getFinance(ksd);
+			  Assert.assertEquals(actual, expect);
+		}
+	/*	// app申请合同
+		@Test(priority=6,invocationCount = 1, threadPoolSize = 1)
+		public void test7() throws InterruptedException, IOException {
+			ksd = AppSPUtil.testSQHT(driver,ksd);
+			Assert.assertEquals(ksd.getStatue(), "已申请合同");
+		}
+		// web审批合同
+		@Test(priority=7,invocationCount = 1, threadPoolSize = 1)
+		public void test8() {
+			WebUtil.login(webdriver, "liuhl@jizhicar.com");// 登录
+			WebUtil.testYSQHT(webdriver,ksd);// 申请合同审批
+			WebUtil.logout(webdriver);// 登出
+			String statue=AppSPUtil.getActstatue(driver);
+			Assert.assertEquals(statue, "已出合同");
+		}
+		// app申请请款
+		@Test(priority=8,invocationCount = 1, threadPoolSize = 1)
+		public void test9() {
+			ksd = AppSPUtil.testHTSQQK(driver,ksd);// 请款
+			Assert.assertEquals(ksd.getStatue(), "已请款");
+		}
+		// 请款审批同意专员
+		@Test(priority=9,invocationCount = 1, threadPoolSize = 1)
+		public void test10() {
+			try {
 
-		try {
-			boolean flag = false;
-			System.out.println(AppUtil.getStatue(driver));// 状态获取
-			String spname = AppSPUtil.getSPname(driver);// 从app获取审批人名字
-			if (spname.indexOf(",") == -1) {
-				// bd操作
-				String email = WebSPUtil.nameToemail(spname);
-				flag = AppSPUtil.loginBD(driver, email);
-				AppUtil.login(driver, devicename, "liuhl@jizhicar.com");// 登录
-			} else {
-				String[] strs = spname.split(",");
-				String itename = strs[1];
-				String email = WebSPUtil.nameToemail(strs[0]);
-				flag = WebSPUtil.testSP3(webdriver, email, itename); // 请款审批同意专员
-
+				Map<String, String> map = AppSPUtil.getSPname(driver);// 从app获取审批人名字
+				String itename = map.get("prename");
+				String email = WebSPUtil.nameToemail(map.get("name"));
+				WebSPUtil.testSP1(webdriver, email, itename); // 请款审批同意专员
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			Assert.assertEquals(flag, true);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
-	@Test
-	public void test14() {
-		try {
-
-			String spname = AppSPUtil.getSPname(driver);// 从app获取审批人名字
-			System.out.println("###" + spname);
-			String[] strs = spname.split(",");
-			String itename = strs[1];
-			String email = WebSPUtil.nameToemail(strs[0]);
-			WebSPUtil.testSP4(webdriver, email, itename); // 请款审批同意专员
-			String str = AppSPUtil.getActstatue(driver);
-			Assert.assertEquals(str, "已放款");
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-	}
+
+		//
+		@Test(priority=10,invocationCount = 1, threadPoolSize = 1)
+		public void test11() {
+			try {
+				Map<String, String> map = AppSPUtil.getSPname(driver);// 从app获取审批人名字
+				String itename = map.get("prename");
+				String email = WebSPUtil.nameToemail(map.get("name"));
+
+				WebSPUtil.testSP2(webdriver, email, itename); // 请款审批同意专员
+
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		// 333
+		@Test(priority=11,invocationCount = 1, threadPoolSize = 1)
+		public void test12() {
+			try {
+
+				Map<String, String> map = AppSPUtil.getSPname(driver);// 从app获取审批人名字
+				if (map.size() == 1) {
+					// bd操作
+
+					String email = WebSPUtil.nameToemail(map.get("name"));
+					AppSPUtil.loginBD(driver, email);
+					AppUtil.login(driver, devicename, "liuhl@jizhicar.com");// 登录
+					Thread.sleep(1000);
+					Map<String, String> map2 = AppSPUtil.getSPname(driver);// 从app获取审批人名字
+					String itename2 = map2.get("prename");
+					String email2 = WebSPUtil.nameToemail(map2.get("name"));
+					WebSPUtil.testSP3(webdriver, email2, itename2); // 请款审批同意专员
+				} else {
+					String itename = map.get("prename");
+					String email = WebSPUtil.nameToemail(map.get("name"));
+					WebSPUtil.testSP3(webdriver, email, itename); // 请款审批同意专员
+				}
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		public void sp4() {
+			try {
+
+				Map<String, String> map = AppSPUtil.getSPname(driver);// 从app获取审批人名字
+				String itename = map.get("prename");
+				String email = WebSPUtil.nameToemail(map.get("name"));
+				WebSPUtil.testSP4(webdriver, email, itename); // 请款审批同意专员
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		// 状态已放款
+		public void sp5() {
+			try {
+
+				Map<String, String> map = AppSPUtil.getSPname(driver);// 从app获取审批人名字
+				String itename = map.get("prename");
+				String email = WebSPUtil.nameToemail(map.get("name"));
+				WebSPUtil.testSP5(webdriver, email, itename); // 请款审批同意专员
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		// 归档
+		public void sp6() {
+
+			WebSPUtil.testSP6(webdriver, "liuhl@jizhicar.com", "刘浩亮"); // 请款审批同意专员
+		}
+
 */
 }

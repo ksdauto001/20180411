@@ -127,25 +127,27 @@ public class RandomValue {
 
 		//
 
-		/*
-		 * KSDCase ksd=getRandom();;
-		 * System.out.println(ksd.getUsername()+ksd.getPhone
-		 * ()+ksd.getIdentitynum() +""
-		 * +ksd.getJgid()+ksd.getQygr()+ksd.getCartype()+ksd.getCarbrand()
-		 * +ksd.getCarseries
-		 * ()+","+ksd.getCarprice()+","+ksd.getSqdk()+","+ksd.getHkqs()
-		 * +"\n  "+ksd
-		 * .getPurchase_tax()+"\n "+ksd.getInsurance()+" \n"+ksd.getGps_charge
-		 * ()+"\n "+ksd.getService_charge()
-		 * +","+ksd.getRegisttype()+","+ksd.getPledge() );
-		 */
+		
+		  KSDCase ksd=getRandom();;
+	
+		  System.out.println(ksd.getIdentitytype()+"名称" + ksd.getUsername() + "手机" + ksd.getPhone()
+					+ "身份证号" + ksd.getIdentitynum() + "身份类型"
+					+ ksd.getIdentitytype() + "军官" + ksd.getJgid() + "企业个人"
+					+ ksd.getQygr() + "车类型" + ksd.getCartype() + "车品牌"
+					+ ksd.getCarbrand() + "车系" + ksd.getCarseries() + "车价格"
+					+ ksd.getCarprice() + "贷款价格" + ksd.getSqdk() + "融资期限"
+					+ ksd.getHkqs() + "\n  " + ksd.getPurchase_tax() + "\n "
+					+ ksd.getInsurance() + " \n" + ksd.getGps_charge() + "\n "
+					+ ksd.getService_charge() + "," + ksd.getRegisttype() + ","
+					+ ksd.getPledge());
+		 
 		/*
 		 * Map map=new HashMap();; map.put("a", "a");
 		 */
 		// map.put("b", "b");
 
-		String ff = "长安新生 标准贷";
-		System.out.println(ff.split(" ")[0]);
+/*		String ff = "长安新生 标准贷";
+		System.out.println(ff.split(" ")[0]);*/
 	}
 
 	public static KSDCase getRandom() {
@@ -172,17 +174,17 @@ public class RandomValue {
 		}
 
 		String purchase_tax = new BigDecimal(Double.parseDouble(df2
-				.format(1 + Math.random() * 999999999)) + "").toString();
+				.format(1 + Math.random() * 999999)) + "").toString();//999999999
 		String gps_charge = new BigDecimal(Double.parseDouble(df2
-				.format(1 + Math.random() * 999999999)) + "").toString();
+				.format(1 + Math.random() * 9999999)) + "").toString();
 		String insurance = new BigDecimal(Double.parseDouble(df2
-				.format(1 + Math.random() * 999999999)) + "").toString();
+				.format(1 + Math.random() * 999999)) + "").toString();
 		String service_charge = new BigDecimal(Double.parseDouble(df2
-				.format(1 + Math.random() * 999999999)) + "").toString();
+				.format(1 + Math.random() * 999999)) + "").toString();
 
-		int idtype = (int) (Math.random() * 2);
-		int gq = (int) (Math.random() * 2);
-		int erx = (int) (Math.random() * 2);
+		int idtype = (int) (1+Math.random() * 2);
+		int loantype = (int) (1+Math.random() * 2);
+		int cartype = (int) (Math.random() * 2);
 		int rzqx = (int) (Math.random() * 4);
 		int registtype = (int) (1 + Math.random() * 3);
 		int pledge = (int) (1 + Math.random() * 3);
@@ -192,11 +194,11 @@ public class RandomValue {
 		ksd.setAddress("address2");// 地址
 		ksd.setIdentitynum(g.generate());// 身份证
 		ksd.setJgid(jgnum);// 军官id
-		ksd.setIdentitytype(idtype);// 军官类型
-		ksd.setQygr(gq);// 企业个人
+		ksd.setIdentitytype(idtype);// 军官类型  1身份证 2军官证
+		ksd.setQygr(loantype);// 2企业1个人
 		ksd.setBusinessname("qiyemc");// 企业名称
 		ksd.setBusinessid("yingyezzh");// 企业执照
-		ksd.setCartype(erx);// 新车二手车
+		ksd.setCartype(cartype);// 0新车  1 二手车
 		ksd.setCarbrand("宝骏");
 		ksd.setCarseries("宝骏630");
 		ksd.setCarprice(cljg);// 车辆价格
@@ -208,10 +210,10 @@ public class RandomValue {
 		ksd.setInsurance(insurance);// 保险费
 		ksd.setService_charge(service_charge);// 服务费
 		ksd.setVin(g.getItemID(17));// 车架号
-		ksd.setRegisttype(registtype);// 上牌方
-		ksd.setPledge(pledge);// 抵押方
+		ksd.setRegisttype(registtype);// 上牌方1,2,3
+		ksd.setPledge(pledge);// 抵押方1,2,3
 		//ksd.setSssh("几节");//所属商户
-		ksd.setImgcount(4);// 图片数量
+		ksd.setImgcount(4);// 图片数量1,2,3
 		
 		return ksd;
 	}

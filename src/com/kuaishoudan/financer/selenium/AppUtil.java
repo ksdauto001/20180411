@@ -117,26 +117,27 @@ public class AppUtil {
 			driver.findElement(
 					By.id("com.kuaishoudan.financer:id/text_id_type")).click();// 点击身份证
 			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-			if (ksd.getIdentitytype() == 0) {
+			if (ksd.getIdentitytype() == 1) {
 				driver.findElements(
 						By.id("com.kuaishoudan.financer:id/text_select"))
 						.get(1).click();// 点击身份证
-				Thread.sleep(500);
+				Thread.sleep(300);
 				Runtime.getRuntime().exec(
 						"adb -s " + devicename + " shell input text "
 								+ ksd.getIdentitynum());// 证件号adb输入
-				Thread.sleep(600);
+				Thread.sleep(500);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_id_code"))
 						.click();// 证件号码 *****
-			} else {
+			} else if(ksd.getIdentitytype() == 2) {
 				driver.findElements(
 						By.id("com.kuaishoudan.financer:id/text_select"))
 						.get(2).click();// 点击军官证
+				Thread.sleep(300);
 				Runtime.getRuntime().exec(
 						"adb -s " + devicename + " shell input text "
 								+ ksd.getJgid());// 证件号adb输入
-				Thread.sleep(600);
+				Thread.sleep(300);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_id_code"))
 						.click();// 证件号码 *****
@@ -210,7 +211,7 @@ public class AppUtil {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				int ran = ksd.getCartype();
 				// ------------
-				if (ran == 0) {
+				if (ran == 1) {
 					driver.findElement(
 							By.id("com.kuaishoudan.financer:id/check_old_car"))
 							.click();// 二手车
@@ -372,7 +373,7 @@ public class AppUtil {
 						.click();// 下一步
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-				if (ran == 0) { // 二手车
+				if (ran == 1) { // 二手车
 					System.out.println(ksd.getProduct().trim().split(" ")[0]);
 					int havesystem = UserDaoImpl.gethave_system(ksd
 							.getProduct().trim().split(" ")[0]);// 产品名称查是否有常规甩单
@@ -465,7 +466,7 @@ public class AppUtil {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				int ran = ksd.getCartype();
 				// ------------
-				if (ran == 0) {
+				if (ran == 1) {
 					driver.findElement(
 							By.id("com.kuaishoudan.financer:id/check_old_car"))
 							.click();// 二手车
@@ -628,7 +629,7 @@ public class AppUtil {
 						.click();// 下一步
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-				if (ran == 0) { // 二手车
+				if (ran == 1) { // 二手车
 					System.out.println(ksd.getProduct().trim().split(" ")[0]);
 					int havesystem = UserDaoImpl.gethave_system(ksd
 							.getProduct().trim().split(" ")[0]);// 产品名称查是否有常规甩单
@@ -704,7 +705,7 @@ public class AppUtil {
 		int gq = ksd.getQygr();
 		boolean flag = createUser(driver, devicename, i, ksd);
 		if (flag) {
-			if (gq == 0) {// 企业贷款
+			if (gq == 2) {// 企业贷款
 				ksd = addQy(driver, devicename, i, ksd);
 			} else {// 个人贷款
 				ksd = addGr(driver, devicename, i, ksd);

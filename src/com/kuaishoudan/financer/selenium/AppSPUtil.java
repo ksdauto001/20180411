@@ -56,7 +56,7 @@ public class AppSPUtil {
 	}
 
 	// (申请合同)-申请请款
-	public static String testHTSQQK(AppiumDriver<AndroidElement> driver,
+	public static KSDCase testHTSQQK(AppiumDriver<AndroidElement> driver,
 			KSDCase ksd) {
 		String actualstatue = "";
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -132,7 +132,8 @@ public class AppSPUtil {
 			e.printStackTrace();
 		}
 		actualstatue = AppUtil.getStatue(driver);
-		return actualstatue;
+		ksd.setStatue(actualstatue);
+		return ksd;
 	}
 
 	// 不出合同申请请款
