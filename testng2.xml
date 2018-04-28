@@ -5,85 +5,33 @@
 		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
 	</listeners>
 
-	<test name="app提单" preserve-order="true">
+	<test name="申请合同测试流程" preserve-order="true">
 		<classes>
-			<class name="com.kuaishoudan.financer.test.test1" />
+			<class name="com.kuaishoudan.financer.test.Test1" />
 
 		</classes>
 	</test>
-	<test name="审核" preserve-order="true">
+	<test name="不出合同测试流程" preserve-order="true">
 		<classes>
 
-			<class name="com.kuaishoudan.financer.test.test2" />
+			<class name="com.kuaishoudan.financer.test.Test2" />
 		</classes>
 	</test>
 	<!--  
-	<test name="G71状态验证" preserve-order="true">
+	<test name="再次进件申请合同测试流程" preserve-order="true">
 		<classes>
-			<class name="com.winsion.inception.test.statue.TestG71" />
+			<class name="com.kuaishoudan.financer.test.Test3" />
 
 		</classes>
 	</test>
 
-	<test name="Z162状态验证" preserve-order="true">
+	<test name="再次进件不出合同测试流程" preserve-order="true">
 		<classes>
-			<class name="com.winsion.inception.test.statue.TestZ162" />
+			<class name="com.kuaishoudan.financer.test.Test4" />
 
 		</classes>
 	</test>
 
-	<test name="注册" preserve-order="true">
-		<classes>
-			<class name="com.winsion.inception.test.login.Register" />
-
-		</classes>
-	</test>
-
-	<test name="登录" preserve-order="true">
-		<classes>
-			<class name="com.winsion.inception.test.login.Login" />
-
-		</classes>
-	</test>
-	<test name="旅程资讯" preserve-order="true">
-		<classes>
-			<class name="com.winsion.inception.test.lc.Lczx" />
-
-		</classes>
-	</test>
-
-	<test name="按车次添加" preserve-order="true">
-		<classes>
-			<class name="com.winsion.inception.test.statue.AddTrain" />
-
-		</classes>
-	</test>
-	<test name="按行程添加" preserve-order="true">
-		<classes>
-			<class name="com.winsion.inception.test.statue.AddTrain2" />
-
-		</classes>
-	</test>
-
-
-
-	<test name="旅程文化" preserve-order="true">
-		<classes>
-			<class name="com.winsion.inception.test.lc.Lcwh" />
-
-		</classes>
-	</test>
-	<test name="旅程服务-天气服务" preserve-order="true">
-		<classes>
-			<class name="com.winsion.inception.test.lc.Tqfw" />
-
-		</classes>
-	</test>
-	<test name="旅程服务-遗失物品-我要报失" preserve-order="true">
-		<classes>
-			<class name="com.winsion.inception.test.lc.Yswp" />
-
-		</classes>
-	</test>
+	
 	-->
 </suite>
