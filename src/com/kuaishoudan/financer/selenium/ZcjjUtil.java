@@ -143,6 +143,7 @@ public class ZcjjUtil {
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back"))
 				.click();// 返回
+		actualstatue = AppUtil.getStatue(driver);
 		ksd.setStatue(actualstatue);
 		return ksd;
 	}
@@ -244,7 +245,7 @@ public class ZcjjUtil {
 	}
 
 	// 不出合同申请请款
-	public static void testBCSQQK(AppiumDriver<AndroidElement> driver,
+	public static KSDCase testBCSQQK(AppiumDriver<AndroidElement> driver,
 			KSDCase ksd) {
 		IdCardGenerator g = new IdCardGenerator();
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -357,7 +358,9 @@ public class ZcjjUtil {
 		}
 		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back"))
 				.click();// 返回
-		
+	String 	actualstatue = AppUtil.getStatue(driver);
+	ksd.setStatue(actualstatue);
+	return ksd;
 	}
 
 	// BD经理登录审批

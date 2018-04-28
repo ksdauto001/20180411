@@ -7,14 +7,14 @@
 
 	<test name="app提单" preserve-order="true">
 		<classes>
-			<class name="com.kuaishoudan.financer.ControlTest" />
+			<class name="com.kuaishoudan.financer.test.test1" />
 
 		</classes>
 	</test>
 	<test name="审核" preserve-order="true">
 		<classes>
 
-			<class name="com.kuaishoudan.financer.web.TestLogin" />
+			<class name="com.kuaishoudan.financer.test.test2" />
 		</classes>
 	</test>
 	<!--  
