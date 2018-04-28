@@ -52,7 +52,7 @@ public class ZcjjUtil {
 		return ksd;
 	}
 
-	public static String zcjjHTSQQK(AppiumDriver<AndroidElement> driver) {
+	public static KSDCase zcjjHTSQQK(AppiumDriver<AndroidElement> driver,KSDCase ksd) {
 		String actualstatue = "";
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
@@ -143,7 +143,8 @@ public class ZcjjUtil {
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back"))
 				.click();// 返回
-		return actualstatue;
+		ksd.setStatue(actualstatue);
+		return ksd;
 	}
 
 	public static Map<String, String> getSPname(
@@ -356,6 +357,7 @@ public class ZcjjUtil {
 		}
 		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back"))
 				.click();// 返回
+		
 	}
 
 	// BD经理登录审批

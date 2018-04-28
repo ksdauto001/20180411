@@ -174,7 +174,7 @@ public class ControlTestZCJJ {
 
 	// 申请请款
 	public void appSqqk() {
-		ZcjjUtil.zcjjHTSQQK(driver);
+		ZcjjUtil.zcjjHTSQQK(driver,ksd);
 
 	}
 

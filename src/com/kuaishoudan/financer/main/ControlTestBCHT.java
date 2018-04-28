@@ -115,8 +115,8 @@ public class ControlTestBCHT {
 	// App不申请合同
 	public void appBsqht() {
 
-		AppSPUtil.testBCSQQK(driver, ksd);
-
+		ksd=AppSPUtil.testBCSQQK(driver, ksd);
+	
 	}
 
 	/*

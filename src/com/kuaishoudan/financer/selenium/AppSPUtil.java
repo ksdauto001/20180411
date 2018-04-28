@@ -137,7 +137,7 @@ public class AppSPUtil {
 	}
 
 	// 不出合同申请请款
-	public static void testBCSQQK(AppiumDriver<AndroidElement> driver,
+	public static KSDCase testBCSQQK(AppiumDriver<AndroidElement> driver,
 			KSDCase ksd) {
 		IdCardGenerator g = new IdCardGenerator();
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -161,6 +161,7 @@ public class AppSPUtil {
 		driver.findElement(
 				By.id("com.kuaishoudan.financer:id/dialog_custom_confirm"))
 				.click();// 是按钮
+
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
 		/*
@@ -240,6 +241,7 @@ public class AppSPUtil {
 		}
 		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back"))
 				.click();// 返回
+		return ksd;
 	}
 
 	/**
