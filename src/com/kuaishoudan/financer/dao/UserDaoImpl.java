@@ -236,14 +236,16 @@ public class UserDaoImpl{
 				map.put("business_name",rs.getString("business_name"));
 				map.put("business_license",	rs.getString("business_license"));
 				}
-				map.put("rate", rs.getString("rate"));
-				map.put("vin", rs.getString("vin"));
-				map.put("purchase_tax", ""+rs.getDouble("purchase_tax"));
-				map.put("gps_charge", ""+rs.getDouble("gps_charge"));
-				map.put("insurance",""+rs.getDouble("insurance"));
-				System.out.println("==="+rs.getString("insurance"));
-				System.out.println("==="+""+ rs.getDouble("insurance"));
-				map.put("service_charge",""+ rs.getDouble("service_charge"));
+				
+				map.put("rate", ""+rs.getString("rate"));
+			//	map.put("vin", rs.getString("vin"));
+				map.put("purchase_tax", ""+decimalFormat.format(Double.parseDouble(rs.getString("purchase_tax"))));
+				map.put("gps_charge", ""+decimalFormat.format(Double.parseDouble(rs.getString("gps_charge"))));
+				map.put("insurance",""+decimalFormat.format(Double.parseDouble(rs.getString("insurance"))));
+				System.out.println("==="+rs.getDouble("insurance"));
+				System.out.println("==="+""+ rs.getString("insurance"));
+				System.out.println("===ddd"+decimalFormat.format(Double.parseDouble(rs.getString("insurance"))));
+				map.put("service_charge",""+ decimalFormat.format(Double.parseDouble(rs.getString("service_charge"))));
 			//	System.out.println(rs.getString("name")+rs.getString("status")+rs.getString("phone")+rs.getString("id_type")+rs.getString("address"));
 			}
 		} catch (SQLException e) {
@@ -323,5 +325,37 @@ public class UserDaoImpl{
 		}
 		return have_system;
 	}
+	public static int getFinanstatue_id(KSDCase ksd) {
+		int statue=0;
+
+		String sql = " select status from tb_finance where customer_id=(select id from tb_customer where id_num=?) order by id desc  limit 1 ";
+		DBUtil util = new DBUtil();
+		Connection conn = util.openConnection();
+		  Map<String,String> map=new HashMap<String,String>();
+		try {
+
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+
+			if(ksd.getIdentitytype()==1){
+				pstmt.setString(1,ksd.getIdentitynum() );
+				}else if(ksd.getIdentitytype()==2){
+					pstmt.setString(1, ksd.getJgid());
+				}
+			
+			ResultSet rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				statue=rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+			e.printStackTrace();
+		} finally {
+			util.closeConn(conn);
+		}
+		System.out.println(statue);
+		return statue;
+	}
+	
 
 }

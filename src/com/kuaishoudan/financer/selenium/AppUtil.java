@@ -121,11 +121,11 @@ public class AppUtil {
 				driver.findElements(
 						By.id("com.kuaishoudan.financer:id/text_select"))
 						.get(1).click();// 点击身份证
-				Thread.sleep(300);
+				Thread.sleep(400);
 				Runtime.getRuntime().exec(
 						"adb -s " + devicename + " shell input text "
 								+ ksd.getIdentitynum());// 证件号adb输入
-				Thread.sleep(500);
+				Thread.sleep(800);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_id_code"))
 						.click();// 证件号码 *****
@@ -133,7 +133,7 @@ public class AppUtil {
 				driver.findElements(
 						By.id("com.kuaishoudan.financer:id/text_select"))
 						.get(2).click();// 点击军官证
-				Thread.sleep(300);
+				Thread.sleep(1000);
 				Runtime.getRuntime().exec(
 						"adb -s " + devicename + " shell input text "
 								+ ksd.getJgid());// 证件号adb输入
@@ -143,7 +143,7 @@ public class AppUtil {
 						.click();// 证件号码 *****
 			}
 
-			Thread.sleep(500);
+			Thread.sleep(1500);
 
 			Runtime.getRuntime().exec(
 					"adb -s " + devicename + " shell input text "
@@ -286,7 +286,7 @@ public class AppUtil {
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_price"))
 						.click();// 车辆价格
-				Thread.sleep(800);
+				Thread.sleep(1000);
 				Runtime.getRuntime().exec(
 						"adb -s " + devicename + " shell input text "
 								+ ksd.getSqdk());
@@ -308,9 +308,10 @@ public class AppUtil {
 					List<AndroidElement> producs = driver.findElements(By
 							.id("com.kuaishoudan.financer:id/text_product"));
 
-					ksd.setProduct(producs.get(0).getText());
+			
 					producs.get(0).click();// 第一个产品
-
+					Thread.sleep(300);
+					ksd.setProduct(driver.findElement(By.id("com.kuaishoudan.financer:id/text_product")).getText().trim());
 				} catch (java.lang.IndexOutOfBoundsException e) {
 					// TODO Auto-generated catch block
 					// e.printStackTrace();
@@ -319,7 +320,7 @@ public class AppUtil {
 							.click();
 				}
 				// _________
-				Thread.sleep(300);
+				
 				AppUtil.swipeToUp(driver, 800);// 向上滑动
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/text_feilv"))
@@ -374,7 +375,7 @@ public class AppUtil {
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
 				if (ran == 1) { // 二手车
-					System.out.println(ksd.getProduct().trim().split(" ")[0]);
+					System.out.println(ksd.getProduct().trim().split("-")[0]);
 					int havesystem = UserDaoImpl.gethave_system(ksd
 							.getProduct().trim().split(" ")[0]);// 产品名称查是否有常规甩单
 					if (havesystem == 0) {
@@ -384,6 +385,7 @@ public class AppUtil {
 
 					}
 				}
+				Thread.sleep(1000);
 				driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 				driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add"))
 						.click();// 上传照片
@@ -462,7 +464,7 @@ public class AppUtil {
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_company_business_license"))
 						.click();// 营业执照号
-				Thread.sleep(1000);
+				Thread.sleep(3000);
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				int ran = ksd.getCartype();
 				// ------------
@@ -537,18 +539,18 @@ public class AppUtil {
 				Runtime.getRuntime().exec(
 						"adb -s " + devicename + " shell input text "
 								+ ksd.getCarprice());
-				Thread.sleep(800);
+				Thread.sleep(500);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_price"))
 						.click();// 车辆价格
-				Thread.sleep(800);
+				Thread.sleep(1000);
 				Runtime.getRuntime().exec(
 						"adb -s " + devicename + " shell input text "
 								+ ksd.getSqdk());
-				Thread.sleep(800);
+				Thread.sleep(500);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_loan")).click();// 申请贷款
-				Thread.sleep(800);
+				Thread.sleep(1000);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/text_periods"))
 						.click();// 还款期数 / 融资期限
@@ -563,9 +565,10 @@ public class AppUtil {
 					List<AndroidElement> producs = driver.findElements(By
 							.id("com.kuaishoudan.financer:id/text_product"));
 
-					ksd.setProduct(producs.get(0).getText());
+				//	ksd.setProduct(producs.get(0).getText());
 					producs.get(0).click();// 第一个产品
-
+					Thread.sleep(300);
+					ksd.setProduct(driver.findElement(By.id("com.kuaishoudan.financer:id/text_product")).getText().trim());
 				} catch (java.lang.IndexOutOfBoundsException e) {
 					// TODO Auto-generated catch block
 					// e.printStackTrace();
@@ -577,6 +580,7 @@ public class AppUtil {
 
 				Thread.sleep(300);
 				AppUtil.swipeToUp(driver, 800);// 向上滑动
+				Thread.sleep(300);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/text_feilv"))
 						.click();// 费率
@@ -630,7 +634,7 @@ public class AppUtil {
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
 				if (ran == 1) { // 二手车
-					System.out.println(ksd.getProduct().trim().split(" ")[0]);
+					System.out.println(ksd.getProduct().trim().split("-")[0]);
 					int havesystem = UserDaoImpl.gethave_system(ksd
 							.getProduct().trim().split(" ")[0]);// 产品名称查是否有常规甩单
 					if (havesystem == 0) {
@@ -640,6 +644,7 @@ public class AppUtil {
 
 					}
 				}
+				Thread.sleep(1000);
 				driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 				driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add"))
 						.click();// 上传照片

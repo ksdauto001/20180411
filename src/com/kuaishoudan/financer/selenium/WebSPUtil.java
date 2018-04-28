@@ -192,7 +192,7 @@ public class WebSPUtil {
 	public static boolean testSP4(WebDriver driver, String email, String itename) {
 		// / String username = "sheny@jizhicar.com";
 		boolean flag = false;
-		login2(driver, email, "123456");
+		login2(driver, email, "@123456");
 
 		clickItem(driver, itename);
 		try {
@@ -218,7 +218,7 @@ public class WebSPUtil {
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		driver.findElement(By.id("argee_sub")).click();// 确认
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-		driver.findElement(By.className("cancel")).click();// 稍后再说
+	//	driver.findElement(By.className("cancel")).click();// 稍后再说
 		flag = true;
 		try {
 			Thread.sleep(3000);
@@ -235,9 +235,10 @@ public class WebSPUtil {
 	public static boolean testSP5(WebDriver driver, String email, String itename) {
 		// String username = "sheny@jizhicar.com";
 		boolean flag = false;
-		login2(driver, email, "123456");
+		login2(driver, email, "@123456");
 		driver.findElement(By.linkText("客户")).click();
-		driver.findElement(By.linkText("已通过")).click();
+		driver.findElement(By.linkText("回款管理")).click();
+		driver.findElement(By.linkText("待回款")).click();
 		clickItemorder(driver, "刘浩亮");
 		int height = driver.manage().window().getSize().height;
 		// System.out.println("height" + height);
@@ -246,13 +247,21 @@ public class WebSPUtil {
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		driver.findElements(
 				By.xpath("//div[@class='requestpayout_detail_btn_box']/a/div"))
-				.get(1).click();// 确认回款
+				.get(0).click();// 确认回款
 		// driver.findElement(By.xpath("//div[@class='requestpayout_detail_btn_box']/a/div")).click();//确认回款
+
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-		driver.findElement(By.linkText("确认")).click();
+	//	driver.findElement(By.linkText("确认回款")).click();//===
+		driver.findElement(By.className("confirm")).click();
 		flag = true;
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -299,7 +308,7 @@ public class WebSPUtil {
 
 		driver.findElements(
 				By.xpath("//div[@class='requestpayout_detail_btn_box']/div[2]"))
-				.get(1).click();// 确认归档
+				.get(0).click();// 确认归档
 
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		driver.findElement(By.className("flied_sub")).click();

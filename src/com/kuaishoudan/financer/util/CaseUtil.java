@@ -36,7 +36,14 @@ public class CaseUtil {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println(UserDaoImpl.getstatus_id("已分配"));
+		//System.out.println(UserDaoImpl.getstatus_id("已分配"));
+		String str="19";
+	       DecimalFormat decimalFormat = new DecimalFormat("###################.###########"); 
+
+	double dd=Double.parseDouble(str);
+//	int aa=(int)(dd);
+
+		System.out.println(decimalFormat.format(dd));
 	}
 
 	public static Map<String,String> getCustomer(KSDCase ksd){
@@ -52,7 +59,7 @@ public class CaseUtil {
 		  Map<String,String> map=new HashMap<String,String>();
 	       DecimalFormat decimalFormat = new DecimalFormat("###################.###########"); 
 		  map.put("name",	ksd.getUsername());
-			map.put("status",""+UserDaoImpl.getstatus_id("已分配"));//statue
+			map.put("status",""+UserDaoImpl.getstatus_id("已通过"));//statue"已分配"
 			map.put("phone", ksd.getPhone());
 			map.put("car_type",	ksd.getCartype()+"");
 			map.put("brand_name",	ksd.getCarbrand());
@@ -61,7 +68,7 @@ public class CaseUtil {
 			map.put("car_price",  ""+ksd.getCarprice());//decimalFormat.format(ksd.getCarprice())
 			System.out.println("@@"+ksd.getCarprice());
 			map.put("loan_amount",""+ksd.getSqdk()	);
-			map.put("pay_periods",	ksd.getHkqs()+"");
+			map.put("pay_periods",	""+(ksd.getHkqs()*6+6));
 			map.put("supplier_name",ksd.getSssh());
 			map.put("remark",	ksd.getRemark());
 			map.put("loan_type",	ksd.getQygr()+"");
@@ -69,8 +76,8 @@ public class CaseUtil {
 			map.put("business_name",ksd.getBusinessname()	);
 			map.put("business_license",	ksd.getBusinessid());
 			}
-			map.put("rate", ksd.getRate());
-			map.put("vin", ksd.getVin());
+			map.put("rate",""+decimalFormat.format(Double.parseDouble((ksd.getRate().split("%")[0]))));
+		//	map.put("vin", ksd.getVin());
 			map.put("purchase_tax", ksd.getPurchase_tax());
 			map.put("gps_charge", ksd.getGps_charge());
 			map.put("insurance",ksd.getInsurance());

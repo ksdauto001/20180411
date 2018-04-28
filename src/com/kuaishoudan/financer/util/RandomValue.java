@@ -162,11 +162,11 @@ public class RandomValue {
 		DecimalFormat df2 = new DecimalFormat("#.00");
 		DecimalFormat df = new DecimalFormat("#.000");
 		for (int i = 0; i < 200; i++) {
-			sqdk = Double.parseDouble(df.format(2 + Math.random() * 97));// Math.random()
+			sqdk = Double.parseDouble(df.format(2 + Math.random() * 57));//97 Math.random()
 																			// *
 																			// 97));//
 																			// 997
-			cljg = Double.parseDouble(df.format(2 + Math.random() * 97));
+			cljg = Double.parseDouble(df.format(2 + Math.random() * 57));
 			// System.out.println(cljg+"="+sqdk);
 			if (cljg >= sqdk) {
 				break;
@@ -204,7 +204,7 @@ public class RandomValue {
 		ksd.setCarprice(cljg);// 车辆价格
 		ksd.setSqdk(sqdk);// 申请贷款
 		ksd.setHkqs(rzqx);// 融资期限
-		ksd.setRemark("beizhu1");// 备注
+		ksd.setRemark("beizhu");// 备注
 		ksd.setPurchase_tax(purchase_tax);// 购置税
 		ksd.setGps_charge(gps_charge);// gps费
 		ksd.setInsurance(insurance);// 保险费
