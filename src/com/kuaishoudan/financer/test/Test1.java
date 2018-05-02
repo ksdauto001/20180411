@@ -259,7 +259,7 @@ public class Test1 {
 	}
 
 	// 状态已放款
-	@Test(priority = 13, invocationCount = 1, threadPoolSize = 1)
+//	@Test(priority = 13, invocationCount = 1, threadPoolSize = 1)
 	public void test13() {
 		try {
 
@@ -283,7 +283,7 @@ public class Test1 {
 	}
 
 	// 归档
-	@Test(priority = 14, invocationCount = 1, threadPoolSize = 1)
+	//@Test(priority = 14, invocationCount = 1, threadPoolSize = 1)
 	public void test14() {
 
 		WebSPUtil.testSP6(webdriver, "liuhl@jizhicar.com", "刘浩亮"); // 请款审批同意专员

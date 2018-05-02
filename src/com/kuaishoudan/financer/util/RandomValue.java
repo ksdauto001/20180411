@@ -1,6 +1,10 @@
 package com.kuaishoudan.financer.util;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidElement;
+
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -8,6 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.kuaishoudan.financer.bean.KSDCase;
+import com.kuaishoudan.financer.dao.UserDaoImpl;
+import com.kuaishoudan.financer.selenium.AppUtil;
 
 /**
  * 随机生成中文姓名，性别，Email，手机号，住址
@@ -126,20 +132,8 @@ public class RandomValue {
 		 */
 
 		//
-
-		
-		  KSDCase ksd=getRandom();;
 	
-		  System.out.println(ksd.getIdentitytype()+"名称" + ksd.getUsername() + "手机" + ksd.getPhone()
-					+ "身份证号" + ksd.getIdentitynum() + "身份类型"
-					+ ksd.getIdentitytype() + "军官" + ksd.getJgid() + "企业个人"
-					+ ksd.getQygr() + "车类型" + ksd.getCartype() + "车品牌"
-					+ ksd.getCarbrand() + "车系" + ksd.getCarseries() + "车价格"
-					+ ksd.getCarprice() + "贷款价格" + ksd.getSqdk() + "融资期限"
-					+ ksd.getHkqs() + "\n  " + ksd.getPurchase_tax() + "\n "
-					+ ksd.getInsurance() + " \n" + ksd.getGps_charge() + "\n "
-					+ ksd.getService_charge() + "," + ksd.getRegisttype() + ","
-					+ ksd.getPledge());
+	new RandomValue().test();
 		 
 		/*
 		 * Map map=new HashMap();; map.put("a", "a");
@@ -148,6 +142,30 @@ public class RandomValue {
 
 /*		String ff = "长安新生 标准贷";
 		System.out.println(ff.split(" ")[0]);*/
+	}
+	public void test(){
+			 KSDCase ksd=null;
+		try {
+			AppiumDriver  driver=AppUtil.getdriver()	;
+			 ksd = getRandom(driver);
+		} catch (MalformedURLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		 
+
+			  System.out.println(ksd.getIdentitytype()+"名称" + ksd.getUsername() + "手机" + ksd.getPhone()
+						+ "身份证号" + ksd.getIdentitynum() + "身份类型"
+						+ ksd.getIdentitytype() + "军官" + ksd.getJgid() + "企业个人"
+						+ ksd.getQygr() + "车类型" + ksd.getCartype() + "车品牌"
+						+ ksd.getCarbrand() + "车系" + ksd.getCarseries() + "车价格"
+						+ ksd.getCarprice() + "贷款价格" + ksd.getSqdk() + "融资期限"
+						+ ksd.getHkqs() + "\n  " + ksd.getPurchase_tax() + "\n "
+						+ ksd.getInsurance() + " \n" + ksd.getGps_charge() + "\n "
+						+ ksd.getService_charge() + "," + ksd.getRegisttype() + ","
+						+ ksd.getPledge());
+	
+	
 	}
 
 	public static KSDCase getRandom() {
@@ -195,6 +213,68 @@ public class RandomValue {
 		ksd.setIdentitynum(g.generate());// 身份证
 		ksd.setJgid(jgnum);// 军官id
 		ksd.setIdentitytype(idtype);// 军官类型  1身份证 2军官证
+		ksd.setQygr(loantype);// 2企业1个人
+		ksd.setBusinessname("qiyemc");// 企业名称
+		ksd.setBusinessid("yingyezzh");// 企业执照
+		ksd.setCartype(cartype);// 0新车  1 二手车
+		ksd.setCarbrand("宝骏");
+		ksd.setCarseries("宝骏630");
+		ksd.setCarprice(cljg);// 车辆价格
+		ksd.setSqdk(sqdk);// 申请贷款
+		ksd.setHkqs(rzqx);// 融资期限
+		ksd.setRemark("beizhu");// 备注
+		ksd.setPurchase_tax(purchase_tax);// 购置税
+		ksd.setGps_charge(gps_charge);// gps费
+		ksd.setInsurance(insurance);// 保险费
+		ksd.setService_charge(service_charge);// 服务费
+		ksd.setVin(g.getItemID(17));// 车架号
+		ksd.setRegisttype(registtype);// 上牌方1,2,3
+		ksd.setPledge(pledge);// 抵押方1,2,3
+		//ksd.setSssh("几节");//所属商户
+		ksd.setImgcount(4);// 图片数量1,2,3
+		
+		return ksd;
+	}
+	public static KSDCase getRandom(AppiumDriver<AndroidElement> driver) {
+		System.out.println("@");
+
+		IdCardGenerator g = new IdCardGenerator();
+		Calendar calendar = Calendar.getInstance();
+		String jgnum = calendar.getTime().getTime()
+				+ (int) (Math.random() * 89 + 10) + "";// 军官证号
+		double sqdk = 0;
+		double cljg = 0;
+		DecimalFormat df2 = new DecimalFormat("#.00");
+		DecimalFormat df = new DecimalFormat("#.000");
+		for (int i = 0; i < 200; i++) {
+			sqdk = Double.parseDouble(df.format(2 + Math.random() * 57));//97 Math.random()
+																			// *
+																			// 97));//
+																			// 997
+			cljg = Double.parseDouble(df.format(2 + Math.random() * 57));
+			// System.out.println(cljg+"="+sqdk);
+			if (cljg >= sqdk) {
+				break;
+			}
+		}
+
+		String purchase_tax = new BigDecimal(Double.parseDouble(df2
+				.format(1 + Math.random() * 999999)) + "").toString();//999999999
+		String gps_charge = new BigDecimal(Double.parseDouble(df2
+				.format(1 + Math.random() * 9999999)) + "").toString();
+		String insurance = new BigDecimal(Double.parseDouble(df2
+				.format(1 + Math.random() * 999999)) + "").toString();
+		String service_charge = new BigDecimal(Double.parseDouble(df2
+				.format(1 + Math.random() * 999999)) + "").toString();
+
+		int idtype = (int) (1+Math.random() * 2);
+		int loantype = (int) (1+Math.random() * 2);
+		int cartype = (int) (Math.random() * 2);
+		int rzqx = (int) (Math.random() * 4);
+		int registtype = (int) (1 + Math.random() * 3);
+		int pledge = (int) (1 + Math.random() * 3);
+		KSDCase ksd =  UserDaoImpl.getCustomer_KSD(AppUtil.getIndexname(driver));
+
 		ksd.setQygr(loantype);// 2企业1个人
 		ksd.setBusinessname("qiyemc");// 企业名称
 		ksd.setBusinessid("yingyezzh");// 企业执照

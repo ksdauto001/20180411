@@ -69,7 +69,28 @@ public class WebSPUtil {
 		// String username="niun@jizhicar.com";
 		boolean flag = false;
 		login2(driver, email, "@123456");
-
+		if(email.equals("liuhl@jizhicar.com")){
+			driver.findElement(By.linkText("客户")).click();
+			driver.findElement(By.linkText("请款管理")).click();
+			clickItemorder(driver, itename);
+			int height = driver.manage().window().getSize().height;
+			// System.out.println("height" + height);
+			((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
+					+ (height * 2 + 200) + ")"); // 向下滑动
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+			driver.findElement(
+					By.xpath("//div[@class='requestpayout_detail_btn_box']/a[2]/div"))
+					.click();// 同意
+			driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+			driver.findElement(By.id("confirm_sub_t")).click();
+			
+		}else{
 		clickItem(driver, itename);
 		try {
 			Thread.sleep(2000);
@@ -100,6 +121,7 @@ public class WebSPUtil {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
 		}
 		WebUtil.logout(driver);
 		return flag;
@@ -134,7 +156,11 @@ public class WebSPUtil {
 				By.xpath("//div[@class='requestpayout_detail_btn_box']/a[3]/div"))
 				.click();// 同意
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-		driver.findElement(By.id("argee_sub")).click();// 确认
+	//	driver.findElement(By.id("argee_sub")).click();// 确认
+		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+		driver.findElement(By.id("risk_type1")).click();
+		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+		driver.findElement(By.xpath("//div[@class='cashed_mark']/div/a")).click();//确认
 		flag = true;
 		try {
 			Thread.sleep(3000);
@@ -237,7 +263,7 @@ public class WebSPUtil {
 		boolean flag = false;
 		login2(driver, email, "@123456");
 		driver.findElement(By.linkText("客户")).click();
-		driver.findElement(By.linkText("回款管理")).click();
+		driver.findElement(By.linkText("款项管理")).click();
 		driver.findElement(By.linkText("待回款")).click();
 		clickItemorder(driver, "刘浩亮");
 		int height = driver.manage().window().getSize().height;

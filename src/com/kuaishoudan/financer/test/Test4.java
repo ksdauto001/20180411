@@ -48,7 +48,7 @@ public class Test4 {
 		System.out.println(devicename);
 		Thread.sleep(3000);
 		webdriver = WebUtil.getdriver();
-		ksd = RandomValue.getRandom();
+		ksd = RandomValue.getRandom(driver);
 		System.out.println("名称" + ksd.getUsername() + "手机" + ksd.getPhone()
 				+ "身份证号" + ksd.getIdentitynum() + "身份类型"
 				+ ksd.getIdentitytype() + "军官" + ksd.getJgid() + "企业个人"
@@ -67,18 +67,7 @@ public class Test4 {
 		webdriver.quit();
 	}
 
-	// 创建用户
-	@Test(priority = 1, invocationCount = 1, threadPoolSize = 1)
-	public void test1() throws InterruptedException, IOException {
-		System.out.println("***1@");
 
-		boolean flag = AppUtil.createUser(driver, devicename, 1, ksd);
-		Map<String, String> actual = UserDaoImpl.getCustomer(ksd);
-		Map<String, String> expect = CaseUtil.getCustomer(ksd);
-		Assert.assertEquals(flag, true);
-		Assert.assertEquals(actual, expect);
-
-	}
 
 	// 个人进件或企业
 	@Test(priority = 2, invocationCount = 1, threadPoolSize = 1)
@@ -243,7 +232,7 @@ public class Test4 {
 	}
 
 	// 状态已放款
-	@Test(priority = 13, invocationCount = 1, threadPoolSize = 1)
+	//@Test(priority = 13, invocationCount = 1, threadPoolSize = 1)
 	public void test13() {
 		try {
 
@@ -267,7 +256,7 @@ public class Test4 {
 	}
 
 	// 归档
-	@Test(priority = 14, invocationCount = 1, threadPoolSize = 1)
+	//@Test(priority = 14, invocationCount = 1, threadPoolSize = 1)
 	public void test14() {
 
 		WebSPUtil.testSP6(webdriver, "liuhl@jizhicar.com", "刘浩亮"); // 请款审批同意专员

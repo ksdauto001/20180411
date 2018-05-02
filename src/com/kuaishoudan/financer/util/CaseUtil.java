@@ -78,10 +78,10 @@ public class CaseUtil {
 			}
 			map.put("rate",""+decimalFormat.format(Double.parseDouble((ksd.getRate().split("%")[0]))));
 		//	map.put("vin", ksd.getVin());
-			map.put("purchase_tax", ksd.getPurchase_tax());
-			map.put("gps_charge", ksd.getGps_charge());
-			map.put("insurance",ksd.getInsurance());
-			map.put("service_charge",ksd.getService_charge());
+			map.put("purchase_tax",decimalFormat.format(Double.parseDouble(ksd.getPurchase_tax())));
+			map.put("gps_charge",decimalFormat.format(Double.parseDouble( ksd.getGps_charge())));
+			map.put("insurance",decimalFormat.format(Double.parseDouble(ksd.getInsurance())));
+			map.put("service_charge",decimalFormat.format(Double.parseDouble(ksd.getService_charge())));
 			System.out.println("case="+ksd.getInsurance());
 		  return map;
 	}

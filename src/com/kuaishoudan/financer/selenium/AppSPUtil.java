@@ -241,6 +241,8 @@ public class AppSPUtil {
 		}
 		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back"))
 				.click();// 返回
+		String actualstatue = AppUtil.getStatue(driver);
+		ksd.setStatue(actualstatue);
 		return ksd;
 	}
 
@@ -341,6 +343,12 @@ public class AppSPUtil {
 	public static boolean loginBD(AppiumDriver<AndroidElement> driver,
 			String username) {
 		boolean flag = false;
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back"))
 				.click();// 返回
@@ -455,6 +463,10 @@ public class AppSPUtil {
 						.findElement(
 								By.id("com.kuaishoudan.financer:id/item_name"))
 						.getText();
+				System.out.println("!!!!"+name);
+		/*		if(name.equals("")){
+					name="测试工程师-刘浩亮";
+				}*/
 				String[] strs = name.split("-");
 				if (strs[0].contains("BD")) {
 					// ///////////////////////////////
@@ -505,14 +517,14 @@ public class AppSPUtil {
 	// 状态实际值
 	public static String getActstatue(AppiumDriver<AndroidElement> driver) {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		AppUtil.swipeToDown(driver, 1000);
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -121,7 +121,7 @@ public class AppUtil {
 				driver.findElements(
 						By.id("com.kuaishoudan.financer:id/text_select"))
 						.get(1).click();// 点击身份证
-				Thread.sleep(400);
+				Thread.sleep(1000);
 				Runtime.getRuntime().exec(
 						"adb -s " + devicename + " shell input text "
 								+ ksd.getIdentitynum());// 证件号adb输入
@@ -385,8 +385,8 @@ public class AppUtil {
 
 					}
 				}
-				Thread.sleep(1000);
-				driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+				Thread.sleep(2000);
+				driver.manage().timeouts().implicitlyWait(35, TimeUnit.SECONDS);
 				driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add"))
 						.click();// 上传照片
 			} catch (IOException e) {
@@ -412,6 +412,7 @@ public class AppUtil {
 
 			}
 			actualstatue = upload(driver, ksd.getImgcount());
+			System.out.println("####"+actualstatue);
 			ksd.setStatue(actualstatue);
 		}
 		return ksd;
@@ -644,8 +645,8 @@ public class AppUtil {
 
 					}
 				}
-				Thread.sleep(1000);
-				driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+				Thread.sleep(2000);
+				driver.manage().timeouts().implicitlyWait(35, TimeUnit.SECONDS);
 				driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add"))
 						.click();// 上传照片
 			} catch (IOException e) {
@@ -687,7 +688,9 @@ public class AppUtil {
 						By.id("com.kuaishoudan.financer:id/toolbar_back"))
 						.click();
 			}
+		
 			actualstatue = upload(driver, ksd.getImgcount());
+			System.out.println("####=="+actualstatue);
 			ksd.setStatue(actualstatue);
 
 		}
@@ -765,12 +768,14 @@ public class AppUtil {
 	public static String upload(AppiumDriver<AndroidElement> driver,
 			int imgcount) {
 		String acstatue = "";
+		
 		try {
 			/*
 			 * driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 			 * driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add"))
 			 * .click();// 上传照片
 			 */
+			driver.manage().timeouts().implicitlyWait(28, TimeUnit.SECONDS);
 			driver.findElement(
 					By.id("com.kuaishoudan.financer:id/dialog_photo_select_btn_gallery"))
 					.click();// 从相册选择
@@ -936,6 +941,12 @@ public class AppUtil {
 	 * @param driver
 	 */
 	public static String getStatue(AppiumDriver<AndroidElement> driver) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back"))
 				.click();// 返回
 		try {
@@ -1015,6 +1026,16 @@ public class AppUtil {
 			e.printStackTrace();
 		}
 
+	}
+	public static String getIndexname(AppiumDriver<AndroidElement> driver){
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String name=driver.findElements(By.id("com.kuaishoudan.financer:id/text_name")).get(0).getText().trim();
+		return name;
 	}
 
 }

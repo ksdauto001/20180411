@@ -48,7 +48,7 @@ public class Test3 {
 		System.out.println(devicename);
 		Thread.sleep(3000);
 		webdriver = WebUtil.getdriver();
-		ksd = RandomValue.getRandom();
+		ksd = RandomValue.getRandom(driver);
 		System.out.println("名称" + ksd.getUsername() + "手机" + ksd.getPhone()
 				+ "身份证号" + ksd.getIdentitynum() + "身份类型"
 				+ ksd.getIdentitytype() + "军官" + ksd.getJgid() + "企业个人"
@@ -252,7 +252,7 @@ public class Test3 {
 	}
 
 	// 状态已放款
-	@Test(priority = 13, invocationCount = 1, threadPoolSize = 1)
+	//@Test(priority = 13, invocationCount = 1, threadPoolSize = 1)
 	public void test13() {
 		try {
 
@@ -276,7 +276,7 @@ public class Test3 {
 	}
 
 	// 归档
-	@Test(priority = 14, invocationCount = 1, threadPoolSize = 1)
+	//@Test(priority = 14, invocationCount = 1, threadPoolSize = 1)
 	public void test14() {
 
 		WebSPUtil.testSP6(webdriver, "liuhl@jizhicar.com", "刘浩亮"); // 请款审批同意专员

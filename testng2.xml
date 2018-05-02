@@ -17,7 +17,7 @@
 			<class name="com.kuaishoudan.financer.test.Test2" />
 		</classes>
 	</test>
-	<!--  
+	
 	<test name="再次进件申请合同测试流程" preserve-order="true">
 		<classes>
 			<class name="com.kuaishoudan.financer.test.Test3" />
@@ -32,6 +32,6 @@
 		</classes>
 	</test>
 
-	
+	<!--  
 	-->
 </suite>

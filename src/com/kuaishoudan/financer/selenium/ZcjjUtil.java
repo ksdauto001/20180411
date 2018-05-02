@@ -48,6 +48,7 @@ public class ZcjjUtil {
 		driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add"))
 				.click();// 添加照片
 		actualstatue = AppSPUtil.upload(driver);
+		System.out.println("##ysqht##"+actualstatue);
 		ksd.setStatue(actualstatue);
 		return ksd;
 	}
@@ -143,7 +144,7 @@ public class ZcjjUtil {
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back"))
 				.click();// 返回
-		actualstatue = AppUtil.getStatue(driver);
+		actualstatue = AppSPUtil.getActstatue(driver);//查值
 		ksd.setStatue(actualstatue);
 		return ksd;
 	}
@@ -198,6 +199,10 @@ public class ZcjjUtil {
 						.findElement(
 								By.id("com.kuaishoudan.financer:id/item_name"))
 						.getText();
+				System.out.println("!!!!"+name);
+			/*	if(name.equals("")){
+					name="测试工程师-刘浩亮";
+				}*/
 				String[] strs = name.split("-");
 				if (strs[0].contains("BD")) {
 					// ///////////////////////////////
