@@ -17,6 +17,7 @@ public class WebOrgan {
 
 	/**
 	 * 供应商机构管理
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -31,53 +32,60 @@ public class WebOrgan {
 			e.printStackTrace();
 		}
 	}
-	public void test1() throws MalformedURLException, InterruptedException{
-		 	
-		
-			KSDCase ksd = RandomValue.getRandom();
-			ksd.setProduct("qita22-其他22产品1");
-			WebDriver webdriver = WebUtil.getdriver();
-			WebUtil.login(webdriver, ksd.getLoginemail());// 登录
-			webdriver.findElement(By.linkText("供应商")).click();
-		String sss=	ksd.getProduct().split("-")[0];
-	
+
+	public void test1() throws MalformedURLException, InterruptedException {
+
+		KSDCase ksd = RandomValue.getRandom();
+		ksd.setProduct("qita22-其他22产品1");
+		WebDriver webdriver = WebUtil.getdriver();
+		WebUtil.login(webdriver, ksd.getLoginemail());// 登录
+		webdriver.findElement(By.linkText("供应商")).click();
+		String sss = ksd.getProduct().split("-")[0];
+
 		webdriver.navigate().refresh();
 		webdriver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-		List<WebElement>  ws =webdriver.findElements(By.className("org_name"));
-	//	List<WebElement>  mask =webdriver.findElements(By.className("org_mask"));//org_mask
+		List<WebElement> ws = webdriver.findElements(By.className("org_name"));
+		// List<WebElement> mask
+		// =webdriver.findElements(By.className("org_mask"));//org_mask
 		System.out.println(ws.size());
-	//	System.out.println(mask.size());
-	   //    JavascriptExecutor j=(JavascriptExecutor)webdriver;
 
-	    //   j.executeScript("document.getElementsByClassName('org_mask')[3].style.display='block';");
-		for(int i=0;i<ws.size();i++){
-			
-			System.out.println("ws"+ws.get(i).getText());
-			if(ws.get(i).getText().equals("qita22")){
-				webdriver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-				  Actions action=new Actions(webdriver);  
-				  
-			        action.moveToElement(ws.get(i)).perform();
-			        Thread.sleep(1000);
+		for (int i = 0; i < ws.size(); i++) {
 
-			     //  webdriver.findElements(By.className("org_mask")).get(i).findElement(By.xpath("a")).click();
-			    	List<WebElement>  mask=    webdriver.findElements(By.className("org_mask"));
-			    	System.out.println("==="+mask.size());
-			    //	mask.get(i).click();
-			    	mask.get(i).findElement(By.tagName("a")).click();
+			System.out.println("ws" + ws.get(i).getText());
+			if (ws.get(i).getText().equals("qita22")) {
+				webdriver.manage().timeouts()
+						.implicitlyWait(13, TimeUnit.SECONDS);
+				Actions action = new Actions(webdriver);
+
+				action.moveToElement(ws.get(i)).perform();
+				Thread.sleep(1000);
+
+				List<WebElement> mask = webdriver.findElements(By
+						.className("org_mask"));
+				System.out.println("@===" + mask.size());
+				// mask.get(i).click();
+				mask.get(i).findElement(By.tagName("a")).click();
+				break;
 			}
-			
+
 		}
+		Thread.sleep(1000);
 		webdriver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+
+		WebElement titos = webdriver.findElement(By
+				.xpath("//ul[@class='tab_list inline_block']/li[2]"));
+		titos.click();
+
 		
-		/*List<WebElement> titos=  webdriver.findElements(By.className("tab_item type_others"));
-		for(int i=0;i<titos.size();i++){
-			System.out.println(titos.size());
-		}
-		*/
-			Thread.sleep(15000);
-			webdriver.quit();
 		
+		
+		WebElement titos2 = webdriver.findElement(By
+				.xpath("//ul[@class='tab_list inline_block']/li[3]"));
+
+		titos2.click();
+		Thread.sleep(15000);
+		webdriver.quit();
+
 	}
-	
+
 }
