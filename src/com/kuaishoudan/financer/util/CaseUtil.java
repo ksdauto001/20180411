@@ -37,13 +37,17 @@ public class CaseUtil {
 	 */
 	public static void main(String[] args) {
 		//System.out.println(UserDaoImpl.getstatus_id("已分配"));
-		String str="19";
+		/*String str="19";
 	       DecimalFormat decimalFormat = new DecimalFormat("###################.###########"); 
 
 	double dd=Double.parseDouble(str);
 //	int aa=(int)(dd);
 
-		System.out.println(decimalFormat.format(dd));
+		System.out.println(decimalFormat.format(dd));*/
+		String a="已申请\n"+"合同";
+		System.out.println(a);
+
+		System.out.println(a.replaceAll("\n", ""));
 	}
 
 	public static Map<String,String> getCustomer(KSDCase ksd){
@@ -76,7 +80,7 @@ public class CaseUtil {
 			map.put("business_name",ksd.getBusinessname()	);
 			map.put("business_license",	ksd.getBusinessid());
 			}
-			map.put("rate",""+decimalFormat.format(Double.parseDouble((ksd.getRate().split("%")[0]))));
+			map.put("rate",decimalFormat.format(Double.parseDouble((ksd.getRate().split("%")[0]))));
 		//	map.put("vin", ksd.getVin());
 			map.put("purchase_tax",decimalFormat.format(Double.parseDouble(ksd.getPurchase_tax())));
 			map.put("gps_charge",decimalFormat.format(Double.parseDouble( ksd.getGps_charge())));
@@ -93,11 +97,12 @@ public class CaseUtil {
 			map.put("series_name",	ksd.getCarseries());
 			map.put("product_name",	ksd.getProduct());
 			map.put("supplier_name",ksd.getSssh());
-			map.put("vin", ksd.getVin());
-			map.put("purchase_tax", ksd.getPurchase_tax());
-			map.put("gps_charge", ksd.getGps_charge());
-			map.put("insurance",ksd.getInsurance());
-			map.put("service_charge",ksd.getService_charge());
+			map.put("vin", ksd.getVin().toUpperCase());//大写车架号
+			map.put("purchase_tax",decimalFormat.format(Double.parseDouble(ksd.getPurchase_tax())));
+	//		map.put("gps_charge",decimalFormat.format(Double.parseDouble( ksd.getGps_charge())));
+			map.put("insurance",decimalFormat.format(Double.parseDouble(ksd.getInsurance())));
+	//		map.put("service_charge",decimalFormat.format(Double.parseDouble(ksd.getService_charge())));
+		
 		  return map;
 	}
 	public static KSDCase getCaseByid(String caseid) {

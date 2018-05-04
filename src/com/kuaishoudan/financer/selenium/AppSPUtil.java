@@ -50,8 +50,12 @@ public class AppSPUtil {
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add"))
 				.click();// 添加照片
-		actualstatue = upload(driver);
-		ksd.setStatue(actualstatue);
+		upload(driver);
+	
+		//		Thread.sleep(500);
+	//	getActstatue(driver);// 状态值
+		String statue=getActstatue(driver);
+		ksd.setStatue(statue);
 		return ksd;
 	}
 
@@ -241,7 +245,7 @@ public class AppSPUtil {
 		}
 		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back"))
 				.click();// 返回
-		String actualstatue = AppUtil.getStatue(driver);
+		String actualstatue = getActstatue(driver);
 		ksd.setStatue(actualstatue);
 		return ksd;
 	}
@@ -327,15 +331,12 @@ public class AppSPUtil {
 
 			driver.findElement(
 					By.id("com.kuaishoudan.financer:id/toolbar_back")).click();// 返回按钮
-			Thread.sleep(1500);
-			acstatue = getActstatue(driver);// 状态值
+	
 		} catch (org.openqa.selenium.WebDriverException e) {
 			// TODO Auto-generated catch block
 			// e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+		
 		return acstatue;
 	}
 
@@ -517,7 +518,7 @@ public class AppSPUtil {
 	// 状态实际值
 	public static String getActstatue(AppiumDriver<AndroidElement> driver) {
 		try {
-			Thread.sleep(500);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

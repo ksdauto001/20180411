@@ -58,7 +58,8 @@ public class Test3 {
 				+ ksd.getHkqs() + "\n  " + ksd.getPurchase_tax() + "\n "
 				+ ksd.getInsurance() + " \n" + ksd.getGps_charge() + "\n "
 				+ ksd.getService_charge() + "," + ksd.getRegisttype() + ","
-				+ ksd.getPledge());
+				+ ksd.getPledge()
+				+"车架号"+ksd.getVin());
 	}
 
 	@AfterTest
@@ -75,13 +76,15 @@ public class Test3 {
 		if (ksd.getQygr() == 1) {
 			System.out.println("***2@");		
 			ksd = AppUtil.addGr(driver, devicename, 1, ksd);
-			Assert.assertEquals(ksd.getStatue(), "待分配");
+			String statue=ZcjjUtil.getActstatue(driver);
+			Assert.assertEquals(statue, "待分配");
 			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 					UserDaoImpl.getstatus_id("待分配"));
 		} else {
 			System.out.println("***3@");
 			ksd = AppUtil.addQy(driver, devicename, 1, ksd);
-			Assert.assertEquals(ksd.getStatue(), "待分配");
+			String statue=ZcjjUtil.getActstatue(driver);
+			Assert.assertEquals(statue, "待分配");
 			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 					UserDaoImpl.getstatus_id("待分配"));
 
@@ -92,8 +95,8 @@ public class Test3 {
 	@Test(priority = 3, invocationCount = 1, threadPoolSize = 1)
 	public void test3() throws InterruptedException, IOException {
 		System.out.println("***4@");
-		WebUtil.login(webdriver, "liuhl@jizhicar.com");// 登录
-		WebUtil.testDFP(webdriver);// 待分配
+		WebUtil.login(webdriver, ksd.getLoginemail());// 登录
+		WebUtil.testDFP(webdriver,ksd);// 待分配
 		WebUtil.logout(webdriver);// 登出
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已分配"));
@@ -103,7 +106,7 @@ public class Test3 {
 	@Test(priority = 4, invocationCount = 1, threadPoolSize = 1)
 	public void test4() throws InterruptedException, IOException {
 		System.out.println("***5@");
-		WebUtil.login(webdriver, "liuhl@jizhicar.com");// 登录
+		WebUtil.login(webdriver, ksd.getLoginemail());// 登录
 		WebUtil.testYFP(webdriver);// 已分配
 		WebUtil.logout(webdriver);// 登出
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
@@ -115,11 +118,13 @@ public class Test3 {
 	@Test(priority = 5, invocationCount = 1, threadPoolSize = 1)
 	public void test5() throws InterruptedException, IOException {
 		System.out.println("***5@");
-		WebUtil.login(webdriver, "liuhl@jizhicar.com");// 登录
+		WebUtil.login(webdriver, ksd.getLoginemail());// 登录
 		WebUtil.testYLR(webdriver, ksd);// 已分配
 		WebUtil.logout(webdriver);// 登出
 		Map<String, String> actual = UserDaoImpl.getFinance(ksd);
+		System.out.println("******************"+actual.get("insurance"));
 		Map<String, String> expect = CaseUtil.getFinance(ksd);
+
 		Assert.assertEquals(actual, expect);
 	}
 
@@ -127,7 +132,8 @@ public class Test3 {
 	@Test(priority = 6, invocationCount = 1, threadPoolSize = 1)
 	public void test6() throws InterruptedException, IOException {
 		ksd = ZcjjUtil.sqhtZCJJ(driver, ksd);
-		Assert.assertEquals(ksd.getStatue(), "已申请合同");
+		String statue=ksd.getStatue().replaceAll("\n", "");;
+		Assert.assertEquals(statue, "已申请合同");
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已申请合同"));
 
@@ -136,10 +142,10 @@ public class Test3 {
 	// web审批合同
 	@Test(priority = 7, invocationCount = 1, threadPoolSize = 1)
 	public void test7() {
-		WebUtil.login(webdriver, "liuhl@jizhicar.com");// 登录
+		WebUtil.login(webdriver, ksd.getLoginemail());// 登录
 		WebUtil.testYSQHT(webdriver, ksd);// 申请合同审批
 		WebUtil.logout(webdriver);// 登出
-		String statue = AppSPUtil.getActstatue(driver);
+		String statue = ZcjjUtil.getActstatue(driver).replaceAll("\n", "");;
 		Assert.assertEquals(statue, "已出合同");
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已出合同"));
@@ -164,7 +170,7 @@ public class Test3 {
 			Map<String, String> map = ZcjjUtil.getSPname(driver);// 从app获取审批人名字
 			String itename = map.get("prename");
 			String email = WebSPUtil.nameToemail(map.get("name"));
-			WebSPUtil.testSP1(webdriver, email, itename); // 请款审批同意专员
+			WebSPUtil.testSP1(webdriver, email, itename,ksd); // 请款审批同意专员
 			Map<String, String> actual = UserDaoImpl.getAdvance(ksd);
 			Map<String, String> expect = CaseUtil.getAdvance(ksd);
 			Assert.assertEquals(actual, expect);
@@ -207,10 +213,10 @@ public class Test3 {
 				// bd操作
 
 				String email = WebSPUtil.nameToemail(map.get("name"));
-				AppSPUtil.loginBD(driver, email);
-				AppUtil.login(driver, devicename, "liuhl@jizhicar.com");// 登录
+				ZcjjUtil.loginBD(driver, email);
+				AppUtil.login(driver, devicename, ksd.getLoginemail());// 登录
 				Thread.sleep(1000);
-				Map<String, String> map2 = AppSPUtil.getSPname(driver);// 从app获取审批人名字
+				Map<String, String> map2 = ZcjjUtil.getSPname(driver);// 从app获取审批人名字
 				String itename2 = map2.get("prename");
 				String email2 = WebSPUtil.nameToemail(map2.get("name"));
 				WebSPUtil.testSP3(webdriver, email2, itename2); // 请款审批同意专员
@@ -237,7 +243,7 @@ public class Test3 {
 			String email = WebSPUtil.nameToemail(map.get("name"));
 			WebSPUtil.testSP4(webdriver, email, itename); // 请款审批同意专员
 			AppUtil.goback1(driver);//
-			String statue = AppSPUtil.getActstatue(driver);
+			String statue = ZcjjUtil.getActstatue(driver);
 			Assert.assertEquals(statue, "已放款");
 			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 					UserDaoImpl.getstatus_id("已放款"));
@@ -259,9 +265,9 @@ public class Test3 {
 			Map<String, String> map = ZcjjUtil.getSPname(driver);// 从app获取审批人名字
 			String itename = map.get("prename");
 			String email = WebSPUtil.nameToemail(map.get("name"));
-			WebSPUtil.testSP5(webdriver, email, itename); // 请款审批同意专员
+			WebSPUtil.testSP5(webdriver, email, itename,ksd); // 请款审批同意专员
 			AppUtil.goback1(driver);//
-			String statue = AppSPUtil.getActstatue(driver);
+			String statue = ZcjjUtil.getActstatue(driver);
 			Assert.assertEquals(statue, "已回款");
 			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 					UserDaoImpl.getstatus_id("已回款"));
@@ -279,9 +285,9 @@ public class Test3 {
 	//@Test(priority = 14, invocationCount = 1, threadPoolSize = 1)
 	public void test14() {
 
-		WebSPUtil.testSP6(webdriver, "liuhl@jizhicar.com", "刘浩亮"); // 请款审批同意专员
+		WebSPUtil.testSP6(webdriver, ksd.getLoginemail(), ksd.getLoginname()); // 请款审批同意专员
 
-		String statue = AppSPUtil.getActstatue(driver);
+		String statue = ZcjjUtil.getActstatue(driver);
 		Assert.assertEquals(statue, "已归档");
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已归档"));

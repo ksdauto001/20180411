@@ -262,15 +262,15 @@ public class UserDaoImpl{
 				map.put("business_license",	rs.getString("business_license"));
 				}
 				
-				map.put("rate", ""+rs.getString("rate"));
+				map.put("rate",rs.getString("rate"));
 			//	map.put("vin", rs.getString("vin"));
-				map.put("purchase_tax", ""+decimalFormat.format(Double.parseDouble(rs.getString("purchase_tax"))));
-				map.put("gps_charge", ""+decimalFormat.format(Double.parseDouble(rs.getString("gps_charge"))));
-				map.put("insurance",""+decimalFormat.format(Double.parseDouble(rs.getString("insurance"))));
+				map.put("purchase_tax", decimalFormat.format(Double.parseDouble(rs.getString("purchase_tax"))));
+				map.put("gps_charge", decimalFormat.format(Double.parseDouble(rs.getString("gps_charge"))));
+				map.put("insurance",decimalFormat.format(Double.parseDouble(rs.getString("insurance"))));
 				System.out.println("==="+rs.getDouble("insurance"));
 				System.out.println("==="+""+ rs.getString("insurance"));
 				System.out.println("===ddd"+decimalFormat.format(Double.parseDouble(rs.getString("insurance"))));
-				map.put("service_charge",""+ decimalFormat.format(Double.parseDouble(rs.getString("service_charge"))));
+				map.put("service_charge", decimalFormat.format(Double.parseDouble(rs.getString("service_charge"))));
 			//	System.out.println(rs.getString("name")+rs.getString("status")+rs.getString("phone")+rs.getString("id_type")+rs.getString("address"));
 			}
 		} catch (SQLException e) {
@@ -308,11 +308,12 @@ public class UserDaoImpl{
 				map.put("product_name",	rs.getString("product_name"));
 				map.put("supplier_name",	rs.getString("supplier_name"));
 				map.put("vin", rs.getString("vin"));
-				map.put("purchase_tax", rs.getString("purchase_tax"));
-				map.put("gps_charge", rs.getString("gps_charge"));
-				map.put("insurance",rs.getString("insurance"));
-				map.put("service_charge", rs.getString("service_charge"));
-			//	System.out.println(rs.getString("name")+rs.getString("status")+rs.getString("phone")+rs.getString("id_type")+rs.getString("address"));
+
+				map.put("purchase_tax", decimalFormat.format(Double.parseDouble(rs.getString("purchase_tax"))));
+		//		map.put("gps_charge", ""+decimalFormat.format(Double.parseDouble(rs.getString("gps_charge"))));
+		//		System.out.println("dao==============="+""+decimalFormat.format(Double.parseDouble(rs.getString("gps_charge"))));
+				map.put("insurance",decimalFormat.format(Double.parseDouble(rs.getString("insurance"))));
+		//		map.put("service_charge",""+ decimalFormat.format(Double.parseDouble(rs.getString("service_charge"))));
 			}
 		} catch (SQLException e) {
 			System.out.println(e);

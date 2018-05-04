@@ -145,14 +145,14 @@ public class RandomValue {
 	}
 	public void test(){
 			 KSDCase ksd=null;
-		try {
+		/*try {
 			AppiumDriver  driver=AppUtil.getdriver()	;
 			 ksd = getRandom(driver);
 		} catch (MalformedURLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
-		 
+		}*/
+			 ksd = getRandom();
 
 			  System.out.println(ksd.getIdentitytype()+"名称" + ksd.getUsername() + "手机" + ksd.getPhone()
 						+ "身份证号" + ksd.getIdentitynum() + "身份类型"
@@ -163,7 +163,7 @@ public class RandomValue {
 						+ ksd.getHkqs() + "\n  " + ksd.getPurchase_tax() + "\n "
 						+ ksd.getInsurance() + " \n" + ksd.getGps_charge() + "\n "
 						+ ksd.getService_charge() + "," + ksd.getRegisttype() + ","
-						+ ksd.getPledge());
+						+ ksd.getPledge()+","+ksd.getLoginname());
 	
 	
 	}
@@ -180,7 +180,7 @@ public class RandomValue {
 		DecimalFormat df2 = new DecimalFormat("#.00");
 		DecimalFormat df = new DecimalFormat("#.000");
 		for (int i = 0; i < 200; i++) {
-			sqdk = Double.parseDouble(df.format(2 + Math.random() * 57));//97 Math.random()
+			sqdk = Double.parseDouble(df.format(2 + Math.random() * 30));//97 Math.random()
 																			// *
 																			// 97));//
 																			// 997
@@ -232,7 +232,8 @@ public class RandomValue {
 		ksd.setPledge(pledge);// 抵押方1,2,3
 		//ksd.setSssh("几节");//所属商户
 		ksd.setImgcount(4);// 图片数量1,2,3
-		
+		ksd.setLoginname("刘浩亮");//登录邮箱
+		ksd.setLoginemail("liuhl@jizhicar.com");
 		return ksd;
 	}
 	public static KSDCase getRandom(AppiumDriver<AndroidElement> driver) {
@@ -247,7 +248,7 @@ public class RandomValue {
 		DecimalFormat df2 = new DecimalFormat("#.00");
 		DecimalFormat df = new DecimalFormat("#.000");
 		for (int i = 0; i < 200; i++) {
-			sqdk = Double.parseDouble(df.format(2 + Math.random() * 57));//97 Math.random()
+			sqdk = Double.parseDouble(df.format(2 + Math.random() * 30));//97 Math.random()
 																			// *
 																			// 97));//
 																			// 997
@@ -294,7 +295,7 @@ public class RandomValue {
 		ksd.setPledge(pledge);// 抵押方1,2,3
 		//ksd.setSssh("几节");//所属商户
 		ksd.setImgcount(4);// 图片数量1,2,3
-		
+		ksd.setLoginname("liuhl@jizhicar.com");//登录邮箱
 		return ksd;
 	}
 }

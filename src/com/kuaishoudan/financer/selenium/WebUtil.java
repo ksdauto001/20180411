@@ -67,7 +67,7 @@ public class WebUtil {
 	}
 
 	// 待分配
-	public static void testDFP(WebDriver driver) {
+	public static void testDFP(WebDriver driver,KSDCase ksd) {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.findElement(By.linkText("首页")).click();
 		// 首页待办
@@ -77,7 +77,7 @@ public class WebUtil {
 		for (int i = 0; i < items.size(); i++) {
 			String name = items.get(i).getText();
 			// System.out.println(name);
-			if (name.contains("刘浩亮")) {
+			if (name.contains(ksd.getLoginname())) {
 				items.get(i).click();
 				break;
 			}
@@ -94,7 +94,7 @@ public class WebUtil {
 		for (int i = 0; i < ss.size(); i++) {
 			// System.out.println(i + ss.get(i).getText());
 			WebElement fpr = ss.get(i);
-			if (fpr.getText().contains("刘浩亮")) {
+			if (fpr.getText().contains(ksd.getLoginname())) {
 				System.out.println(i);
 				if (i < 25) {
 					// System.out.println("<25");
@@ -194,7 +194,7 @@ public class WebUtil {
 		driver.findElement(By.linkText("客户")).click();
 		driver.findElement(By.linkText("已录入")).click();
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-		clickItem(driver, "刘浩亮");
+		clickItem(driver, ksd.getLoginname());
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 		driver.findElement(By.className("requestpayout_detail_btn_box"))
 				.findElement(By.xpath("//a/div")).click();// 通知审核结果
@@ -249,7 +249,7 @@ public class WebUtil {
 		driver.findElement(By.xpath("//div[@class='operation_category']/a"))
 				.click();// 待出合同
 		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
-		clickItem(driver, "刘浩亮");
+		clickItem(driver, ksd.getLoginname());
 		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
 
 		int height = driver.manage().window().getSize().height;

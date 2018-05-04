@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="再次进件不出合同测试流程"
+           tests="9"
+           failures="3"
+           errors="0"
+           skipped="6"
+           time="133.491">
+  <properties />
+            <testcase name="test12" time="16.098" classname="com.kuaishoudan.financer.test.Test4">
+                <failure type="org.openqa.selenium.NoSuchElementException"
+                  message="An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 15.43 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;2.45.0&apos;, revision: &apos;5017cb8&apos;, time: &apos;2015-02-26 23:59:50&apos;
+System info: host: &apos;LB-201609032239&apos;, ip: &apos;192.168.203.1&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;x86&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_101&apos;
+Driver info: io.appium.java_client.android.AndroidDriver
+Capabilities [{app=D:\xiazai\2013-10-24_adt-bundle-windows-x86-20130917\Test2\apps\financer_ceshi_2.4.0.2_24002_2018-04-18.apk, networkConnectionEnabled=true, noSign=true, warnings={}, app-package=com.kuaishoudan.financer, app-activity=com.kuaishoudan.financer.activity.act.WelcomeActivity, databaseEnabled=false, deviceName=60fd1ae7d240, version=4.4, platform=WINDOWS, desired={app=D:\xiazai\2013-10-24_adt-bundle-windows-x86-20130917\Test2\apps\financer_ceshi_2.4.0.2_24002_2018-04-18.apk, noSign=true, app-package=com.kuaishoudan.financer, app-activity=com.kuaishoudan.financer.activity.act.WelcomeActivity, browserName=, unicodeKeyboard=true, platformName=Android, deviceName=Android, version=4.4, device=Android, platform=WINDOWS, resetKeyboard=true}, platformVersion=6.0.1, webStorageEnabled=false, locationContextEnabled=false, browserName=, takesScreenshot=true, javascriptEnabled=true, unicodeKeyboard=true, platformName=Android, device=Android, resetKeyboard=true}]
+Session ID: 681bbb18-31ae-431f-bb07-80ad69126d24
+*** Element info: {Using=id, value=com.kuaishoudan.financer:id/toolbar_loan_status}"
+              >
+<![CDATA[org.openqa.selenium.NoSuchElementException: An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 15.43 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.45.0', revision: '5017cb8', time: '2015-02-26 23:59:50'
+System info: host: 'LB-201609032239', ip: '192.168.203.1', os.name: 'Windows 10', os.arch: 'x86', os.version: '10.0', java.version: '1.8.0_101'
+Driver info: io.appium.java_client.android.AndroidDriver
+Capabilities [{app=D:\xiazai\2013-10-24_adt-bundle-windows-x86-20130917\Test2\apps\financer_ceshi_2.4.0.2_24002_2018-04-18.apk, networkConnectionEnabled=true, noSign=true, warnings={}, app-package=com.kuaishoudan.financer, app-activity=com.kuaishoudan.financer.activity.act.WelcomeActivity, databaseEnabled=false, deviceName=60fd1ae7d240, version=4.4, platform=WINDOWS, desired={app=D:\xiazai\2013-10-24_adt-bundle-windows-x86-20130917\Test2\apps\financer_ceshi_2.4.0.2_24002_2018-04-18.apk, noSign=true, app-package=com.kuaishoudan.financer, app-activity=com.kuaishoudan.financer.activity.act.WelcomeActivity, browserName=, unicodeKeyboard=true, platformName=Android, deviceName=Android, version=4.4, device=Android, platform=WINDOWS, resetKeyboard=true}, platformVersion=6.0.1, webStorageEnabled=false, locationContextEnabled=false, browserName=, takesScreenshot=true, javascriptEnabled=true, unicodeKeyboard=true, platformName=Android, device=Android, resetKeyboard=true}]
+Session ID: 681bbb18-31ae-431f-bb07-80ad69126d24
+*** Element info: {Using=id, value=com.kuaishoudan.financer:id/toolbar_loan_status}
+  sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+  sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+  sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+  java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+  org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:204)
+  org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:156)
+  org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:599)
+  io.appium.java_client.DefaultGenericMobileDriver.execute(DefaultGenericMobileDriver.java:27)
+  io.appium.java_client.AppiumDriver.execute(AppiumDriver.java:1)
+  io.appium.java_client.android.AndroidDriver.execute(AndroidDriver.java:1)
+  org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:352)
+  org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:393)
+  io.appium.java_client.DefaultGenericMobileDriver.findElementById(DefaultGenericMobileDriver.java:47)
+  io.appium.java_client.AppiumDriver.findElementById(AppiumDriver.java:1)
+  io.appium.java_client.android.AndroidDriver.findElementById(AndroidDriver.java:1)
+  org.openqa.selenium.By$ById.findElement(By.java:214)
+  org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:344)
+  io.appium.java_client.DefaultGenericMobileDriver.findElement(DefaultGenericMobileDriver.java:37)
+  io.appium.java_client.AppiumDriver.findElement(AppiumDriver.java:1)
+  io.appium.java_client.android.AndroidDriver.findElement(AndroidDriver.java:1)
+  com.kuaishoudan.financer.selenium.ZcjjUtil.getSPname(ZcjjUtil.java:180)
+  com.kuaishoudan.financer.test.Test4.test12(Test4.java:218)
+  sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+  sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+  sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+  java.lang.reflect.Method.invoke(Method.java:498)
+  org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)
+  org.testng.internal.Invoker.invokeMethod(Invoker.java:714)
+  org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)
+  org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)
+  org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)
+  org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+  org.testng.TestRunner.privateRun(TestRunner.java:767)
+  org.testng.TestRunner.run(TestRunner.java:617)
+  org.testng.SuiteRunner.runTest(SuiteRunner.java:335)
+  org.testng.SuiteRunner.access$000(SuiteRunner.java:37)
+  org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:369)
+  org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)
+  java.util.concurrent.FutureTask.run(FutureTask.java:266)
+  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+  java.lang.Thread.run(Thread.java:745)
+]]>
+      </failure>
+
+          </testcase>
+            <testcase name="test2" time="101.208" classname="com.kuaishoudan.financer.test.Test4">
+                <failure type="org.openqa.selenium.NoSuchElementException"
+                  message="An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 9.00 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;2.45.0&apos;, revision: &apos;5017cb8&apos;, time: &apos;2015-02-26 23:59:50&apos;
+System info: host: &apos;LB-201609032239&apos;, ip: &apos;192.168.203.1&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;x86&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_101&apos;
+Driver info: io.appium.java_client.android.AndroidDriver
+Capabilities [{app=D:\xiazai\2013-10-24_adt-bundle-windows-x86-20130917\Test2\apps\financer_ceshi_2.4.0.2_24002_2018-04-18.apk, networkConnectionEnabled=true, noSign=true, warnings={}, app-package=com.kuaishoudan.financer, app-activity=com.kuaishoudan.financer.activity.act.WelcomeActivity, databaseEnabled=false, deviceName=60fd1ae7d240, version=4.4, platform=WINDOWS, desired={app=D:\xiazai\2013-10-24_adt-bundle-windows-x86-20130917\Test2\apps\financer_ceshi_2.4.0.2_24002_2018-04-18.apk, noSign=true, app-package=com.kuaishoudan.financer, app-activity=com.kuaishoudan.financer.activity.act.WelcomeActivity, browserName=, unicodeKeyboard=true, platformName=Android, deviceName=Android, version=4.4, device=Android, platform=WINDOWS, resetKeyboard=true}, platformVersion=6.0.1, webStorageEnabled=false, locationContextEnabled=false, browserName=, takesScreenshot=true, javascriptEnabled=true, unicodeKeyboard=true, platformName=Android, device=Android, resetKeyboard=true}]
+Session ID: 681bbb18-31ae-431f-bb07-80ad69126d24
+*** Element info: {Using=id, value=com.kuaishoudan.financer:id/dialog_custom_confirm}"
+              >
+<![CDATA[org.openqa.selenium.NoSuchElementException: An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 9.00 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.45.0', revision: '5017cb8', time: '2015-02-26 23:59:50'
+System info: host: 'LB-201609032239', ip: '192.168.203.1', os.name: 'Windows 10', os.arch: 'x86', os.version: '10.0', java.version: '1.8.0_101'
+Driver info: io.appium.java_client.android.AndroidDriver
+Capabilities [{app=D:\xiazai\2013-10-24_adt-bundle-windows-x86-20130917\Test2\apps\financer_ceshi_2.4.0.2_24002_2018-04-18.apk, networkConnectionEnabled=true, noSign=true, warnings={}, app-package=com.kuaishoudan.financer, app-activity=com.kuaishoudan.financer.activity.act.WelcomeActivity, databaseEnabled=false, deviceName=60fd1ae7d240, version=4.4, platform=WINDOWS, desired={app=D:\xiazai\2013-10-24_adt-bundle-windows-x86-20130917\Test2\apps\financer_ceshi_2.4.0.2_24002_2018-04-18.apk, noSign=true, app-package=com.kuaishoudan.financer, app-activity=com.kuaishoudan.financer.activity.act.WelcomeActivity, browserName=, unicodeKeyboard=true, platformName=Android, deviceName=Android, version=4.4, device=Android, platform=WINDOWS, resetKeyboard=true}, platformVersion=6.0.1, webStorageEnabled=false, locationContextEnabled=false, browserName=, takesScreenshot=true, javascriptEnabled=true, unicodeKeyboard=true, platformName=Android, device=Android, resetKeyboard=true}]
+Session ID: 681bbb18-31ae-431f-bb07-80ad69126d24
+*** Element info: {Using=id, value=com.kuaishoudan.financer:id/dialog_custom_confirm}
+  sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+  sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+  sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+  java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+  org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:204)
+  org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:156)
+  org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:599)
+  io.appium.java_client.DefaultGenericMobileDriver.execute(DefaultGenericMobileDriver.java:27)
+  io.appium.java_client.AppiumDriver.execute(AppiumDriver.java:1)
+  io.appium.java_client.android.AndroidDriver.execute(AndroidDriver.java:1)
+  org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:352)
+  org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:393)
+  io.appium.java_client.DefaultGenericMobileDriver.findElementById(DefaultGenericMobileDriver.java:47)
+  io.appium.java_client.AppiumDriver.findElementById(AppiumDriver.java:1)
+  io.appium.java_client.android.AndroidDriver.findElementById(AndroidDriver.java:1)
+  org.openqa.selenium.By$ById.findElement(By.java:214)
+  org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:344)
+  io.appium.java_client.DefaultGenericMobileDriver.findElement(DefaultGenericMobileDriver.java:37)
+  io.appium.java_client.AppiumDriver.findElement(AppiumDriver.java:1)
+  io.appium.java_client.android.AndroidDriver.findElement(AndroidDriver.java:1)
+  com.kuaishoudan.financer.selenium.AppUtil.upload(AppUtil.java:830)
+  com.kuaishoudan.financer.selenium.AppUtil.addGr(AppUtil.java:415)
+  com.kuaishoudan.financer.test.Test4.test2(Test4.java:79)
+  sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+  sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+  sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+  java.lang.reflect.Method.invoke(Method.java:498)
+  org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)
+  org.testng.internal.Invoker.invokeMethod(Invoker.java:714)
+  org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)
+  org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)
+  org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)
+  org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+  org.testng.TestRunner.privateRun(TestRunner.java:767)
+  org.testng.TestRunner.run(TestRunner.java:617)
+  org.testng.SuiteRunner.runTest(SuiteRunner.java:335)
+  org.testng.SuiteRunner.access$000(SuiteRunner.java:37)
+  org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:369)
+  org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)
+  java.util.concurrent.FutureTask.run(FutureTask.java:266)
+  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+  java.lang.Thread.run(Thread.java:745)
+]]>
+      </failure>
+
+          </testcase>
+            <testcase name="test11" time="16.185" classname="com.kuaishoudan.financer.test.Test4">
+                <failure type="org.openqa.selenium.NoSuchElementException"
+                  message="An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 15.46 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;2.45.0&apos;, revision: &apos;5017cb8&apos;, time: &apos;2015-02-26 23:59:50&apos;
+System info: host: &apos;LB-201609032239&apos;, ip: &apos;192.168.203.1&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;x86&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_101&apos;
+Driver info: io.appium.java_client.android.AndroidDriver
+Capabilities [{app=D:\xiazai\2013-10-24_adt-bundle-windows-x86-20130917\Test2\apps\financer_ceshi_2.4.0.2_24002_2018-04-18.apk, networkConnectionEnabled=true, noSign=true, warnings={}, app-package=com.kuaishoudan.financer, app-activity=com.kuaishoudan.financer.activity.act.WelcomeActivity, databaseEnabled=false, deviceName=60fd1ae7d240, version=4.4, platform=WINDOWS, desired={app=D:\xiazai\2013-10-24_adt-bundle-windows-x86-20130917\Test2\apps\financer_ceshi_2.4.0.2_24002_2018-04-18.apk, noSign=true, app-package=com.kuaishoudan.financer, app-activity=com.kuaishoudan.financer.activity.act.WelcomeActivity, browserName=, unicodeKeyboard=true, platformName=Android, deviceName=Android, version=4.4, device=Android, platform=WINDOWS, resetKeyboard=true}, platformVersion=6.0.1, webStorageEnabled=false, locationContextEnabled=false, browserName=, takesScreenshot=true, javascriptEnabled=true, unicodeKeyboard=true, platformName=Android, device=Android, resetKeyboard=true}]
+Session ID: 681bbb18-31ae-431f-bb07-80ad69126d24
+*** Element info: {Using=id, value=com.kuaishoudan.financer:id/toolbar_loan_status}"
+              >
+<![CDATA[org.openqa.selenium.NoSuchElementException: An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 15.46 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.45.0', revision: '5017cb8', time: '2015-02-26 23:59:50'
+System info: host: 'LB-201609032239', ip: '192.168.203.1', os.name: 'Windows 10', os.arch: 'x86', os.version: '10.0', java.version: '1.8.0_101'
+Driver info: io.appium.java_client.android.AndroidDriver
+Capabilities [{app=D:\xiazai\2013-10-24_adt-bundle-windows-x86-20130917\Test2\apps\financer_ceshi_2.4.0.2_24002_2018-04-18.apk, networkConnectionEnabled=true, noSign=true, warnings={}, app-package=com.kuaishoudan.financer, app-activity=com.kuaishoudan.financer.activity.act.WelcomeActivity, databaseEnabled=false, deviceName=60fd1ae7d240, version=4.4, platform=WINDOWS, desired={app=D:\xiazai\2013-10-24_adt-bundle-windows-x86-20130917\Test2\apps\financer_ceshi_2.4.0.2_24002_2018-04-18.apk, noSign=true, app-package=com.kuaishoudan.financer, app-activity=com.kuaishoudan.financer.activity.act.WelcomeActivity, browserName=, unicodeKeyboard=true, platformName=Android, deviceName=Android, version=4.4, device=Android, platform=WINDOWS, resetKeyboard=true}, platformVersion=6.0.1, webStorageEnabled=false, locationContextEnabled=false, browserName=, takesScreenshot=true, javascriptEnabled=true, unicodeKeyboard=true, platformName=Android, device=Android, resetKeyboard=true}]
+Session ID: 681bbb18-31ae-431f-bb07-80ad69126d24
+*** Element info: {Using=id, value=com.kuaishoudan.financer:id/toolbar_loan_status}
+  sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+  sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+  sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+  java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+  org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:204)
+  org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:156)
+  org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:599)
+  io.appium.java_client.DefaultGenericMobileDriver.execute(DefaultGenericMobileDriver.java:27)
+  io.appium.java_client.AppiumDriver.execute(AppiumDriver.java:1)
+  io.appium.java_client.android.AndroidDriver.execute(AndroidDriver.java:1)
+  org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:352)
+  org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:393)
+  io.appium.java_client.DefaultGenericMobileDriver.findElementById(DefaultGenericMobileDriver.java:47)
+  io.appium.java_client.AppiumDriver.findElementById(AppiumDriver.java:1)
+  io.appium.java_client.android.AndroidDriver.findElementById(AndroidDriver.java:1)
+  org.openqa.selenium.By$ById.findElement(By.java:214)
+  org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:344)
+  io.appium.java_client.DefaultGenericMobileDriver.findElement(DefaultGenericMobileDriver.java:37)
+  io.appium.java_client.AppiumDriver.findElement(AppiumDriver.java:1)
+  io.appium.java_client.android.AndroidDriver.findElement(AndroidDriver.java:1)
+  com.kuaishoudan.financer.selenium.ZcjjUtil.getSPname(ZcjjUtil.java:180)
+  com.kuaishoudan.financer.test.Test4.test11(Test4.java:188)
+  sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+  sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+  sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+  java.lang.reflect.Method.invoke(Method.java:498)
+  org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)
+  org.testng.internal.Invoker.invokeMethod(Invoker.java:714)
+  org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)
+  org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)
+  org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)
+  org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+  org.testng.TestRunner.privateRun(TestRunner.java:767)
+  org.testng.TestRunner.run(TestRunner.java:617)
+  org.testng.SuiteRunner.runTest(SuiteRunner.java:335)
+  org.testng.SuiteRunner.access$000(SuiteRunner.java:37)
+  org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:369)
+  org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)
+  java.util.concurrent.FutureTask.run(FutureTask.java:266)
+  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+  java.lang.Thread.run(Thread.java:745)
+]]>
+      </failure>
+
+          </testcase>
+  
+            <testcase name="test5" time="0.0" classname="com.kuaishoudan.financer.test.Test4">
+          <skipped />
+    </testcase>
+            <testcase name="test4" time="0.0" classname="com.kuaishoudan.financer.test.Test4">
+          <skipped />
+    </testcase>
+            <testcase name="test10" time="0.0" classname="com.kuaishoudan.financer.test.Test4">
+          <skipped />
+    </testcase>
+            <testcase name="test3" time="0.0" classname="com.kuaishoudan.financer.test.Test4">
+          <skipped />
+    </testcase>
+            <testcase name="test9" time="0.0" classname="com.kuaishoudan.financer.test.Test4">
+          <skipped />
+    </testcase>
+            <testcase name="test8" time="0.0" classname="com.kuaishoudan.financer.test.Test4">
+          <skipped />
+    </testcase>
+  
+  
+</testsuite>

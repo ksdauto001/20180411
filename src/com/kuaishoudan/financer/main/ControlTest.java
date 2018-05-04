@@ -118,7 +118,7 @@ public class ControlTest {
 	 */
 	public void webDksp() {
 		WebUtil.login(webdriver, "liuhl@jizhicar.com");// 登录
-		WebUtil.testDFP(webdriver);// 待分配
+		WebUtil.testDFP(webdriver,ksd);// 待分配
 		WebUtil.testYFP(webdriver);// 已分配
 		WebUtil.testYLR(webdriver, ksd);// 已录入
 		WebUtil.logout(webdriver);// 登出
@@ -158,7 +158,7 @@ public class ControlTest {
 			Map<String, String> map = AppSPUtil.getSPname(driver);// 从app获取审批人名字
 			String itename = map.get("prename");
 			String email = WebSPUtil.nameToemail(map.get("name"));
-			WebSPUtil.testSP1(webdriver, email, itename); // 请款审批同意专员
+			WebSPUtil.testSP1(webdriver, email, itename,ksd); // 请款审批同意专员
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -240,7 +240,7 @@ public class ControlTest {
 			Map<String, String> map = AppSPUtil.getSPname(driver);// 从app获取审批人名字
 			String itename = map.get("prename");
 			String email = WebSPUtil.nameToemail(map.get("name"));
-			WebSPUtil.testSP5(webdriver, email, itename); // 请款审批同意专员
+			WebSPUtil.testSP5(webdriver, email, itename,ksd); // 请款审批同意专员
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

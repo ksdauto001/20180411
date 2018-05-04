@@ -22,6 +22,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.kuaishoudan.financer.bean.KSDCase;
 import com.kuaishoudan.financer.util.IdCardGenerator;
 
 public class WebSPUtil {
@@ -65,11 +66,11 @@ public class WebSPUtil {
 
 	// 请款审批同意专员
 
-	public static boolean testSP1(WebDriver driver, String email, String itename) {
+	public static boolean testSP1(WebDriver driver, String email, String itename,KSDCase ksd) {
 		// String username="niun@jizhicar.com";
 		boolean flag = false;
 		login2(driver, email, "@123456");
-		if(email.equals("liuhl@jizhicar.com")){
+		if(email.equals(ksd.getLoginemail())){
 			driver.findElement(By.linkText("客户")).click();
 			driver.findElement(By.linkText("请款管理")).click();
 			clickItemorder(driver, itename);
@@ -258,14 +259,14 @@ public class WebSPUtil {
 
 	// 财务专员 审批-已放款
 
-	public static boolean testSP5(WebDriver driver, String email, String itename) {
+	public static boolean testSP5(WebDriver driver, String email, String itename,KSDCase ksd) {
 		// String username = "sheny@jizhicar.com";
 		boolean flag = false;
 		login2(driver, email, "@123456");
 		driver.findElement(By.linkText("客户")).click();
 		driver.findElement(By.linkText("款项管理")).click();
 		driver.findElement(By.linkText("待回款")).click();
-		clickItemorder(driver, "刘浩亮");
+		clickItemorder(driver, ksd.getLoginname());
 		int height = driver.manage().window().getSize().height;
 		// System.out.println("height" + height);
 		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"

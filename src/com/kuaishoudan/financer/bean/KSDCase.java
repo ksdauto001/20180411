@@ -25,6 +25,7 @@ public class KSDCase {
 	String remark;// 备注
 	String init_statue;// 初始状态
 	String phone;
+	String loginemail;
 	String loginname;// 登录名
 	String pwd;
 	String address;// 用户地址
@@ -39,6 +40,14 @@ public class KSDCase {
 	int registtype;// 上牌方
 	int pledge;// 抵押方
 	int imgcount;// 进件图片数量
+
+	public String getLoginemail() {
+		return loginemail;
+	}
+
+	public void setLoginemail(String loginemail) {
+		this.loginemail = loginemail;
+	}
 
 	public int getImgcount() {
 		return imgcount;
