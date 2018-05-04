@@ -295,7 +295,8 @@ public class RandomValue {
 		ksd.setPledge(pledge);// 抵押方1,2,3
 		//ksd.setSssh("几节");//所属商户
 		ksd.setImgcount(4);// 图片数量1,2,3
-		ksd.setLoginname("liuhl@jizhicar.com");//登录邮箱
+		ksd.setLoginname("刘浩亮");//登录邮箱
+		ksd.setLoginemail("liuhl@jizhicar.com");
 		return ksd;
 	}
 }

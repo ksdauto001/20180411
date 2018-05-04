@@ -383,5 +383,47 @@ public class UserDaoImpl{
 		return statue;
 	}
 	
+public static KSDCase getLoanname(int financeid,int type) {
+
+		
+		KSDCase ksd=null;
+		String sql = "select * from tb_loan_file where finance_id=?  and 	material_type=?; ";
+		DBUtil util = new DBUtil();
+		Connection conn = util.openConnection();
+		try {
+
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, financeid);
+			pstmt.setInt(2, type);
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+		
+				ksd=new KSDCase();
+		
+				ksd.setUsername( rs.getString("name"));
+				ksd.setPhone(rs.getString("phone"));
+				ksd.setAddress("address2");
+			int idtype =rs.getInt("id_type");
+			ksd.setIdentitytype(idtype);
+			if(idtype==1){
+				ksd.setIdentitynum(rs.getString("id_num"));//身份证.
+			}else {	
+				ksd.setJgid(rs.getString("id_num"));//军官证			
+			}
+	
+
+
+			
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+			e.printStackTrace();
+		} finally {
+			util.closeConn(conn);
+		}
+		return ksd;
+	}
 
 }

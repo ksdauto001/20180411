@@ -78,7 +78,7 @@ public class Test1 {
 	// 个人进件或企业
 	@Test(priority = 2, invocationCount = 1, threadPoolSize = 1)
 	public void test2() throws InterruptedException, IOException {
-
+	
 		if (ksd.getQygr() == 1) {
 			System.out.println("***2@");
 			ksd = AppUtil.addGr(driver, devicename, 1, ksd);

@@ -34,7 +34,7 @@ public class AppUtil {
 		File classpathRoot = new File(System.getProperty("user.dir"));
 		File appDir = new File(classpathRoot, "apps");
 		File app = new File(appDir,
-				"financer_ceshi_2.4.0.2_24002_2018-04-18.apk");// financerfinalVersionjiagusign.apk
+				"financer_ceshi_2.4.2.0_24200_2018-05-04.apk");// financerfinalVersionjiagusign.apk
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		capabilities.setCapability("device", "Android");
 		capabilities.setCapability("platformName", "Android");
@@ -221,6 +221,26 @@ public class AppUtil {
 							By.id("com.kuaishoudan.financer:id/layout_new_car"))
 							.click();// 新车
 				}
+				// ___________
+				
+				driver.findElement(
+						By.id("com.kuaishoudan.financer:id/text_supplier"))
+						.click();// 所属商户
+				try {
+					AndroidElement supplier = driver.findElements(
+							By.id("com.kuaishoudan.financer:id/tv_name"))
+							.get(0);
+					ksd.setSssh(supplier.getText());
+					supplier.click();// 所属商户列表
+	
+				} catch (java.lang.IndexOutOfBoundsException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					driver.findElement(
+							By.id("com.kuaishoudan.financer:id/toolbar_back"))
+							.click();
+				}
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/text_brand"))
 						.click();// 品牌车系
@@ -324,7 +344,7 @@ public class AppUtil {
 				// _________
 				Thread.sleep(1000);
 				AppUtil.swipeToUp(driver, 800);// 向上滑动
-				Thread.sleep(300);
+				Thread.sleep(1000);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/text_feilv"))
 						.click();// 费率
@@ -343,25 +363,7 @@ public class AppUtil {
 							.click();
 				}
 	
-				// ___________
-	
-				driver.findElement(
-						By.id("com.kuaishoudan.financer:id/text_supplier"))
-						.click();// 所属商户
-				try {
-					AndroidElement supplier = driver.findElements(
-							By.id("com.kuaishoudan.financer:id/tv_name"))
-							.get(0);
-					ksd.setSssh(supplier.getText());
-					supplier.click();// 所属商户列表
-	
-				} catch (java.lang.IndexOutOfBoundsException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					driver.findElement(
-							By.id("com.kuaishoudan.financer:id/toolbar_back"))
-							.click();
-				}
+				
 	
 				Thread.sleep(500);
 	
@@ -462,7 +464,7 @@ public class AppUtil {
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_company_name"))
 						.click();// 企业名称
-				Thread.sleep(800);
+				Thread.sleep(2500);
 				Runtime.getRuntime().exec(
 						"adb -s " + devicename + " shell input text "
 								+ ksd.getBusinessid());
@@ -483,6 +485,24 @@ public class AppUtil {
 							By.id("com.kuaishoudan.financer:id/layout_new_car"))
 							.click();// 新车
 				}
+				// ___________
+
+				driver.findElement(
+						By.id("com.kuaishoudan.financer:id/text_supplier"))
+						.click();// 所属商户
+				try {
+					AndroidElement supplier = driver.findElements(
+							By.id("com.kuaishoudan.financer:id/tv_name"))
+							.get(0);
+					ksd.setSssh(supplier.getText());
+					supplier.click();// 所属商户列表
+
+				} catch (java.lang.IndexOutOfBoundsException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+		
+				}
+				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/text_brand"))
 						.click();// 品牌车系
@@ -557,6 +577,7 @@ public class AppUtil {
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/edit_loan")).click();// 申请贷款
 				Thread.sleep(2000);
+				
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/text_periods"))
 						.click();// 还款期数 / 融资期限
@@ -564,6 +585,11 @@ public class AppUtil {
 				driver.findElements(
 						By.id("com.kuaishoudan.financer:id/text_select"))
 						.get(ksd.getHkqs()).click();// 还款期数周期 /融资期限
+				// _________
+
+				Thread.sleep(1000);
+				AppUtil.swipeToUp(driver, 800);// 向上滑动
+				Thread.sleep(1000);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/text_product"))
 						.click();// 金融产品
@@ -583,11 +609,7 @@ public class AppUtil {
 							By.id("com.kuaishoudan.financer:id/toolbar_back"))
 							.click();
 				}
-				// _________
-
-				Thread.sleep(1000);
-				AppUtil.swipeToUp(driver, 800);// 向上滑动
-				Thread.sleep(300);
+	
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/text_feilv"))
 						.click();// 费率
@@ -606,26 +628,7 @@ public class AppUtil {
 							.click();
 				}
 
-				// ___________
-
-				driver.findElement(
-						By.id("com.kuaishoudan.financer:id/text_supplier"))
-						.click();// 所属商户
-				try {
-					AndroidElement supplier = driver.findElements(
-							By.id("com.kuaishoudan.financer:id/tv_name"))
-							.get(0);
-					ksd.setSssh(supplier.getText());
-					supplier.click();// 所属商户列表
-
-				} catch (java.lang.IndexOutOfBoundsException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					driver.findElement(
-							By.id("com.kuaishoudan.financer:id/toolbar_back"))
-							.click();
-				}
-
+			
 				Thread.sleep(500);
 
 				Runtime.getRuntime().exec(

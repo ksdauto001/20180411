@@ -112,7 +112,10 @@ public class AppSPUtil {
 		 * driver.findElement(By.id("com.kuaishoudan.financer:id/iv_check"))
 		 * .click();// 勾选
 		 */
+		AppUtil.upload(driver,ksd.getImgcount());
+		
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		
 		driver.findElement(
 				By.id("com.kuaishoudan.financer:id/tv_toolbar_confirm"))
 				.click();// 确定
