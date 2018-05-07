@@ -7,11 +7,15 @@ import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.kuaishoudan.financer.bean.KSDCase;
 import com.kuaishoudan.financer.dao.UserDaoImpl;
@@ -116,10 +120,9 @@ public class RandomValue {
 	 * 进件资料
 	 */
 	public static List getImg1(){
-		int [][] arr={{0,1,2,3,4,5},{11,13,15,17,19,21},{100,101,103,104,113,128,129},{112,120,121,130},{106,117,119,124,131,132,133,134 }
+		int [][] arr={{0,1,2,3,4,5},{10,11,12,13,14,15},{100,101,103,104,113,128,129},{112,120,121,130},{106,117,119,124,131,132,133,134 }
 		,{102,110,114,118,125,126,127,135},{136,137,138,139,140,141,142},{105,111,122,143,144,145,146,147,148,149}};
 		List<Integer> list=new ArrayList<Integer>();
-
 
 		for(int p=0;p<arr.length;p++){
 			int length=(int)(Math.random()*arr[p].length);
@@ -137,7 +140,7 @@ public class RandomValue {
 				index=(int)(Math.random()*arr[p].length);
 		
 				int rand = arr[p][index];
-		
+				
 				list.add(rand);
 				//System.out.println(rand);
 				
@@ -146,9 +149,10 @@ public class RandomValue {
 			if(index>=0){
 				for(int i=0;i<list.size();i++){
 					if(list.get(i)==(p+8)){
-					list.remove(i);//如果没有勾选选项，删除必选
-					
-					list.add(p+8);
+					//list.remove(i);//如果没有勾选选项，删除必选
+						;
+						List<int[]> list2= Arrays.asList(arr[p]);
+						list.removeAll(list2);
 					System.out.println("删除"+i+"add"+(p+8));
 					}
 				}
@@ -156,6 +160,7 @@ public class RandomValue {
 			
 		}
 		list=	removeDuplicate(list);//删除重复
+		
 		for(int type:list)
 			System.out.println("==="+type);
 		return list;

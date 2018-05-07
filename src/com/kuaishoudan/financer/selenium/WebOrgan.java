@@ -18,6 +18,7 @@ import com.kuaishoudan.financer.util.RandomValue;
 
 public class WebOrgan {
 
+
 	/**
 	 * 供应商机构管理
 	 * 
@@ -39,7 +40,35 @@ public class WebOrgan {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+		/*for(int i=2;i<4;i++){
+		 switch(i){
+	        case 0:
+	            System.out.println("0");
+	        case 1:
+	            System.out.println("1");
+	        case 2:
+	            System.out.println("2");
+	        default:
+	            System.out.println("default");break;
+	        }
+		}*/
+		
+		/*List list1 =new ArrayList();
+		  list1.add("1111");
+		  list1.add("2222");
+		  list1.add("3333");
+		  
+		  List list2 =new ArrayList();
+		  list2.add("3333");
+		  list2.add("4444");
+		  list2.add("5555");
+		  
+
+		  //差集
+		  list1.removeAll(list2);
+		  for(int i=0;i<list1.size();i++){
+			  System.out.println(list1.get(i));
+		  }*/
 		
 	}
 
@@ -131,12 +160,8 @@ public class WebOrgan {
 				driver.findElements(By.className("must_send")).get(musttype).click();//必填
 			}
 		}
-		Thread.sleep(1000);
-		for(int musttype:list1){
-			if(musttype<19&&musttype>9){
-				driver.findElements(By.className("check_all")).get(musttype-9).click();//全选
-			}
-		}
+	
+	//	driver.findElements(By.className("check_all")).get(11).click();
 		Thread.sleep(1000);
 		for(int k=0;k<ws.size();k++){
 			String labels=ws.get(k).getAttribute("for");
@@ -148,6 +173,39 @@ public class WebOrgan {
 					ws.get(k).click();//选项
 					
 				}
+			}
+		}
+		Thread.sleep(1000);
+		for(int musttype:list1){
+			if(musttype>9&&musttype<19){
+			  switch(musttype){
+		        case 10:
+		       	 System.out.println("default10");
+		            driver.findElements(By.className("check_all")).get(1).click();
+		    		Thread.sleep(1000);break;
+		        case 11:
+		        		 System.out.println("default11");
+		        	 driver.findElements(By.className("check_all")).get(3).click();
+		     		Thread.sleep(1000);break;
+		        case 12:
+		       	 System.out.println("default12");
+		        	 driver.findElements(By.className("check_all")).get(5).click();
+		        	 Thread.sleep(1000);break;
+		        case 13:
+		       	 System.out.println("default13");
+		        	driver.findElements(By.className("check_all")).get(7).click();
+		    		Thread.sleep(1000);break;
+		        case 14:
+		       	 System.out.println("default14");
+		        	driver.findElements(By.className("check_all")).get(9).click();
+		    		Thread.sleep(1000);break;
+		        case 15:
+		        	driver.findElements(By.className("check_all")).get(11).click();
+		        	 System.out.println("default15");
+		     		Thread.sleep(1000);break;
+		        default:
+		            System.out.println("default");break;
+		        }
 			}
 		}
 		driver.findElement(By.linkText("保存")).click();//保存
