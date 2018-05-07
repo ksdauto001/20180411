@@ -36,18 +36,7 @@ public class CaseUtil {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//System.out.println(UserDaoImpl.getstatus_id("已分配"));
-		/*String str="19";
-	       DecimalFormat decimalFormat = new DecimalFormat("###################.###########"); 
-
-	double dd=Double.parseDouble(str);
-//	int aa=(int)(dd);
-
-		System.out.println(decimalFormat.format(dd));*/
-		String a="已申请\n"+"合同";
-		System.out.println(a);
-
-		System.out.println(a.replaceAll("\n", ""));
+		
 	}
 
 	public static Map<String,String> getCustomer(KSDCase ksd){

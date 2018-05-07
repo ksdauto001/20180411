@@ -6,9 +6,11 @@ import io.appium.java_client.android.AndroidElement;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.kuaishoudan.financer.bean.KSDCase;
@@ -110,6 +112,134 @@ public class RandomValue {
 		return first + second + third;
 	}
 
+	/**
+	 * 进件资料
+	 */
+	public static List getImg1(){
+		int [][] arr={{0,1,2,3,4,5},{11,13,15,17,19,21},{100,101,103,104,113,128,129},{112,120,121,130},{106,117,119,124,131,132,133,134 }
+		,{102,110,114,118,125,126,127,135},{136,137,138,139,140,141,142},{105,111,122,143,144,145,146,147,148,149}};
+		List<Integer> list=new ArrayList<Integer>();
+
+
+		for(int p=0;p<arr.length;p++){
+			int length=(int)(Math.random()*arr[p].length);
+			int index=-1;
+			//System.out.println(length);
+			if(p>1&&length==0){
+				for(int i=0;i<list.size();i++){
+					if(list.get(i)==(p-2)){
+						list.remove(i);//如果没有勾选选项，删除必选
+					}
+				}
+			}
+			
+			for(int k=0;k<length;k++){
+				index=(int)(Math.random()*arr[p].length);
+		
+				int rand = arr[p][index];
+		
+				list.add(rand);
+				//System.out.println(rand);
+				
+				
+			}
+			if(index>=0){
+				for(int i=0;i<list.size();i++){
+					if(list.get(i)==(p+8)){
+					list.remove(i);//如果没有勾选选项，删除必选
+					
+					list.add(p+8);
+					System.out.println("删除"+i+"add"+(p+8));
+					}
+				}
+			}
+			
+		}
+		list=	removeDuplicate(list);//删除重复
+		for(int type:list)
+			System.out.println("==="+type);
+		return list;
+	}
+	/**
+	 * 请款资料
+	 */
+	public static List getImg2(){
+		int [][] arr={{0,1,2,3,4,5,6},{1001},{1039,1054},{1002}
+		,{1055,1056,1057,1058},{1059,1060},{1061,1062,1063},{1064}};
+		List<Integer> list=new ArrayList<Integer>();
+
+
+		for(int p=0;p<arr.length;p++){
+			int length=(int)(Math.random()*arr[p].length);
+			//System.out.println(length);
+			if(p>0&&length==0){
+				for(int i=0;i<list.size();i++){
+					if(list.get(i)==(p-1)){
+						System.out.println("删除"+list.get(i));
+						list.remove(i);
+					}
+				}
+			}
+			for(int k=0;k<length;k++){
+				int index=(int)(Math.random()*arr[p].length);
+		
+				int rand = arr[p][index];
+		
+				list.add(rand);
+				//System.out.println(rand);
+				}
+		}
+		list=	removeDuplicate(list);
+		for(int type:list)
+			System.out.println("==="+type);
+		return list;
+	}
+	
+	/**
+	 * 归档资料
+	 */
+	public static List getImg3(){
+		int [][] arr={{0,1,2,3,4,5},{3001,3002},{3003},{3004,3005,3006}
+		,{3000,3007},{3008},{3009,3010}};
+		List<Integer> list=new ArrayList<Integer>();
+
+
+		for(int p=0;p<arr.length;p++){
+			int length=(int)(Math.random()*arr[p].length);
+	
+			if(p>0&&length==0){
+				for(int i=0;i<list.size();i++){
+					if(list.get(i)==(p-1)){
+					//	System.out.println("删除"+list.get(i));
+						list.remove(i);
+					}
+				}
+			}
+			for(int k=0;k<length;k++){
+				int index=(int)(Math.random()*arr[p].length);
+				
+				
+				int rand = arr[p][index];
+		
+				list.add(rand);
+				System.out.println(rand);
+			}
+		}
+		list=	removeDuplicate(list);
+		for(int type:list)
+			System.out.println("==="+type);
+		return list;
+	}
+	public   static   List  removeDuplicate(List list)  {       
+		  for  ( int  i  =   0 ; i  <  list.size()  -   1 ; i ++ )  {       
+		      for  ( int  j  =  list.size()  -   1 ; j  >  i; j -- )  {       
+		           if  (list.get(j).equals(list.get(i)))  {       
+		              list.remove(j);       
+		            }        
+		        }        
+		      }        
+		    return list;       
+		}
 	/**
 	 * 数据封装
 	 * 
