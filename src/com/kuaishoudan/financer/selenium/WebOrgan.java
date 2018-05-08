@@ -30,7 +30,7 @@ public class WebOrgan {
 		try {
 			WebDriver driver = WebUtil.getdriver();
 			KSDCase ksd = RandomValue.getRandom();
-			getImge1(driver,ksd);
+			getImge3(driver,ksd);
 			Thread.sleep(25000);
 			driver.quit();
 		} catch (MalformedURLException e) {
@@ -39,37 +39,8 @@ public class WebOrgan {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		/*for(int i=2;i<4;i++){
-		 switch(i){
-	        case 0:
-	            System.out.println("0");
-	        case 1:
-	            System.out.println("1");
-	        case 2:
-	            System.out.println("2");
-	        default:
-	            System.out.println("default");break;
-	        }
-		}*/
-		
-		/*List list1 =new ArrayList();
-		  list1.add("1111");
-		  list1.add("2222");
-		  list1.add("3333");
-		  
-		  List list2 =new ArrayList();
-		  list2.add("3333");
-		  list2.add("4444");
-		  list2.add("5555");
-		  
-
-		  //差集
-		  list1.removeAll(list2);
-		  for(int i=0;i<list1.size();i++){
-			  System.out.println(list1.get(i));
-		  }*/
-		
+		}	
+			
 	}
 
 	public  static void test1(	WebDriver driver,KSDCase ksd ) throws MalformedURLException, InterruptedException {
@@ -140,7 +111,6 @@ public class WebOrgan {
 
 		List<Integer> list1=	RandomValue.getImg1();
 		List<WebElement> ws =driver.findElements(By.tagName("label")) ;
-		System.out.println("@@"+ws.size());
 		for(int k=0;k<ws.size();k++){
 			String labels=ws.get(k).getAttribute("for");
 			String classes=ws.get(k).getAttribute("class");		
@@ -152,10 +122,12 @@ public class WebOrgan {
 						
 					}			
 		}
+		Thread.sleep(500);
 		for(int i=0;i<6;i++){
 		driver.findElements(By.className("must_nosend")).get(i).click();//非必填
 		}
-		for(int musttype:list1){
+		Thread.sleep(500);
+		for(Integer musttype:list1){
 			if(musttype<9){
 				driver.findElements(By.className("must_send")).get(musttype).click();//必填
 			}
@@ -176,40 +148,40 @@ public class WebOrgan {
 			}
 		}
 		Thread.sleep(1000);
-		for(int musttype:list1){
+		/*for(int musttype:list1){
 			if(musttype>9&&musttype<19){
 			  switch(musttype){
 		        case 10:
 		       	 System.out.println("default10");
 		            driver.findElements(By.className("check_all")).get(1).click();
-		    		Thread.sleep(1000);break;
+		    		Thread.sleep(2000);break;
 		        case 11:
 		        		 System.out.println("default11");
 		        	 driver.findElements(By.className("check_all")).get(3).click();
-		     		Thread.sleep(1000);break;
+		     		Thread.sleep(2000);break;
 		        case 12:
 		       	 System.out.println("default12");
 		        	 driver.findElements(By.className("check_all")).get(5).click();
-		        	 Thread.sleep(1000);break;
+		        	 Thread.sleep(2000);break;
 		        case 13:
 		       	 System.out.println("default13");
 		        	driver.findElements(By.className("check_all")).get(7).click();
-		    		Thread.sleep(1000);break;
+		    		Thread.sleep(2000);break;
 		        case 14:
 		       	 System.out.println("default14");
 		        	driver.findElements(By.className("check_all")).get(9).click();
-		    		Thread.sleep(1000);break;
+		    		Thread.sleep(2000);break;
 		        case 15:
 		        	driver.findElements(By.className("check_all")).get(11).click();
 		        	 System.out.println("default15");
-		     		Thread.sleep(1000);break;
+		     		Thread.sleep(2000);break;
 		        default:
 		            System.out.println("default");break;
 		        }
 			}
-		}
+		}*/
 		driver.findElement(By.linkText("保存")).click();//保存
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		driver.findElement(By.linkText("确定")).click();//确定
 		
 	}
@@ -229,7 +201,6 @@ public class WebOrgan {
 
 		List<Integer> list1=	RandomValue.getImg2();
 		List<WebElement> ws =driver.findElements(By.tagName("label")) ;
-		System.out.println("@@"+ws.size());
 		for(int k=0;k<ws.size();k++){
 			String labels=ws.get(k).getAttribute("for");
 			String classes=ws.get(k).getAttribute("class");		
@@ -242,14 +213,17 @@ public class WebOrgan {
 						
 					}			
 		}
-		for(int i=0;i<6;i++){
+		Thread.sleep(500);
+		for(int i=0;i<=6;i++){
 		driver.findElements(By.className("must_nosend")).get(i).click();//非必填
 		}
-		for(int musttype:list1){
+		Thread.sleep(500);
+		for(Integer musttype:list1){
 			if(musttype<9){
 				driver.findElements(By.className("must_send")).get(musttype).click();//必填
 			}
 		}
+		//driver.findElements(By.className("must_send")).get(1).click();//必填
 		Thread.sleep(1000);
 		for(int k=0;k<ws.size();k++){
 			String labels=ws.get(k).getAttribute("for");
@@ -264,7 +238,7 @@ public class WebOrgan {
 			}
 		}
 		driver.findElement(By.linkText("保存")).click();//保存
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		driver.findElement(By.linkText("确定")).click();//确定
 		
 	}
@@ -284,7 +258,6 @@ public class WebOrgan {
 
 		List<Integer> list1=	RandomValue.getImg3();
 		List<WebElement> ws =driver.findElements(By.tagName("label")) ;
-		System.out.println("@@"+ws.size());
 		for(int k=0;k<ws.size();k++){
 			String labels=ws.get(k).getAttribute("for");
 			String classes=ws.get(k).getAttribute("class");		
@@ -300,7 +273,7 @@ public class WebOrgan {
 		for(int i=0;i<6;i++){
 		driver.findElements(By.className("must_nosend")).get(i).click();//非必填
 		}
-		for(int musttype:list1){
+		for(Integer musttype:list1){
 			if(musttype<9){
 				driver.findElements(By.className("must_send")).get(musttype).click();//必填
 			}
@@ -319,7 +292,7 @@ public class WebOrgan {
 			}
 		}
 		driver.findElement(By.linkText("保存")).click();//保存
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		driver.findElement(By.linkText("确定")).click();//确定
 		
 	}
