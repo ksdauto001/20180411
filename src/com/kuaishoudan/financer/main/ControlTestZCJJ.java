@@ -133,7 +133,7 @@ public class ControlTestZCJJ {
 	// App不申请合同
 	public void appBsqht() {
 
-		ZcjjUtil.testBCSQQK(driver, ksd);
+		ZcjjUtil.testBCSQQK(driver,webdriver, ksd);
 
 	}
 
@@ -174,7 +174,7 @@ public class ControlTestZCJJ {
 
 	// 申请请款
 	public void appSqqk() {
-		ZcjjUtil.zcjjHTSQQK(driver,ksd);
+		ZcjjUtil.zcjjHTSQQK(driver,webdriver,ksd);
 
 	}
 
@@ -280,7 +280,7 @@ public class ControlTestZCJJ {
 	// 归档
 	public void sp6() {
 
-		WebSPUtil.testSP6(webdriver, "liuhl@jizhicar.com", "刘浩亮"); // 请款审批同意专员
+		WebSPUtil.testSP6(webdriver, ksd); // 请款审批同意专员
 	}
 
 	public void tearDown() throws Exception {

@@ -7,7 +7,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -81,14 +83,14 @@ public class Test1 {
 	
 		if (ksd.getQygr() == 1) {
 			System.out.println("***2@");
-			ksd = AppUtil.addGr(driver, devicename, 1, ksd);
+			ksd = AppUtil.addGr(driver,webdriver, devicename, 1, ksd);
 			String statue = AppSPUtil.getActstatue(driver);
 			Assert.assertEquals(statue, "待分配");
 			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 					UserDaoImpl.getstatus_id("待分配"));
 		} else {
 			System.out.println("***3@");
-			ksd = AppUtil.addQy(driver, devicename, 1, ksd);
+			ksd = AppUtil.addQy(driver,webdriver, devicename, 1, ksd);
 			String statue = AppSPUtil.getActstatue(driver);
 			Assert.assertEquals(statue, "待分配");
 			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
@@ -159,7 +161,7 @@ public class Test1 {
 	// app申请请款
 	@Test(priority = 8, invocationCount = 1, threadPoolSize = 1)
 	public void test8() {
-		ksd = AppSPUtil.testHTSQQK(driver, ksd);// 请款
+		ksd = AppSPUtil.testHTSQQK(driver,webdriver, ksd);// 请款
 
 		Assert.assertEquals(ksd.getStatue(), "已请款");
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
@@ -265,7 +267,7 @@ public class Test1 {
 	}
 
 	// 状态已放款
-//	@Test(priority = 13, invocationCount = 1, threadPoolSize = 1)
+	@Test(priority = 13, invocationCount = 1, threadPoolSize = 1)
 	public void test13() {
 		try {
 
@@ -288,17 +290,27 @@ public class Test1 {
 		}
 	}
 
-	// 归档
-	//@Test(priority = 14, invocationCount = 1, threadPoolSize = 1)
+	// 归档--通知下发材料
+	@Test(priority = 14, invocationCount = 1, threadPoolSize = 1)
 	public void test14() {
 
-		WebSPUtil.testSP6(webdriver, ksd.getLoginemail(), ksd.getLoginname()); // 请款审批同意专员
-
-		String statue = AppSPUtil.getActstatue(driver);
-		Assert.assertEquals(statue, "已归档");
-		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
-				UserDaoImpl.getstatus_id("已归档"));
+	ksd=	WebSPUtil.testSP6(webdriver, ksd); // 请款审批同意专员
+		AppSPUtil.sp6App(driver, ksd);
+	
+	
 
 	}
+	// 归档
+		@Test(priority = 15, invocationCount = 1, threadPoolSize = 1)
+		public void test15() {
+		
+		ksd=	WebSPUtil.testSP7(webdriver, ksd); // 请款审批同意专员
+	
+			String statue = AppSPUtil.getActstatue(driver);
+			Assert.assertEquals(statue, "已归档");
+			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
+					UserDaoImpl.getstatus_id("已归档"));
+
+		}
 
 }

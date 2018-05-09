@@ -64,6 +64,7 @@ public class WebUtil {
 		driver.findElement(By.id("login_userName")).sendKeys(username);
 		driver.findElement(By.id("login_passWord")).sendKeys("@123456");
 		driver.findElement(By.id("login_submit")).click();
+		
 	}
 
 	// 待分配
@@ -331,7 +332,7 @@ public class WebUtil {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.findElement(By.id("header_username")).click();
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

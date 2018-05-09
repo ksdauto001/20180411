@@ -16,6 +16,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
@@ -34,7 +35,7 @@ public class AppUtil {
 		File classpathRoot = new File(System.getProperty("user.dir"));
 		File appDir = new File(classpathRoot, "apps");
 		File app = new File(appDir,
-				"financer_ceshi_2.4.2.0_24200_2018-05-04.apk");// financerfinalVersionjiagusign.apk
+				"financer_ceshi_2.4.2.0_24200_2018-05-08.apk");// financerfinalVersionjiagusign.apk
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		capabilities.setCapability("device", "Android");
 		capabilities.setCapability("platformName", "Android");
@@ -70,6 +71,16 @@ public class AppUtil {
 					during);
 		// wait for page loading12801321
 	}
+	// 向上滑动
+		public static void swipeToUp2(AppiumDriver driver, int during) {
+			int width = driver.manage().window().getSize().width;
+			int height = driver.manage().window().getSize().height;
+			// System.out.print(width+"@"+height);
+	
+				driver.swipe(width / 2, height * 3 / 4, width / 2, height / 4,
+						during);
+			// wait for page loading12801321
+		}
 
 	// 向下滑动
 	public static void swipeToDown(AppiumDriver driver, int during) {
@@ -186,7 +197,7 @@ public class AppUtil {
 	 * @param devicename
 	 * @param k
 	 */
-	public static KSDCase addGr(AppiumDriver<AndroidElement> driver,
+	public static KSDCase addGr(AppiumDriver<AndroidElement> driver,WebDriver webdriver,
 			String devicename, int k, KSDCase ksd) {
 	
 		String actualstatue = "";
@@ -348,7 +359,7 @@ public class AppUtil {
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/text_feilv"))
 						.click();// 费率
-				Thread.sleep(300);
+				Thread.sleep(1000);
 				try {
 					List<AndroidElement> rates = driver.findElements(By
 							.id("com.kuaishoudan.financer:id/text_select"));
@@ -375,6 +386,10 @@ public class AppUtil {
 						By.id("com.kuaishoudan.financer:id/edit_remark"))
 						.click();// 备注
 				Thread.sleep(1000);
+				WebUtil.login(webdriver, ksd.getLoginemail());// 登录
+				List<Integer> list = WebOrgan.getImge1(webdriver, ksd);
+				WebUtil.logout(webdriver);
+				
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/toolbar_next"))
 						.click();// 下一步
@@ -391,8 +406,17 @@ public class AppUtil {
 	
 					}
 				}
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 				driver.manage().timeouts().implicitlyWait(55, TimeUnit.SECONDS);
+				int aa=0,countImg=0;
+				for(int i=0;i<list.size();i++){
+					if(list.get(i)<9){
+						aa=UserDaoImpl.getImgType(list.get(i)+1,list);
+						countImg=aa+countImg;
+					}
+				}
+				System.out.println("$$$"+countImg);
+				ksd.setImgcount(countImg);
 				driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add"))
 						.click();// 上传照片
 			} catch (IOException e) {
@@ -418,7 +442,9 @@ public class AppUtil {
 						.click();*/
 	
 			}
-			actualstatue = upload(driver, ksd.getImgcount());
+
+
+	actualstatue = upload(driver, ksd.getImgcount());
 		//	System.out.println("####"+actualstatue);
 		//	ksd.setStatue(actualstatue);
 		}
@@ -432,7 +458,7 @@ public class AppUtil {
 	 * @param devicename
 	 * @param k
 	 */
-	public static KSDCase addQy(AppiumDriver<AndroidElement> driver,
+	public static KSDCase addQy(AppiumDriver<AndroidElement> driver,WebDriver webdriver,
 			String devicename, int k, KSDCase ksd) {
 
 		String actualstatue = "";
@@ -587,13 +613,13 @@ public class AppUtil {
 						.get(ksd.getHkqs()).click();// 还款期数周期 /融资期限
 				// _________
 
-				Thread.sleep(1000);
+				Thread.sleep(300);
 				AppUtil.swipeToUp(driver, 800);// 向上滑动
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/text_product"))
 						.click();// 金融产品
-				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+				driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 				try {
 					List<AndroidElement> producs = driver.findElements(By
 							.id("com.kuaishoudan.financer:id/text_product"));
@@ -613,7 +639,7 @@ public class AppUtil {
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/text_feilv"))
 						.click();// 费率
-				Thread.sleep(300);
+				Thread.sleep(500);
 				try {
 					List<AndroidElement> rates = driver.findElements(By
 							.id("com.kuaishoudan.financer:id/text_select"));
@@ -639,6 +665,10 @@ public class AppUtil {
 						By.id("com.kuaishoudan.financer:id/edit_remark"))
 						.click();// 备注
 				Thread.sleep(1000);
+				WebUtil.login(webdriver, ksd.getLoginemail());// 登录
+				List<Integer> list = WebOrgan.getImge1(webdriver, ksd);
+				WebUtil.logout(webdriver);
+				
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/toolbar_next"))
 						.click();// 下一步
@@ -659,6 +689,16 @@ public class AppUtil {
 				}
 				Thread.sleep(1000);
 				driver.manage().timeouts().implicitlyWait(55, TimeUnit.SECONDS);
+
+				int aa=0,countImg=0;
+				for(int i=0;i<list.size();i++){
+					if(list.get(i)<9){
+						aa=UserDaoImpl.getImgType(list.get(i)+1,list);
+						countImg=aa+countImg;
+					}
+				}
+				System.out.println("$$$"+countImg);
+				ksd.setImgcount(countImg);
 				driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add"))
 						.click();// 上传照片
 			} catch (IOException e) {
@@ -701,7 +741,7 @@ public class AppUtil {
 						By.id("com.kuaishoudan.financer:id/toolbar_back"))
 						.click();*/
 			}
-		
+
 			actualstatue = upload(driver, ksd.getImgcount());
 		//	System.out.println("####=="+actualstatue);
 		//	ksd.setStatue(actualstatue);
@@ -712,6 +752,13 @@ public class AppUtil {
 
 	public static KSDCase addTest(AppiumDriver<AndroidElement> driver,
 			String devicename, int i) {
+	WebDriver webdriver = null;
+	try {
+		webdriver = WebUtil.getdriver();
+	} catch (MalformedURLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 		KSDCase ksd = RandomValue.getRandom();
 		System.out.println("名称" + ksd.getUsername() + "手机" + ksd.getPhone()
 				+ "身份证号" + ksd.getIdentitynum() + "身份类型"
@@ -727,9 +774,9 @@ public class AppUtil {
 		boolean flag = createUser(driver, devicename, i, ksd);
 		if (flag) {
 			if (gq == 2) {// 企业贷款
-				ksd = addQy(driver, devicename, i, ksd);
+				ksd = addQy(driver,webdriver, devicename, i, ksd);
 			} else {// 个人贷款
-				ksd = addGr(driver, devicename, i, ksd);
+				ksd = addGr(driver,webdriver, devicename, i, ksd);
 				//
 			}
 		}
@@ -802,14 +849,18 @@ public class AppUtil {
 				driver.findElements(
 						By.id("com.kuaishoudan.financer:id/iv_thumb")).get(i)
 						.click();// 添加图片（驾驶证）
+				if(i==13&&imgcount>14){
+					AppUtil.swipeToUp2(driver, 800);// 向上滑动
+					Thread.sleep(2000);
+				}
 
 			}
-
+		
 			driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 			//
 			driver.findElement(By.id("com.kuaishoudan.financer:id/btn_ok"))
 					.click();// 两种证上传——确定按钮
-			Thread.sleep(12000);
+			Thread.sleep(5000+imgcount*2000);
 			driver.findElement(
 					By.id("com.kuaishoudan.financer:id/toolbar_confirm"))
 					.click();// 上传完照片-确认按钮
@@ -862,6 +913,13 @@ public class AppUtil {
 
 	public static KSDCase addZjjtest(AppiumDriver<AndroidElement> driver,
 			String devicename, int i) {
+		WebDriver webdriver = null;
+		try {
+			webdriver = WebUtil.getdriver();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		KSDCase ksd = RandomValue.getRandom();
 		System.out.println("名称" + ksd.getUsername() + "手机" + ksd.getPhone()
 				+ "身份证号" + ksd.getIdentitynum() + "身份类型"
@@ -873,9 +931,9 @@ public class AppUtil {
 		int gq = ksd.getQygr();
 		AppUtil.zcjj(driver);
 		if (gq == 0) {// 企业贷款
-			ksd = addQy(driver, devicename, i, ksd);
+			ksd = addQy(driver, webdriver,devicename, i, ksd);
 		} else {// 个人贷款
-			ksd = addGr(driver, devicename, i, ksd);
+			ksd = addGr(driver, webdriver,devicename, i, ksd);
 		}
 		return ksd;
 	}
@@ -1055,6 +1113,60 @@ public class AppUtil {
 		}
 		String name=driver.findElements(By.id("com.kuaishoudan.financer:id/text_name")).get(0).getText().trim();
 		return name;
+	}
+	/**
+	 * 上传照片
+	 * 
+	 * @param driver
+	 * @return
+	 */
+	public static String uploadQk(AppiumDriver<AndroidElement> driver,
+			int imgcount) {
+		String acstatue = "";
+		
+		try {
+			try {
+				Thread.sleep(1500);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			 driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			  driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add")).click();// 上传照片
+			
+			Thread.sleep(500);
+			driver.manage().timeouts().implicitlyWait(48, TimeUnit.SECONDS);
+			driver.findElement(
+					By.id("com.kuaishoudan.financer:id/dialog_photo_select_btn_gallery"))
+					.click();// 从相册选择
+			driver.findElements(By.id("com.kuaishoudan.financer:id/iv_thumb"))
+					.get(0).click();// 添加图片（身份证）
+			for (int i = 1; i < imgcount; i++) {
+				driver.findElements(
+						By.id("com.kuaishoudan.financer:id/iv_thumb")).get(i)
+						.click();// 添加图片（驾驶证）
+				driver.findElements(
+						By.id("com.kuaishoudan.financer:id/iv_thumb")).get(i)
+						.click();// 添加图片（驾驶证）
+
+			}
+
+			driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+	
+			driver.findElement(By.id("com.kuaishoudan.financer:id/btn_ok"))
+			.click();// 两种证上传——确定按钮
+			Thread.sleep(5000+imgcount*2000);
+
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+		} catch (org.openqa.selenium.WebDriverException e) {
+			e.printStackTrace();
+		
+		}
+
+	
+		return acstatue;
 	}
 
 }

@@ -145,7 +145,7 @@ public class ControlTest {
 
 	// 申请请款
 	public void appSqqk() {
-		AppSPUtil.testHTSQQK(driver, ksd);// 请款
+		AppSPUtil.testHTSQQK(driver,webdriver, ksd);// 请款
 		// System.out.println(AppUtil.getStatue(driver));
 		// AppUtil.look_status(driver);//查看进度
 		System.out.println("##===sqqk" + AppSPUtil.getActstatue(driver));
@@ -253,7 +253,7 @@ public class ControlTest {
 	// 归档
 	public void sp6() {
 
-		WebSPUtil.testSP6(webdriver, "liuhl@jizhicar.com", "刘浩亮"); // 请款审批同意专员
+		WebSPUtil.testSP6(webdriver, ksd); // 请款审批同意专员
 	}
 
 	public void tearDown() throws Exception {

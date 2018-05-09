@@ -10,8 +10,10 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.kuaishoudan.financer.bean.KSDCase;
+import com.kuaishoudan.financer.dao.UserDaoImpl;
 import com.kuaishoudan.financer.util.IdCardGenerator;
 
 public class ZcjjUtil {
@@ -53,8 +55,22 @@ public class ZcjjUtil {
 		return ksd;
 	}
 
-	public static KSDCase zcjjHTSQQK(AppiumDriver<AndroidElement> driver,KSDCase ksd) {
+	public static KSDCase zcjjHTSQQK(AppiumDriver<AndroidElement> driver,WebDriver webdriver,KSDCase ksd) {
 		String actualstatue = "";
+		WebUtil.login(webdriver, ksd.getLoginemail());// 登录
+		List<Integer> list = WebOrgan.getImge2(webdriver, ksd);
+		WebUtil.logout(webdriver);
+		int aa=0,countImg=0;
+		for(int i=0;i<list.size();i++){
+			if(list.get(i)<9){
+				aa=UserDaoImpl.getImgType(list.get(i)+7,list);
+				countImg=aa+countImg;
+			}
+		}
+		
+		System.out.println("$$$"+countImg);
+		ksd.setImgcount(countImg);
+		
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
 		String titletext = driver
@@ -109,6 +125,8 @@ public class ZcjjUtil {
 		 * driver.findElement(By.id("com.kuaishoudan.financer:id/iv_check"))
 		 * .click();// 勾选
 		 */
+		AppUtil.swipeToUp(driver, 1000);// 向上滑动		
+		AppUtil.uploadQk(driver,ksd.getImgcount());
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.findElement(
 				By.id("com.kuaishoudan.financer:id/tv_toolbar_confirm"))
@@ -248,9 +266,21 @@ public class ZcjjUtil {
 	}
 
 	// 不出合同申请请款
-	public static KSDCase testBCSQQK(AppiumDriver<AndroidElement> driver,
+	public static KSDCase testBCSQQK(AppiumDriver<AndroidElement> driver,WebDriver webdriver,
 			KSDCase ksd) {
-		IdCardGenerator g = new IdCardGenerator();
+		WebUtil.login(webdriver, ksd.getLoginemail());// 登录
+		List<Integer> list = WebOrgan.getImge2(webdriver, ksd);
+		WebUtil.logout(webdriver);
+		int aa=0,countImg=0;
+		for(int i=0;i<list.size();i++){
+			if(list.get(i)<9){
+				aa=UserDaoImpl.getImgType(list.get(i)+7,list);
+				countImg=aa+countImg;
+			}
+		}
+		
+		System.out.println("$$$"+countImg);
+		ksd.setImgcount(countImg);
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		String titletext = driver
 				.findElement(By.id("com.kuaishoudan.financer:id/toolbar_title"))
@@ -327,7 +357,10 @@ public class ZcjjUtil {
 		/*
 		 * driver.findElement(By.id("com.kuaishoudan.financer:id/iv_check"))
 		 * .click();// 勾选
-		 */driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		 */
+		AppUtil.swipeToUp(driver, 1000);// 向上滑动		
+		AppUtil.uploadQk(driver,ksd.getImgcount());
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.findElement(
 				By.id("com.kuaishoudan.financer:id/tv_toolbar_confirm"))
 				.click();// 确定

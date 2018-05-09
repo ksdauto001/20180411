@@ -75,14 +75,14 @@ public class Test3 {
 		AppUtil.zcjj(driver);
 		if (ksd.getQygr() == 1) {
 			System.out.println("***2@");		
-			ksd = AppUtil.addGr(driver, devicename, 1, ksd);
+			ksd = AppUtil.addGr(driver,webdriver, devicename, 1, ksd);
 			String statue=ZcjjUtil.getActstatue(driver);
 			Assert.assertEquals(statue, "待分配");
 			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 					UserDaoImpl.getstatus_id("待分配"));
 		} else {
 			System.out.println("***3@");
-			ksd = AppUtil.addQy(driver, devicename, 1, ksd);
+			ksd = AppUtil.addQy(driver,webdriver, devicename, 1, ksd);
 			String statue=ZcjjUtil.getActstatue(driver);
 			Assert.assertEquals(statue, "待分配");
 			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
@@ -91,7 +91,7 @@ public class Test3 {
 		}
 	}
 
-	// web审批待分配
+	/*// web审批待分配
 	@Test(priority = 3, invocationCount = 1, threadPoolSize = 1)
 	public void test3() throws InterruptedException, IOException {
 		System.out.println("***4@");
@@ -155,7 +155,7 @@ public class Test3 {
 	// app申请请款
 	@Test(priority = 8, invocationCount = 1, threadPoolSize = 1)
 	public void test8() {
-		ksd=ZcjjUtil.zcjjHTSQQK(driver,ksd);// 请款
+		ksd=ZcjjUtil.zcjjHTSQQK(driver,webdriver,ksd);// 请款
 		Assert.assertEquals(ksd.getStatue(), "已请款");
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已请款"));
@@ -285,13 +285,25 @@ public class Test3 {
 	//@Test(priority = 14, invocationCount = 1, threadPoolSize = 1)
 	public void test14() {
 
-		WebSPUtil.testSP6(webdriver, ksd.getLoginemail(), ksd.getLoginname()); // 请款审批同意专员
-
+		ksd=	WebSPUtil.testSP6(webdriver, ksd ); // 请款审批同意专员
+		AppSPUtil.sp6App(driver, ksd);
 		String statue = ZcjjUtil.getActstatue(driver);
 		Assert.assertEquals(statue, "已归档");
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已归档"));
 
 	}
+	
+		// 归档
+			@Test(priority = 15, invocationCount = 1, threadPoolSize = 1)
+			public void test15() {
+			
+			ksd=	WebSPUtil.testSP7(webdriver, ksd); // 请款审批同意专员
+		
+				String statue = AppSPUtil.getActstatue(driver);
+				Assert.assertEquals(statue, "已归档");
+				Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
+						UserDaoImpl.getstatus_id("已归档"));
 
+			}*/
 }
