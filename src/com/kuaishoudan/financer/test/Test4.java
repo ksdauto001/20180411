@@ -132,7 +132,7 @@ public class Test4 {
 	// app不出合同---申请请款
 	@Test(priority = 8, invocationCount = 1, threadPoolSize = 1)
 	public void test8() {
-		ksd=ZcjjUtil.testBCSQQK(driver,webdriver, ksd);;// 请款// 请款
+		ksd=ZcjjUtil.testBCSQQK(driver,webdriver, ksd,devicename);;// 请款// 请款
 		Assert.assertEquals(ksd.getStatue(), "已请款");
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已请款"));

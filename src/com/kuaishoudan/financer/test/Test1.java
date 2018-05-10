@@ -161,7 +161,7 @@ public class Test1 {
 	// app申请请款
 	@Test(priority = 8, invocationCount = 1, threadPoolSize = 1)
 	public void test8() {
-		ksd = AppSPUtil.testHTSQQK(driver,webdriver, ksd);// 请款
+		ksd = AppSPUtil.testHTSQQK(driver,webdriver, ksd,devicename);// 请款
 
 		Assert.assertEquals(ksd.getStatue(), "已请款");
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),

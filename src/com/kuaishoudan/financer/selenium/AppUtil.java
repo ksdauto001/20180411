@@ -22,6 +22,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 
 import com.kuaishoudan.financer.bean.KSDCase;
+import com.kuaishoudan.financer.bean.RequestPayout;
 import com.kuaishoudan.financer.dao.UserDaoImpl;
 import com.kuaishoudan.financer.util.IdCardGenerator;
 import com.kuaishoudan.financer.util.RandomValue;
@@ -35,7 +36,7 @@ public class AppUtil {
 		File classpathRoot = new File(System.getProperty("user.dir"));
 		File appDir = new File(classpathRoot, "apps");
 		File app = new File(appDir,
-				"financer_ceshi_2.4.2.0_24200_2018-05-08.apk");// financerfinalVersionjiagusign.apk
+				"financer_ceshi_2.4.2.0_24200_2018-05-10.apk");// financerfinalVersionjiagusign.apk
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		capabilities.setCapability("device", "Android");
 		capabilities.setCapability("platformName", "Android");
@@ -52,11 +53,11 @@ public class AppUtil {
 		capabilities.setCapability("resetKeyboard", "True");
 
 		capabilities.setCapability("noSign", "True");
-
+		capabilities.setCapability("noReset", true); 
 		capabilities.setCapability("app-package", "com.kuaishoudan.financer");
 		capabilities.setCapability("app-activity",
 				"com.kuaishoudan.financer.activity.act.WelcomeActivity");
-		return new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
+		return new AndroidDriver<AndroidElement>(new URL("http://127.0.0.1:4723/wd/hub"),
 				capabilities);
 
 	}
@@ -71,16 +72,7 @@ public class AppUtil {
 					during);
 		// wait for page loading12801321
 	}
-	// 向上滑动
-		public static void swipeToUp2(AppiumDriver driver, int during) {
-			int width = driver.manage().window().getSize().width;
-			int height = driver.manage().window().getSize().height;
-			// System.out.print(width+"@"+height);
 	
-				driver.swipe(width / 2, height * 3 / 4, width / 2, height / 4,
-						during);
-			// wait for page loading12801321
-		}
 
 	// 向下滑动
 	public static void swipeToDown(AppiumDriver driver, int during) {
@@ -828,7 +820,6 @@ public class AppUtil {
 	public static String upload(AppiumDriver<AndroidElement> driver,
 			int imgcount) {
 		String acstatue = "";
-		
 		try {
 			/*
 			 * driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -842,6 +833,7 @@ public class AppUtil {
 					.click();// 从相册选择
 			driver.findElements(By.id("com.kuaishoudan.financer:id/iv_thumb"))
 					.get(0).click();// 添加图片（身份证）
+			if(imgcount<16){
 			for (int i = 1; i < imgcount; i++) {
 				driver.findElements(
 						By.id("com.kuaishoudan.financer:id/iv_thumb")).get(i)
@@ -849,13 +841,31 @@ public class AppUtil {
 				driver.findElements(
 						By.id("com.kuaishoudan.financer:id/iv_thumb")).get(i)
 						.click();// 添加图片（驾驶证）
-				if(i==13&&imgcount>14){
-					AppUtil.swipeToUp2(driver, 800);// 向上滑动
-					Thread.sleep(2000);
-				}
-
 			}
-		
+			}else {
+				for (int i = 1; i < 15; i++) {
+					driver.findElements(
+							By.id("com.kuaishoudan.financer:id/iv_thumb")).get(i)
+							.click();// 添加图片（驾驶证）
+					driver.findElements(
+							By.id("com.kuaishoudan.financer:id/iv_thumb")).get(i)
+							.click();// 添加图片（驾驶证）
+				}
+				AppUtil.swipeToUp(driver, 800);// 向上滑动
+
+				Thread.sleep(2000);
+				for (int i = 4; i < 9; i++) {
+					if((i-3)<=(imgcount-15)){
+					driver.findElements(
+							By.id("com.kuaishoudan.financer:id/iv_thumb")).get(i)
+							.click();// 添加图片（驾驶证）
+					driver.findElements(
+							By.id("com.kuaishoudan.financer:id/iv_thumb")).get(i)
+							.click();// 添加图片（驾驶证）
+					}
+				}
+				
+			}
 			driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 			//
 			driver.findElement(By.id("com.kuaishoudan.financer:id/btn_ok"))
@@ -1168,5 +1178,152 @@ public class AppUtil {
 	
 		return acstatue;
 	}
+	
+	//返点费用支出
+	public static void testFd(AppiumDriver<AndroidElement> driver,String devicename,RequestPayout RequestPyout) throws InterruptedException, IOException {
+		
+		AppUtil.swipeToUp(driver, 1000);// 向上滑动	
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		driver.findElements(By.id("com.kuaishoudan.financer:id/iv_is_show"))
+		.get(0).click();
+		AppUtil.swipeToUp(driver, 1000);// 向上滑动
+		//车款融资额返点
+
+		Runtime.getRuntime().exec(
+				"adb -s " + devicename + " shell input text "
+						+ RequestPyout.getFinancing_back_point());
+		Thread.sleep(500);
+		driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"))
+		.get(0).click();
+		Thread.sleep(1500);
+		//GPS返点
+		Runtime.getRuntime().exec(
+				"adb -s " + devicename + " shell input text "
+						+ RequestPyout.getGps_back_point());
+		Thread.sleep(500);
+		driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"))
+		.get(1).click();
+		Thread.sleep(1500);
+		//保险返点
+		Runtime.getRuntime().exec(
+				"adb -s " + devicename + " shell input text "
+						+ RequestPyout.getInsurance_back_point());
+		Thread.sleep(500);
+		driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"))
+		.get(2).click();
+		Thread.sleep(1500);
+		//服务费返点
+		Runtime.getRuntime().exec(
+				"adb -s " + devicename + " shell input text "
+						+ RequestPyout.getService_back_point());
+		Thread.sleep(500);
+		driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"))
+		.get(3).click();
+		Thread.sleep(1000);
+		driver.findElements(By.id("com.kuaishoudan.financer:id/iv_is_show"))
+		.get(0).click();
+	}
+	
+	//新车抵押费用支出
+
+	public static void testDy(AppiumDriver<AndroidElement> driver,String devicename  ,RequestPayout RequestPyout) throws InterruptedException, IOException {
+		
+		AppUtil.swipeToUp(driver, 1000);// 向上滑动
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.findElements(By.id("com.kuaishoudan.financer:id/iv_is_show"))
+		.get(1).click();
+		AppUtil.swipeToUp(driver, 1000);// 向上滑动
+		Thread.sleep(2000);
+	
+		//抵押费
+		Runtime.getRuntime().exec(
+				"adb -s " + devicename + " shell input text "
+						+ RequestPyout.getMortgage_free());
+		Thread.sleep(500);
+		driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"))
+		.get(0).click();
+		Thread.sleep(1500);
+		//解押费
+		Runtime.getRuntime().exec(
+				"adb -s " + devicename + " shell input text "
+						+ RequestPyout.getSign_free());
+		Thread.sleep(500);
+		driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"))
+		.get(1).click();
+		Thread.sleep(1000);
+		//上牌抵押地
+		driver.findElement(By.id("com.kuaishoudan.financer:id/tv_chekuan_shangpaidiya"))
+		.click();
+		driver.findElement(By.id("com.kuaishoudan.financer:id/options3"))
+		.click();// 城市
+		int width = driver.manage().window().getSize().width;
+		int height = driver.manage().window().getSize().height;
+		driver.swipe(width * 2 / 3, height - 80, width * 2 / 3, height - 280,
+		800);
+		driver.findElement(By.id("com.kuaishoudan.financer:id/btnSubmit"))
+		.click();// 城市确定
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		
+		//上牌方
+		driver.findElement(By.id("com.kuaishoudan.financer:id/tv_chekuan_shangpaifang"))
+		.click();
+		driver.findElements(By.id("com.kuaishoudan.financer:id/text_select"))
+		.get(RequestPyout.getRegistration_party()).click();
+		
+		//抵押方
+		driver.findElement(By.id("com.kuaishoudan.financer:id/tv_chekuan_diyafang"))
+		.click();
+		driver.findElements(By.id("com.kuaishoudan.financer:id/text_select"))
+		.get(RequestPyout.getRegistration_party()).click();
+		
+		driver.findElements(By.id("com.kuaishoudan.financer:id/iv_is_show"))
+		.get(1).click();
+	
+	}
+	//新车杂项费用支出
+
+		public  static void testZx(AppiumDriver<AndroidElement> driver,String devicename ,RequestPayout RequestPyout) throws InterruptedException, IOException {
+			
+			AppUtil.swipeToUp(driver, 1000);// 向上滑动
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.findElements(By.id("com.kuaishoudan.financer:id/iv_is_show"))
+			.get(2).click();
+			AppUtil.swipeToUp(driver, 1000);// 向上滑动
+			//GPS安装费
+			Runtime.getRuntime().exec(
+					"adb -s " + devicename + " shell input text "
+							+ RequestPyout.getGps_installation());
+			Thread.sleep(500);
+			driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"))
+			.get(0).click();
+			Thread.sleep(1500);
+			//前置利息
+			Runtime.getRuntime().exec(
+					"adb -s " + devicename + " shell input text "
+							+ RequestPyout.getInterest_on_pre());
+			Thread.sleep(500);
+			driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"))
+			.get(1).click();
+			Thread.sleep(1500);
+			//退款
+			Runtime.getRuntime().exec(
+					"adb -s " + devicename + " shell input text "
+							+ RequestPyout.getRefund());
+			Thread.sleep(500);
+			driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"))
+			.get(2).click();
+			Thread.sleep(1500);
+			//车价贷款(返款)
+			Runtime.getRuntime().exec(
+					"adb -s " + devicename + " shell input text "
+							+ RequestPyout.getThe_car_loan());
+			Thread.sleep(500);
+			driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"))
+			.get(3).click();
+			Thread.sleep(1500);
+			driver.findElements(By.id("com.kuaishoudan.financer:id/iv_is_show"))
+			.get(2).click();
+
+		}
 
 }

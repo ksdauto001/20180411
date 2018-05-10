@@ -133,7 +133,7 @@ public class ControlTestZCJJ {
 	// App不申请合同
 	public void appBsqht() {
 
-		ZcjjUtil.testBCSQQK(driver,webdriver, ksd);
+		ZcjjUtil.testBCSQQK(driver,webdriver, ksd,devicename);
 
 	}
 
@@ -174,7 +174,7 @@ public class ControlTestZCJJ {
 
 	// 申请请款
 	public void appSqqk() {
-		ZcjjUtil.zcjjHTSQQK(driver,webdriver,ksd);
+		ZcjjUtil.zcjjHTSQQK(driver,webdriver,ksd,devicename);
 
 	}
 

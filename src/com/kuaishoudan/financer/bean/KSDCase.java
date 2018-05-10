@@ -40,7 +40,7 @@ public class KSDCase {
 	int registtype;// 上牌方
 	int pledge;// 抵押方
 	int imgcount;// 进件图片数量
-
+	RequestPayout requestpayout;
 	public String getLoginemail() {
 		return loginemail;
 	}
@@ -312,5 +312,15 @@ public class KSDCase {
 	public void setJgid(String jgid) {
 		this.jgid = jgid;
 	}
+
+	public RequestPayout getRequestpayout() {
+		return requestpayout;
+	}
+
+	public void setRequestpayout(RequestPayout requestpayout) {
+		this.requestpayout = requestpayout;
+	}
+
+
 
 }

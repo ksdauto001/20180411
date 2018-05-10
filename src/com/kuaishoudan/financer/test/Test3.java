@@ -91,7 +91,7 @@ public class Test3 {
 		}
 	}
 
-	/*// web审批待分配
+	// web审批待分配
 	@Test(priority = 3, invocationCount = 1, threadPoolSize = 1)
 	public void test3() throws InterruptedException, IOException {
 		System.out.println("***4@");
@@ -155,7 +155,7 @@ public class Test3 {
 	// app申请请款
 	@Test(priority = 8, invocationCount = 1, threadPoolSize = 1)
 	public void test8() {
-		ksd=ZcjjUtil.zcjjHTSQQK(driver,webdriver,ksd);// 请款
+		ksd=ZcjjUtil.zcjjHTSQQK(driver,webdriver,ksd,devicename);// 请款
 		Assert.assertEquals(ksd.getStatue(), "已请款");
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已请款"));
@@ -305,5 +305,5 @@ public class Test3 {
 				Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 						UserDaoImpl.getstatus_id("已归档"));
 
-			}*/
+			}
 }

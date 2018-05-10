@@ -115,7 +115,7 @@ public class ControlTestBCHT {
 	// App不申请合同
 	public void appBsqht() {
 
-		ksd=AppSPUtil.testBCSQQK(driver,webdriver, ksd);
+		ksd=AppSPUtil.testBCSQQK(driver,webdriver, ksd,devicename);
 	
 	}
 
@@ -129,7 +129,7 @@ public class ControlTestBCHT {
 
 	// 申请请款
 	public void appSqqk() {
-		AppSPUtil.testHTSQQK(driver,webdriver, ksd);// 请款
+		AppSPUtil.testHTSQQK(driver,webdriver, ksd,devicename);// 请款
 		// System.out.println(AppUtil.getStatue(driver));
 		// AppUtil.look_status(driver);//查看进度
 

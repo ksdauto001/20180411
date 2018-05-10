@@ -13,8 +13,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.kuaishoudan.financer.bean.KSDCase;
+import com.kuaishoudan.financer.bean.RequestPayout;
 import com.kuaishoudan.financer.dao.UserDaoImpl;
 import com.kuaishoudan.financer.util.IdCardGenerator;
+import com.kuaishoudan.financer.util.RandomValue;
 
 public class AppSPUtil {
 
@@ -68,7 +70,7 @@ public class AppSPUtil {
 
 	// (申请合同)-申请请款
 	public static KSDCase testHTSQQK(AppiumDriver<AndroidElement> driver,WebDriver webdriver,
-			KSDCase ksd) {
+			KSDCase ksd,String devicename) {
 		String actualstatue = "";
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
@@ -129,17 +131,30 @@ public class AppSPUtil {
 		 */
 
 		AppUtil.swipeToUp(driver, 1000);// 向上滑动
-		
-	
-		
 		AppUtil.uploadQk(driver,ksd.getImgcount());
 		
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		RequestPayout requestPyout = ksd.getRequestpayout();
+		try {
+	
+			AppUtil.testFd(driver, devicename,requestPyout);
+	
+		//	AppUtil.testDy(driver,devicename, requestPyout);
+
+	//		AppUtil.testZx(driver,devicename, requestPyout);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 		
 		driver.findElement(
 				By.id("com.kuaishoudan.financer:id/tv_toolbar_confirm"))
 				.click();// 确定
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		//
 		driver.findElement(By.id("com.kuaishoudan.financer:id/tv_confirm"))
 				.click();// 申请请款确定
@@ -151,7 +166,7 @@ public class AppSPUtil {
 			e.printStackTrace();
 		}
 		driver.findElement(By.id("com.kuaishoudan.financer:id/tv_countdown"))
-				.click();// 信息确认按钮
+				.click();// 信息确认按钮com.kuaishoudan.financer:id/rl_countdown
 		try {
 			Thread.sleep(1500);
 		} catch (InterruptedException e) {
@@ -160,12 +175,13 @@ public class AppSPUtil {
 		}
 		actualstatue = AppUtil.getStatue(driver);
 		ksd.setStatue(actualstatue);
+		
 		return ksd;
 	}
 
 	// 不出合同申请请款
 	public static KSDCase testBCSQQK(AppiumDriver<AndroidElement> driver,WebDriver webdriver,
-			KSDCase ksd) {
+			KSDCase ksd,String devicename) {
 		WebUtil.login(webdriver, ksd.getLoginemail());// 登录
 		List<Integer> list = WebOrgan.getImge2(webdriver, ksd);
 		WebUtil.logout(webdriver);
@@ -249,6 +265,19 @@ public class AppSPUtil {
 		 */
 		AppUtil.swipeToUp(driver, 1000);// 向上滑动		
 		AppUtil.uploadQk(driver,ksd.getImgcount());
+		
+		RequestPayout requestPyout = ksd.getRequestpayout();
+		try {
+			AppUtil.testFd(driver, devicename,requestPyout);
+		//	AppUtil.testDy(driver,devicename, requestPyout);
+		//	AppUtil.testZx(driver,devicename, requestPyout);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.findElement(

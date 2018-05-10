@@ -13,6 +13,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.kuaishoudan.financer.bean.KSDCase;
+import com.kuaishoudan.financer.bean.RequestPayout;
 import com.kuaishoudan.financer.dao.UserDaoImpl;
 import com.kuaishoudan.financer.util.IdCardGenerator;
 
@@ -55,7 +56,7 @@ public class ZcjjUtil {
 		return ksd;
 	}
 
-	public static KSDCase zcjjHTSQQK(AppiumDriver<AndroidElement> driver,WebDriver webdriver,KSDCase ksd) {
+	public static KSDCase zcjjHTSQQK(AppiumDriver<AndroidElement> driver,WebDriver webdriver,KSDCase ksd,String devicename) {
 		String actualstatue = "";
 		WebUtil.login(webdriver, ksd.getLoginemail());// 登录
 		List<Integer> list = WebOrgan.getImge2(webdriver, ksd);
@@ -127,6 +128,19 @@ public class ZcjjUtil {
 		 */
 		AppUtil.swipeToUp(driver, 1000);// 向上滑动		
 		AppUtil.uploadQk(driver,ksd.getImgcount());
+		RequestPayout requestPyout = ksd.getRequestpayout();
+		try {
+			AppUtil.testFd(driver, devicename,requestPyout);
+		//	AppUtil.testDy(driver,devicename, requestPyout);
+		//	AppUtil.testZx(driver,devicename, requestPyout);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.findElement(
 				By.id("com.kuaishoudan.financer:id/tv_toolbar_confirm"))
@@ -267,7 +281,7 @@ public class ZcjjUtil {
 
 	// 不出合同申请请款
 	public static KSDCase testBCSQQK(AppiumDriver<AndroidElement> driver,WebDriver webdriver,
-			KSDCase ksd) {
+			KSDCase ksd,String devicename) {
 		WebUtil.login(webdriver, ksd.getLoginemail());// 登录
 		List<Integer> list = WebOrgan.getImge2(webdriver, ksd);
 		WebUtil.logout(webdriver);
@@ -360,6 +374,19 @@ public class ZcjjUtil {
 		 */
 		AppUtil.swipeToUp(driver, 1000);// 向上滑动		
 		AppUtil.uploadQk(driver,ksd.getImgcount());
+		
+		RequestPayout requestPyout = ksd.getRequestpayout();
+		try {
+			AppUtil.testFd(driver, devicename,requestPyout);
+	//		AppUtil.testDy(driver,devicename, requestPyout);
+	//		AppUtil.testZx(driver,devicename, requestPyout);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.findElement(
 				By.id("com.kuaishoudan.financer:id/tv_toolbar_confirm"))

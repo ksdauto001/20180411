@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.kuaishoudan.financer.bean.KSDCase;
+import com.kuaishoudan.financer.bean.RequestPayout;
 import com.kuaishoudan.financer.dao.UserDaoImpl;
 import com.kuaishoudan.financer.selenium.AppUtil;
 
@@ -292,6 +293,53 @@ public class RandomValue {
 		map.put("email", getEmail(6, 9));
 		return map;
 	}
+	public static RequestPayout getMoney(){
+		RequestPayout requestPayout=new RequestPayout();
+		DecimalFormat df2 = new DecimalFormat("#.00");
+		String money = new BigDecimal(Double.parseDouble(df2
+				.format(1 + Math.random() * 99)) + "").toString();
+		String money1 = new BigDecimal(Double.parseDouble(df2
+				.format(1 + Math.random() * 99)) + "").toString();
+		String money2 = new BigDecimal(Double.parseDouble(df2
+				.format(1 + Math.random() * 99)) + "").toString();
+		String money3 = new BigDecimal(Double.parseDouble(df2
+				.format(1 + Math.random() * 99)) + "").toString();
+		String money4 = new BigDecimal(Double.parseDouble(df2
+				.format(1 + Math.random() * 99)) + "").toString();
+		String money5 = new BigDecimal(Double.parseDouble(df2
+				.format(1 + Math.random() * 99)) + "").toString();
+		String money6 = new BigDecimal(Double.parseDouble(df2
+				.format(1 + Math.random() * 99)) + "").toString();
+		String money7 = new BigDecimal(Double.parseDouble(df2
+				.format(1 + Math.random() * 99)) + "").toString();
+		String money8 = new BigDecimal(Double.parseDouble(df2
+				.format(1 + Math.random() * 99)) + "").toString();
+		String money9 = new BigDecimal(Double.parseDouble(df2
+				.format(1 + Math.random() * 99)) + "").toString();
+		int registration_party = (int) (Math.random() * 3);
+		int mortgage_party = (int) (Math.random() * 3);
+		int idtype1 = (int) (1+Math.random() * 20);
+		int idtype2= (int) (1+Math.random() * 10);
+		int idtype3= (int) (1+Math.random() * 10);
+		requestPayout.setFinancing_back_point(money);
+		requestPayout.setGps_back_point(money1);
+		requestPayout.setInsurance_back_point(money2);
+		requestPayout.setService_back_point(money3);
+		requestPayout.setMortgage_free(money4);
+		requestPayout.setSign_free(money5);
+		requestPayout.setSheepishly1(idtype1);//上牌抵押地省份
+		requestPayout.setSheepishly2(idtype2);//上牌抵押地市区
+		requestPayout.setSheepishly3(idtype3);//上牌抵押地区域
+		requestPayout.setRegistration_party(registration_party);//上牌地
+		requestPayout.setMortgage_party(mortgage_party);//抵押方
+		requestPayout.setGps_installation(money6);//gps安装费
+		requestPayout.setInterest_on_pre(money7);//前置利息
+		requestPayout.setRefund(money8);//退款
+		requestPayout.setThe_car_loan(money9);//车价贷款	
+		requestPayout.setType((int) (Math.random() * 3));
+		return requestPayout;
+		
+	}
 
 	public static void main(String[] args) {
 		/*
@@ -313,13 +361,7 @@ public class RandomValue {
 	}
 	public void test(){
 			 KSDCase ksd=null;
-		/*try {
-			AppiumDriver  driver=AppUtil.getdriver()	;
-			 ksd = getRandom(driver);
-		} catch (MalformedURLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
+	
 			 ksd = getRandom();
 
 			  System.out.println(ksd.getIdentitytype()+"名称" + ksd.getUsername() + "手机" + ksd.getPhone()
@@ -375,6 +417,7 @@ public class RandomValue {
 		int registtype = (int) (1 + Math.random() * 3);
 		int pledge = (int) (1 + Math.random() * 3);
 		KSDCase ksd = new KSDCase();
+		RequestPayout	rp = RandomValue.getMoney();
 		ksd.setUsername(getChineseName());// 名字
 		ksd.setPhone(getTel());// 手机号
 		ksd.setAddress("address2");// 地址
@@ -402,6 +445,7 @@ public class RandomValue {
 		ksd.setImgcount(4);// 图片数量1,2,3
 		ksd.setLoginname("刘浩亮");//登录邮箱
 		ksd.setLoginemail("liuhl@jizhicar.com");
+		ksd.setRequestpayout(rp);
 		return ksd;
 	}
 	public static KSDCase getRandom(AppiumDriver<AndroidElement> driver) {
@@ -443,7 +487,7 @@ public class RandomValue {
 		int registtype = (int) (1 + Math.random() * 3);
 		int pledge = (int) (1 + Math.random() * 3);
 		KSDCase ksd =  UserDaoImpl.getCustomer_KSD(AppUtil.getIndexname(driver));
-
+		RequestPayout	rp = RandomValue.getMoney();
 		ksd.setQygr(loantype);// 2企业1个人
 		ksd.setBusinessname("qiyemc");// 企业名称
 		ksd.setBusinessid("yingyezzh");// 企业执照
@@ -465,6 +509,7 @@ public class RandomValue {
 		ksd.setImgcount(4);// 图片数量1,2,3
 		ksd.setLoginname("刘浩亮");//登录邮箱
 		ksd.setLoginemail("liuhl@jizhicar.com");
+		ksd.setRequestpayout(rp);
 		return ksd;
 	}
 }

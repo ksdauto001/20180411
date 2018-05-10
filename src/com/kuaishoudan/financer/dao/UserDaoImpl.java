@@ -42,10 +42,14 @@ public class UserDaoImpl {
 
 	/*	KSDCase ksd = getCustomer_KSD("弓心");
 		System.out.println("@#$" + ksd.getIdentitytype());*/
-		List<Integer> list1=new ArrayList<Integer>();
+	/*	List<Integer> list1=new ArrayList<Integer>();
 		list1.add(100);list1.add(103);
 		int aa=getImgType(0+1,list1);
-System.out.println(aa);
+System.out.println(aa);*/
+		KSDCase ksd = RandomValue.getRandom();;
+		ksd.setIdentitynum("410325198708130182");
+		ksd.setIdentitytype(1);
+		getLoanname(ksd);
 	}
 
 	public static KSDCase getCustomer_KSD(String name) {
@@ -402,35 +406,29 @@ System.out.println(aa);
 		return statue;
 	}
 
-	public static KSDCase getLoanname(int financeid, int type) {
+	public static List<Integer> getLoanname(KSDCase ksd) {
 
-		KSDCase ksd = null;
-		String sql = "select * from tb_loan_file where finance_id=?  and 	material_type=?; ";
+		List<Integer> list = new ArrayList<Integer>();
+		String sql = "select * from tb_loan_file  tlf where tlf.finance_id= ( select tf.id from tb_finance tf ,tb_customer tc where  tc.id=tf.customer_id and tc.id_num=?); ";
 		DBUtil util = new DBUtil();
 		Connection conn = util.openConnection();
 		try {
 
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-
-			pstmt.setInt(1, financeid);
-			pstmt.setInt(2, type);
+			if (ksd.getIdentitytype() == 1) {
+				pstmt.setString(1, ksd.getIdentitynum());
+			} else if (ksd.getIdentitytype() == 2) {
+				pstmt.setString(1, ksd.getJgid());
+			}
+		
+	
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 
-				ksd = new KSDCase();
-
-				ksd.setUsername(rs.getString("name"));
-				ksd.setPhone(rs.getString("phone"));
-				ksd.setAddress("address2");
-				int idtype = rs.getInt("id_type");
-				ksd.setIdentitytype(idtype);
-				if (idtype == 1) {
-					ksd.setIdentitynum(rs.getString("id_num"));// 身份证.
-				} else {
-					ksd.setJgid(rs.getString("id_num"));// 军官证
-				}
-
+			
+		System.out.println(rs.getInt("file_type"));
+				list.add(rs.getInt("file_type"));
 			}
 		} catch (SQLException e) {
 			System.out.println(e);
@@ -438,7 +436,7 @@ System.out.println(aa);
 		} finally {
 			util.closeConn(conn);
 		}
-		return ksd;
+		return list;
 	}
 
 	public static int getImgType( int type,List<Integer> list1) {
