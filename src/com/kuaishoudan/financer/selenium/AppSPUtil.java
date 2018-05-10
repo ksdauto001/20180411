@@ -76,15 +76,19 @@ public class AppSPUtil {
 
 		WebUtil.login(webdriver, ksd.getLoginemail());// 登录
 		List<Integer> list = WebOrgan.getImge2(webdriver, ksd);
+		List<Integer> list2=	ksd.getImgtypes();
+
 		WebUtil.logout(webdriver);
 		int aa=0,countImg=0;
 		for(int i=0;i<list.size();i++){
 			if(list.get(i)<9){
-				aa=UserDaoImpl.getImgType(list.get(i)+7,list);
+				List<Integer> list3	=UserDaoImpl.getImgType(list.get(i)+7,list);
+				list2.addAll(list3);
+				aa=list3.size();
 				countImg=aa+countImg;
 			}
 		}
-		
+		ksd.setImgtypes(list2);
 		System.out.println("$$$"+countImg);
 		ksd.setImgcount(countImg);
 		driver.findElements(By.id("com.kuaishoudan.financer:id/text_name"))
@@ -185,14 +189,17 @@ public class AppSPUtil {
 		WebUtil.login(webdriver, ksd.getLoginemail());// 登录
 		List<Integer> list = WebOrgan.getImge2(webdriver, ksd);
 		WebUtil.logout(webdriver);
+		List<Integer> list2=ksd.getImgtypes(); 
 		int aa=0,countImg=0;
 		for(int i=0;i<list.size();i++){
 			if(list.get(i)<9){
-				aa=UserDaoImpl.getImgType(list.get(i)+7,list);
+				List<Integer> list3=UserDaoImpl.getImgType(list.get(i)+7,list);
+				list2.addAll(list3);
+				aa=list3.size();
 				countImg=aa+countImg;
 			}
 		}
-		
+		ksd.setImgtypes(list2);
 		System.out.println("$$$"+countImg);
 		ksd.setImgcount(countImg);
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);

@@ -6,6 +6,7 @@ import io.appium.java_client.android.AndroidElement;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -80,17 +81,17 @@ public class Test1 {
 	// 个人进件或企业
 	@Test(priority = 2, invocationCount = 1, threadPoolSize = 1)
 	public void test2() throws InterruptedException, IOException {
-	
+
 		if (ksd.getQygr() == 1) {
 			System.out.println("***2@");
-			ksd = AppUtil.addGr(driver,webdriver, devicename, 1, ksd);
+			ksd = AppUtil.addGr(driver, webdriver, devicename, 1, ksd);
 			String statue = AppSPUtil.getActstatue(driver);
 			Assert.assertEquals(statue, "待分配");
 			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 					UserDaoImpl.getstatus_id("待分配"));
 		} else {
 			System.out.println("***3@");
-			ksd = AppUtil.addQy(driver,webdriver, devicename, 1, ksd);
+			ksd = AppUtil.addQy(driver, webdriver, devicename, 1, ksd);
 			String statue = AppSPUtil.getActstatue(driver);
 			Assert.assertEquals(statue, "待分配");
 			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
@@ -104,7 +105,7 @@ public class Test1 {
 	public void test3() throws InterruptedException, IOException {
 		System.out.println("***4@");
 		WebUtil.login(webdriver, ksd.getLoginemail());// 登录
-		WebUtil.testDFP(webdriver,ksd);// 待分配
+		WebUtil.testDFP(webdriver, ksd);// 待分配
 		WebUtil.logout(webdriver);// 登出
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已分配"));
@@ -138,7 +139,7 @@ public class Test1 {
 	@Test(priority = 6, invocationCount = 1, threadPoolSize = 1)
 	public void test6() throws InterruptedException, IOException {
 		ksd = AppSPUtil.testSQHT(driver, ksd);
-	//	String statue = AppSPUtil.getActstatue(driver);
+		// String statue = AppSPUtil.getActstatue(driver);
 		Assert.assertEquals(ksd.getStatue(), "已申请合同");
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已申请合同"));
@@ -161,7 +162,7 @@ public class Test1 {
 	// app申请请款
 	@Test(priority = 8, invocationCount = 1, threadPoolSize = 1)
 	public void test8() {
-		ksd = AppSPUtil.testHTSQQK(driver,webdriver, ksd,devicename);// 请款
+		ksd = AppSPUtil.testHTSQQK(driver, webdriver, ksd, devicename);// 请款
 
 		Assert.assertEquals(ksd.getStatue(), "已请款");
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
@@ -177,11 +178,11 @@ public class Test1 {
 			Map<String, String> map = AppSPUtil.getSPname(driver);// 从app获取审批人名字
 			String itename = map.get("prename");
 			String email = WebSPUtil.nameToemail(map.get("name"));
-			WebSPUtil.testSP1(webdriver, email, itename,ksd); // 请款审批同意专员
+			WebSPUtil.testSP1(webdriver, email, itename, ksd); // 请款审批同意专员
 			Map<String, String> actual = UserDaoImpl.getAdvance(ksd);
-			System.out.println("##############"+actual.get("purchase_tax"));
+			System.out.println("##############" + actual.get("purchase_tax"));
 			Map<String, String> expect = CaseUtil.getAdvance(ksd);
-			System.out.println("##############"+expect.get("purchase_tax"));
+			System.out.println("##############" + expect.get("purchase_tax"));
 			Assert.assertEquals(actual, expect);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -193,7 +194,7 @@ public class Test1 {
 
 	}
 
-		//
+	//
 	@Test(priority = 10, invocationCount = 1, threadPoolSize = 1)
 	public void test10() {
 		try {
@@ -274,7 +275,7 @@ public class Test1 {
 			Map<String, String> map = AppSPUtil.getSPname(driver);// 从app获取审批人名字
 			String itename = map.get("prename");
 			String email = WebSPUtil.nameToemail(map.get("name"));
-			WebSPUtil.testSP5(webdriver, email, itename,ksd); // 请款审批同意专员
+			WebSPUtil.testSP5(webdriver, email, itename, ksd); // 请款审批同意专员
 			AppUtil.goback1(driver);//
 			String statue = AppSPUtil.getActstatue(driver);
 			Assert.assertEquals(statue, "已回款");
@@ -294,23 +295,24 @@ public class Test1 {
 	@Test(priority = 14, invocationCount = 1, threadPoolSize = 1)
 	public void test14() {
 
-	ksd=	WebSPUtil.testSP6(webdriver, ksd); // 请款审批同意专员
+		ksd = WebSPUtil.testSP6(webdriver, ksd); // 请款审批同意专员
 		AppSPUtil.sp6App(driver, ksd);
-	
-	
+
+		Assert.assertEquals(UserDaoImpl.getLoanname(ksd), ksd.getImgtypes());
 
 	}
-	// 归档
-		@Test(priority = 15, invocationCount = 1, threadPoolSize = 1)
-		public void test15() {
-		
-		ksd=	WebSPUtil.testSP7(webdriver, ksd); // 请款审批同意专员
-	
-			String statue = AppSPUtil.getActstatue(driver);
-			Assert.assertEquals(statue, "已归档");
-			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
-					UserDaoImpl.getstatus_id("已归档"));
 
-		}
+	// 归档
+	@Test(priority = 15, invocationCount = 1, threadPoolSize = 1)
+	public void test15() {
+
+		ksd = WebSPUtil.testSP7(webdriver, ksd); // 请款审批同意专员
+
+		String statue = AppSPUtil.getActstatue(driver);
+		Assert.assertEquals(statue, "已归档");
+		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
+				UserDaoImpl.getstatus_id("已归档"));
+
+	}
 
 }

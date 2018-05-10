@@ -61,14 +61,17 @@ public class ZcjjUtil {
 		WebUtil.login(webdriver, ksd.getLoginemail());// 登录
 		List<Integer> list = WebOrgan.getImge2(webdriver, ksd);
 		WebUtil.logout(webdriver);
+		List<Integer> list2=ksd.getImgtypes();
 		int aa=0,countImg=0;
 		for(int i=0;i<list.size();i++){
 			if(list.get(i)<9){
-				aa=UserDaoImpl.getImgType(list.get(i)+7,list);
+				List<Integer> list3=UserDaoImpl.getImgType(list.get(i)+7,list);
+				list2.addAll(list3);
+				aa=list3.size();
 				countImg=aa+countImg;
 			}
 		}
-		
+		ksd.setImgtypes(list2);
 		System.out.println("$$$"+countImg);
 		ksd.setImgcount(countImg);
 		
@@ -285,15 +288,18 @@ public class ZcjjUtil {
 		WebUtil.login(webdriver, ksd.getLoginemail());// 登录
 		List<Integer> list = WebOrgan.getImge2(webdriver, ksd);
 		WebUtil.logout(webdriver);
+		List<Integer> list2=ksd.getImgtypes(); 
 		int aa=0,countImg=0;
 		for(int i=0;i<list.size();i++){
 			if(list.get(i)<9){
-				aa=UserDaoImpl.getImgType(list.get(i)+7,list);
+			List<Integer> list3=UserDaoImpl.getImgType(list.get(i)+7,list);
+			list2.addAll(list3);
+			aa=list3.size();
 				countImg=aa+countImg;
 			}
 		}
-		
-		System.out.println("$$$"+countImg);
+		ksd.setImgtypes(list2);
+		System.out.println(list2.size()+"$$$"+countImg);
 		ksd.setImgcount(countImg);
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		String titletext = driver
@@ -569,5 +575,29 @@ public class ZcjjUtil {
 		return statue;
 
 	}
+	public static void sp6App(AppiumDriver<AndroidElement> driver,KSDCase ksd){
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
+		driver.findElements(By.id("com.kuaishoudan.financer:id/text_product"))
+				.get(0).click();// 常规产品列表
+		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+		driver.findElement(By.id("com.kuaishoudan.financer:id/btn_archive")).click();//归档
+		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+		driver.findElement(By.id("com.kuaishoudan.financer:id/dialog_custom_confirm")).click();//确定
+		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+		driver.findElements(By.id("com.kuaishoudan.financer:id/check_group")).get(0).click();//当面交付
+		AppUtil.uploadQk(driver,ksd.getImgcount());
+		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_submit")).click();//提交
+		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+		driver.findElement(By.id("com.kuaishoudan.financer:id/dialog_custom_confirm")).click();//是
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back")).click();//返回
+		
+	}
 }

@@ -1,5 +1,7 @@
 package com.kuaishoudan.financer.bean;
 
+import java.util.List;
+
 /**
  * @author Administrator
  * 
@@ -40,7 +42,16 @@ public class KSDCase {
 	int registtype;// 上牌方
 	int pledge;// 抵押方
 	int imgcount;// 进件图片数量
+	List<Integer> imgtypes;
 	RequestPayout requestpayout;
+	public List<Integer> getImgtypes() {
+		return imgtypes;
+	}
+
+	public void setImgtypes(List<Integer> imgtypes) {
+		this.imgtypes = imgtypes;
+	}
+
 	public String getLoginemail() {
 		return loginemail;
 	}

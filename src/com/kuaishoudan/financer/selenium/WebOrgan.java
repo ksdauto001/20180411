@@ -30,7 +30,7 @@ public class WebOrgan {
 
 			WebDriver driver = WebUtil.getdriver();
 			KSDCase ksd = RandomValue.getRandom();
-			ksd.setProduct("奇瑞徽银-那家店");// qita22-其他22产品1
+			ksd.setProduct("中安金控-那家店");// qita22-其他22产品1
 			ksd.setCartype(1);
 			WebUtil.login(driver, ksd.getLoginemail());// 登录
 			List<Integer> list = getImge1(driver, ksd);
@@ -60,8 +60,8 @@ public class WebOrgan {
 		// =driver.findElements(By.className("org_mask"));//org_mask
 		List<WebElement> pages = driver.findElements(By
 				.xpath("//ul[@class='page_list']/li"));
-		loop: for (int j = 0; j < (pages.size() - 4); j++) {
-
+	//	loop: for (int j = 0; j < (pages.size() - 4); j++) {
+		loop: for (int j =pages.size()-2; j >2; j--) {
 			List<WebElement> ws = driver.findElements(By.className("org_name"));
 			System.out.println(ws.size());
 			for (int i = 0; i < ws.size(); i++) {
@@ -87,8 +87,11 @@ public class WebOrgan {
 			Thread.sleep(500);
 			swipeTodown(driver);
 			driver.findElement(
-					By.xpath("//ul[@class='page_list']/li[" + (j + 4) + "]"))
+					By.xpath("//ul[@class='page_list']/li[" + j + "]"))
 					.click();
+			/*driver.findElement(
+					By.xpath("//ul[@class='page_list']/li[" + (j + 4) + "]"))
+					.click();*/
 		}
 		Thread.sleep(1000);
 		// testQdzl(driver);

@@ -276,7 +276,7 @@ public class WebSPUtil {
 		int height = driver.manage().window().getSize().height;
 		// System.out.println("height" + height);
 		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
-				+ (height * 2 +550) + ")"); // 向下滑动
+				+ (height * 2 +700) + ")"); // 向下滑动
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		driver.findElements(
 				By.xpath("//div[@class='requestpayout_detail_btn_box']/a/div"))
@@ -312,14 +312,34 @@ public class WebSPUtil {
 
 		WebUtil.login(driver, ksd.getLoginemail());// 登录
 		List<Integer> list = WebOrgan.getImge3(driver, ksd);
-		WebUtil.logout(driver);
-		int aa=0,countImg=0;
+		List<Integer> list2=	ksd.getImgtypes();
+		
 		for(int i=0;i<list.size();i++){
-			if(list.get(i)<9){
-				aa=UserDaoImpl.getImgType(list.get(i)+14,list);
-				countImg=aa+countImg;
+			if(list.get(i)<99){
+				list.remove(i);
+				i--;
 			}
 		}
+
+		list2.addAll(list);
+
+		for(int i=0;i<list2.size();i++){
+			if(list2.get(i)<99){
+				list2.remove(i);			
+				i--;
+			}
+		}
+		ksd.setImgtypes(list2);
+		WebUtil.logout(driver);
+	/*	int aa=0,countImg=0;
+		for(int i=0;i<list.size();i++){
+			if(list.get(i)<9){
+				List<Integer> list3=UserDaoImpl.getImgType(list.get(i)+14,list);
+				aa=list3.size();
+				countImg=aa+countImg;
+			}
+		}*/
+		int countImg=list.size();
 		System.out.println("$$$"+countImg);
 		ksd.setImgcount(countImg);
 		

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -380,6 +381,7 @@ public class AppUtil {
 				Thread.sleep(1000);
 				WebUtil.login(webdriver, ksd.getLoginemail());// 登录
 				List<Integer> list = WebOrgan.getImge1(webdriver, ksd);
+			
 				WebUtil.logout(webdriver);
 				
 				driver.findElement(
@@ -401,13 +403,24 @@ public class AppUtil {
 				Thread.sleep(2000);
 				driver.manage().timeouts().implicitlyWait(55, TimeUnit.SECONDS);
 				int aa=0,countImg=0;
+				List<Integer> list2=new ArrayList<Integer>();
 				for(int i=0;i<list.size();i++){
 					if(list.get(i)<9){
-						aa=UserDaoImpl.getImgType(list.get(i)+1,list);
+						List<Integer> list3=UserDaoImpl.getImgType(list.get(i)+1,list);
+						list2.addAll(list3);
+						aa=list3.size();
 						countImg=aa+countImg;
 					}
 				}
-				System.out.println("$$$"+countImg);
+				if(countImg==0){
+					for(Integer type:list){
+						if(type>99){
+							list2.add(type);break;
+						}
+					}
+				}
+				ksd.setImgtypes(list2);
+				System.out.println(list2.size()+"$$$"+countImg);
 				ksd.setImgcount(countImg);
 				driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add"))
 						.click();// 上传照片
@@ -659,6 +672,7 @@ public class AppUtil {
 				Thread.sleep(1000);
 				WebUtil.login(webdriver, ksd.getLoginemail());// 登录
 				List<Integer> list = WebOrgan.getImge1(webdriver, ksd);
+				ksd.setImgtypes(list);
 				WebUtil.logout(webdriver);
 				
 				driver.findElement(
@@ -681,15 +695,26 @@ public class AppUtil {
 				}
 				Thread.sleep(1000);
 				driver.manage().timeouts().implicitlyWait(55, TimeUnit.SECONDS);
-
+				List<Integer> list2=new ArrayList<Integer>();
 				int aa=0,countImg=0;
 				for(int i=0;i<list.size();i++){
 					if(list.get(i)<9){
-						aa=UserDaoImpl.getImgType(list.get(i)+1,list);
+						List<Integer> list3=UserDaoImpl.getImgType(list.get(i)+1,list);
+						list2.addAll(list3);
+						aa=list3.size();
+						countImg=aa+countImg;
 						countImg=aa+countImg;
 					}
 				}
-				System.out.println("$$$"+countImg);
+				if(countImg==0){
+					for(Integer type:list){
+						if(type>99){
+							list2.add(type);break;
+						}
+					}
+				}
+				ksd.setImgtypes(list2);
+				System.out.println(list2.size()+"$$$"+countImg);
 				ksd.setImgcount(countImg);
 				driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add"))
 						.click();// 上传照片

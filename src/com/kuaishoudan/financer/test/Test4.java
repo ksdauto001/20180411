@@ -6,6 +6,8 @@ import io.appium.java_client.android.AndroidElement;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
@@ -23,10 +25,12 @@ import com.kuaishoudan.financer.selenium.WebUtil;
 import com.kuaishoudan.financer.selenium.ZcjjUtil;
 import com.kuaishoudan.financer.util.CaseUtil;
 import com.kuaishoudan.financer.util.RandomValue;
+
 /**
  * 不出合同
+ * 
  * @author Administrator
- *
+ * 
  */
 public class Test4 {
 
@@ -58,8 +62,7 @@ public class Test4 {
 				+ ksd.getHkqs() + "\n  " + ksd.getPurchase_tax() + "\n "
 				+ ksd.getInsurance() + " \n" + ksd.getGps_charge() + "\n "
 				+ ksd.getService_charge() + "," + ksd.getRegisttype() + ","
-				+ ksd.getPledge()
-				+"车架号"+ksd.getVin());
+				+ ksd.getPledge() + "车架号" + ksd.getVin());
 	}
 
 	@AfterTest
@@ -67,24 +70,22 @@ public class Test4 {
 		driver.quit();
 		webdriver.quit();
 	}
-
-
-
+/*
 	// 个人进件或企业
 	@Test(priority = 2, invocationCount = 1, threadPoolSize = 1)
 	public void test2() throws InterruptedException, IOException {
 		AppUtil.zcjj(driver);
 		if (ksd.getQygr() == 1) {
 			System.out.println("***2@");
-			ksd = AppUtil.addGr(driver,webdriver, devicename, 1, ksd);
-			String statue=ZcjjUtil.getActstatue(driver);
+			ksd = AppUtil.addGr(driver, webdriver, devicename, 1, ksd);
+			String statue = ZcjjUtil.getActstatue(driver);
 			Assert.assertEquals(statue, "待分配");
 			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 					UserDaoImpl.getstatus_id("待分配"));
 		} else {
 			System.out.println("***3@");
-			ksd = AppUtil.addQy(driver,webdriver, devicename, 1, ksd);
-			String statue=ZcjjUtil.getActstatue(driver);
+			ksd = AppUtil.addQy(driver, webdriver, devicename, 1, ksd);
+			String statue = ZcjjUtil.getActstatue(driver);
 			Assert.assertEquals(statue, "待分配");
 			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 					UserDaoImpl.getstatus_id("待分配"));
@@ -97,7 +98,7 @@ public class Test4 {
 	public void test3() throws InterruptedException, IOException {
 		System.out.println("***4@");
 		WebUtil.login(webdriver, "liuhl@jizhicar.com");// 登录
-		WebUtil.testDFP(webdriver,ksd);// 待分配
+		WebUtil.testDFP(webdriver, ksd);// 待分配
 		WebUtil.logout(webdriver);// 登出
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已分配"));
@@ -119,7 +120,7 @@ public class Test4 {
 	@Test(priority = 5, invocationCount = 1, threadPoolSize = 1)
 	public void test5() throws InterruptedException, IOException {
 		System.out.println("***5@");
-		WebUtil.login(webdriver,ksd.getLoginemail());// 登录
+		WebUtil.login(webdriver, ksd.getLoginemail());// 登录
 		WebUtil.testYLR(webdriver, ksd);// 已分配
 		WebUtil.logout(webdriver);// 登出
 		Map<String, String> actual = UserDaoImpl.getFinance(ksd);
@@ -127,12 +128,11 @@ public class Test4 {
 		Assert.assertEquals(actual, expect);
 	}
 
-
-
 	// app不出合同---申请请款
 	@Test(priority = 8, invocationCount = 1, threadPoolSize = 1)
 	public void test8() {
-		ksd=ZcjjUtil.testBCSQQK(driver,webdriver, ksd,devicename);;// 请款// 请款
+		ksd = ZcjjUtil.testBCSQQK(driver, webdriver, ksd, devicename);
+		;// 请款// 请款
 		Assert.assertEquals(ksd.getStatue(), "已请款");
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已请款"));
@@ -235,14 +235,14 @@ public class Test4 {
 	}
 
 	// 状态已放款
-	//@Test(priority = 13, invocationCount = 1, threadPoolSize = 1)
+	@Test(priority = 13, invocationCount = 1, threadPoolSize = 1)
 	public void test13() {
 		try {
 
 			Map<String, String> map = ZcjjUtil.getSPname(driver);// 从app获取审批人名字
 			String itename = map.get("prename");
 			String email = WebSPUtil.nameToemail(map.get("name"));
-			WebSPUtil.testSP5(webdriver, email, itename,ksd); // 请款审批同意专员
+			WebSPUtil.testSP5(webdriver, email, itename, ksd); // 请款审批同意专员
 			AppUtil.goback1(driver);//
 			String statue = ZcjjUtil.getActstatue(driver);
 			Assert.assertEquals(statue, "已回款");
@@ -256,19 +256,32 @@ public class Test4 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	// 归档
-	//@Test(priority = 14, invocationCount = 1, threadPoolSize = 1)
+	@Test(priority = 14, invocationCount = 1, threadPoolSize = 1)
 	public void test14() {
+ksd.setProduct("平安银行-23");ksd.setImgtypes(new ArrayList<Integer>());
+		ksd = WebSPUtil.testSP6(webdriver, ksd); // 请款审批同意专员
+	//	ZcjjUtil.sp6App(driver, ksd);
+		List<Integer> lisss = ksd.getImgtypes();
+		for (int i = 0; i < lisss.size(); i++) {
+			System.out.println("##===" + lisss.get(i));
+		}
+	//	Assert.assertEquals(UserDaoImpl.getLoanname(ksd), ksd.getImgtypes());
+	}
 
-		WebSPUtil.testSP6(webdriver, ksd); // 请款审批同意专员
+	/*// 归档
+	@Test(priority = 15, invocationCount = 1, threadPoolSize = 1)
+	public void test15() {
+
+		ksd = WebSPUtil.testSP7(webdriver, ksd); // 请款审批同意专员
 
 		String statue = ZcjjUtil.getActstatue(driver);
 		Assert.assertEquals(statue, "已归档");
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已归档"));
 
-	}
+	}*/
 
 }

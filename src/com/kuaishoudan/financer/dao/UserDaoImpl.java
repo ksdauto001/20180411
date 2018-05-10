@@ -409,7 +409,7 @@ System.out.println(aa);*/
 	public static List<Integer> getLoanname(KSDCase ksd) {
 
 		List<Integer> list = new ArrayList<Integer>();
-		String sql = "select * from tb_loan_file  tlf where tlf.finance_id= ( select tf.id from tb_finance tf ,tb_customer tc where  tc.id=tf.customer_id and tc.id_num=?); ";
+		String sql = "select * from tb_loan_file  tlf where tlf.finance_id= ( select max(tf.id) from tb_finance tf ,tb_customer tc where  tc.id=tf.customer_id and tc.id_num=?); ";
 		DBUtil util = new DBUtil();
 		Connection conn = util.openConnection();
 		try {
@@ -439,7 +439,7 @@ System.out.println(aa);*/
 		return list;
 	}
 
-	public static int getImgType( int type,List<Integer> list1) {
+	public static List<Integer>  getImgType( int type,List<Integer> list1) {
 		List<Integer> list2=new ArrayList<Integer>();
 		KSDCase ksd = null;
 		String sql = "select * from tb_material_data where   type=?;";
@@ -467,7 +467,7 @@ System.out.println(aa);*/
 		} finally {
 			util.closeConn(conn);
 		}
-		return list2.size();
+		return list2;
 
 	}
 
