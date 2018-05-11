@@ -6,6 +6,7 @@ import io.appium.java_client.android.AndroidElement;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -279,7 +280,9 @@ public class Test2 {
 			System.out.println("##" + lisss.get(i));
 		}
 
-		Assert.assertEquals(UserDaoImpl.getLoanname(ksd), ksd.getImgtypes());
+		List<Integer> actual=UserDaoImpl.getLoanname(ksd);
+		 Collections.sort(actual);  
+		Assert.assertEquals(actual, lisss);
 	}
 
 	// 归档

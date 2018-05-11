@@ -53,7 +53,16 @@ public class ZcjjUtil {
 		AppSPUtil.upload(driver);
 
 		ksd.setStatue(	getActstatue(driver));//状态值
-		return ksd;
+		List<Integer> list2=ksd.getImgtypes();
+		if(ksd.getCartype()==0){
+			list2.add(1049);
+		}else{
+		list2.add(1048);
+		}	
+		list2.add(1050);
+		list2.add(1051); list2.add(1052);
+		ksd.setImgtypes(list2);
+ 		return ksd;
 	}
 
 	public static KSDCase zcjjHTSQQK(AppiumDriver<AndroidElement> driver,WebDriver webdriver,KSDCase ksd,String devicename) {
@@ -69,6 +78,13 @@ public class ZcjjUtil {
 				list2.addAll(list3);
 				aa=list3.size();
 				countImg=aa+countImg;
+			}
+		}
+		if(countImg==0){
+			for(Integer type:list){
+				if(type>99){
+					list2.add(type);break;
+				}
 			}
 		}
 		ksd.setImgtypes(list2);
@@ -296,6 +312,13 @@ public class ZcjjUtil {
 			list2.addAll(list3);
 			aa=list3.size();
 				countImg=aa+countImg;
+			}
+		}
+		if(countImg==0){
+			for(Integer type:list){
+				if(type>99){
+					list2.add(type);break;
+				}
 			}
 		}
 		ksd.setImgtypes(list2);

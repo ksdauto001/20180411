@@ -65,6 +65,15 @@ public class AppSPUtil {
 	//	getActstatue(driver);// 状态值
 		String statue=getActstatue(driver);
 		ksd.setStatue(statue);
+		List<Integer> list2=ksd.getImgtypes();
+		if(ksd.getCartype()==0){
+			list2.add(1049);
+		}else{
+		list2.add(1048);
+		}		
+		list2.add(1050);
+		list2.add(1051); list2.add(1052);
+		ksd.setImgtypes(list2);
 		return ksd;
 	}
 
@@ -88,8 +97,15 @@ public class AppSPUtil {
 				countImg=aa+countImg;
 			}
 		}
+		if(countImg==0){
+			for(Integer type:list){
+				if(type>99){
+					list2.add(type);break;
+				}
+			}
+		}
 		ksd.setImgtypes(list2);
-		System.out.println("$$$"+countImg);
+		System.out.println(list2.size()+"$$$"+countImg);
 		ksd.setImgcount(countImg);
 		driver.findElements(By.id("com.kuaishoudan.financer:id/text_name"))
 		.get(0).click();// 首页列表
@@ -197,6 +213,13 @@ public class AppSPUtil {
 				list2.addAll(list3);
 				aa=list3.size();
 				countImg=aa+countImg;
+			}
+		}
+		if(countImg==0){
+			for(Integer type:list){
+				if(type>99){
+					list2.add(type);break;
+				}
 			}
 		}
 		ksd.setImgtypes(list2);

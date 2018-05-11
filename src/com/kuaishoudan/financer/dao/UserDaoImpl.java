@@ -171,7 +171,7 @@ System.out.println(aa);*/
 	public static int gethave_system(String organization_name) {
 		int have_system = 1;
 
-		String sql = " select max( have_system) from tb_organization where name =? and company_id=1000 ";
+		String sql = " select min( have_system) from tb_organization where name =? and company_id=1000 ";
 		DBUtil util = new DBUtil();
 		Connection conn = util.openConnection();
 		try {

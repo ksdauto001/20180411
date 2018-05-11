@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -70,7 +71,7 @@ public class Test4 {
 		driver.quit();
 		webdriver.quit();
 	}
-/*
+
 	// 个人进件或企业
 	@Test(priority = 2, invocationCount = 1, threadPoolSize = 1)
 	public void test2() throws InterruptedException, IOException {
@@ -256,22 +257,21 @@ public class Test4 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}*/
+	}
 
 	// 归档
 	@Test(priority = 14, invocationCount = 1, threadPoolSize = 1)
 	public void test14() {
-ksd.setProduct("平安银行-23");ksd.setImgtypes(new ArrayList<Integer>());
+
 		ksd = WebSPUtil.testSP6(webdriver, ksd); // 请款审批同意专员
-	//	ZcjjUtil.sp6App(driver, ksd);
+		ZcjjUtil.sp6App(driver, ksd);
 		List<Integer> lisss = ksd.getImgtypes();
-		for (int i = 0; i < lisss.size(); i++) {
-			System.out.println("##===" + lisss.get(i));
-		}
-	//	Assert.assertEquals(UserDaoImpl.getLoanname(ksd), ksd.getImgtypes());
+		List<Integer> actual=UserDaoImpl.getLoanname(ksd);
+		 Collections.sort(actual);  
+		Assert.assertEquals(actual, lisss);
 	}
 
-	/*// 归档
+	// 归档
 	@Test(priority = 15, invocationCount = 1, threadPoolSize = 1)
 	public void test15() {
 
@@ -282,6 +282,6 @@ ksd.setProduct("平安银行-23");ksd.setImgtypes(new ArrayList<Integer>());
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已归档"));
 
-	}*/
+	}
 
 }

@@ -5,6 +5,7 @@ import io.appium.java_client.android.AndroidElement;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -329,6 +330,7 @@ public class WebSPUtil {
 				i--;
 			}
 		}
+		 Collections.sort(list2); ;
 		ksd.setImgtypes(list2);
 		WebUtil.logout(driver);
 	/*	int aa=0,countImg=0;

@@ -389,7 +389,7 @@ public class AppUtil {
 						.click();// 下一步
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	
-				if (ran == 1) { // 二手车
+				//if (ran == 1) { // 二手车
 					int havesystem = UserDaoImpl.gethave_system(ksd
 							.getProduct().trim().split("-")[0]);// 产品名称查是否有常规甩单
 					System.out.println(ksd.getProduct().trim().split("-")[0]+","+havesystem);
@@ -399,7 +399,7 @@ public class AppUtil {
 								.click();// 订单常规
 	
 					}
-				}
+				//}
 				Thread.sleep(2000);
 				driver.manage().timeouts().implicitlyWait(55, TimeUnit.SECONDS);
 				int aa=0,countImg=0;
@@ -680,7 +680,7 @@ public class AppUtil {
 						.click();// 下一步
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-				if (ran == 1) { // 二手车
+			//	if (ran == 1) { // 二手车
 					int havesystem = UserDaoImpl.gethave_system(ksd
 							.getProduct().trim().split("-")[0]);// 产品名称查是否有常规甩单
 					
@@ -692,7 +692,7 @@ public class AppUtil {
 								.click();// 订单常规
 
 					}
-				}
+			//	}
 				Thread.sleep(1000);
 				driver.manage().timeouts().implicitlyWait(55, TimeUnit.SECONDS);
 				List<Integer> list2=new ArrayList<Integer>();
@@ -702,7 +702,6 @@ public class AppUtil {
 						List<Integer> list3=UserDaoImpl.getImgType(list.get(i)+1,list);
 						list2.addAll(list3);
 						aa=list3.size();
-						countImg=aa+countImg;
 						countImg=aa+countImg;
 					}
 				}
@@ -867,7 +866,7 @@ public class AppUtil {
 						By.id("com.kuaishoudan.financer:id/iv_thumb")).get(i)
 						.click();// 添加图片（驾驶证）
 			}
-			}else {
+			}else  {
 				for (int i = 1; i < 15; i++) {
 					driver.findElements(
 							By.id("com.kuaishoudan.financer:id/iv_thumb")).get(i)
@@ -891,10 +890,40 @@ public class AppUtil {
 				}
 				
 			}
+			if(imgcount>20){
+				driver.findElement(
+						By.id("com.kuaishoudan.financer:id/toolbar_back"))
+						.click();
+				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+				driver.findElement(
+						By.id("com.kuaishoudan.financer:id/dialog_custom_confirm"))
+						.click();
+				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+				driver.findElements(By.id("com.kuaishoudan.financer:id/text_name"))
+				.get(0).click();// 首页列表
+				AppUtil.swipeToUp(driver, 1000);// 向上滑动
+				Thread.sleep(1000);
+				driver.findElement(By.id("com.kuaishoudan.financer:id/btn_add"))
+				  .click();// 上传照片
+				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+				driver.findElement(
+						By.id("com.kuaishoudan.financer:id/dialog_photo_select_btn_gallery"))
+						.click();// 从相册选择
+				Thread.sleep(1000);
+				for (int i = 1; i < (imgcount-20); i++) {
+					driver.findElements(
+							By.id("com.kuaishoudan.financer:id/iv_thumb")).get(i)
+							.click();// 添加图片（驾驶证）
+					driver.findElements(
+							By.id("com.kuaishoudan.financer:id/iv_thumb")).get(i)
+							.click();// 添加图片（驾驶证）
+				}
+			}
 			driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 			//
 			driver.findElement(By.id("com.kuaishoudan.financer:id/btn_ok"))
 					.click();// 两种证上传——确定按钮
+
 			Thread.sleep(5000+imgcount*2000);
 			driver.findElement(
 					By.id("com.kuaishoudan.financer:id/toolbar_confirm"))
@@ -996,6 +1025,7 @@ public class AppUtil {
 			Thread.sleep(600);
 			driver.findElement(
 					By.id("com.kuaishoudan.financer:id/edit_password")).click();
+			Thread.sleep(600);
 			driver.findElement(By.id("com.kuaishoudan.financer:id/btn_login"))
 					.click();
 			Thread.sleep(3000);
