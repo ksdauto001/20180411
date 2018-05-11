@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidElement;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,6 +90,7 @@ public class AppSPUtil {
 
 		WebUtil.logout(webdriver);
 		int aa=0,countImg=0;
+		 Collections.sort(list); 
 		for(int i=0;i<list.size();i++){
 			if(list.get(i)<9){
 				List<Integer> list3	=UserDaoImpl.getImgType(list.get(i)+7,list);
@@ -97,6 +99,7 @@ public class AppSPUtil {
 				countImg=aa+countImg;
 			}
 		}
+ 
 		if(countImg==0){
 			for(Integer type:list){
 				if(type>99){
@@ -207,6 +210,7 @@ public class AppSPUtil {
 		WebUtil.logout(webdriver);
 		List<Integer> list2=ksd.getImgtypes(); 
 		int aa=0,countImg=0;
+		 Collections.sort(list);  
 		for(int i=0;i<list.size();i++){
 			if(list.get(i)<9){
 				List<Integer> list3=UserDaoImpl.getImgType(list.get(i)+7,list);

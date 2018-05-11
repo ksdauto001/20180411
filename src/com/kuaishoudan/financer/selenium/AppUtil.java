@@ -11,6 +11,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -412,6 +413,7 @@ public class AppUtil {
 						countImg=aa+countImg;
 					}
 				}
+				 Collections.sort(list);  
 				if(countImg==0){
 					for(Integer type:list){
 						if(type>99){
@@ -419,6 +421,7 @@ public class AppUtil {
 						}
 					}
 				}
+	
 				ksd.setImgtypes(list2);
 				System.out.println(list2.size()+"$$$"+countImg);
 				ksd.setImgcount(countImg);
@@ -705,6 +708,7 @@ public class AppUtil {
 						countImg=aa+countImg;
 					}
 				}
+				 Collections.sort(list);  
 				if(countImg==0){
 					for(Integer type:list){
 						if(type>99){
@@ -891,6 +895,9 @@ public class AppUtil {
 				
 			}
 			if(imgcount>20){
+				driver.findElement(By.id("com.kuaishoudan.financer:id/btn_ok"))
+				.click();// 两种证上传——确定按钮
+				Thread.sleep(1000);
 				driver.findElement(
 						By.id("com.kuaishoudan.financer:id/toolbar_back"))
 						.click();

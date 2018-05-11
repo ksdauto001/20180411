@@ -158,17 +158,17 @@ public class WebSPUtil {
 		driver.findElement(
 				By.xpath("//div[@class='requestpayout_detail_btn_box']/a[3]/div"))
 				.click();// 同意
-		int size=driver.findElements(By.name("risk_type")).size();
+		/*int size=driver.findElements(By.name("risk_type")).size();
 		if(size>0){
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		driver.findElement(By.id("risk_type1")).click();
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		driver.findElement(By.xpath("//div[@class='cashed_mark']/div/a")).click();//确认
-		}else{
+		}else{*/
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		
 		driver.findElement(By.id("argee_sub")).click();// 确认
-		}
+		//}
 		flag = true;
 		try {
 			Thread.sleep(3000);
