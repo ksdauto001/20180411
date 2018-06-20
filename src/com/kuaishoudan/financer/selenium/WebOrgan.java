@@ -30,9 +30,9 @@ public class WebOrgan {
 
 			WebDriver driver = WebUtil.getdriver();
 			KSDCase ksd = RandomValue.getRandom();
-			ksd.setProduct("中安金控-那家店");// qita22-其他22产品1
+			ksd.setProduct("平安银行-那家店");// qita22-其他22产品1
 			ksd.setCartype(1);
-			WebUtil.login(driver, ksd.getLoginemail());// 登录
+			WebUtil.login(driver, ksd );// 登录
 			List<Integer> list = getImge1(driver, ksd);
 			WebUtil.logout(driver);
 			Thread.sleep(25000);
@@ -60,13 +60,18 @@ public class WebOrgan {
 		// =driver.findElements(By.className("org_mask"));//org_mask
 		List<WebElement> pages = driver.findElements(By
 				.xpath("//ul[@class='page_list']/li"));
-	//	loop: for (int j = 0; j < (pages.size() - 4); j++) {
-		loop: for (int j =pages.size()-2; j >2; j--) {
+
+		loop: for (int j = pages.size() - 2; j > 2; j--) {
+
+			swipeTodown(driver);
+			driver.findElement(
+					By.xpath("//ul[@class='page_list']/li[" + j + "]")).click();
 			List<WebElement> ws = driver.findElements(By.className("org_name"));
-			System.out.println(ws.size());
+
+
 			for (int i = 0; i < ws.size(); i++) {
 
-				System.out.println("ws" + ws.get(i).getText());
+				//System.out.println("ws" + ws.get(i).getText());
 				if (ws.get(i).getText().equals(sss)) {
 					driver.manage().timeouts()
 							.implicitlyWait(13, TimeUnit.SECONDS);
@@ -77,7 +82,7 @@ public class WebOrgan {
 
 					List<WebElement> mask = driver.findElements(By
 							.className("org_mask"));
-					System.out.println("@===" + mask.size());
+				//	System.out.println("@===" + mask.size());
 					// mask.get(i).click();
 					mask.get(i).findElement(By.tagName("a")).click();
 					break loop;
@@ -85,24 +90,13 @@ public class WebOrgan {
 
 			}
 			Thread.sleep(500);
-			swipeTodown(driver);
-			driver.findElement(
-					By.xpath("//ul[@class='page_list']/li[" + j + "]"))
-					.click();
-			/*driver.findElement(
-					By.xpath("//ul[@class='page_list']/li[" + (j + 4) + "]"))
-					.click();*/
+
 		}
 		Thread.sleep(1000);
-		// testQdzl(driver);
-
-		/*
-		 * Thread.sleep(25000); driver.quit();
-		 */
 
 	}
 
-	public static List<Integer> testJjzl(WebDriver driver,KSDCase ksd)
+	public static List<Integer> testJjzl(WebDriver driver, KSDCase ksd)
 			throws InterruptedException {
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 
@@ -119,10 +113,13 @@ public class WebOrgan {
 		 * driver.findElements(By.className("check_all")) ;//全选
 		 * checkalls.get(3).click();
 		 */
-	int type=	driver.findElements(By.xpath("//ul[@class='tab_list inline_block']/li")).size();
-	//System.out.println("size"+type);
-	if(type==2&&ksd.getCartype()==1){
-			driver.findElement(By.xpath("//ul[@class='tab_list inline_block']/li[2]")).click();
+		int type = driver.findElements(
+				By.xpath("//ul[@class='tab_list inline_block']/li")).size();
+		// System.out.println("size"+type);
+		if (type == 2 && ksd.getCartype() == 1) {
+			driver.findElement(
+					By.xpath("//ul[@class='tab_list inline_block']/li[2]"))
+					.click();
 		}
 		List<Integer> list1 = RandomValue.getImg1();
 		List<WebElement> ws = driver.findElements(By.tagName("label"));
@@ -173,7 +170,7 @@ public class WebOrgan {
 
 	}
 
-	public static List<Integer> testQkzl(WebDriver driver,KSDCase ksd)
+	public static List<Integer> testQkzl(WebDriver driver, KSDCase ksd)
 			throws InterruptedException {
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 
@@ -190,11 +187,14 @@ public class WebOrgan {
 		 * driver.findElements(By.className("check_all")) ;//全选
 		 * checkalls.get(3).click();
 		 */
-		int type=	driver.findElements(By.xpath("//ul[@class='tab_list inline_block']/li")).size();
-		//System.out.println("size"+type);
-		if(type==2&&ksd.getCartype()==1){
-				driver.findElement(By.xpath("//ul[@class='tab_list inline_block']/li[2]")).click();
-			}
+		int type = driver.findElements(
+				By.xpath("//ul[@class='tab_list inline_block']/li")).size();
+		// System.out.println("size"+type);
+		if (type == 2 && ksd.getCartype() == 1) {
+			driver.findElement(
+					By.xpath("//ul[@class='tab_list inline_block']/li[2]"))
+					.click();
+		}
 		List<Integer> list1 = RandomValue.getImg2();
 		List<WebElement> ws = driver.findElements(By.tagName("label"));
 		for (int k = 0; k < ws.size(); k++) {
@@ -241,7 +241,7 @@ public class WebOrgan {
 
 	}
 
-	public static List<Integer> testQdzl(WebDriver driver,KSDCase ksd)
+	public static List<Integer> testQdzl(WebDriver driver, KSDCase ksd)
 			throws InterruptedException {
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 
@@ -258,11 +258,14 @@ public class WebOrgan {
 		 * driver.findElements(By.className("check_all")) ;//全选
 		 * checkalls.get(3).click();
 		 */
-		int type=	driver.findElements(By.xpath("//ul[@class='tab_list inline_block']/li")).size();
-		//System.out.println("size"+type);
-		if(type==2&&ksd.getCartype()==1){
-				driver.findElement(By.xpath("//ul[@class='tab_list inline_block']/li[2]")).click();
-			}
+		int type = driver.findElements(
+				By.xpath("//ul[@class='tab_list inline_block']/li")).size();
+		// System.out.println("size"+type);
+		if (type == 2 && ksd.getCartype() == 1) {
+			driver.findElement(
+					By.xpath("//ul[@class='tab_list inline_block']/li[2]"))
+					.click();
+		}
 		List<Integer> list1 = RandomValue.getImg3();
 		List<WebElement> ws = driver.findElements(By.tagName("label"));
 		for (int k = 0; k < ws.size(); k++) {
@@ -328,7 +331,7 @@ public class WebOrgan {
 		try {
 
 			test1(driver, ksd);
-			list = testJjzl(driver,ksd);
+			list = testJjzl(driver, ksd);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -347,7 +350,7 @@ public class WebOrgan {
 		try {
 
 			test1(driver, ksd);
-			list = testQkzl(driver,ksd);
+			list = testQkzl(driver, ksd);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -366,7 +369,7 @@ public class WebOrgan {
 		try {
 
 			test1(driver, ksd);
-			list = testQdzl(driver,ksd);
+			list = testQdzl(driver, ksd);
 			return list;
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block

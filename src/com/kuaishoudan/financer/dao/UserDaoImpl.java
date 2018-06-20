@@ -47,9 +47,12 @@ public class UserDaoImpl {
 		int aa=getImgType(0+1,list1);
 System.out.println(aa);*/
 		KSDCase ksd = RandomValue.getRandom();;
-		ksd.setIdentitynum("410325198708130182");
+		ksd.setIdentitynum("1528967079239");
 		ksd.setIdentitytype(1);
-		getLoanname(ksd);
+	//	getLoanname(ksd);
+		
+		int aa=getRisk_type(ksd);
+		System.out.println("@@@"+aa);
 	}
 
 	public static KSDCase getCustomer_KSD(String name) {
@@ -336,6 +339,10 @@ System.out.println(aa);*/
 						.getString("insurance"))));
 				// map.put("service_charge",""+
 				// decimalFormat.format(Double.parseDouble(rs.getString("service_charge"))));
+				map.put("deduction", decimalFormat.format(Double.parseDouble(rs
+						.getString("deduction"))));
+				double toalcharge=rs.getDouble("car_loan_charge")+rs.getDouble("insurance")+rs.getDouble("purchase_tax")-rs.getDouble("deduction");
+				map.put("toalcharge", decimalFormat.format(toalcharge));
 			}
 		} catch (SQLException e) {
 			System.out.println(e);
@@ -469,6 +476,38 @@ System.out.println(aa);*/
 		}
 		return list2;
 
+	}
+	
+	
+	public static int getRisk_type( KSDCase ksd) {
+		int have_system = 1;
+
+		String sql = " select risk_type from tb_finance_advance where finance_id=(select id from tb_finance where customer_id=(select id from tb_customer where id_num=?)order by id desc  limit 1) ; ";
+		DBUtil util = new DBUtil();
+		Connection conn = util.openConnection();
+		try {
+
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+
+			if (ksd.getIdentitytype() == 1) {
+				pstmt.setString(1, ksd.getIdentitynum());
+			} else if (ksd.getIdentitytype() == 2) {
+				pstmt.setString(1, ksd.getJgid());
+			}
+
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				have_system = rs.getInt(1);
+
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+			e.printStackTrace();
+		} finally {
+			util.closeConn(conn);
+		}
+		return have_system;
 	}
 
 }

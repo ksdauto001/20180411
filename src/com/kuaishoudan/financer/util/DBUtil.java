@@ -32,7 +32,7 @@ public class DBUtil {
 
 		try {
 
-			System.out.println(url);
+		//	System.out.println(url);
 			return DriverManager.getConnection(url, username, password);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,7 +52,7 @@ public class DBUtil {
 		try {
 			Class.forName(name);
 			conn = DriverManager.getConnection(url, user, password);
-			System.out.println(conn);
+	//		System.out.println(conn);
 			return conn;
 		} catch (Exception e) {
 			e.printStackTrace();

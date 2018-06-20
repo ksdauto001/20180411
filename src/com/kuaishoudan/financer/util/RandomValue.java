@@ -19,6 +19,7 @@ import java.util.Set;
 
 import com.kuaishoudan.financer.bean.KSDCase;
 import com.kuaishoudan.financer.bean.RequestPayout;
+import com.kuaishoudan.financer.bean.ShopBeanCase;
 import com.kuaishoudan.financer.dao.UserDaoImpl;
 import com.kuaishoudan.financer.selenium.AppUtil;
 
@@ -156,7 +157,7 @@ public class RandomValue {
 							 
 							list.add( arr[p][q]);
 						}
-					System.out.println("增加"+Arrays.toString(arr[p]));
+			//		System.out.println("增加"+Arrays.toString(arr[p]));
 					}
 				}
 			}
@@ -164,10 +165,10 @@ public class RandomValue {
 		}
 		list=	removeDuplicate(list);//删除重复
 		
-		for(int type:list)
-			System.out.println("==="+type);
+	/*	for(int type:list)
+			System.out.println("==="+type);*/
 		
-		System.out.println("##="+list.size());
+	//	System.out.println("##="+list.size());
 		return list;
 	}
 	/**
@@ -213,10 +214,10 @@ public class RandomValue {
 			}
 		}
 		list=	removeDuplicate(list);
-		for(int type:list)
+	/*	for(int type:list)
 			System.out.println("==="+type);
 		
-		System.out.println("##"+list.size());
+		System.out.println("##"+list.size());*/
 		return list;
 	}
 	
@@ -264,9 +265,9 @@ public class RandomValue {
 			}
 		}
 		list=	removeDuplicate(list);
-		for(int type:list)
+	/*	for(int type:list)
 			System.out.println("==="+type);
-		System.out.println("##"+list.size());
+		System.out.println("##"+list.size());*/
 		return list;
 	}
 	public   static   List  removeDuplicate(List list)  {       
@@ -292,6 +293,50 @@ public class RandomValue {
 		map.put("tel", getTel());
 		map.put("email", getEmail(6, 9));
 		return map;
+	}
+	
+	public static ShopBeanCase getShop() {
+		ShopBeanCase shopBeanCase=new ShopBeanCase();
+		
+		System.out.println("getShop()");
+		int businessType = (int) (Math.random() * 3);
+		int storeType=(int)(Math.random() * 4);
+		int paymentMethod=(int)(Math.random() * 2);
+		int companyNumber=(int)(1+Math.random() * 9999);
+		int mouthSale=(int)(Math.random() * 5);
+		int dutyType=(int)(Math.random() * 4);
+	int	documentType=(int)(Math.random() * 2);
+	int accountType=(int)(Math.random() * 4);
+	IdCardGenerator g = new IdCardGenerator();
+		
+
+	
+		int businessLicense=(int)(Math.random() * 999999999);
+		shopBeanCase.setShopname(getChineseName());// 商户名称
+		shopBeanCase.setBusinessType(businessType);//业务类型
+		shopBeanCase.setStoreType(storeType);//店面类型
+		shopBeanCase.setShopAddress("address");// 地址
+		shopBeanCase.setPaymentMethod(paymentMethod);//款项结算方式
+		shopBeanCase.setCompanyNumber(companyNumber+"");//公司人数
+		shopBeanCase.setMouthSale(mouthSale);// 月销量
+		shopBeanCase.setName(getChineseName());//姓名
+		shopBeanCase.setPhone(getTel());// 手机
+		shopBeanCase.setDuty(dutyType);//职务
+		shopBeanCase.setDocumentType(documentType);
+		if (documentType==0) {
+			//营业执照
+			shopBeanCase.setBusinessLicense(""+ businessLicense);
+		}else if (documentType==1) {
+			//身份证
+			shopBeanCase.setBusinessLicense(g.generate());
+		}
+		shopBeanCase.setAccountType(accountType);//账户类型
+		shopBeanCase.setAccountName("zhanghao");// 账户名
+		shopBeanCase.setOpeningBack("kaihuhang");// 开户行
+		shopBeanCase.setBackCardNumber("62103432111");// 银行卡号
+		shopBeanCase.setImageCount(1);
+		
+		return shopBeanCase;
 	}
 	public static RequestPayout getMoney(){
 		RequestPayout requestPayout=new RequestPayout();
@@ -390,7 +435,7 @@ public class RandomValue {
 		DecimalFormat df2 = new DecimalFormat("#.00");
 		DecimalFormat df = new DecimalFormat("#.000");
 		for (int i = 0; i < 200; i++) {
-			sqdk = Double.parseDouble(df.format(2 + Math.random() * 30));//97 Math.random()
+			sqdk = Double.parseDouble(df.format(2 + Math.random() * 28));//97 Math.random()
 																			// *
 																			// 97));//
 																			// 997
@@ -416,6 +461,7 @@ public class RandomValue {
 		int rzqx = (int) (Math.random() * 4);
 		int registtype = (int) (1 + Math.random() * 3);
 		int pledge = (int) (1 + Math.random() * 3);
+		
 		KSDCase ksd = new KSDCase();
 		RequestPayout	rp = RandomValue.getMoney();
 		ksd.setUsername(getChineseName());// 名字
@@ -428,8 +474,8 @@ public class RandomValue {
 		ksd.setBusinessname("qiyemc");// 企业名称
 		ksd.setBusinessid("yingyezzh");// 企业执照
 		ksd.setCartype(cartype);// 0新车  1 二手车
-		ksd.setCarbrand("宝骏");
-		ksd.setCarseries("宝骏630");
+		ksd.setCarbrand("奥迪汽车-奥迪");
+		ksd.setCarseries("A1");
 		ksd.setCarprice(cljg);// 车辆价格
 		ksd.setSqdk(sqdk);// 申请贷款
 		ksd.setHkqs(rzqx);// 融资期限
@@ -443,9 +489,12 @@ public class RandomValue {
 		ksd.setPledge(pledge);// 抵押方1,2,3
 		//ksd.setSssh("几节");//所属商户
 		ksd.setImgcount(4);// 图片数量1,2,3
-		ksd.setLoginname("刘浩亮");//登录邮箱
+		ksd.setLoginname("刘浩亮");//登录邮箱徐翊峰
 		ksd.setLoginemail("liuhl@jizhicar.com");
+		ksd.setPwd("@123456");
 		ksd.setRequestpayout(rp);
+		ksd.setDeduction(	 Double.parseDouble(df2.format(2 + Math.random() * 100)));
+		ksd.setZjtr((int) (Math.random() * 4));
 		return ksd;
 	}
 	public static KSDCase getRandom(AppiumDriver<AndroidElement> driver) {
@@ -460,7 +509,7 @@ public class RandomValue {
 		DecimalFormat df2 = new DecimalFormat("#.00");
 		DecimalFormat df = new DecimalFormat("#.000");
 		for (int i = 0; i < 200; i++) {
-			sqdk = Double.parseDouble(df.format(2 + Math.random() * 30));//97 Math.random()
+			sqdk = Double.parseDouble(df.format(2 + Math.random() * 28));//97 Math.random()
 																			// *
 																			// 97));//
 																			// 997
@@ -492,8 +541,8 @@ public class RandomValue {
 		ksd.setBusinessname("qiyemc");// 企业名称
 		ksd.setBusinessid("yingyezzh");// 企业执照
 		ksd.setCartype(cartype);// 0新车  1 二手车
-		ksd.setCarbrand("宝骏");
-		ksd.setCarseries("宝骏630");
+		ksd.setCarbrand("奥迪汽车-奥迪");
+		ksd.setCarseries("A1");
 		ksd.setCarprice(cljg);// 车辆价格
 		ksd.setSqdk(sqdk);// 申请贷款
 		ksd.setHkqs(rzqx);// 融资期限
@@ -509,7 +558,10 @@ public class RandomValue {
 		ksd.setImgcount(4);// 图片数量1,2,3
 		ksd.setLoginname("刘浩亮");//登录邮箱
 		ksd.setLoginemail("liuhl@jizhicar.com");
+		ksd.setPwd("@123456");
 		ksd.setRequestpayout(rp);
+		ksd.setDeduction(	 Double.parseDouble(df2.format(2 + Math.random() * 100)));
+		ksd.setZjtr( (int) (Math.random() * 4));
 		return ksd;
 	}
 }

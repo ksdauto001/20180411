@@ -42,8 +42,29 @@ public class KSDCase {
 	int registtype;// 上牌方
 	int pledge;// 抵押方
 	int imgcount;// 进件图片数量
+	double deduction;//总额
+	int zjtr;//转交他人
 	List<Integer> imgtypes;
 	RequestPayout requestpayout;
+	
+	
+	
+	public int getZjtr() {
+		return zjtr;
+	}
+
+	public void setZjtr(int zjtr) {
+		this.zjtr = zjtr;
+	}
+
+	public double getDeduction() {
+		return deduction;
+	}
+
+	public void setDeduction(double deduction) {
+		this.deduction = deduction;
+	}
+
 	public List<Integer> getImgtypes() {
 		return imgtypes;
 	}

@@ -19,6 +19,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -30,7 +31,7 @@ import com.kuaishoudan.financer.util.IdCardGenerator;
 public class WebSPUtil {
 
 	public static void login2(WebDriver driver, String username, String pwd) {
-
+		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		driver.findElement(By.id("login_userName")).sendKeys(username);
 		driver.findElement(By.id("login_passWord")).sendKeys(pwd);
 		driver.findElement(By.id("login_submit")).click();
@@ -54,6 +55,7 @@ public class WebSPUtil {
 		tempMap.put("辛颖", "xiny@jizhicar.com");
 		tempMap.put("沈月", "sheny@jizhicar.com");
 		tempMap.put("刘浩亮", "liuhl@jizhicar.com");
+		tempMap.put("白正华", "baizh@jizhicar.com");
 		for (String key : tempMap.keySet()) {
 			// System.out.println("key= "+ key + " and value= " +
 			// tempMap.get(key));
@@ -71,29 +73,23 @@ public class WebSPUtil {
 	public static boolean testSP1(WebDriver driver, String email, String itename,KSDCase ksd) {
 		// String username="niun@jizhicar.com";
 		boolean flag = false;
-		login2(driver, email, "@123456");
-		if(email.equals(ksd.getLoginemail())){
+	
+		if(email.equals(ksd.getLoginemail())||email.equals("")){
+			login2(driver, ksd.getLoginemail(),ksd.getPwd());
 			driver.findElement(By.linkText("客户")).click();
 			driver.findElement(By.linkText("请款管理")).click();
 			clickItemorder(driver, itename);
-			int height = driver.manage().window().getSize().height;
-			// System.out.println("height" + height);
-			((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
-					+ (height * 2 + 500) + ")"); // 向下滑动
-			try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	
 			driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-			driver.findElement(
-					By.xpath("//div[@class='requestpayout_detail_btn_box']/a[2]/div"))
-					.click();// 同意
+
+			driver.findElement(By.linkText("确认提交")).click();
+			driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+			driver.findElement(By.name("remark")).sendKeys("同意");
 			driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 			driver.findElement(By.id("confirm_sub_t")).click();
 			
 		}else{
+			login2(driver, email, "@123456");
 		clickItem(driver, itename);
 		try {
 			Thread.sleep(2000);
@@ -102,25 +98,17 @@ public class WebSPUtil {
 			e.printStackTrace();
 		}
 
-		int height = driver.manage().window().getSize().height;
-		// System.out.println("height" + height);
-		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
-				+ (height * 2 + 500) + ")"); // 向下滑动
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-		driver.findElement(
-				By.xpath("//div[@class='requestpayout_detail_btn_box']/a[4]/div"))
-				.click();// 同意
+
+		driver.findElement(By.linkText("同意")).click();
+		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+		driver.findElement(By.name("remark")).sendKeys("同意");
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		driver.findElement(By.id("argee_sub")).click();// 确认
 		flag = true;
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -144,34 +132,28 @@ public class WebSPUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		int height = driver.manage().window().getSize().height;
-		// System.out.println("height" + height);
-		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
-				+ (height * 2 + 500) + ")"); // 向下滑动
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+		driver.manage().timeouts().implicitlyWait(23, TimeUnit.SECONDS);
+	WebElement agree=	driver.findElement(
+				By.xpath("//div[@class='details_content']/div[2]/div/a"));
+		if(agree.getText().equals("同意")){
+			agree.click();// 同意
+			driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+			driver.findElement(By.name("remark")).sendKeys("同意");
+			driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+			driver.findElement(By.id("argee_sub")).click();// 确认
+		}else{
+			agree.click();// 确认提交
+			driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+			driver.findElement(By.id("risk_type1")).click();
+			driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+			driver.findElement(By.name("remark")).sendKeys("同意");
+			driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+			driver.findElement(By.xpath("//div[@class='cashed_mark']/div/a")).click();//确认
 		}
-		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-		driver.findElement(
-				By.xpath("//div[@class='requestpayout_detail_btn_box']/a[3]/div"))
-				.click();// 同意
-		/*int size=driver.findElements(By.name("risk_type")).size();
-		if(size>0){
-		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-		driver.findElement(By.id("risk_type1")).click();
-		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-		driver.findElement(By.xpath("//div[@class='cashed_mark']/div/a")).click();//确认
-		}else{*/
-		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-		
-		driver.findElement(By.id("argee_sub")).click();// 确认
-		//}
 		flag = true;
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -194,21 +176,11 @@ public class WebSPUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		int height = driver.manage().window().getSize().height;
-		// System.out.println("height" + height);
-		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
-				+ (height * 2 + 600) + ")"); // 向下滑动
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		driver.manage().timeouts().implicitlyWait(33, TimeUnit.SECONDS);
+			driver.findElement(By.linkText("同意")).click();
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-		driver.findElement(
-				By.xpath("//div[@class='requestpayout_detail_btn_box']/a[4]/div"))
-				.click();// 同意
-		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+		driver.findElement(By.id("content")).sendKeys("同意");
 		driver.findElement(By.id("argee_sub")).click();// 确认
 		flag = true;
 		try {
@@ -223,36 +195,43 @@ public class WebSPUtil {
 
 	// 财务专员 审批
 
-	public static boolean testSP4(WebDriver driver, String email, String itename) {
+	public static boolean testSP4(WebDriver driver, String email, String itename,KSDCase ksd) {
 		// / String username = "sheny@jizhicar.com";
 		boolean flag = false;
 		login2(driver, email, "@123456");
 
 		clickItem(driver, itename);
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		int height = driver.manage().window().getSize().height;
-		// System.out.println("height" + height);
 		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
 				+ (height * 2 + 500) + ")"); // 向下滑动
+		WebShop.clickShop(driver, ksd);
+
 		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
+			Thread.sleep(500);
+		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-		driver.findElement(
-				By.xpath("//div[@class='requestpayout_detail_btn_box']/a[3]/div"))
-				.click();// 同意
+		Select userSelect = new Select(
+				driver.findElement(By.id("orderby_type")));
+		userSelect.selectByVisibleText("按贷款时间倒序排列");
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-		driver.findElement(By.id("argee_sub")).click();// 确认
+		driver.findElement(By.linkText("筛选")).click();
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-	//	driver.findElement(By.className("cancel")).click();// 稍后再说
+
+		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
+		+ (height * 2 + 200) + ")"); // 向下滑动
+
+		driver.findElement(By.linkText("同意")).click();
+		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+		driver.findElement(By.name("remark")).sendKeys("同意");
+		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+		
+		driver.findElement(By.linkText("确认")).click();
+		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+		driver.findElement(By.className("cancel")).click();// 稍后再说
+
 		flag = true;
 		try {
 			Thread.sleep(3000);
@@ -277,13 +256,13 @@ public class WebSPUtil {
 		int height = driver.manage().window().getSize().height;
 		// System.out.println("height" + height);
 		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
-				+ (height * 2 +700) + ")"); // 向下滑动
+				+ (height * 2 +200) + ")"); // 向下滑动
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-		driver.findElements(
+	/*	driver.findElements(
 				By.xpath("//div[@class='requestpayout_detail_btn_box']/a/div"))
 				.get(0).click();// 确认回款
-		// driver.findElement(By.xpath("//div[@class='requestpayout_detail_btn_box']/a/div")).click();//确认回款
-
+*/		// driver.findElement(By.xpath("//div[@class='requestpayout_detail_btn_box']/a/div")).click();//确认回款
+		driver.findElement(By.linkText("确认回款")).click();
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e1) {
@@ -311,9 +290,33 @@ public class WebSPUtil {
 		boolean flag = false;
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
-		WebUtil.login(driver, ksd.getLoginemail());// 登录
+		WebUtil.login(driver, ksd);// 登录
 		List<Integer> list = WebOrgan.getImge3(driver, ksd);
 		List<Integer> list2=	ksd.getImgtypes();
+			/*int aa=0,countImg=0;
+		for(int i=0;i<list.size();i++){
+			if(list.get(i)<9){
+				List<Integer> list3=UserDaoImpl.getImgType(list.get(i)+14,list);
+				for(int p=0;p<list3.size();p++){
+				System.out.println("!!!!!!!!"+list3.get(p));}
+				list2.addAll(list3);
+				aa=list3.size();
+				countImg=aa+countImg;
+			}
+		}
+		if(countImg==0){
+			for(Integer type:list){
+				if(type>99){
+					list2.add(type);countImg=1;
+					break;
+				}
+			}
+		}*/
+	
+	//	System.out.println("********$$$"+countImg);
+		
+
+		
 		
 		for(int i=0;i<list.size();i++){
 			if(list.get(i)<99){
@@ -321,9 +324,10 @@ public class WebSPUtil {
 				i--;
 			}
 		}
-
+		
+		ksd.setImgcount(list.size());
 		list2.addAll(list);
-
+	
 		for(int i=0;i<list2.size();i++){
 			if(list2.get(i)<99){
 				list2.remove(i);			
@@ -332,73 +336,6 @@ public class WebSPUtil {
 		}
 		 Collections.sort(list2); ;
 		ksd.setImgtypes(list2);
-		WebUtil.logout(driver);
-	/*	int aa=0,countImg=0;
-		for(int i=0;i<list.size();i++){
-			if(list.get(i)<9){
-				List<Integer> list3=UserDaoImpl.getImgType(list.get(i)+14,list);
-				aa=list3.size();
-				countImg=aa+countImg;
-			}
-		}*/
-		int countImg=list.size();
-		System.out.println("$$$"+countImg);
-		ksd.setImgcount(countImg);
-		
-		login2(driver, ksd.getLoginemail(), "@123456");
-		driver.findElement(By.linkText("客户")).click();
-		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-		driver.findElement(By.xpath("//ul[@class='slide_nav_bar']/li[6]/a"))
-				.click();// 归档管理
-
-		driver.manage().timeouts().implicitlyWait(23, TimeUnit.SECONDS);
-		driver.findElement(By.linkText("待处理")).click();
-		clickItemorder(driver, ksd.getLoginname());
-
-		int height = driver.manage().window().getSize().height;
-		// System.out.println("height" + height);
-		// Long aa=(Long) ((JavascriptExecutor)
-		// driver).executeScript("return  document.body.scrollHeight");
-		// System.out.println(aa);
-
-		// ((JavascriptExecutor)
-		// driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
-
-		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
-				+ (height * 2 + 400) + ")"); // 向下滑动
-
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		driver.manage().timeouts().implicitlyWait(23, TimeUnit.SECONDS);
-		driver.findElements(
-				By.xpath("//div[@class='requestpayout_detail_btn_box']/a/div"))
-				.get(0).click();// 通知所需材料
-	/*	driver.findElements(
-				By.xpath("//div[@class='requestpayout_detail_btn_box']/div[2]"))
-				.get(0).click();// 确认归档
-*/
-		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-	/*	driver.findElement(By.className("flied_sub")).click();//归档确认*/
-		List<WebElement> checks=driver.findElements(By.xpath("//div[@class='check']/div"));
-		System.out.println(checks.size());
-		for(WebElement check:checks){
-			check.click();
-		}
-		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-		driver.findElement(By.id("material_sub")).click();//通知所需材料确认
-		flag = true;
-	
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		WebUtil.logout(driver);
 		
 
@@ -411,39 +348,27 @@ public class WebSPUtil {
 			// String username = "liuhl@jizhicar.com";
 			boolean flag = false;
 			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-			login2(driver, ksd.getLoginemail(), "@123456");
+			login2(driver, ksd.getLoginemail(), ksd.getPwd());
 			driver.findElement(By.linkText("客户")).click();
 			driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 			driver.findElement(By.xpath("//ul[@class='slide_nav_bar']/li[6]/a"))
 					.click();// 归档管理
 
 			driver.manage().timeouts().implicitlyWait(23, TimeUnit.SECONDS);
-			driver.findElement(By.linkText("待处理")).click();
+	//		driver.findElement(By.linkText("待处理")).click();
 			clickItemorder(driver, ksd.getLoginname());
-
-			int height = driver.manage().window().getSize().height;
-			((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
-					+ (height * 2 + 600) + ")"); // 向下滑动
-
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 
 			driver.manage().timeouts().implicitlyWait(23, TimeUnit.SECONDS);
 
-			driver.findElements(
-					By.xpath("//div[@class='requestpayout_detail_btn_box']/div[2]"))
-					.get(0).click();// 确认归档
-	
+			driver.findElement(By.linkText("同意")).click();
 			driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-			driver.findElement(By.className("flied_sub")).click();//归档确认
+			driver.findElement(By.name("remark")).sendKeys("同意");//归档确认
+			driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
+			driver.findElement(By.linkText("确认")).click();//归档确认
 
 			flag = true;
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

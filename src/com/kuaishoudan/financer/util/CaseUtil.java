@@ -91,7 +91,9 @@ public class CaseUtil {
 	//		map.put("gps_charge",decimalFormat.format(Double.parseDouble( ksd.getGps_charge())));
 			map.put("insurance",decimalFormat.format(Double.parseDouble(ksd.getInsurance())));
 	//		map.put("service_charge",decimalFormat.format(Double.parseDouble(ksd.getService_charge())));
-		
+			map.put("deduction", decimalFormat.format(ksd.getDeduction()));
+			double toalcharge=ksd.getSqdk()+Double.parseDouble(ksd.getPurchase_tax())+Double.parseDouble(ksd.getInsurance())-ksd.getDeduction();
+			map.put("toalcharge", ""+toalcharge);
 		  return map;
 	}
 	public static KSDCase getCaseByid(String caseid) {
