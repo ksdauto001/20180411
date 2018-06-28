@@ -41,8 +41,7 @@ public class TestUser {
 	String itename = "";
 	String flow="";
 	/**
-	 *  不出合同-审批流11234
-	 * 
+	 *  不出合同-审批流 
 	 * @param args
 	 * @throws Exception
 	 */
