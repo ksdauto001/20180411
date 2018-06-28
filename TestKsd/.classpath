@@ -14,5 +14,6 @@
 	<classpathentry kind="lib" path="lib/reportng-1.1.4.jar"/>
 	<classpathentry kind="lib" path="lib/selenium-java-2.44.0.jar"/>
 	<classpathentry kind="lib" path="lib/velocity-dep-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/selenium-server-standalone-2.45.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
