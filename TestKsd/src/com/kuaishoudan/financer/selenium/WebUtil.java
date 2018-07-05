@@ -371,21 +371,21 @@ public class WebUtil {
 
 	public static void logout(WebDriver driver) {
 		
-		try {
+		/*try {
 			Thread.sleep(1500);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
-		/*driver.findElement(By.linkText("首页")).click();
+		driver.findElement(By.linkText("首页")).click();
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);*/
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 		driver.findElement(By.id("header_username")).click();
 		try {
 			Thread.sleep(500);
@@ -394,6 +394,22 @@ public class WebUtil {
 			e.printStackTrace();
 		}
 		driver.manage().timeouts().implicitlyWait(55, TimeUnit.SECONDS);
-		driver.findElement(By.linkText("退出登录")).click();
+		driver.findElement(By.linkText("退出登录")).click();*/
+		String baseUrl = "";
+		Properties properties = new Properties();
+		try {
+        	InputStreamReader in=new InputStreamReader(WebUtil.class.getResourceAsStream("ksd.properties"), "UTF-8");
+        	properties.load(in);
+        	baseUrl = properties.getProperty("webUrl");
+
+           // System.out.println("z");
+        	driver.get(baseUrl);
+        	Thread.sleep(500);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

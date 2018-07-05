@@ -180,7 +180,8 @@ public class TestUser {
 	}
 	public void webYlr() {
 		WebUtil.login(webdriver, ksd);// 登录
-		WebUtil.testYFP(webdriver, ksd);// 待分配
+		WebUtil.testDFP(webdriver, ksd);// 待分配
+		WebUtil.testYFP(webdriver, ksd);// 已分配
 		WebUtil.logout(webdriver);// 登出
 
 	}
