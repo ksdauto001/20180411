@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="libs/java-client-6.0.0.jar"/>
 	<classpathentry kind="lib" path="libs/mysql-connector-java-5.1.13.jar"/>
 	<classpathentry kind="lib" path="libs/selenium-java-3.12.0.jar"/>
@@ -14,5 +13,13 @@
 	<classpathentry kind="lib" path="libs/selenium-remote-driver-3.12.0.jar"/>
 	<classpathentry kind="lib" path="libs/selenium-support-3.12.0.jar"/>
 	<classpathentry kind="lib" path="libs/velocity-dep-1.4.jar"/>
+	<classpathentry kind="lib" path="libs/spring-core-5.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="libs/spring-context-5.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="libs/spring-aop-5.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="libs/spring-beans-5.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="libs/spring-expression-5.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="libs/spring-jcl-5.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="libs/aspectjweaver-1.9.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -250,6 +250,12 @@ public class WebSPUtil {
 		}
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		driver.findElement(By.linkText("确认")).click();
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		driver.findElement(By.linkText("确定")).click();
 		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
