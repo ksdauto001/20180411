@@ -1072,7 +1072,7 @@ public class AppUtil {
 				df(driver,
 						By.id("com.kuaishoudan.financer:id/btn_ok")).click();
 					// 两种证上传——确定按钮
-				Thread.sleep(2000);
+		
 
 				AppUtil.swipeToUp2(driver, 1000);// 向上滑动
 				Thread.sleep(8500);
@@ -1123,7 +1123,7 @@ public class AppUtil {
 					}
 					AppUtil.swipeToUp3(driver, 800);// 向上滑动
 
-					Thread.sleep(2000);
+
 					List<WebElement> ivts =	dfs(driver, By
 							.id("com.kuaishoudan.financer:id/iv_check"));
 		 
@@ -1152,7 +1152,7 @@ public class AppUtil {
 						By.id("com.kuaishoudan.financer:id/btn_ok")).click();
 				// 两种证上传——确定按钮
 
-				Thread.sleep(4000 + count2 * 1500);
+				Thread.sleep( count2 * 500);
 			}
 	 
 			df(driver,
