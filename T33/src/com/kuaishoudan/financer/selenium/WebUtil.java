@@ -193,19 +193,7 @@ public class WebUtil {
 
 	// 已分配
 	public static void testYFP(WebDriver driver,KSDCase ksd) {
-	//	System.out.println("已分配");
-		/*try {
-			Thread.sleep(500);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
-/*		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
-		driver.findElement(By.linkText("客户")).click();*/
-/*		driver.navigate().refresh();
-		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);*/
-	//	driver.findElement(By.className("operation_category")).findElements(By.tagName("a")).get(1).click();
-	//driver.findElement(By.linkText("已分配")).click();
+
 		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
 		driver.findElement(By.className("operation_category")).findElements(By.tagName("a")).get(1).click();
 		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
