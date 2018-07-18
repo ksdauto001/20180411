@@ -426,10 +426,10 @@ public class TestUser {
 	}
 
 	public void tearDown() throws Exception {
-		db.closeConn1();
+	
 		driver.quit();
 		webdriver.quit();
-	
+		db.closeConn1();
 		
 		
 	}

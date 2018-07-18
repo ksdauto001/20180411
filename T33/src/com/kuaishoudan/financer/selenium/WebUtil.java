@@ -183,9 +183,19 @@ public class WebUtil {
 		df(driver,By.id("allotBtnY")).click();// 分配按钮
 		df(driver,By.id("delQDBtn")).click();// 分配提醒确定		
 		//  确定按钮
+		
+
+		
+	
 		  ((JavascriptExecutor)driver).executeScript
 		  ("document.getElementById('success_allot').click();;");
-
+		  try {
+				Thread.sleep(500);
+			
+		 } catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();			
+		 }
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已分配"));
 
@@ -193,92 +203,69 @@ public class WebUtil {
 
 	// 已分配
 	public static void testYFP(WebDriver driver,KSDCase ksd) {
-
-		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
-		driver.findElement(By.className("operation_category")).findElements(By.tagName("a")).get(1).click();
-		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
+	//	df(driver,By.linkText("客户")).click();
+		df(driver,By.linkText("已分配")).click();
+	//	driver.findElement(By.className("operation_category")).findElements(By.tagName("a")).get(1).click();
+	 
 		clickItem(driver, ksd.getLoginname());
-		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
- 	
-		driver.findElement(By.linkText("开始录入")).click();
-		
-		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
-		driver.findElement(By.linkText("确认申请")).click();
+ 
+		df(driver,By.linkText("开始录入")).click();
 	
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-	//	driver.findElement(By.id("requestpayout_apply")).click();// 确认申请
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		df(driver,By.linkText("确认申请")).click();
+ 
+		  try {
+				Thread.sleep(300);
+			
+		 } catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();			
+		 }
+
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已录入"));
 	}
 
 	// 已录入
 	public static void testYLR(WebDriver driver, KSDCase ksd) {
-	//	System.out.println("已录入");
-/*		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
-	driver.findElement(By.linkText("客户")).click();//-------------------------
-	*/
-	/*	try {
-			Thread.sleep(500);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
-	//	driver.navigate().refresh();
-		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
-		driver.findElement(By.className("operation_category")).findElements(By.tagName("a")).get(2).click();
-//		driver.findElement(By.linkText("已录入")).click();
 
-		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
+	//	df(driver,By.linkText("客户")).click();
+		df(driver,By.linkText("已录入")).click();
+
 		clickItem(driver, ksd.getLoginname());
-		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
-/*		driver.findElement(By.className("requestpayout_detail_btn_box"))
-				.findElement(By.xpath("//a/div")).click();// 通知审核结果
-*/	
 
-		driver.findElement(By.linkText("通知审核结果")).click();
+		df(driver,By.linkText("通知审核结果")).click();
 
-		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
+		dfs(driver,By.name("type")).get(1).click();
 
-		driver.findElements(By.name("type")).get(1).click();
- 
-
-		/*try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
+	
+	/*	driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
 		  ((JavascriptExecutor)driver).executeScript
-		  ("document.getElementById('realLoanAmount').setAttribute('value', '0.0001');;");
+		  ("document.getElementById('realLoanAmount').setAttribute('value', '0.0001');;");*/
 		   
-		
+		df(driver,By.name("real_loan_amount")).sendKeys("0.0001");
 //		driver.findElement(By.name("real_loan_amount")).sendKeys("0.0001");
  
-		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
-		driver.findElement(By.name("purchase_tax")).sendKeys(
+
+		df(driver,By.name("purchase_tax")).sendKeys(
 				ksd.getPurchase_tax());// 购置税
-		driver.findElement(By.name("gps_charge")).sendKeys(ksd.getGps_charge());// GPS费
-		driver.findElement(By.name("insurance")).sendKeys(ksd.getInsurance());// 保险费
-		driver.findElement(By.name("service_charge")).sendKeys(
+		df(driver,By.name("gps_charge")).sendKeys(ksd.getGps_charge());// GPS费
+		df(driver,By.name("insurance")).sendKeys(ksd.getInsurance());// 保险费
+		df(driver,By.name("service_charge")).sendKeys(
 				ksd.getService_charge());// 服务费
 
-		driver.manage().timeouts().implicitlyWait(28, TimeUnit.SECONDS);
-		driver.findElement(By.id("review_sub")).click();// 确定按钮
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Map<String, String> actual = UserDaoImpl.getFinance(ksd);
+	 
+		df(driver,By.id("review_sub")).click();// 确定按钮
+		 try {
+				Thread.sleep(500);
+			
+		 } catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();			
+		 }
+		
 		Map<String, String> expect = CaseUtil.getFinance(ksd);
+		Map<String, String> actual = UserDaoImpl.getFinance(ksd);
+
 		Assert.assertEquals(actual, expect);
 	}
 
@@ -288,7 +275,7 @@ public class WebUtil {
 		driver.findElement(By.linkText("客户")).click();
 		driver.findElement(By.linkText("已通过")).click();
 
-		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+ 
 	}
 
 	// 首页待办订单列表

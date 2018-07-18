@@ -714,21 +714,18 @@ public class AppSPUtil {
 
 	// 状态实际值
 	public static String getActstatue(AppiumDriver<AndroidElement> driver) {
- 
-			String titletext =AppUtil.df(driver,
-				By.id("com.kuaishoudan.financer:id/toolbar_title")).getText().trim();// 标题文本
+		String titletext =AppUtil.df(driver,
+				By.id("com.kuaishoudan.financer:id/toolbar_title")).getText();// 标题文本
 
 		if ("贷款详情".equals(titletext)) {
 			driver.findElement(
 					By.id("com.kuaishoudan.financer:id/toolbar_back")).click();// 返回
 		}
-	 
+		
 		AppUtil.swipeToDown(driver, 500);
- 
-		driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 	 
 		String actu = 	AppUtil.df(driver,
-				By.id("com.kuaishoudan.financer:id/tv_lable")).getText().trim();
+				By.id("com.kuaishoudan.financer:id/tv_lable")).getText();
 		if(actu.equals("新店加急")){
 		 
 			 actu =AppUtil.dfs(driver, By.id("com.kuaishoudan.financer:id/tv_lable")).get(1)
