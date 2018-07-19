@@ -433,19 +433,26 @@ public class TestA {
 				.click();// 倒计时确认
 		AppUtil.df(driver,By.id("com.kuaishoudan.financer:id/toolbar_back"))
 			.click();// 返回
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		AppUtil.df(driver,By.id("com.kuaishoudan.financer:id/toolbar_back"))
 			.click();// 返回
 		
-
+		String actualstatue = AppSPUtil.getActstatue(driver);
+		ksd.setStatue(actualstatue);
+		Assert.assertEquals(ksd.getStatue(), "已请款");
+		
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已请款"));
 
 		Assert.assertEquals(UserDaoImpl.getRisk_type(ksd),
 				1);
 		
-		String actualstatue = AppSPUtil.getActstatue(driver);
-		ksd.setStatue(actualstatue);
-		Assert.assertEquals(ksd.getStatue(), "已请款");
+
 		return ksd;
 	}
 	

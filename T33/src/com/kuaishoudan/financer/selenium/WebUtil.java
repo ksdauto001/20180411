@@ -189,15 +189,7 @@ public class WebUtil {
 	
 		  ((JavascriptExecutor)driver).executeScript
 		  ("document.getElementById('success_allot').click();;");
-		  try {
-				Thread.sleep(500);
-			
-		 } catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();			
-		 }
-		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
-				UserDaoImpl.getstatus_id("已分配"));
+		
 
 	}
 
@@ -205,24 +197,19 @@ public class WebUtil {
 	public static void testYFP(WebDriver driver,KSDCase ksd) {
 	//	df(driver,By.linkText("客户")).click();
 		df(driver,By.linkText("已分配")).click();
-	//	driver.findElement(By.className("operation_category")).findElements(By.tagName("a")).get(1).click();
-	 
+
+		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
+				UserDaoImpl.getstatus_id("已分配"));
+		
 		clickItem(driver, ksd.getLoginname());
  
 		df(driver,By.linkText("开始录入")).click();
 	
 		df(driver,By.linkText("确认申请")).click();
  
-		  try {
-				Thread.sleep(300);
-			
-		 } catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();			
-		 }
+		 
 
-		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
-				UserDaoImpl.getstatus_id("已录入"));
+		
 	}
 
 	// 已录入
@@ -231,6 +218,9 @@ public class WebUtil {
 	//	df(driver,By.linkText("客户")).click();
 		df(driver,By.linkText("已录入")).click();
 
+		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
+				UserDaoImpl.getstatus_id("已录入"));
+		
 		clickItem(driver, ksd.getLoginname());
 
 		df(driver,By.linkText("通知审核结果")).click();
@@ -256,7 +246,7 @@ public class WebUtil {
 	 
 		df(driver,By.id("review_sub")).click();// 确定按钮
 		 try {
-				Thread.sleep(500);
+				Thread.sleep(600);
 			
 		 } catch (InterruptedException e) {
 				// TODO Auto-generated catch block

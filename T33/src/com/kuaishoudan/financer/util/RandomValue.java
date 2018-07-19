@@ -543,9 +543,9 @@ public class RandomValue {
 		ksd.setCartype(cartype);// 0新车  1 二手车cartype
 		ksd.setCarbrand("北京汽车-北京");//奥迪汽车-奥迪
 		ksd.setCarseries("BJ20");//A1
-		ksd.setCarprice(45);// 车辆价格cljg
-		ksd.setSqdk(25);// 申请贷款sqdk
-		ksd.setHkqs(0);// 融资期限rzqx
+		ksd.setCarprice(cljg);// 车辆价格cljg 45
+		ksd.setSqdk(sqdk);// 申请贷款sqdk 25
+		ksd.setHkqs(rzqx);// 融资期限rzqx0
 		ksd.setRemark("beizhu");// 备注
 		ksd.setPurchase_tax(""+0);// 购置税purchase_tax
 		ksd.setGps_charge(""+0);// gps费gps_charge

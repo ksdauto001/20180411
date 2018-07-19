@@ -100,8 +100,8 @@ public class AppUtil {
 	/*	driver = EventFiringWebDriverFactory.getEventFiringWebDriver(driver,
 				new AlertListener(), new ElementListener());*/
 	 
-	
-//new WebDriverWait(driver,10).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("css locator")));
+		
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
 		return driver;
 
@@ -447,7 +447,12 @@ public class AppUtil {
 
 			 
 				try {
-					
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					List<WebElement> producs = 	dfs(driver, By.id("com.kuaishoudan.financer:id/text_product"));
 				
 					for (WebElement product : producs) {
@@ -457,12 +462,16 @@ public class AppUtil {
 							break;
 						}
 					}
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					WebElement prodname=df(driver,
+							By.id("com.kuaishoudan.financer:id/text_product"));
 
-			
-					String prodname=df(driver,
-							By.id("com.kuaishoudan.financer:id/text_product"))
-							.getText();
-					ksd.setProduct(	prodname	);
+					ksd.setProduct(	prodname.getText()	);
 				} catch (java.lang.IndexOutOfBoundsException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -474,12 +483,7 @@ public class AppUtil {
 				
 				AppUtil.swipeToUpJj(driver, 1000);// 向上滑动
 
-				try {
-					Thread.sleep(200);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+		
 				df(driver,
 						By.id("com.kuaishoudan.financer:id/text_feilv")).click();// 费率
 	
@@ -489,11 +493,17 @@ public class AppUtil {
 					List<WebElement> rates = dfs(driver, By.id("com.kuaishoudan.financer:id/text_select"));
  
 					dfBy(driver,rates.get(0)).click();// 费率选项
-			 
-					String rate=df(driver,
-							By.id("com.kuaishoudan.financer:id/text_feilv")).getText();
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					 
+					WebElement rate=df(driver,
+							By.id("com.kuaishoudan.financer:id/text_feilv"));
 	 
-					ksd.setRate(rate);
+					ksd.setRate(rate.getText());
 				
 
 				} catch (java.lang.IndexOutOfBoundsException e) {
@@ -726,7 +736,12 @@ public class AppUtil {
 	 
 
 				try {
-					
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					List<WebElement> producs = 	dfs(driver, By.id("com.kuaishoudan.financer:id/text_product"));
 				 
 					for (WebElement product : producs) {
@@ -736,25 +751,39 @@ public class AppUtil {
 							break;
 						}
 					}
-					String prodname=df(driver,
-							By.id("com.kuaishoudan.financer:id/text_product"))
-							.getText();
-					ksd.setProduct(	prodname	);
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					WebElement prodname=df(driver,
+							By.id("com.kuaishoudan.financer:id/text_product"))		;
+				
+					ksd.setProduct(	prodname.getText()	);
 				} catch (java.lang.IndexOutOfBoundsException e) {
 					// TODO Auto-generated catch block
 					 e.printStackTrace();
 				
 				}
-				df(driver,
-						By.id("com.kuaishoudan.financer:id/text_feilv")).click();// 费率
+			
 
 				try {
+			
+					df(driver,
+							By.id("com.kuaishoudan.financer:id/text_feilv")).click();// 费率
 					List<WebElement> rates = dfs(driver, By.id("com.kuaishoudan.financer:id/text_select"));
 					 
 					dfBy(driver,rates.get(0)).click();// 费率选项
-					String rate=df(driver,
-							By.id("com.kuaishoudan.financer:id/text_feilv")).getText();
-					ksd.setRate(rate);
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					WebElement rate=df(driver,
+							By.id("com.kuaishoudan.financer:id/text_feilv"));
+					ksd.setRate(rate.getText());
 
 				} catch (java.lang.IndexOutOfBoundsException e) {
 					// TODO Auto-generated catch block
@@ -888,12 +917,11 @@ public class AppUtil {
 		System.out.println(ksd.getFlow()+","+ksd.getLoginemail());
 		int gq = ksd.getQygr();
 		try {
-			Thread.sleep(1500);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		boolean flag = createUser(driver, devicename, i, ksd);
 	
 		Map<String, String> expect = CaseUtil.getCustomer(ksd);
@@ -908,12 +936,12 @@ public class AppUtil {
 				ksd = addGr(driver, webdriver, devicename, i, ksd);
 				//
 			}
-		
-		
+	
+			String statue = AppSPUtil.getActstatue(driver);
+			Assert.assertEquals(statue, "待分配");
 			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 					UserDaoImpl.getstatus_id("待分配"));
-/*			String statue = AppSPUtil.getActstatue(driver);
-			Assert.assertEquals(statue, "待分配");*/
+		
 		}
 		
 		
@@ -1109,7 +1137,7 @@ public class AppUtil {
 						By.id("com.kuaishoudan.financer:id/btn_ok")).click();
 				// 两种证上传——确定按钮
 
-				Thread.sleep( count2 * 500);
+				Thread.sleep( count2 * 1000);
 			}
 	 
 			df(driver,
@@ -1413,7 +1441,7 @@ public class AppUtil {
 				df(driver,By.id("com.kuaishoudan.financer:id/btn_ok"))
 						.click();// 两种证上传——确定按钮
 
-				Thread.sleep( count2 * 500);
+				Thread.sleep( count2 * 1000);
 			}
 
 
