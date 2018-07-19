@@ -79,7 +79,7 @@ public class AppUtil {
 		// 真机
 		capabilities.setCapability("deviceName", "Android");
 		//	capabilities.setCapability(CapabilityType.BROWSER_NAME, "");
-			capabilities.setCapability(CapabilityType.VERSION, "4.3");
+			capabilities.setCapability(CapabilityType.VERSION, "4.4");
  
 		// support Chinese
 		capabilities.setCapability("unicodeKeyboard", true);
@@ -529,11 +529,11 @@ public class AppUtil {
 						.trim().split("-")[0]);// 产品名称查是否有常规甩单
 				System.out.println(ksd.getProduct().trim().split("-")[0] + ","
 						+ havesystem);
-		/*	if (havesystem == 0) {
+			if (havesystem == 0) {
 					// 订单常规
 					df(driver, By.id("com.kuaishoudan.financer:id/dialog_custom_confirm")).click();
 			//	}
-				 }*/
+				 }
  
 	 
 				int aa = 0, countImg = 0;
@@ -561,8 +561,8 @@ public class AppUtil {
 				countImg=list3.size();
 	
 				if(countImg==0){
-					list3=UserDaoImpl.getOMaterial2(ksd,1);
-				list2.add(	list3.get(0));
+					List<Integer>	list4=UserDaoImpl.getOMaterial2(ksd,1);
+				list2.add(	list4.get(0));
 					countImg=1;
 				}else{
 					list2.addAll(list3);
@@ -813,9 +813,9 @@ public class AppUtil {
 				System.out.println(ksd.getProduct().trim().split("-")[0] + ","
 						+ havesystem);
 
-			/*	if (havesystem == 0) {
+				if (havesystem == 0) {
 					df(driver, By.id("com.kuaishoudan.financer:id/dialog_custom_confirm")).click();//	订单常规
-				}*/
+				}
 				// }
 				//Thread.sleep(2000);
 	
@@ -845,8 +845,8 @@ public class AppUtil {
 				countImg=list3.size();
 		
 				if(countImg==0){
-					list3=UserDaoImpl.getOMaterial2(ksd,1);
-				list2.add(	list3.get(0));
+					List<Integer>	list4=UserDaoImpl.getOMaterial2(ksd,1);
+				list2.add(	list4.get(0));
 					countImg=1;
 				}else{
 					list2.addAll(list3);
@@ -923,7 +923,12 @@ public class AppUtil {
 			e.printStackTrace();
 		}
 		boolean flag = createUser(driver, devicename, i, ksd);
-	
+		try {
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Map<String, String> expect = CaseUtil.getCustomer(ksd);
 		Map<String, String> actual = UserDaoImpl.getCustomer(ksd);
 		Assert.assertEquals(actual, expect);
@@ -937,8 +942,8 @@ public class AppUtil {
 				//
 			}
 	
-			String statue = AppSPUtil.getActstatue(driver);
-			Assert.assertEquals(statue, "待分配");
+	/*		String statue = AppSPUtil.getActstatue(driver);
+			Assert.assertEquals(statue, "待分配");*/
 			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 					UserDaoImpl.getstatus_id("待分配"));
 		
@@ -1151,7 +1156,8 @@ public class AppUtil {
 			// driver.findElement(By.id("com.kuaishoudan.financer:id/tv_guide_know")).click();//我知道了
 			// driver.findElement(By.id("com.kuaishoudan.financer:id/tv_guide_know")).click();//我知道了
 			// driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back")).click();//返回按钮
- 
+			
+			Thread.sleep(500);
 		 
 
 		} catch (InterruptedException e) {
@@ -1199,48 +1205,43 @@ public class AppUtil {
 			String devicename, KSDCase ksd) {
 
 		try {
-			driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
-			driver.findElement(
+			 
+			 df(driver,
 					By.id("com.kuaishoudan.financer:id/edit_account")).clear();
- 
-			
-			Thread.sleep(600);
-			driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
-			driver.findElement(
+  
+			 df(driver,
 					By.id("com.kuaishoudan.financer:id/edit_account")).sendKeys( ksd.getLoginemail());
  
-			driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
-			driver.findElement(
+	 
+			 df(driver,
 					By.id("com.kuaishoudan.financer:id/edit_password")).sendKeys(ksd.getPwd());
-			driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
-			driver.findElement(By.id("com.kuaishoudan.financer:id/btn_login"))
+ 
+			 df(driver,By.id("com.kuaishoudan.financer:id/btn_login"))
 					.click();
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 
 		}  catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		// driver.findElement(By.id("com.kuaishoudan.financer:id/edit_account")).sendKeys(username);
-		// driver.findElement(By.id("com.kuaishoudan.financer:id/edit_password")).sendKeys("@123456");
+ 
 
 	}
 
 	// 登出
 	public static void logout(AppiumDriver<AndroidElement> driver) {
-		// System.out.println("logout");
-		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
-		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_menu"))
+	
+
+		df(driver,By.id("com.kuaishoudan.financer:id/toolbar_menu"))
 				.click();// 菜单
-		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-		driver.findElement(By.id("com.kuaishoudan.financer:id/header_img"))
+ 
+		df(driver,By.id("com.kuaishoudan.financer:id/header_img"))
 				.click();// 头像
-		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-		driver.findElement(By.id("com.kuaishoudan.financer:id/account_logout"))
+ 
+		df(driver,By.id("com.kuaishoudan.financer:id/account_logout"))
 				.click();// 退出登录
-		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-		driver.findElement(
+ 
+		df(driver,
 				By.id("com.kuaishoudan.financer:id/dialog_custom_confirm"))
 				.click();// 确定)
 	}

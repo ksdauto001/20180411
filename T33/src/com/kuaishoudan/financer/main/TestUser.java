@@ -365,6 +365,12 @@ public class TestUser {
 				itename = ep.getUsername();
 				break;
 			}
+			/*if (ep.getDesc().equals("BD经理")) {
+				System.out.println(ep.getUsername());
+				WebSPUtil.testSP3(webdriver, ep.getAccount(), itename, ksd); // 请款审批同意专员
+				itename = ep.getUsername();
+				break;
+			}*/
 
 		}
 		for (Employee ep : employes) {
@@ -378,7 +384,7 @@ public class TestUser {
 				WebSPUtil.testSP3(webdriver, ep.getAccount(), itename, ksd); // 请款审批同意专员
 				itename = ep.getUsername();
 				break;
-			}
+			} 
 		}
 
 	}

@@ -370,14 +370,14 @@ public class TestE {
 					.click();// 上牌抵押地
 			AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/options3"))
 					.click();// 城市
-			int width = driver.manage().window().getSize().width;
+			/*int width = driver.manage().window().getSize().width;
 			int height = driver.manage().window().getSize().height;
 			TouchAction action1 = new TouchAction(driver)
 					.press(PointOption.point(width * 2 / 3, height - 80))
 					.waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
 					.moveTo(PointOption.point(width * 2 / 3, height - 280))
 					.release();
-			action1.perform();
+			action1.perform();*/
 			AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/btnSubmit"))
 					.click();// 城市确定
 
@@ -440,9 +440,9 @@ public class TestE {
 			AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/toolbar_back"))
 			.click();// 返回
 			
-			String actualstatue = AppSPUtil.getActstatue(driver);
+		/*	String actualstatue = AppSPUtil.getActstatue(driver);
 			ksd.setStatue(actualstatue);
-			Assert.assertEquals(ksd.getStatue(), "已请款");
+			Assert.assertEquals(ksd.getStatue(), "已请款");*/
 			
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已请款"));

@@ -306,8 +306,8 @@ public class TestB {
 		countImg = list3.size();
 
 		if (countImg == 0) {
-			list3 = UserDaoImpl.getOMaterial2(ksd, 2);
-			list2.add(list3.get(0));
+			List<Integer>	list4 = UserDaoImpl.getOMaterial2(ksd, 2);
+			list2.add(list4.get(0));
 			countImg = 1;
 		} else {
 			list2.addAll(list3);
@@ -370,14 +370,14 @@ public class TestB {
 				.click();// 上牌抵押地
 		AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/options3"))
 				.click();// 城市
-		int width = driver.manage().window().getSize().width;
+/*			int width = driver.manage().window().getSize().width;
 		int height = driver.manage().window().getSize().height;
 		TouchAction action1 = new TouchAction(driver)
 				.press(PointOption.point(width * 2 / 3, height - 80))
 				.waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
 				.moveTo(PointOption.point(width * 2 / 3, height - 280))
 				.release();
-		action1.perform();
+		action1.perform();*/
 		AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/btnSubmit"))
 				.click();// 城市确定
 
@@ -439,18 +439,15 @@ public class TestB {
 		}
 		AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/toolbar_back"))
 		.click();// 返回
-
 		
-		String actualstatue = AppSPUtil.getActstatue(driver);
+		
+		/*String actualstatue = AppSPUtil.getActstatue(driver);
 		ksd.setStatue(actualstatue);
-		Assert.assertEquals(ksd.getStatue(), "已请款");
+		Assert.assertEquals(ksd.getStatue(), "已请款");*/
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已请款"));
 
 		Assert.assertEquals(UserDaoImpl.getRisk_type(ksd), 2);
-		
-	
-
 
 		return ksd;
 	}

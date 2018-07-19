@@ -39,7 +39,7 @@ public class TestUser100 {
 	String devicename = "";
 	public WebDriver webdriver;
 	static KSDCase ksd = null;
-	List<Employee> employes = null;
+	  List<Employee> employes = null;
 	String itename = "";
 	String flow="";
 	/**
@@ -75,6 +75,9 @@ public class TestUser100 {
 		ct.setUp2();// web启动
 	//	ct.setUp();// app启动
 		int count = ct.getCount();
+		ksd.setSssh("南郊2区");//南郊2区  北郊庭区1
+		 
+
 		for (int i = 0; i < count; i++) {
 		//	ct.dfp();// 待分配app
 			long startTime = System.currentTimeMillis();    //获取开始时间
@@ -111,20 +114,20 @@ public class TestUser100 {
 				ct.sp3();
 				break;
 			case 8:
-				ct.webDksp();// 已录
+		//		ct.webDksp();// 已录
 				ct.appBsqht();// App不申请合同-申请请款
-				ct.sp1();
+			/*	ct.sp1();
 				ct.sp2();
-				ct.sp3();
+				ct.sp3();*/
 				ct.sp4();
 				break;
 			case 9:
-				ct.webDksp();// 已录
+			//	ct.webDksp();// 已录
 				ct.appBsqht();// App不申请合同-申请请款
-				ct.sp1();
+			/*	ct.sp1();
 				ct.sp2();
 				ct.sp3();
-				ct.sp4();
+				ct.sp4();*/
 				ct.sp5();
 				break;
 			case 10:
@@ -173,7 +176,7 @@ public class TestUser100 {
 	public void setUp2() throws IOException, InterruptedException {
 		webdriver = WebUtil.getDriver();
 	//	webdriver = WebUtil2.getDriver2();
-
+ 
 	}
 
 	public void loginWeb(String username) {
@@ -219,8 +222,8 @@ public class TestUser100 {
 	 */
 	public void webDksp() {
 		WebUtil.login(webdriver, ksd);// 登录
-	//	WebUtil.testDFP(webdriver, ksd);// 待分配
-	//	WebUtil.testYFP(webdriver, ksd);// 已分配
+		WebUtil.testDFP(webdriver, ksd);// 待分配
+		WebUtil.testYFP(webdriver, ksd);// 已分配
 		WebUtil.testYLR(webdriver, ksd);// 已录入
 		WebUtil.logout(webdriver);// 登出
 
@@ -234,7 +237,7 @@ public class TestUser100 {
 			employes = UserDaoImpl.getSpNameid(ksd, 1);
 			break;
 		case "B":
-			ksd = TestB.testBCSQQK(driver, webdriver, ksd, devicename);
+	//		ksd = TestB.testBCSQQK(driver, webdriver, ksd, devicename);
 			employes = UserDaoImpl.getSpNameid(ksd, 1);
 			break;
 		case "C":

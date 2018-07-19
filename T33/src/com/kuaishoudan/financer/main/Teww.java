@@ -82,6 +82,7 @@ public class Teww {
 		Map<String, String> expect = CaseUtil.getAdvance(ksd);
 		Assert.assertEquals(actual, expect);*/
 		ff();
+	
 	}
 
 	public static void ff() {
