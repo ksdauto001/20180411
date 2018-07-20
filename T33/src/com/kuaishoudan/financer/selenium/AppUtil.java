@@ -884,37 +884,8 @@ public class AppUtil {
 			WebDriver webdriver, String devicename, int i) {
 
 		KSDCase ksd = RandomValue.getRandom();
-		Properties properties = new Properties();
-		try {
-        	InputStreamReader in=new InputStreamReader(WebUtil.class.getResourceAsStream("ksd.properties"), "UTF-8");
-        	properties.load(in);
-        	ksd.setLoginname(properties.getProperty("login_name"));
-        	ksd.setLoginemail(properties.getProperty("login_email")) ;
-        	ksd.setPwd(properties.getProperty("login_password"));
-        	ksd.setFlow(properties.getProperty("flow"));
-        	ksd.setSp_password(properties.getProperty("sp_password"));
-        	ksd.setSssh_id(Integer.parseInt(properties.getProperty("supplier")));
-        	ksd.setSssh_account(Integer.parseInt(properties.getProperty("supp_account")));
-        	String cartype=properties.getProperty("cartype");
-        	if(!cartype.equals("")){
-        		System.out.println("--------------------");
-        		ksd.setCartype(Integer.parseInt(cartype));
-        	}
-        	ksd.setInit_statue(Integer.parseInt(properties.getProperty("init_statue")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-		System.out.println("名称" + ksd.getUsername() + "手机" + ksd.getPhone()
-				+ "身份证号" + ksd.getIdentitynum() + "身份类型"
-				+ ksd.getIdentitytype() + "军官" + ksd.getJgid() + "企业个人"
-				+ ksd.getQygr() + "车类型" + ksd.getCartype() + "车品牌"
-				+ ksd.getCarbrand() + "车系" + ksd.getCarseries() + "车价格"
-				+ ksd.getCarprice() + "贷款价格" + ksd.getSqdk() + "融资期限"
-				+ ksd.getHkqs() + "\n  " + ksd.getPurchase_tax() + " "
-				+ ksd.getInsurance() + " " + ksd.getGps_charge() + " "
-				+ ksd.getService_charge() + "," + ksd.getRegisttype() + ","
-				+ ksd.getPledge());
-		System.out.println(ksd.getFlow()+","+ksd.getLoginemail());
+
+
 		int gq = ksd.getQygr();
 		try {
 			Thread.sleep(500);

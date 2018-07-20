@@ -457,30 +457,21 @@ public class TestC {
 		WebSPUtil.login2(driver, email, ksd.getSp_password());
 
 		//WebSPUtil.clickItem(driver, itename);
-		/*try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-
-		driver.manage().timeouts().implicitlyWait(23, TimeUnit.SECONDS);		
-		driver.findElement(By.linkText("客户")).click();
-		driver.manage().timeouts().implicitlyWait(23, TimeUnit.SECONDS);
-		driver.findElement(By.linkText("审批管理")).click();
-		driver.manage().timeouts().implicitlyWait(23, TimeUnit.SECONDS);
+	 
+ 	
+		WebUtil.df(driver,By.linkText("客户")).click();
+		WebUtil.df(driver,By.linkText("审批管理")).click();
+ 
 		WebSPUtil.clickItemorder(driver, ksd.getLoginname());
-		driver.manage().timeouts().implicitlyWait(23, TimeUnit.SECONDS);
+ 
   
-			driver.findElement(By.linkText("确认提交")).click();// 确认提交
-			driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-			driver.findElement(By.id("risk_type1")).click();
+		WebUtil.df(driver,By.linkText("确认提交")).click();// 确认提交
+ 
+		WebUtil.df(driver,By.id("risk_type1")).click();
 
-			
-			driver.manage().timeouts().implicitlyWait(33, TimeUnit.SECONDS);
-			driver.findElement(By.name("remark")).sendKeys("同意");
-			driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-			driver.findElement(By.xpath("//div[@class='cashed_mark']/div/a")).click();//确认
+		WebUtil.df(driver,By.name("remark")).sendKeys("同意");
+	 
+		WebUtil.df(driver,By.xpath("//div[@class='cashed_mark']/div/a")).click();//确认
 	 
 		flag = true;
 	
