@@ -588,18 +588,7 @@ public class RandomValue {
         } catch (IOException e) {
             e.printStackTrace();
         }
-		
-		System.out.println("名称" + ksd.getUsername() + "手机" + ksd.getPhone()
-				+ "身份证号" + ksd.getIdentitynum() + "身份类型"
-				+ ksd.getIdentitytype() + "军官" + ksd.getJgid() + "企业个人"
-				+ ksd.getQygr() + "车类型" + ksd.getCartype() + "车品牌"
-				+ ksd.getCarbrand() + "车系" + ksd.getCarseries() + "车价格"
-				+ ksd.getCarprice() + "贷款价格" + ksd.getSqdk() + "融资期限"
-				+ ksd.getHkqs() + "\n  " + ksd.getPurchase_tax() + " "
-				+ ksd.getInsurance() + " " + ksd.getGps_charge() + " "
-				+ ksd.getService_charge() + "," + ksd.getRegisttype() + ","
-				+ ksd.getPledge());
-		System.out.println(ksd.getFlow()+","+ksd.getLoginemail());
+	
 		return ksd;
 	}
 }

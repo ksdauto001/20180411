@@ -432,7 +432,7 @@ public class TestB {
 		AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/toolbar_back"))
 				.click();// 返回
 		try {
-			Thread.sleep(100);
+			Thread.sleep(300);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

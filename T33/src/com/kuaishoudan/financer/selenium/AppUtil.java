@@ -40,8 +40,7 @@ import org.testng.Assert;
 import com.kuaishoudan.financer.bean.KSDCase;
 import com.kuaishoudan.financer.bean.RequestPayout;
 import com.kuaishoudan.financer.dao.UserDaoImpl;
-import com.kuaishoudan.financer.main.AlertListener;
-import com.kuaishoudan.financer.main.ElementListener;
+ 
 import com.kuaishoudan.financer.main.TestUser;
 import com.kuaishoudan.financer.util.CaseUtil;
 import com.kuaishoudan.financer.util.IdCardGenerator;
@@ -884,7 +883,18 @@ public class AppUtil {
 			WebDriver webdriver, String devicename, int i) {
 
 		KSDCase ksd = RandomValue.getRandom();
-
+		
+		System.out.println("名称" + ksd.getUsername() + "手机" + ksd.getPhone()
+				+ "身份证号" + ksd.getIdentitynum() + "身份类型"
+				+ ksd.getIdentitytype() + "军官" + ksd.getJgid() + "企业个人"
+				+ ksd.getQygr() + "车类型" + ksd.getCartype() + "车品牌"
+				+ ksd.getCarbrand() + "车系" + ksd.getCarseries() + "车价格"
+				+ ksd.getCarprice() + "贷款价格" + ksd.getSqdk() + "融资期限"
+				+ ksd.getHkqs() + "\n  " + ksd.getPurchase_tax() + " "
+				+ ksd.getInsurance() + " " + ksd.getGps_charge() + " "
+				+ ksd.getService_charge() + "," + ksd.getRegisttype() + ","
+				+ ksd.getPledge());
+		System.out.println(ksd.getFlow()+","+ksd.getLoginemail());
 
 		int gq = ksd.getQygr();
 		try {
