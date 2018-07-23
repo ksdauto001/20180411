@@ -953,7 +953,7 @@ public class AppUtil {
 	public static String upload(final AppiumDriver<AndroidElement> driver,
 			int imgcount) throws org.openqa.selenium.TimeoutException {
 		String acstatue = "";
-		//imgcount=19;
+	//	imgcount=22;
 		int count1 = imgcount / 20;
 		int count2 = imgcount % 20;
 		try {
@@ -1101,13 +1101,13 @@ public class AppUtil {
 				Thread.sleep( 1000+count2 * 300);
 
 			}
-	/*		new WebDriverWait(driver, 120).until(new ExpectedCondition<WebElement>(){ 
+			new WebDriverWait(driver, 120).until(new ExpectedCondition<WebElement>(){ 
 				 @Override 
 				 public WebElement apply(WebDriver d) { 
 					 return d.findElement(By.id("com.kuaishoudan.financer:id/toolbar_confirm")); 
 		
 				 } 				
-			 }).click() ;*/
+			 }).click() ;
 		 // 上传完照片-确认按钮
 	 
 			df(driver,
