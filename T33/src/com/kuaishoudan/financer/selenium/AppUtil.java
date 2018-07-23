@@ -25,6 +25,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -36,6 +40,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import sun.print.resources.serviceui;
 
 import com.kuaishoudan.financer.bean.KSDCase;
 import com.kuaishoudan.financer.bean.RequestPayout;
@@ -107,7 +113,7 @@ public class AppUtil {
 
 	}
 	public static  WebElement df(AppiumDriver driver,final By dr){
-		WebDriverWait wait = new WebDriverWait(driver, 60);
+		WebDriverWait wait = new WebDriverWait(driver, 30);
 		return wait.until(new ExpectedCondition<WebElement>(){ 
 			@Override 
 			public WebElement apply(WebDriver d) { 
@@ -117,7 +123,7 @@ public class AppUtil {
 		//By.xpath("//android.widget.RelativeLayout[@index='2']")
 	}
 	public static List<WebElement> dfs(AppiumDriver driver,final By dr){
-		WebDriverWait wait = new WebDriverWait(driver, 60);
+		WebDriverWait wait = new WebDriverWait(driver, 30);
 		return (List<WebElement>) wait.until(new ExpectedCondition<List<WebElement>>(){ 
 			@Override 
 			public List<WebElement> apply(WebDriver d) { 
@@ -126,7 +132,7 @@ public class AppUtil {
 			}});
 	}
 	public static  WebElement dfBy(WebDriver driver,final WebElement w){
-		WebDriverWait wait = new WebDriverWait(driver, 60);
+		WebDriverWait wait = new WebDriverWait(driver, 30);
 		return wait.until(new ExpectedCondition<WebElement>(){ 
 			@Override 
 			public WebElement apply(WebDriver d) { 
@@ -205,7 +211,7 @@ public class AppUtil {
 		int width = driver.manage().window().getSize().width;
 		int height = driver.manage().window().getSize().height;
 		// System.out.print(width+"@"+height);
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i <5; i++)
 	/*		driver.swipe(width / 2, height * 3 / 4, width / 2, height / 4,
 					during);*/
 		{
@@ -260,15 +266,33 @@ public class AppUtil {
 	public static boolean createUser(AppiumDriver<AndroidElement> driver,
 			String devicename, int k, KSDCase ksd) {
 		boolean flag = false;
-  
+	
+		try{
+			 new WebDriverWait(driver, 1).until(new ExpectedCondition<WebElement>(){ 
+				 @Override 
+				 public WebElement apply(WebDriver d) { 
+					 return d.findElement(By.id("com.kuaishoudan.financer:id/toolbar_custom_img")); 
+		
+				 } 				
+			 }).click() ;
+			;// +号	
+			df(driver, By.id("com.kuaishoudan.financer:id/menu_manual_input"))
+			.click();
+			;	 // 手动输入
+		} catch(org.openqa.selenium.TimeoutException e){
+			 new WebDriverWait(driver, 2).until(new ExpectedCondition<WebElement>(){ 
+				 @Override 
+				 public WebElement apply(WebDriver d) { 
+					 return d.findElement(By.id("com.kuaishoudan.financer:id/ll_input")); 
+		
+				 } 				
+			 }).click() ;
+
+		}
 		try {
 
-			df(driver, By.id("com.kuaishoudan.financer:id/toolbar_custom_img"))
-					.click();
-			;// +号
-			df(driver, By.id("com.kuaishoudan.financer:id/menu_manual_input"))
-					.click();
-			;// // 手动输入
+
+	
 
 			df(driver, By.id("com.kuaishoudan.financer:id/edit_name"))
 					.sendKeys(ksd.getUsername());// 名字
@@ -513,17 +537,11 @@ public class AppUtil {
 
 				df(driver, By.id("com.kuaishoudan.financer:id/edit_remark")).sendKeys(ksd.getRemark())
 				;// 备注
-
-
-			/*	WebUtil.login(webdriver, ksd);// 登录
-				List<Integer> list = WebOrgan.getImge1(webdriver, ksd);
-
-				WebUtil.logout(webdriver);*/
 	
 				df(driver, By.id("com.kuaishoudan.financer:id/toolbar_next")).click();// 下一步
 			
 
-				// if (ran == 1) { // 二手车
+				  if (ran == 1) { // 二手车
 				int havesystem = UserDaoImpl.gethave_system(ksd.getProduct()
 						.trim().split("-")[0]);// 产品名称查是否有常规甩单
 				System.out.println(ksd.getProduct().trim().split("-")[0] + ","
@@ -531,38 +549,24 @@ public class AppUtil {
 			if (havesystem == 0) {
 					// 订单常规
 					df(driver, By.id("com.kuaishoudan.financer:id/dialog_custom_confirm")).click();
-			//	}
+			 	}
 				 }
  
 	 
 				int aa = 0, countImg = 0;
 
 				List<Integer> list2 = new ArrayList<Integer>();
-			/*	for (int i = 0; i < list.size(); i++) {
-					if (list.get(i) < 9) {
-						List<Integer> list3 = UserDaoImpl.getImgType(
-								list.get(i) + 1, list);
-						list2.addAll(list3);
-						aa = list3.size();
-						countImg = aa + countImg;
-					}
-				}
-				Collections.sort(list);
-				if (countImg == 0) {
-					for (Integer type : list) {
-						if (type > 99) {
-							list2.add(type);
-							break;
-						}
-					}
-				}*/
+			
 				List<Integer>	list3=UserDaoImpl.getOMaterial(ksd,1);
 				countImg=list3.size();
 	
 				if(countImg==0){
 					List<Integer>	list4=UserDaoImpl.getOMaterial2(ksd,1);
-				list2.add(	list4.get(0));
 					countImg=1;
+			
+						list2.add(	list4.get(0));
+				
+		
 				}else{
 					list2.addAll(list3);
 				}
@@ -588,8 +592,9 @@ public class AppUtil {
 			}
 
 			actualstatue = upload(driver, ksd.getImgcount());
-			// System.out.println("####"+actualstatue);
-			// ksd.setStatue(actualstatue);
+		
+		
+			
 		}
 		return ksd;
 	}
@@ -794,18 +799,10 @@ public class AppUtil {
 				df(driver, By.id("com.kuaishoudan.financer:id/edit_remark")).sendKeys(ksd.getRemark())
 				;// 备注
 
-				
-			//	driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
-
-		/*		WebUtil.login(webdriver, ksd);// 登录
-				List<Integer> list = WebOrgan.getImge1(webdriver, ksd);
-				ksd.setImgtypes(list);
-				WebUtil.logout(webdriver);*/
-
 				df(driver, By.id("com.kuaishoudan.financer:id/toolbar_next")).click();// 下一步
 			 
 
-				// if (ran == 1) { // 二手车
+				 if (ran == 1) { // 二手车
 				int havesystem = UserDaoImpl.gethave_system(ksd.getProduct()
 						.trim().split("-")[0]);// 产品名称查是否有常规甩单
 
@@ -815,38 +812,22 @@ public class AppUtil {
 				if (havesystem == 0) {
 					df(driver, By.id("com.kuaishoudan.financer:id/dialog_custom_confirm")).click();//	订单常规
 				}
-				// }
-				//Thread.sleep(2000);
+				  }
+
 	
 				List<Integer> list2 = new ArrayList<Integer>();
 				int aa = 0, countImg = 0;
 
-				/*for (int i = 0; i < list.size(); i++) {
-					if (list.get(i) < 9) {
-						List<Integer> list3 = UserDaoImpl.getImgType(
-								list.get(i) + 1, list);
-						list2.addAll(list3);
-						aa = list3.size();
-						countImg = aa + countImg;
-					}
-				}
-				Collections.sort(list);
-				if (countImg == 0) {
-					for (Integer type : list) {
-						if (type > 99) {
-							list2.add(type);
-							break;
-						}
-					}
-				}*/
 				
 				List<Integer>	list3=UserDaoImpl.getOMaterial(ksd,1);
 				countImg=list3.size();
 		
 				if(countImg==0){
 					List<Integer>	list4=UserDaoImpl.getOMaterial2(ksd,1);
-				list2.add(	list4.get(0));
 					countImg=1;
+			
+					list2.add(	list4.get(0));
+				
 				}else{
 					list2.addAll(list3);
 				}
@@ -872,8 +853,7 @@ public class AppUtil {
 			}
 
 			actualstatue = upload(driver, ksd.getImgcount());
-			// System.out.println("####=="+actualstatue);
-			// ksd.setStatue(actualstatue);
+ 
 
 		}
 		return ksd;
@@ -981,10 +961,10 @@ public class AppUtil {
 	 * @param driver
 	 * @return
 	 */
-	public static String upload(AppiumDriver<AndroidElement> driver,
-			int imgcount) {
+	public static String upload(final AppiumDriver<AndroidElement> driver,
+			int imgcount) throws org.openqa.selenium.TimeoutException {
 		String acstatue = "";
-
+		//imgcount=19;
 		int count1 = imgcount / 20;
 		int count2 = imgcount % 20;
 		try {
@@ -1068,7 +1048,7 @@ public class AppUtil {
 			
 					imgs.get(0).click();// 添加图片（驾驶证）
 					// 添加图片（驾驶证）
-				} else if (count2 > 0 && count2 < 12) {
+				} else if (count2 > 0 && count2 <=12) {
 
 					for (int i = 0; i < count2; i++) {
 						if (i == 0) {
@@ -1083,7 +1063,7 @@ public class AppUtil {
 
 						imgs.get(i).click();// 添加图片（驾驶证）
 					}
-				} else if (count2 > 11 && count2 < 21) {
+				} else if (count2 > 12 && count2 < 21) {
 
 					for (int i = 0; i < 12; i++) {
 						if (i != 0)
@@ -1123,40 +1103,46 @@ public class AppUtil {
 						By.id("com.kuaishoudan.financer:id/btn_ok")).click();
 				// 两种证上传——确定按钮
 
-				Thread.sleep(1000+ count2 * 1000);
+				Thread.sleep( 1000+count2 * 300);
+
 			}
-	 
-			df(driver,
-					By.id("com.kuaishoudan.financer:id/toolbar_confirm")).click();
+			new WebDriverWait(driver, 120).until(new ExpectedCondition<WebElement>(){ 
+				 @Override 
+				 public WebElement apply(WebDriver d) { 
+					 return d.findElement(By.id("com.kuaishoudan.financer:id/toolbar_confirm")); 
+		
+				 } 				
+			 }).click() ;
+			/*df(driver,
+					By.id("com.kuaishoudan.financer:id/toolbar_confirm")).click();*/
 		 // 上传完照片-确认按钮
 	 
 			df(driver,
 					By.id("com.kuaishoudan.financer:id/dialog_custom_confirm")).click();
 			 // 提醒确定是
 
-			// driver.findElement(By.id("com.kuaishoudan.financer:id/tv_guide_know")).click();//我知道了
-			// driver.findElement(By.id("com.kuaishoudan.financer:id/tv_guide_know")).click();//我知道了
-			// driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back")).click();//返回按钮
-			
 			Thread.sleep(500);
 		 
 
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (org.openqa.selenium.WebDriverException e) {
+		} catch(org.openqa.selenium.TimeoutException e){
+			
+		}/*catch (org.openqa.selenium.WebDriverException e) {
 			e.printStackTrace();
-		}
-
-		try {
-
-			df(driver,
-					By.id("com.kuaishoudan.financer:id/toolbar_back")).click();// 返回按钮
+		}*/
+ 
+		 
+		int countR=driver.findElements(By.className("android.widget.RelativeLayout")).size();
+		if(countR==8){
+			 
+			df( driver,By.id("com.kuaishoudan.financer:id/tv_guide_know")).click();//我知道了
+			df( driver ,By.id("com.kuaishoudan.financer:id/tv_guide_know")).click();//我知道了
+			df(driver ,By.id("com.kuaishoudan.financer:id/toolbar_back")).click();//返回按钮
 		
-			// acstatue = AppSPUtil.getActstatue(driver);// 状态值
-		} catch (org.openqa.selenium.WebDriverException e) {
-			// TODO Auto-generated catch block
-			// e.printStackTrace();
+		}else{
+			df(driver,By.id("com.kuaishoudan.financer:id/toolbar_back")).click();//返回按钮
 		}
 		return acstatue;
 	}
@@ -1423,7 +1409,7 @@ public class AppUtil {
 				df(driver,By.id("com.kuaishoudan.financer:id/btn_ok"))
 						.click();// 两种证上传——确定按钮
 
-				Thread.sleep( count2 * 1000);
+				Thread.sleep(500+ count2 * 500);
 			}
 
 

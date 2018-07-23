@@ -16,6 +16,8 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -412,10 +414,13 @@ public class TestB {
 		 * e1.printStackTrace(); } catch (IOException e1) { // TODO
 		 * Auto-generated catch block // e1.printStackTrace(); }
 		 */
-
-		AppUtil.df(driver,
-				By.id("com.kuaishoudan.financer:id/tv_toolbar_confirm"))
-				.click();// 确定
+		new WebDriverWait(driver, 120).until(new ExpectedCondition<WebElement>(){ 
+			 @Override 
+			 public WebElement apply(WebDriver d) { 
+				 return d.findElement(By.id("com.kuaishoudan.financer:id/tv_toolbar_confirm")); 
+	
+			 } 				
+		 }).click() ;// 确定
 
 		AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/tv_confirm"))
 				.click();// 申请请款确定

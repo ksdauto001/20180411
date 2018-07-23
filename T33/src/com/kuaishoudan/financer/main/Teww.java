@@ -1,5 +1,7 @@
 package com.kuaishoudan.financer.main;
 
+import io.appium.java_client.android.AndroidElement;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -9,7 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
@@ -81,10 +89,60 @@ public class Teww {
 		Map<String, String> actual = UserDaoImpl.getAdvance(ksd);
 		Map<String, String> expect = CaseUtil.getAdvance(ksd);
 		Assert.assertEquals(actual, expect);*/
-		ff();
-	
+		//ff();
+		 final Timer timer = new Timer();
+		    TimerTask task = new TimerTask() {
+		        private int count;
+
+		        @Override
+		        public void run() {
+		         
+		            this.count++;
+		            System.out.println(count);
+		          
+		      //      System.out.println("Hello !!");  
+	        		 
+	        		System.out.println("Hello !!");  
+	    			 
+		        }
+		    };
+		    timer.schedule(task, 0,300);// 1秒一次	    
+		    System.out.println(32);
+		    System.out.println(92);
+		    fa();
 	}
 
+	public static void fa(){
+		System.out.println("322221");
+		 /*final Timer timer = new Timer();
+		    TimerTask task = new TimerTask() {
+		        private int count;
+
+		        @Override
+		        public void run() {
+		         
+		            this.count++;
+		            System.out.println(count);
+		          
+		      //      System.out.println("Hello !!");  
+	        		List<AndroidElement>	yscs= driver.findElements(By.className("android.widget.TextView"));
+	        		for(int i=0;i<yscs.size();i++){
+						System.out.println(yscs.size()+"!@#"+yscs.get(i).getText());
+					
+					}
+	        		System.out.println("Hello !!");  
+	    			int a=yscs.size()-1;
+					System.out.println(a+"@@"+yscs.get(a).getText());
+					if(yscs.get(a).getText().equals("已上传")){
+						
+						
+					      System.out.println("定时器停止了");
+					      timer.cancel();// 停止定时器
+					}
+		        }
+		    };
+		    timer.schedule(task, 0,300);// 1秒一次
+*/	}
 	public static void ff() {
 
 		// TODO Auto-generated method stub

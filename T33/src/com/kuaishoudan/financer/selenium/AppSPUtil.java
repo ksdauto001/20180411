@@ -17,6 +17,8 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.kuaishoudan.financer.bean.KSDCase;
 import com.kuaishoudan.financer.bean.RequestPayout;
@@ -760,10 +762,14 @@ public class AppSPUtil {
 		AppUtil.swipeToUp(driver, 1000);
 
 		AppUtil.uploadQk(driver,ksd.getImgcount());
-
-		AppUtil.df(driver,By.id("com.kuaishoudan.financer:id/tv_toolbar_confirm")).click();//提交
-		//driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
-	//	driver.findElement(By.id("com.kuaishoudan.financer:id/dialog_custom_confirm")).click();//是
+		new WebDriverWait(driver, 120).until(new ExpectedCondition<WebElement>(){ 
+			 @Override 
+			 public WebElement apply(WebDriver d) { 
+				 return d.findElement(By.id("com.kuaishoudan.financer:id/tv_toolbar_confirm")); 
+	
+			 } 				
+		 }).click() ; //提交
+ 
 		try {
 			Thread.sleep(200);
 		} catch (InterruptedException e) {

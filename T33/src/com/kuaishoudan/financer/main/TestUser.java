@@ -38,6 +38,7 @@ import com.kuaishoudan.financer.util.DBUtil;
 import com.kuaishoudan.financer.util.RandomValue;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 
 public class TestUser {
@@ -170,9 +171,9 @@ public class TestUser {
 			   }).start();
 		
 			driver = AppUtil.getDriver();
-			 Thread.sleep(1000);
+			 Thread.sleep(500);
 			 try{
-				 new WebDriverWait(driver, 3).until(new ExpectedCondition<WebElement>(){ 
+				 new WebDriverWait(driver, 1).until(new ExpectedCondition<WebElement>(){ 
 					 @Override 
 					 public WebElement apply(WebDriver d) { 
 						 return d.findElement(By.id("com.kuaishoudan.financer:id/toolbar_title")); 
@@ -182,9 +183,33 @@ public class TestUser {
 			 			
 			 } catch(org.openqa.selenium.TimeoutException e){
 		
-				 AppUtil.login(driver, devicename, ksd);
+				 AppUtil.login(driver, devicename, ksd);//
+				 try{
+					 new WebDriverWait(driver, 1).until(new ExpectedCondition<WebElement>(){ 
+						 @Override 
+						 public WebElement apply(WebDriver d) { 
+							 return d.findElement(By.id("com.kuaishoudan.financer:id/toolbar_title")); 
+				
+						 } 				
+					 }) ;
+				 			
+				 } catch(org.openqa.selenium.TimeoutException ex){
+			
+					 try {
+							for(int i=0;i<4;i++){
+								 driver.switchTo().alert().accept();//允许
+							}
+						} catch (org.openqa.selenium.NoAlertPresentException ea) {
+							// TODO Auto-generated catch block
+							//e.printStackTrace();
+						}
+						 driver.findElement(By.id("com.kuaishoudan.financer:id/tv_guide_know")).click();//我知道了
+				 }
+			
 			 }
-
+			 
+		
+			
 	}
 
 	// web
