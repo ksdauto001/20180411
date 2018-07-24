@@ -920,15 +920,13 @@ public class AppUtil {
 
 		dfBy(driver,driver.findElements(By.id("com.kuaishoudan.financer:id/text_name"))
 				.get(0)).click();// 首页列表
-	/*	try {
-			Thread.sleep(3000);
+		try {
+			Thread.sleep(300);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String titletext = driver.findElement(
-				By.id("com.kuaishoudan.financer:id/toolbar_title")).getText();// 标题文本
-		System.out.println(titletext);*/
+ 
 		
 		int a = UserDaoImpl.getUser_Count(ksd);
 		if (a==1) {
@@ -1133,7 +1131,7 @@ public class AppUtil {
  
 		 
 		int countR=driver.findElements(By.className("android.widget.RelativeLayout")).size();
-		System.out.println("--==="+countR);
+	//	System.out.println("--==="+countR);
 		if(countR==8){
 			 
 			df( driver,By.id("com.kuaishoudan.financer:id/tv_guide_know")).click();//我知道了
@@ -1330,7 +1328,7 @@ public class AppUtil {
 
 	public static String getIndexname(AppiumDriver<AndroidElement> driver) {
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
