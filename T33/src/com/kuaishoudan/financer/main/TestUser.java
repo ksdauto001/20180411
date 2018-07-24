@@ -50,6 +50,7 @@ public class TestUser {
 	String itename = "";
 	String flow="";
 	DBUtil db=null;
+
 	/**
 	 *  不出合同-审批流1222266
 	 * 
@@ -65,7 +66,7 @@ public class TestUser {
 		int count = ct.getCount();
 		for (int i = 0; i < count; i++) {
 			long startTime = System.currentTimeMillis();    //获取开始时间
-			ct.dfp();// 待分配app
+			ct.dfp(i);// 待分配app
 			switch (ksd.getInit_statue()) {
 			case 1:
 				ct.webYfp();// 已分配
@@ -165,15 +166,16 @@ public class TestUser {
 						e.printStackTrace();
 					}
 					  db=new 	DBUtil();
-						  ksd = RandomValue.getRandom();
+					    ksd=RandomValue.getRandom();
+					 
 			    }
 			    
 			   }).start();
 		
 			driver = AppUtil.getDriver();
-			 Thread.sleep(500);
+			 Thread.sleep(300);
 			 try{
-				 new WebDriverWait(driver, 1).until(new ExpectedCondition<WebElement>(){ 
+				 new WebDriverWait(driver, 2).until(new ExpectedCondition<WebElement>(){ 
 					 @Override 
 					 public WebElement apply(WebDriver d) { 
 						 return d.findElement(By.id("com.kuaishoudan.financer:id/toolbar_title")); 
@@ -195,7 +197,8 @@ public class TestUser {
 				 			
 				 } catch(org.openqa.selenium.TimeoutException ex){
 			
-					 try {
+					 Thread.sleep(100);
+					 	try {
 							for(int i=0;i<4;i++){
 								 driver.switchTo().alert().accept();//允许
 							}
@@ -203,7 +206,7 @@ public class TestUser {
 							// TODO Auto-generated catch block
 							//e.printStackTrace();
 						}
-						 driver.findElement(By.id("com.kuaishoudan.financer:id/tv_guide_know")).click();//我知道了
+						AppUtil.df(driver,By.id("com.kuaishoudan.financer:id/tv_guide_know")).click();//我知道了
 				 }
 			
 			 }
@@ -234,9 +237,13 @@ public class TestUser {
 	/**
 	 * 创建用户，进件，待审批
 	 */
-	public void dfp() {
-		ksd = AppUtil.addTest(driver, webdriver, devicename, 1);
-
+	public void dfp(int i) {
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		if( ksd.getCommit_type() ==2){
+			ksd = AppUtil.addZjjtest(driver, webdriver, devicename, i,ksd);
+		}else{
+			ksd = AppUtil.addTest(driver, webdriver, devicename, 1);
+	  	}
 	}
 
 	

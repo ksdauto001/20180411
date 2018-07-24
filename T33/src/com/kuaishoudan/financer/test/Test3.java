@@ -45,7 +45,7 @@ public class Test3 {
 		webdriver = WebUtil.getDriver();
 		driver = AppUtil.getDriver();
 
-		ksd = RandomValue.getRandom(driver);
+		ksd = RandomValue.getRandom(driver,ksd);
 		System.out.println("名称" + ksd.getUsername() + "手机" + ksd.getPhone()
 				+ "身份证号" + ksd.getIdentitynum() + "身份类型"
 				+ ksd.getIdentitytype() + "军官" + ksd.getJgid() + "企业个人"
@@ -67,7 +67,7 @@ public class Test3 {
 	// 个人进件或企业
 	@Test(priority = 2, invocationCount = 1, threadPoolSize = 1)
 	public void test2() throws InterruptedException, IOException {
-		count = AppUtil.zcjj(driver);
+		count = AppUtil.zcjj(driver,ksd);
 		String statue = "";
 		if (ksd.getQygr() == 1) {
 			System.out.println("***2@");

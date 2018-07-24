@@ -63,9 +63,9 @@ public class WebUtil {
         }
  
 
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.get(baseUrl);
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+		driver.get(baseUrl);
+
 		return driver;
 
 	}
@@ -225,8 +225,7 @@ public class WebUtil {
 		clickItem(driver, ksd.getLoginname());
 
 		df(driver,By.linkText("通知审核结果")).click();
-		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
-				UserDaoImpl.getstatus_id("已录入"));
+
 		
 		dfs(driver,By.name("type")).get(1).click();
 
@@ -245,7 +244,9 @@ public class WebUtil {
 		df(driver,By.name("insurance")).sendKeys(ksd.getInsurance());// 保险费
 		df(driver,By.name("service_charge")).sendKeys(
 				ksd.getService_charge());// 服务费
-
+		
+		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
+				UserDaoImpl.getstatus_id("已录入"));
 	 
 		df(driver,By.id("review_sub")).click();// 确定按钮
 		 try {

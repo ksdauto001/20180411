@@ -76,14 +76,14 @@ public class AppUtil {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		
 		capabilities.setCapability("automationName", "uiautomator2");
-		capabilities.setCapability("newCommandTimeout", 5080);
+		capabilities.setCapability("newCommandTimeout", 4080);
 		capabilities.setCapability("device", "Android");
 		capabilities.setCapability("platformName", "Android");
 		// 虚拟机
-	//	capabilities.setCapability("deviceName", "Android Emulator");
+	 //	capabilities.setCapability("deviceName", "Android Emulator");
 		// 真机
 		capabilities.setCapability("deviceName", "Android");
-		//	capabilities.setCapability(CapabilityType.BROWSER_NAME, "");
+		capabilities.setCapability(CapabilityType.BROWSER_NAME, "");
 			capabilities.setCapability(CapabilityType.VERSION, "4.4");
  
 		// support Chinese
@@ -106,7 +106,7 @@ public class AppUtil {
 				new AlertListener(), new ElementListener());*/
 	 
 		
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+	
 
 		return driver;
 
@@ -497,7 +497,12 @@ public class AppUtil {
 				
 				
 				AppUtil.swipeToUpJj(driver, 1000);// 向上滑动
-
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		
 				df(driver,
 						By.id("com.kuaishoudan.financer:id/text_feilv")).click();// 费率
@@ -722,9 +727,14 @@ public class AppUtil {
 				dfs(driver, By.id("com.kuaishoudan.financer:id/text_select")).get(ksd.getHkqs()).click(); // 还款期数周期 /融资期限
 				// _________
 
-			
+				
 				AppUtil.swipeToUpJj(driver, 1000);// 向上滑动
-	
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		 
 				df(driver,
 						By.id("com.kuaishoudan.financer:id/text_product"))
@@ -905,42 +915,37 @@ public class AppUtil {
 	}
 
 	// 再次进件
-	public static int zcjj(AppiumDriver<AndroidElement> driver) {
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		driver.findElements(By.id("com.kuaishoudan.financer:id/text_name"))
-				.get(0).click();// 首页列表
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-		try {
+	public static int zcjj(AppiumDriver<AndroidElement> driver,KSDCase ksd) {
+
+
+		dfBy(driver,driver.findElements(By.id("com.kuaishoudan.financer:id/text_name"))
+				.get(0)).click();// 首页列表
+	/*	try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String titletext = driver
-				.findElement(By.id("com.kuaishoudan.financer:id/toolbar_title"))
-				.getText().trim();// 标题文本
-		System.out.println(titletext);
-		int a=0;
-		if ("贷款详情".equals(titletext)) {
-			driver.findElement(
-					By.id("com.kuaishoudan.financer:id/toolbar_loan_status"))
+		String titletext = driver.findElement(
+				By.id("com.kuaishoudan.financer:id/toolbar_title")).getText();// 标题文本
+		System.out.println(titletext);*/
+		
+		int a = UserDaoImpl.getUser_Count(ksd);
+		if (a==1) {
+			df(driver, By.id("com.kuaishoudan.financer:id/toolbar_loan_status"))
 					.click();
-			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-			driver.findElement(
+
+			df(
+					driver,
 					By.id("com.kuaishoudan.financer:id/text_customer_algin_jinjian"))
 					.click(); // 大于1次进件
-			a=1;
+			
 		} else {
-			driver.findElement(
-					By.id("com.kuaishoudan.financer:id/btn_add_loan")).click();// 第3次进件3
-			a=2;
-		}
+			df(driver, By.id("com.kuaishoudan.financer:id/btn_add_loan"))
+					.click();// 第3次进件3
 		
+		}
+
 		return a;
 	}
 
@@ -1128,6 +1133,7 @@ public class AppUtil {
  
 		 
 		int countR=driver.findElements(By.className("android.widget.RelativeLayout")).size();
+		System.out.println("--==="+countR);
 		if(countR==8){
 			 
 			df( driver,By.id("com.kuaishoudan.financer:id/tv_guide_know")).click();//我知道了
@@ -1141,9 +1147,17 @@ public class AppUtil {
 	}
 
 	public static KSDCase addZjjtest(AppiumDriver<AndroidElement> driver,WebDriver webdriver,
-			String devicename, int i) {
- 
-		KSDCase ksd = RandomValue.getRandom();
+			String devicename, int i,KSDCase ksd) {
+		 int gq=0;
+		if(i==0){
+			ksd=RandomValue.getKSD(driver);
+			ksd = RandomValue.getRandom(driver,ksd);
+			AppUtil.zcjj(driver,ksd);
+		}else{
+			ksd = RandomValue.getRandom(driver,ksd);
+			df(driver, By.id("com.kuaishoudan.financer:id/btn_add_loan"))
+			.click();// 第3次进件qi
+		}
 		System.out.println("名称" + ksd.getUsername() + "手机" + ksd.getPhone()
 				+ "身份证号" + ksd.getIdentitynum() + "身份类型"
 				+ ksd.getIdentitytype() + "军官" + ksd.getJgid() + "企业个人"
@@ -1151,9 +1165,8 @@ public class AppUtil {
 				+ ksd.getCarbrand() + "车系" + ksd.getCarseries() + "车价格"
 				+ ksd.getCarprice() + "贷款价格" + ksd.getSqdk() + "融资期限"
 				+ ksd.getHkqs());
-		int gq = ksd.getQygr();
-		AppUtil.zcjj(driver);
-		if (gq == 0) {// 企业贷款
+		gq = ksd.getQygr();
+		if (gq == 2) {// 企业贷款
 			ksd = addQy(driver, webdriver, devicename, i, ksd);
 		} else {// 个人贷款
 			ksd = addGr(driver, webdriver, devicename, i, ksd);
@@ -1317,14 +1330,14 @@ public class AppUtil {
 
 	public static String getIndexname(AppiumDriver<AndroidElement> driver) {
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String name = driver
+		String name =dfBy(driver,driver
 				.findElements(By.id("com.kuaishoudan.financer:id/text_name"))
-				.get(0).getText().trim();
+				.get(0)).getText().trim();
 		return name;
 	}
 

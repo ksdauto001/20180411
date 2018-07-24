@@ -315,8 +315,17 @@ public class TestD {
 		// countImg=ksd.getImgtypes().size();
 		System.out.println("$$$" + countImg);
 		ksd.setImgcount(countImg);
-		List<WebElement> indexs=	AppUtil.dfs(driver, By.id("com.kuaishoudan.financer:id/text_name"));
-		AppUtil.dfBy(driver,indexs.get(0)).click();// 首页列表
+		if (ksd.getCommit_type() == 2) {
+			AppUtil.dfBy(
+					driver,
+					driver.findElements(
+							By.id("com.kuaishoudan.financer:id/text_product"))
+							.get(0)).click();// 常规产品列表
+		} else {
+			List<WebElement> indexs = AppUtil.dfs(driver,
+					By.id("com.kuaishoudan.financer:id/text_name"));
+			AppUtil.dfBy(driver, indexs.get(0)).click();// 首页列表
+		}
 
 			AppUtil.df(driver,
 					By.id("com.kuaishoudan.financer:id/tv_not_apply_compact")).click();// 不出合同
@@ -442,6 +451,7 @@ public class TestD {
 			}
 			AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/toolbar_back"))
 			.click();// 返回
+			
 			
 		/*	String actualstatue = AppSPUtil.getActstatue(driver);
 			ksd.setStatue(actualstatue);

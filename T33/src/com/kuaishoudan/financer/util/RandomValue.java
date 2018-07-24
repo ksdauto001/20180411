@@ -427,10 +427,14 @@ public class RandomValue {
 	
 	
 	}
-
+	public static KSDCase getKSD(AppiumDriver<AndroidElement> driver) {
+		KSDCase ksd =  UserDaoImpl.getCustomer_KSD(AppUtil.getIndexname(driver));
+		return ksd;
+		
+	}
 	
-	public static KSDCase getRandom(AppiumDriver<AndroidElement> driver) {
-		System.out.println("@");
+	public static KSDCase getRandom(AppiumDriver<AndroidElement> driver,KSDCase ksd) {
+
 
 		IdCardGenerator g = new IdCardGenerator();
 		Calendar calendar = Calendar.getInstance();
@@ -467,7 +471,7 @@ public class RandomValue {
 		int rzqx = (int) (Math.random() * 4);
 		int registtype = (int) (1 + Math.random() * 3);
 		int pledge = (int) (1 + Math.random() * 3);
-		KSDCase ksd =  UserDaoImpl.getCustomer_KSD(AppUtil.getIndexname(driver));
+	
 		RequestPayout	rp = RandomValue.getMoney();
 		ksd.setQygr(loantype);// 2企业1个人
 		ksd.setBusinessname("qiyemc");// 企业名称
@@ -479,10 +483,10 @@ public class RandomValue {
 		ksd.setSqdk(sqdk);// 申请贷款
 		ksd.setHkqs(rzqx);// 融资期限
 		ksd.setRemark("beizhu");// 备注
-		ksd.setPurchase_tax(purchase_tax);// 购置税
-		ksd.setGps_charge(gps_charge);// gps费
-		ksd.setInsurance(insurance);// 保险费
-		ksd.setService_charge(service_charge);// 服务费
+		ksd.setPurchase_tax(""+0);// 购置税purchase_tax
+		ksd.setGps_charge(""+0);// gps费gps_charge
+		ksd.setInsurance(""+0);// 保险费insurance
+		ksd.setService_charge(""+0);// 服务费service_charge
 		ksd.setVin(g.getItemID(17));// 车架号
 		ksd.setRegisttype(registtype);// 上牌方1,2,3
 		ksd.setPledge(pledge);// 抵押方1,2,3
@@ -494,6 +498,29 @@ public class RandomValue {
 		ksd.setRequestpayout(rp);
 		ksd.setDeduction(	 Double.parseDouble(df2.format(2 + Math.random() * 100)));
 		ksd.setZjtr( (int) (Math.random() * 4));
+
+		Properties properties = new Properties();
+		try {
+        	InputStreamReader in=new InputStreamReader(WebUtil.class.getResourceAsStream("ksd.properties"), "UTF-8");
+        	properties.load(in);
+        	ksd.setLoginname(properties.getProperty("login_name"));
+        	ksd.setLoginemail(properties.getProperty("login_email")) ;
+        	ksd.setPwd(properties.getProperty("login_password"));
+        	ksd.setFlow(properties.getProperty("flow"));
+        	ksd.setSp_password(properties.getProperty("sp_password"));
+        	ksd.setSssh_id(Integer.parseInt(properties.getProperty("supplier")));
+        	ksd.setSssh_account(Integer.parseInt(properties.getProperty("supp_account")));
+        	ksd.setCommit_type(Integer.parseInt(properties.getProperty("commit_type")));
+        	String cartype00=properties.getProperty("cartype");
+        	if(!cartype00.equals("")){
+        		System.out.println("--------------------");
+        		ksd.setCartype(Integer.parseInt(cartype00));
+        	}
+        	ksd.setInit_statue(Integer.parseInt(properties.getProperty("init_statue")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		
 		return ksd;
 	}
 	public static KSDCase getRandom() {
@@ -548,9 +575,9 @@ public class RandomValue {
 		ksd.setCartype(cartype);// 0新车  1 二手车cartype
 		ksd.setCarbrand("北京汽车-北京");//奥迪汽车-奥迪
 		ksd.setCarseries("BJ20");//A1
-		ksd.setCarprice(28.859 );// 车辆价格cljg 45
-		ksd.setSqdk( 17.363);// 申请贷款sqdk 25
-		ksd.setHkqs(2);// 融资期限rzqx0
+		ksd.setCarprice(cljg );// 车辆价格cljg 45
+		ksd.setSqdk( sqdk);// 申请贷款sqdk 25
+		ksd.setHkqs(rzqx);// 融资期限rzqx0
 		ksd.setRemark("beizhu");// 备注
 		ksd.setPurchase_tax(""+0);// 购置税purchase_tax
 		ksd.setGps_charge(""+0);// gps费gps_charge
@@ -579,6 +606,7 @@ public class RandomValue {
         	ksd.setSp_password(properties.getProperty("sp_password"));
         	ksd.setSssh_id(Integer.parseInt(properties.getProperty("supplier")));
         	ksd.setSssh_account(Integer.parseInt(properties.getProperty("supp_account")));
+        	ksd.setCommit_type(Integer.parseInt(properties.getProperty("commit_type")));
         	String cartype00=properties.getProperty("cartype");
         	if(!cartype00.equals("")){
         		System.out.println("--------------------");

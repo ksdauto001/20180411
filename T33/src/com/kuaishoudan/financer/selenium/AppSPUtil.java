@@ -729,9 +729,13 @@ public class AppSPUtil {
 	}
 	public static void sp6App(AppiumDriver<AndroidElement> driver,KSDCase ksd){
 
-		driver.findElements(By.id("com.kuaishoudan.financer:id/text_name"))
-		.get(0).click();// 首页列表
+		AppUtil.dfBy(driver,driver.findElements(By.id("com.kuaishoudan.financer:id/text_name"))
+		.get(0)).click();// 首页列表
 
+		if(ksd.getCommit_type()==2){
+			AppUtil.dfBy(driver,driver.findElements(By.id("com.kuaishoudan.financer:id/text_product"))
+			.get(0)).click();// 常规产品列表
+		}
 		AppUtil.df(driver,By.id("com.kuaishoudan.financer:id/btn_archive")).click();//归档 
 	//	driver.findElements(By.id("com.kuaishoudan.financer:id/check_group")).get(0).click();//当面交付
 		AppUtil.df(driver,By.id("com.kuaishoudan.financer:id/tv_select_type")).click();//材料类型
@@ -777,7 +781,7 @@ public class AppSPUtil {
 			e.printStackTrace();
 		}
 		AppUtil.df(driver,By.id("com.kuaishoudan.financer:id/toolbar_back")).click();//返回
-		
+	
 	}
 
 }

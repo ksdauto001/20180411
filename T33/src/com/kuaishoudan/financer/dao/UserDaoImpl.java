@@ -48,7 +48,7 @@ public class UserDaoImpl {
 		int aa=getImgType(0+1,list1);
 System.out.println(aa);*/
 		KSDCase ksd = RandomValue.getRandom();;
-		ksd.setIdentitynum("1528967079239");
+		ksd.setIdentitynum("340203198604260749");
 		ksd.setIdentitytype(1);
 		ksd.setCartype(0);
 	//	getLoanname(ksd);
@@ -60,10 +60,12 @@ System.out.println(aa);*/
 		}
 			
 		System.out.println("@@@" +ssf.size());*/
-	List<Employee> list=	getSpNameid(ksd,1);
+	/*List<Employee> list=	getSpNameid(ksd,1);
 	for(int i=0;i<list.size();i++){
 		System.out.println(list.get(i).getUsername()+","+list.get(i).getAccount()+list.get(i).getDesc());
-	}
+	}*/
+		int faf=getUser_Count(ksd);
+		System.out.println(""+faf);
 	}
 
 	public static KSDCase getCustomer_KSD(String name) {
@@ -97,41 +99,6 @@ System.out.println(aa);*/
 					ksd.setJgid(rs.getString("id_num"));// 军官证
 				}
 
-				/*
-				 * ksd.setCarbrand(rs.getString("brand_name"));//车辆类
-				 * 
-				 * ksd.setCarseries(rs.getString("series_name"));//车系类
-				 * 
-				 * ksd.setCarprice(rs.getDouble("car_price"));
-				 * 
-				 * ksd.setSqdk(rs.getDouble("loan_amount"));// 申请贷款
-				 * ksd.setProduct(rs.getString("product_name"));
-				 * 
-				 * int loan_type= rs.getInt("loan_type");
-				 * ksd.setQygr(loan_type); if(loan_type==2){
-				 * ksd.setBusinessname("qiyemc");// 企业名称
-				 * ksd.setBusinessid("yingyezzh");// 企业执照 }
-				 * ksd.setCartype(rs.getInt("car_type"));// 0新车 1 二手车
-				 * ksd.setHkqs(rs.getInt("pay_periods"));// 融资期限
-				 * ksd.setRemark("beizhu");// 备注
-				 * ksd.setPurchase_tax(rs.getString("purchase_tax"));// 购置税
-				 * ksd.setGps_charge(rs.getString("gps_charge"));// gps费
-				 * ksd.setInsurance(rs.getString("insurance"));// 保险费
-				 * ksd.setService_charge(rs.getString("service_charge"));// 服务费
-				 * ksd.setVin(rs.getString("vin"));// 车架号
-				 * ksd.setRegisttype(rs.getInt("registtype"));// 上牌方1,2,3
-				 * ksd.setPledge(rs.getInt("pledge"));// 抵押方1,2,3
-				 * ksd.setImgcount(4);// 图片数量1,2,3
-				 * 
-				 * ksd.setSssh(rs.getString("supplier_name"));//所属商户
-				 * ksd.setStatue(rs.getString("status"));
-				 * ksd.setRate(rs.getString("rate"));//费率 //
-				 * f.setOrganizationname(rs.getString("organization_name"));
-				 * ksd.setPurchase_tax(rs.getString("purchase_tax"));
-				 * ksd.setGps_charge(rs.getString("gps_charge"));
-				 * ksd.setInsurance(rs.getString("insurance"));
-				 * ksd.setService_charge(rs.getString("service_charge"));
-				 */
 
 			}
 		} catch (SQLException e) {
@@ -141,6 +108,40 @@ System.out.println(aa);*/
 			util.closeConn(conn,rs,pstmt);
 		}
 		return ksd;
+	}
+	public static int getUser_Count(KSDCase  ksd) {
+
+		int count=0;
+		String sql = "select count(id) from tb_finance where id_num=?; ";
+		DBUtil util = new DBUtil();
+		Connection conn = util.openConnection();
+		ResultSet rs=null;
+		PreparedStatement pstmt=null;
+		try {
+
+			pstmt= conn.prepareStatement(sql);
+
+			if (ksd.getIdentitytype() == 1) {
+				pstmt.setString(1, ksd.getIdentitynum());
+			} else if (ksd.getIdentitytype() == 2) {
+				pstmt.setString(1, ksd.getJgid());
+			}
+
+			rs= pstmt.executeQuery();
+
+			if (rs.next()) {
+
+			count=rs.getInt(1);
+
+
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+			e.printStackTrace();
+		} finally {
+			util.closeConn(conn,rs,pstmt);
+		}
+		return  count;
 	}
 
 	public static FinanceAdvence getAdvence(String finance_id) {

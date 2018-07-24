@@ -55,7 +55,7 @@ public class Test9 {
 		System.out.println(devicename);
 		Thread.sleep(3000);
 		// webdriver = WebUtil.getdriver();
-		ksd = RandomValue.getRandom(driver);
+		ksd = RandomValue.getRandom(driver,ksd);
 		System.out.println("名称" + ksd.getUsername() + "手机" + ksd.getPhone()
 				+ "身份证号" + ksd.getIdentitynum() + "身份类型"
 				+ ksd.getIdentitytype() + "军官" + ksd.getJgid() + "企业个人"
