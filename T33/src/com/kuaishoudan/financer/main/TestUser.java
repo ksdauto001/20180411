@@ -186,6 +186,7 @@ public class TestUser {
 			 } catch(org.openqa.selenium.TimeoutException e){
 		
 				 AppUtil.login(driver, devicename, ksd);//
+				 
 				 try{
 					 new WebDriverWait(driver, 1).until(new ExpectedCondition<WebElement>(){ 
 						 @Override 
@@ -198,14 +199,23 @@ public class TestUser {
 				 } catch(org.openqa.selenium.TimeoutException ex){
 			
 					 Thread.sleep(100);
-					 	try {
-							for(int i=0;i<4;i++){
-								 driver.switchTo().alert().accept();//允许
-							}
+				for (int i = 0; i < 4; i++) {
+					int yx = driver.findElements(
+							By.id("com.lbe.security.miui:id/dialog_container"))
+							.size();
+					if (yx == 1) {
+						try {
+
+							driver.switchTo().alert().accept();// 允许
+
 						} catch (org.openqa.selenium.NoAlertPresentException ea) {
 							// TODO Auto-generated catch block
-							//e.printStackTrace();
+							// e.printStackTrace();
 						}
+					}
+				}
+						
+				
 						AppUtil.df(driver,By.id("com.kuaishoudan.financer:id/tv_guide_know")).click();//我知道了
 				 }
 			
