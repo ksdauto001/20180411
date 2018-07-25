@@ -427,11 +427,14 @@ public class RandomValue {
 	
 	
 	}
+	
+	
 	public static KSDCase getKSD(AppiumDriver<AndroidElement> driver) {
 		KSDCase ksd =  UserDaoImpl.getCustomer_KSD(AppUtil.getIndexname(driver));
 		return ksd;
 		
 	}
+	
 	
 	public static KSDCase getRandom(AppiumDriver<AndroidElement> driver,KSDCase ksd) {
 
@@ -443,7 +446,7 @@ public class RandomValue {
 		double sqdk = 0;
 		double cljg = 0;
 		DecimalFormat df2 = new DecimalFormat("#.00");
-		DecimalFormat df = new DecimalFormat("#.000");
+		DecimalFormat df = new DecimalFormat("#.0000");
 		for (int i = 0; i < 200; i++) {
 			sqdk = Double.parseDouble(df.format(2 + Math.random() * 28));//97 Math.random()
 																			// *
@@ -479,9 +482,9 @@ public class RandomValue {
 		ksd.setCartype(cartype);// 0新车  1 二手车
 		ksd.setCarbrand("奥迪汽车-奥迪");
 		ksd.setCarseries("A1");
-		ksd.setCarprice(cljg);// 车辆价格
-		ksd.setSqdk(sqdk);// 申请贷款
-		ksd.setHkqs(rzqx);// 融资期限
+		ksd.setCarprice(cljg);// 车辆价格cljg
+		ksd.setSqdk(sqdk);// 申请贷款sqdk
+		ksd.setHkqs(rzqx);// 融资期限rzqx
 		ksd.setRemark("beizhu");// 备注
 		ksd.setPurchase_tax(""+0);// 购置税purchase_tax
 		ksd.setGps_charge(""+0);// gps费gps_charge
@@ -492,34 +495,15 @@ public class RandomValue {
 		ksd.setPledge(pledge);// 抵押方1,2,3
 		//ksd.setSssh("几节");//所属商户
 		ksd.setImgcount(4);// 图片数量1,2,3
-		ksd.setLoginname("刘浩亮");//登录邮箱
+/*		ksd.setLoginname("刘浩亮");//登录邮箱
 		ksd.setLoginemail("liuhl@jizhicar.com");
-		ksd.setPwd("!123456");
+		ksd.setPwd("!123456");*/
 		ksd.setRequestpayout(rp);
 		ksd.setDeduction(	 Double.parseDouble(df2.format(2 + Math.random() * 100)));
 		ksd.setZjtr( (int) (Math.random() * 4));
 
-		Properties properties = new Properties();
-		try {
-        	InputStreamReader in=new InputStreamReader(WebUtil.class.getResourceAsStream("ksd.properties"), "UTF-8");
-        	properties.load(in);
-        	ksd.setLoginname(properties.getProperty("login_name"));
-        	ksd.setLoginemail(properties.getProperty("login_email")) ;
-        	ksd.setPwd(properties.getProperty("login_password"));
-        	ksd.setFlow(properties.getProperty("flow"));
-        	ksd.setSp_password(properties.getProperty("sp_password"));
-        	ksd.setSssh_id(Integer.parseInt(properties.getProperty("supplier")));
-        	ksd.setSssh_account(Integer.parseInt(properties.getProperty("supp_account")));
-        	ksd.setCommit_type(Integer.parseInt(properties.getProperty("commit_type")));
-        	String cartype00=properties.getProperty("cartype");
-        	if(!cartype00.equals("")){
-        		System.out.println("--------------------");
-        		ksd.setCartype(Integer.parseInt(cartype00));
-        	}
-        	ksd.setInit_statue(Integer.parseInt(properties.getProperty("init_statue")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+		
+		ksd=getPropeties(ksd);
 		
 		return ksd;
 	}
@@ -532,7 +516,7 @@ public class RandomValue {
 		double sqdk = 0;
 		double cljg = 0;
 		DecimalFormat df2 = new DecimalFormat("#.00");
-		DecimalFormat df = new DecimalFormat("#.000");
+		DecimalFormat df = new DecimalFormat("#.0000");
 		for (int i = 0; i < 200; i++) {
 			sqdk = Double.parseDouble(df.format(2 + Math.random() * 28));//97 Math.random()
 																			// *
@@ -588,13 +572,19 @@ public class RandomValue {
 		ksd.setPledge(pledge);// 抵押方1,2,3
 		//ksd.setSssh("几节");//所属商户
 		ksd.setImgcount(4);// 图片数量1,2,3
-	/*	ksd.setLoginname("王轩");//登录邮箱 
-		ksd.setLoginemail("wangx@jizhicar.com");
+	/*	ksd.setLoginname(" ");//登录邮箱 
+		ksd.setLoginemail(" ");
 		ksd.setPwd("!123456");*/
 		ksd.setRequestpayout(rp);
 		ksd.setDeduction(	 Double.parseDouble(df2.format(2 + Math.random() * 100)));
 		ksd.setZjtr((int) (Math.random() * 4));
 		
+		ksd=getPropeties(ksd);
+	
+		return ksd;
+	}
+	
+	public static  KSDCase getPropeties(KSDCase ksd){
 		Properties properties = new Properties();
 		try {
         	InputStreamReader in=new InputStreamReader(WebUtil.class.getResourceAsStream("ksd.properties"), "UTF-8");
@@ -616,7 +606,6 @@ public class RandomValue {
         } catch (IOException e) {
             e.printStackTrace();
         }
-	
 		return ksd;
 	}
 }

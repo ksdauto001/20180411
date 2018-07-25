@@ -238,7 +238,7 @@ public class TestUser {
 	 * 创建用户，进件，待审批
 	 */
 	public void dfp(int i) {
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		if( ksd.getCommit_type() ==2){
 			ksd = AppUtil.addZjjtest(driver, webdriver, devicename, i,ksd);
 		}else{

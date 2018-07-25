@@ -730,15 +730,12 @@ public class AppSPUtil {
 	public static void sp6App(AppiumDriver<AndroidElement> driver,KSDCase ksd){
 
 		if (ksd.getCommit_type() == 2) {
-			AppUtil.dfBy(
-					driver,
-					driver.findElements(
-							By.id("com.kuaishoudan.financer:id/text_product"))
-							.get(0)).click();// 常规产品列表
+			AppUtil.df(driver,
+					By.id("com.kuaishoudan.financer:id/text_product")).click();// 常规产品列表
 		} else {
-			List<WebElement> indexs = AppUtil.dfs(driver,
-					By.id("com.kuaishoudan.financer:id/text_name"));
-			AppUtil.dfBy(driver, indexs.get(0)).click();// 首页列表
+
+			AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/text_name"))
+					.click();// 首页列表
 		}
 		AppUtil.df(driver,By.id("com.kuaishoudan.financer:id/btn_archive")).click();//归档 
 	//	driver.findElements(By.id("com.kuaishoudan.financer:id/check_group")).get(0).click();//当面交付

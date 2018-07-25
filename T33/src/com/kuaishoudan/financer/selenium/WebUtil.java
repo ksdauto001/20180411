@@ -212,7 +212,12 @@ public class WebUtil {
 	
 		df(driver,By.linkText("确认申请")).click();
  
-		 
+		 try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		
 	}

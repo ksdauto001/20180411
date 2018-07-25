@@ -131,7 +131,7 @@ public class WebSPUtil {
 		}
 		flag = true;
 		try {
-			Thread.sleep(500);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -219,7 +219,7 @@ public class WebSPUtil {
 		WebUtil.df(driver,By.className("cancel")).click();// 稍后再说
 		flag = true;
 		try {
-			Thread.sleep(500);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -250,7 +250,7 @@ public class WebSPUtil {
 		WebUtil.df(driver,By.linkText("确认回款")).click();
 	
 		try {
-			Thread.sleep(200);
+			Thread.sleep(300);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -351,7 +351,7 @@ public class WebSPUtil {
 
 			flag = true;
 			try {
-				Thread.sleep(500);
+				Thread.sleep(700);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

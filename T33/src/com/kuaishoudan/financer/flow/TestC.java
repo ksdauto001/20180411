@@ -319,15 +319,12 @@ public class TestC {
 		System.out.println("$$$" + countImg);
 		ksd.setImgcount(countImg);
 		if (ksd.getCommit_type() == 2) {
-			AppUtil.dfBy(
-					driver,
-					driver.findElements(
-							By.id("com.kuaishoudan.financer:id/text_product"))
-							.get(0)).click();// 常规产品列表
+			AppUtil.df(driver,
+					By.id("com.kuaishoudan.financer:id/text_product")).click();// 常规产品列表
 		} else {
-			List<WebElement> indexs = AppUtil.dfs(driver,
-					By.id("com.kuaishoudan.financer:id/text_name"));
-			AppUtil.dfBy(driver, indexs.get(0)).click();// 首页列表
+
+			AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/text_name"))
+					.click();// 首页列表
 		}
 
 			AppUtil.df(driver,
@@ -424,7 +421,7 @@ public class TestC {
 			 * Auto-generated catch block // e1.printStackTrace(); }
 			 */
 
-			new WebDriverWait(driver, 120).until(new ExpectedCondition<WebElement>(){ 
+			new WebDriverWait(driver, 60).until(new ExpectedCondition<WebElement>(){ 
 				 @Override 
 				 public WebElement apply(WebDriver d) { 
 					 return d.findElement(By.id("com.kuaishoudan.financer:id/tv_toolbar_confirm")); 
@@ -491,7 +488,7 @@ public class TestC {
 		flag = true;
 	
 		try {
-			Thread.sleep(500);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

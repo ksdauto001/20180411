@@ -424,7 +424,7 @@ public class testYs1 {
 
 			}
 
-			actualstatue = AppUtil.upload(driver, ksd.getImgcount());
+			actualstatue = AppUtil.upload(driver, ksd);
 			// System.out.println("####"+actualstatue);
 			// ksd.setStatue(actualstatue);
 		}
