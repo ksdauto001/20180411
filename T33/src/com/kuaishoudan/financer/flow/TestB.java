@@ -113,8 +113,6 @@ public class TestB {
 	public void setUp() throws IOException, InterruptedException {
 		driver = AppUtil.getDriver();
 
-		
-
 	}
 
 	// web
@@ -124,13 +122,11 @@ public class TestB {
 	}
 
 	public void loginWeb(String username) {
-	
 
 		WebUtil.login(webdriver, ksd);// 登录
 	}
 
 	public void logoutWeb() {
- 
 
 		WebUtil.logout(webdriver);// 登出
 	}
@@ -138,7 +134,7 @@ public class TestB {
 	/**
 	 * 创建用户，进件，待审批
 	 */
-	public KSDCase  dfp() {
+	public KSDCase dfp() {
 		ksd = AppUtil.addTest(driver, webdriver, devicename, 1);
 		return ksd;
 
@@ -162,8 +158,6 @@ public class TestB {
 		ksd = testBCSQQK(driver, webdriver, ksd, devicename);
 
 	}
-
-
 
 	// 申请请款
 	public void appSqqk() {
@@ -197,7 +191,7 @@ public class TestB {
 			Map<String, String> map = AppSPUtil.getSPname(driver, ksd);// 从app获取审批人名字
 			String itename = map.get("prename");
 			String email = WebSPUtil.nameToemail(map.get("name"));
-			WebSPUtil.testSP2(webdriver, email, itename,ksd); // 请款审批同意专员
+			WebSPUtil.testSP2(webdriver, email, itename, ksd); // 请款审批同意专员
 
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -218,18 +212,18 @@ public class TestB {
 				// bd操作
 
 				String email = WebSPUtil.nameToemail(map.get("name"));
-				AppSPUtil.loginBD(driver, email,ksd);
+				AppSPUtil.loginBD(driver, email, ksd);
 				AppUtil.login(driver, devicename, ksd);// 登录
 
 				Thread.sleep(1000);
 				Map<String, String> map2 = AppSPUtil.getSPname(driver, ksd);// 从app获取审批人名字
 				String itename2 = map2.get("prename");
 				String email2 = WebSPUtil.nameToemail(map2.get("name"));
-				WebSPUtil.testSP3(webdriver, email2, itename2,ksd); // 请款审批同意专员
+				WebSPUtil.testSP3(webdriver, email2, itename2, ksd); // 请款审批同意专员
 			} else {
 				String itename = map.get("prename");
 				String email = WebSPUtil.nameToemail(map.get("name"));
-				WebSPUtil.testSP3(webdriver, email, itename,ksd); // 请款审批同意专员
+				WebSPUtil.testSP3(webdriver, email, itename, ksd); // 请款审批同意专员
 			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -296,10 +290,10 @@ public class TestB {
 		driver.quit();
 		webdriver.quit();
 	}
-	
+
 	// 不出合同申请请款
-	public static KSDCase testBCSQQK(AppiumDriver<AndroidElement> driver,WebDriver webdriver,
- KSDCase ksd, String devicename) {
+	public static KSDCase testBCSQQK(AppiumDriver<AndroidElement> driver,
+			WebDriver webdriver, KSDCase ksd, String devicename) {
 
 		int aa = 0, countImg = 0;
 
@@ -455,7 +449,6 @@ public class TestB {
 		AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/toolbar_back"))
 				.click();// 返回
 
-		
 		/*
 		 * String actualstatue = AppSPUtil.getActstatue(driver);
 		 * ksd.setStatue(actualstatue); Assert.assertEquals(ksd.getStatue(),

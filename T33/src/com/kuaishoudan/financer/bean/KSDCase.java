@@ -23,8 +23,8 @@ public class KSDCase {
 	int hkqs;// 还款期数
 	String product;// 金融产品
 	String sssh;// 所属商户
-	int sssh_id;//商户id
-	int sssh_account;//商户账号
+	int sssh_id;// 商户id
+	int sssh_account;// 商户账号
 	String businessname;// 企业名称
 	String businessid;// 企业名称
 	String remark;// 备注
@@ -47,11 +47,10 @@ public class KSDCase {
 	int imgcount;// 进件图片数量
 	double deduction;// 总额
 	int zjtr;// 转交他人
-	int commit_type;//再次进件 进件
+	int commit_type;// 再次进件 进件
 	List<Integer> imgtypes;
 	RequestPayout requestpayout;
 
-	
 	public int getCommit_type() {
 		return commit_type;
 	}
