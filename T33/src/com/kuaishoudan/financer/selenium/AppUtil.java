@@ -931,7 +931,7 @@ public class AppUtil {
 
 		int gq = ksd.getQygr();
 		try {
-			Thread.sleep(13300);
+			Thread.sleep(300);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -955,10 +955,10 @@ public class AppUtil {
 				//
 			}
 
-			/*
-			 * String statue = AppSPUtil.getActstatue(driver);
-			 * Assert.assertEquals(statue, "待分配");
-			 */
+			
+			 // String statue = AppSPUtil.getActstatue(driver);
+			 // Assert.assertEquals(statue, "待分配");
+			 
 			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 					UserDaoImpl.getstatus_id("待分配"));
 
@@ -1150,7 +1150,7 @@ public class AppUtil {
 				df(driver, By.id("com.kuaishoudan.financer:id/btn_ok")).click();
 				// 两种证上传——确定按钮
 
-				Thread.sleep(count2 * 100);
+				Thread.sleep(count2 * 400);
 
 			}
 			driver.findElement(
@@ -1190,10 +1190,10 @@ public class AppUtil {
 			 * driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_title"
 			 * )).getText().trim(); if (title.equals("拍摄资料")) {
 			 */
-			for (int j = 0; j < 10; j++) {
+			for (int j = 0; j < 5; j++) {
 				// System.out.println("@@@@@@@@@@@");
 				try {
-					Thread.sleep(100);
+					Thread.sleep(400);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1374,27 +1374,22 @@ public class AppUtil {
 	 */
 	public static void goBack1(AppiumDriver<AndroidElement> driver) {
 		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back"))
-				.click();// 返回按钮
-		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back"))
-				.click();// 返回按钮
-		try {
 			Thread.sleep(1500);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		AppUtil.df(driver,By.id("com.kuaishoudan.financer:id/toolbar_back"))
+				.click();// 返回按钮
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		AppUtil.df(driver,By.id("com.kuaishoudan.financer:id/toolbar_back"))
+				.click();// 返回按钮
+	 
 	}
 
 	/**

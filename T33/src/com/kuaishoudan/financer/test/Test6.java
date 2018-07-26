@@ -187,7 +187,7 @@ public class Test6 {
 			String itename = map.get("prename");
 			String email = WebSPUtil.nameToemail(map.get("name"));
 
-			WebDisAgree.testSP2(webdriver, email, itename); // 请款审批同意专员
+			WebDisAgree.testSP2(webdriver, email, itename,ksd); // 请款审批同意专员
 			AppUtil.goBack1(driver);
 			 WebDisAgree .testDisAgreeQk(driver,ksd);
 			 
@@ -215,7 +215,7 @@ public class Test6 {
 				// bd操作
 
 				String email = WebSPUtil.nameToemail(map.get("name"));
-				WebDisAgree.loginBD(driver, email);
+				WebDisAgree.loginBD(driver, email,ksd);
 				AppUtil.login(driver, devicename, ksd);// 登录
 				 WebDisAgree .testDisAgreeQk(driver,ksd);
 			
@@ -230,7 +230,7 @@ public class Test6 {
 				Map<String, String> map3 = AppSPUtil.getSPname(driver,ksd);
 				String itename3 = map3.get("prename");
 				String email3 = WebSPUtil.nameToemail(map3.get("name"));
-				WebDisAgree.testSP3(webdriver, email3, itename3); // 请款审批同意专员
+				WebDisAgree.testSP3(webdriver, email3, itename3,ksd); // 请款审批同意专员
 				 AppUtil.goBack1(driver);
 				WebDisAgree .testDisAgreeQk(driver,ksd);
 		
@@ -247,7 +247,7 @@ public class Test6 {
 			} else {
 				String itename = map.get("prename");
 				String email = WebSPUtil.nameToemail(map.get("name"));
-				WebDisAgree.testSP3(webdriver, email, itename); // 请款审批同意专员
+				WebDisAgree.testSP3(webdriver, email, itename,ksd); // 请款审批同意专员
 				 AppUtil.goBack1(driver);
 				WebDisAgree .testDisAgreeQk(driver,ksd);
 		
