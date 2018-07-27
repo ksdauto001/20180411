@@ -139,11 +139,12 @@ public class WebSPUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		WebUtil.logout(driver);
 		Map<String, String> actual = UserDaoImpl.getAdvance(ksd);
 		Map<String, String> expect = CaseUtil.getAdvance(ksd);
 		Assert.assertEquals(actual, expect);
 
-		WebUtil.logout(driver);
+		
 
 		return flag;
 	}
@@ -228,10 +229,10 @@ public class WebSPUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
-				UserDaoImpl.getstatus_id("已放款"));
 		WebUtil.logout(driver);
+	/*	Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
+				UserDaoImpl.getstatus_id("已放款"));*/
+	
 		return flag;
 	}
 
@@ -268,9 +269,10 @@ public class WebSPUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		WebUtil.logout(driver);
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已回款"));
-		WebUtil.logout(driver);
+
 		return flag;
 	}
 
@@ -332,6 +334,11 @@ public class WebSPUtil {
 		WebUtil.df(driver, By.xpath("//ul[@class='slide_nav_bar']/li[6]/a"))
 				.click();// 归档管理
 
+		WebUtil.df(driver,By.id("start_loan_time")).click();
+		WebUtil.df(driver,By.className("jedateok")).click();
+		WebUtil.df(driver, By.linkText("筛选")).click();
+		
+		
 		clickItemorder(driver, ksd.getLoginname());
 
 		WebUtil.df(driver, By.linkText("同意")).click();
@@ -347,10 +354,10 @@ public class WebSPUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		WebUtil.logout(driver);
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已归档"));
-		WebUtil.logout(driver);
+	
 
 		return ksd;
 	}

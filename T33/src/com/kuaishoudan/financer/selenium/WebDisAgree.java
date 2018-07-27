@@ -253,8 +253,10 @@ public class WebDisAgree {
 		WebUtil.df(driver,By.xpath("//ul[@class='slide_nav_bar']/li[6]/a"))
 				.click();// 归档管理
 
-	 
-		// driver.findElement(By.linkText("待处理")).click();
+		WebUtil.df(driver,By.id("start_loan_time")).click();
+		WebUtil.df(driver,By.className("jedateok")).click();
+		WebUtil.df(driver, By.linkText("筛选")).click();
+		
 		WebSPUtil.clickItemorder(driver, ksd.getLoginname());
 		WebUtil.df(driver,By.linkText("不同意")).click();
 	 
@@ -266,13 +268,18 @@ public class WebDisAgree {
 
 		flag = true;
 		try {
-			Thread.sleep(500);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		WebUtil.logout(driver);
-
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return ksd;
 	}
 
@@ -286,15 +293,15 @@ public class WebDisAgree {
  
 		int count = ksd.getImgtypes().size() - ksd.getImgcount();
 	//	int count=5;
-		System.out.println("count" + count);
+	//	System.out.println("count" + count);
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(2500);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
  
-		AppUtil.swipeToUpQk(driver, 1000, count +3);// 向上滑动ksd.getImgtypes().size()
+		AppUtil.swipeToUpQk(driver, 1000, count  );// 向上滑动ksd.getImgtypes().size()
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -318,9 +325,16 @@ public class WebDisAgree {
 			e.printStackTrace();
 		}
  
-		AppUtil.df(driver,
-				By.id("com.kuaishoudan.financer:id/dialog_custom_confirm"))
-				.click();
+		try {
+			AppUtil.df(driver,
+					By.id("com.kuaishoudan.financer:id/dialog_custom_confirm"))
+					.click();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			AppUtil.df(driver,
+					By.id("com.kuaishoudan.financer:id/dialog_custom_confirm"))
+					.click();
+		}
 	 
 
 		AppUtil.goBack1(driver);
@@ -333,7 +347,7 @@ public class WebDisAgree {
 			String username,KSDCase ksd) {
 		boolean flag = false;
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -342,7 +356,7 @@ public class WebDisAgree {
 		AppUtil.df(driver,By.id("com.kuaishoudan.financer:id/toolbar_back"))
 				.click();// 返回
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -351,7 +365,7 @@ public class WebDisAgree {
 				.click();// 返回
 	 
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

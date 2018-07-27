@@ -781,7 +781,7 @@ public class AppSPUtil {
 				}).click(); // 提交
 
 		try {
-			Thread.sleep(200);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -448,10 +448,16 @@ public class TestA {
 		}
 		driver.findElement(By.id("com.kuaishoudan.financer:id/tv_countdown"))
 				.click();// 倒计时确认
+		try {
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/toolbar_back"))
 				.click();// 返回
 		try {
-			Thread.sleep(100);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

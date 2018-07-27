@@ -249,16 +249,16 @@ public class AppUtil {
 		int width = driver.manage().window().getSize().width;
 		int height = driver.manage().window().getSize().height;
 		// System.out.print(width+"@"+height);
-		for (int i = 0; i < (count / 2); i++)
+		for (int i = 0; i < (count+3 ); i++)
 		/*
 		 * driver.swipe(width / 2, height * 3 / 4, width / 2, height / 4,
 		 * during);
 		 */
 		{
 			TouchAction action1 = new TouchAction(driver)
-					.press(PointOption.point(width / 2, height * 3 / 4))
+					.press(PointOption.point(width / 2, height * 7 / 8))
 					.waitAction(WaitOptions.waitOptions(duration))
-					.moveTo(PointOption.point(width / 2, height / 4)).release();
+					.moveTo(PointOption.point(width / 2, height *11/ 16)).release();
 			action1.perform();
 		}
 
@@ -556,8 +556,7 @@ public class AppUtil {
 
 				}
 
-				df(driver, By.id("com.kuaishoudan.financer:id/edit_remark"))
-						.sendKeys(ksd.getRemark());// 备注
+			
 				WebElement prodname = df(driver,
 						By.id("com.kuaishoudan.financer:id/text_product"));
 
@@ -566,6 +565,9 @@ public class AppUtil {
 						By.id("com.kuaishoudan.financer:id/text_feilv"));
 
 				ksd.setRate(rate.getText());
+				
+				df(driver, By.id("com.kuaishoudan.financer:id/edit_remark"))
+				.sendKeys(ksd.getRemark());// 备注
 				df(driver, By.id("com.kuaishoudan.financer:id/toolbar_next"))
 						.click();// 下一步
 
@@ -837,8 +839,6 @@ public class AppUtil {
 
 				}
 
-				df(driver, By.id("com.kuaishoudan.financer:id/edit_remark"))
-						.sendKeys(ksd.getRemark());// 备注
 
 				WebElement prodname = df(driver,
 						By.id("com.kuaishoudan.financer:id/text_product"));
@@ -847,6 +847,10 @@ public class AppUtil {
 						By.id("com.kuaishoudan.financer:id/text_feilv"));
 				ksd.setRate(rate.getText());
 
+
+				df(driver, By.id("com.kuaishoudan.financer:id/edit_remark"))
+						.sendKeys(ksd.getRemark());// 备注
+				
 				df(driver, By.id("com.kuaishoudan.financer:id/toolbar_next"))
 						.click();// 下一步
 
@@ -1045,7 +1049,7 @@ public class AppUtil {
 					imgs.get(i).click();// 添加图片（驾驶证）
 				}
 				AppUtil.swipeToUp3(driver, 800);// 向上滑动
-
+				Thread.sleep(200);
 				List<WebElement> ivts = dfs(driver,
 						By.id("com.kuaishoudan.financer:id/iv_check"));
 
@@ -1089,6 +1093,8 @@ public class AppUtil {
 						By.id("com.kuaishoudan.financer:id/dialog_photo_select_btn_gallery"))
 						.click();
 				// 从相册选择
+				
+				Thread.sleep(200);
 				List<WebElement> imgs = dfs(driver,
 						By.id("com.kuaishoudan.financer:id/iv_thumb"));
 				if (count2 == 0 && count1 == 0) {
@@ -1120,7 +1126,7 @@ public class AppUtil {
 						imgs.get(i).click();// 添加图片（驾驶证）
 					}
 					AppUtil.swipeToUp3(driver, 800);// 向上滑动
-
+					Thread.sleep(200);
 					List<WebElement> ivts = dfs(driver,
 							By.id("com.kuaishoudan.financer:id/iv_check"));
 
@@ -1162,21 +1168,9 @@ public class AppUtil {
 					.click();
 			// 提醒确定是
 
-			Thread.sleep(1000);
+			Thread.sleep(1200);
 
-			int countR = driver.findElements(
-					By.className("android.widget.RelativeLayout")).size();
-			// System.out.println("--==="+countR);
-			if (countR == 8) {
-
-				df(driver, By.id("com.kuaishoudan.financer:id/tv_guide_know"))
-						.click();// 我知道了
-				df(driver, By.id("com.kuaishoudan.financer:id/tv_guide_know"))
-						.click();// 我知道了
-
-			}
-			df(driver, By.id("com.kuaishoudan.financer:id/toolbar_back"))
-					.click();// 返回按钮
+			
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1229,13 +1223,24 @@ public class AppUtil {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			df(driver, By.id("com.kuaishoudan.financer:id/toolbar_back"))
-					.click();// 返回按钮
+
 		} catch (org.openqa.selenium.WebDriverException e) {
 			System.out.println(e);
 			e.printStackTrace();
 		}
+		int countR = driver.findElements(
+				By.className("android.widget.RelativeLayout")).size();
+		// System.out.println("--==="+countR);
+		if (countR == 8) {
 
+			df(driver, By.id("com.kuaishoudan.financer:id/tv_guide_know"))
+					.click();// 我知道了
+			df(driver, By.id("com.kuaishoudan.financer:id/tv_guide_know"))
+					.click();// 我知道了
+
+		}
+		df(driver, By.id("com.kuaishoudan.financer:id/toolbar_back"))
+				.click();// 返回按钮
 		return acstatue;
 	}
 
@@ -1480,6 +1485,7 @@ public class AppUtil {
 						driver,
 						By.id("com.kuaishoudan.financer:id/dialog_photo_select_btn_gallery"))
 						.click();// 从相册选择
+				Thread.sleep(200);
 				List<WebElement> imgs = dfs(driver,
 						By.id("com.kuaishoudan.financer:id/iv_thumb"));
 				if (count2 == 0 && count1 == 0) {

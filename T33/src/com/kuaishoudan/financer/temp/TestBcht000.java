@@ -49,10 +49,12 @@ public class TestBcht000 {
 
 		System.out.println("***@");
 		
-		ct.setUp2();// web启动
+	//	ct.setUp2();// web启动
 		ct.setUp();// app启动
 
-		for (int i = 0; i <3; i++) {
+		Thread.sleep(3000);
+		ct.ff();
+	/*	for (int i = 0; i <3; i++) {
 			ct.dfp();// 待分配app
 
 			ct.webDksp();// 已录
@@ -63,16 +65,26 @@ public class TestBcht000 {
 //			ct.sp3();
 //			ct.sp4();
 			ct.back();
-		/*	ct.sp5();
+			ct.sp5();
 			ct.sp6();
-			ct.sp7();*/
+			ct.sp7();
 
-		}
+		}*/
 
 		ct.tearDown();
 		// ct.back()
 	}
-
+public void ff(){
+	 driver.findElements(By.id("com.kuaishoudan.financer:id/text_name")).get(0) 
+	.click();
+	try {
+		Thread.sleep(3000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	AppUtil.swipeToUpQk(driver, 1000, 1);// 向上滑动ksd.getImgtypes().size()
+}
 	public void back() {
 		AppUtil.goBack1(driver);
 	}
@@ -280,7 +292,7 @@ public class TestBcht000 {
 
 	public void tearDown() throws Exception {
 
-		driver.quit();
-		webdriver.quit();
+	//	driver.quit();
+	//	webdriver.quit();
 	}
 }

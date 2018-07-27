@@ -76,7 +76,7 @@ public class TestUser100 {
 	//	ct.setUp();// app启动
 		int count = ct.getCount();
 		ksd.setSssh("南郊2区");//南郊2区  北郊庭区1
-		 
+		ksd.setUsername("娄新");
 
 		for (int i = 0; i < count; i++) {
 		//	ct.dfp();// 待分配app
@@ -141,14 +141,14 @@ public class TestUser100 {
 				ct.sp6();
 				break;
 			case 11:
-				ct.webDksp();// 已录
+/*				ct.webDksp();// 已录
 				ct.appBsqht();// App不申请合同-申请请款
 				ct.sp1();
 				ct.sp2();
 				ct.sp3();
 				ct.sp4();
 				ct.sp5();
-				ct.sp6();
+				ct.sp6();*/
 				ct.sp7();
 				break;
 			default:
