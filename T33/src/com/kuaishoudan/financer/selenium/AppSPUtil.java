@@ -744,7 +744,12 @@ public class AppSPUtil {
 
 		driver.findElements(By.id("com.kuaishoudan.financer:id/tv_title"))
 				.get(2).click();//
-
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/cb_all")).click();
 		/*
 		 * for(int i=0;i<ksd.getImgcount();i++){

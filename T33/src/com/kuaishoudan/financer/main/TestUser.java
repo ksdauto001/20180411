@@ -132,7 +132,7 @@ public class TestUser {
 				ct.sp2();
 				ct.sp3();
 				ct.sp4();
-			//	ct.sp5();
+				ct.sp5();
 				ct.sp6();
 				ct.sp7();
 				break;
@@ -203,16 +203,7 @@ public class TestUser {
 
 			} catch (org.openqa.selenium.TimeoutException ex) {
 
-				int tgk = driver.findElements(
-						By.id("com.kuaishoudan.financer:id/tv_guide_know"))
-						.size();
-
-				if (tgk == 1) {
-					AppUtil.df(driver,
-							By.id("com.kuaishoudan.financer:id/tv_guide_know"))
-							.click();// 我知道了
-
-				}
+				Thread.sleep(2000);
 				for (int i = 0; i < 4; i++) {
 					int yx = driver.findElements(
 							By.id("com.lbe.security.miui:id/dialog_container"))
@@ -229,7 +220,7 @@ public class TestUser {
 					}
 				}
 				Thread.sleep(100);
-				tgk = driver.findElements(
+			int	tgk = driver.findElements(
 						By.id("com.kuaishoudan.financer:id/tv_guide_know"))
 						.size();
 
@@ -446,12 +437,7 @@ public class TestUser {
 				itename = ep.getUsername();
 				break;
 			}
-			/*
-			 * if (ep.getDesc().equals("BD经理")) {
-			 * System.out.println(ep.getUsername());
-			 * WebSPUtil.testSP3(webdriver, ep.getAccount(), itename, ksd); //
-			 * 请款审批同意专员 itename = ep.getUsername(); break; }
-			 */
+	
 
 		}
 		for (Employee ep : employes) {
@@ -472,6 +458,7 @@ public class TestUser {
 
 	// 状态已放款
 	public void sp4() {
+
 		for (Employee ep : employes) {
 			if (ep.getDesc().equals("财务专员")) {
 				System.out.println(ep.getUsername());
@@ -485,6 +472,7 @@ public class TestUser {
 
 	// 状态已回款
 	public void sp5() {
+
 		for (Employee ep : employes) {
 			if (ep.getDesc().equals("财务专员")) {
 				System.out.println(ep.getUsername());

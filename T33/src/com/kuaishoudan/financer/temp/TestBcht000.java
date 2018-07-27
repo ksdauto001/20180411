@@ -53,7 +53,9 @@ public class TestBcht000 {
 		ct.setUp();// app启动
 
 		Thread.sleep(3000);
-		ct.ff();
+	///	ct.ff();
+		
+		ct.appBsqht();// App不申请合同-申请请款
 	/*	for (int i = 0; i <3; i++) {
 			ct.dfp();// 待分配app
 

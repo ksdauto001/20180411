@@ -295,7 +295,7 @@ public class AppUtil {
 		boolean flag = false;
 
 		try {
-			new WebDriverWait(driver, 5).until(
+			new WebDriverWait(driver, 6).until(
 					new ExpectedCondition<WebElement>() {
 						@Override
 						public WebElement apply(WebDriver d) {
@@ -1187,14 +1187,16 @@ public class AppUtil {
 			for (int j = 0; j < 5; j++) {
 				// System.out.println("@@@@@@@@@@@");
 				try {
-					Thread.sleep(400);
+					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				int usestatue = UserDaoImpl.getFinanstatue_id(ksd);
+			 	int usestatue = UserDaoImpl.getFinanstatue_id(ksd);
 
-				if (usestatue == 1) {
+			  	if (usestatue == 1) {
+			/*	int ss= driver.findElements(By.id("com.kuaishoudan.financer:id/toolbar_confirm")).size();
+				if (ss==1) {*/
 					driver.findElement(
 							By.id("com.kuaishoudan.financer:id/toolbar_confirm"))
 							.click();
@@ -1439,7 +1441,8 @@ public class AppUtil {
 	public static String uploadQk(AppiumDriver<AndroidElement> driver,
 			int imgcount) {
 		String acstatue = "";
-
+		//imgcount=15;
+		//System.out.println(imgcount);
 		int count1 = imgcount / 10;
 		int count2 = imgcount % 10;
 		try {
@@ -1468,9 +1471,9 @@ public class AppUtil {
 				}
 
 				df(driver, By.id("com.kuaishoudan.financer:id/btn_ok")).click();// 两种证上传——确定按钮
-
+				Thread.sleep( 500);
 				AppUtil.swipeToUp2(driver, 1000);// 向上滑动
-				Thread.sleep(8500);
+				Thread.sleep(7500);
 
 			}
 
@@ -1505,15 +1508,18 @@ public class AppUtil {
 				}
 
 				//
-				df(driver, By.id("com.kuaishoudan.financer:id/btn_ok")).click();// 两种证上传——确定按钮
 
+				df(driver, By.id("com.kuaishoudan.financer:id/btn_ok")).click();// 两种证上传——确定按钮
+				
 				Thread.sleep(500 + count2 * 500);
 			}
 
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (org.openqa.selenium.WebDriverException e) {
+		}catch (org.openqa.selenium.NoSuchElementException ex) {
+			
+		}catch (org.openqa.selenium.WebDriverException e) {
 			e.printStackTrace();
 
 		}

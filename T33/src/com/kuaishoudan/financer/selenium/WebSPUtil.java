@@ -230,9 +230,10 @@ public class WebSPUtil {
 			e.printStackTrace();
 		}
 		WebUtil.logout(driver);
-	/*	Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
-				UserDaoImpl.getstatus_id("已放款"));*/
-	
+		if (!ksd.getFlow().equals("E")) {
+			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
+					UserDaoImpl.getstatus_id("已放款"));
+		}
 		return flag;
 	}
 
@@ -242,34 +243,36 @@ public class WebSPUtil {
 			String itename, KSDCase ksd) {
 		// String username = "sheny@jizhicar.com";
 		boolean flag = false;
-		login2(driver, email, ksd.getSp_password());// "!123456"
-		WebUtil.df(driver, By.linkText("客户")).click();
-		WebUtil.df(driver, By.linkText("回款管理")).click();
-		WebUtil.df(driver, By.linkText("待回款")).click();
-		clickItemorder(driver, ksd.getLoginname());
-		int height = driver.manage().window().getSize().height;
-		// System.out.println("height" + height);
-		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
-				+ (height * 2 + 200) + ")"); // 向下滑动
+		if (!ksd.getFlow().equals("E")) {
+			login2(driver, email, ksd.getSp_password());// "!123456"
+			WebUtil.df(driver, By.linkText("客户")).click();
+			WebUtil.df(driver, By.linkText("回款管理")).click();
+			WebUtil.df(driver, By.linkText("待回款")).click();
+			clickItemorder(driver, ksd.getLoginname());
+			int height = driver.manage().window().getSize().height;
+			// System.out.println("height" + height);
+			((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
+					+ (height * 2 + 200) + ")"); // 向下滑动
 
-		WebUtil.df(driver, By.linkText("确认回款")).click();
+			WebUtil.df(driver, By.linkText("确认回款")).click();
 
-		try {
-			Thread.sleep(300);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			try {
+				Thread.sleep(300);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			WebUtil.df(driver, By.className("confirm")).click();
+			flag = true;
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			WebUtil.logout(driver);
 		}
-
-		WebUtil.df(driver, By.className("confirm")).click();
-		flag = true;
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		WebUtil.logout(driver);
 		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
 				UserDaoImpl.getstatus_id("已回款"));
 
