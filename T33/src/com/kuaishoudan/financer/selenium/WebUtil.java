@@ -237,7 +237,7 @@ public class WebUtil {
 
 		df(driver, By.linkText("通知审核结果")).click();
 
-		dfs(driver, By.name("type")).get(1).click();
+	
 
 		/*
 		 * driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
@@ -245,8 +245,10 @@ public class WebUtil {
 		 * "document.getElementById('realLoanAmount').setAttribute('value', '0.0001');;"
 		 * );
 		 */
-
-		df(driver, By.name("real_loan_amount")).sendKeys("0.0001");
+		if(ksd.getReal_loan_amount().equals("0")){
+		dfs(driver, By.name("type")).get(1).click();
+		df(driver, By.name("real_loan_amount")).sendKeys(ksd.getReal_loan_amount());
+		}
 		// driver.findElement(By.name("real_loan_amount")).sendKeys("0.0001");
 
 		df(driver, By.name("purchase_tax")).sendKeys(ksd.getPurchase_tax());// 购置税

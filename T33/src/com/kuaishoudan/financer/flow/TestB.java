@@ -22,6 +22,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.kuaishoudan.financer.bean.KSDCase;
+import com.kuaishoudan.financer.bean.RequestPayout;
 import com.kuaishoudan.financer.dao.UserDaoImpl;
 import com.kuaishoudan.financer.selenium.AppSPUtil;
 import com.kuaishoudan.financer.selenium.AppUtil;
@@ -364,22 +365,19 @@ public class TestB {
 
 		List<WebElement> ssds = AppUtil.dfs(driver,
 				By.id("com.kuaishoudan.financer:id/text_content"));
-		AppUtil.dfBy(driver, ssds.get(1)).sendKeys("0");// 购置税
-		AppUtil.dfBy(driver, ssds.get(2)).sendKeys("0");// 保险费
+		if (Double.parseDouble(ksd.getPurchase_tax()) == 0) {
+			AppUtil.dfBy(driver, ssds.get(1)).sendKeys("0");// 购置税
+		}
+		if (Double.parseDouble(ksd.getInsurance()) == 0) {
+			AppUtil.dfBy(driver, ssds.get(2)).sendKeys("0");// 保险费
+		}
 		// ssds.get(2).sendKeys("0") ;// 保险费
 		AppUtil.df(driver,
 				By.id("com.kuaishoudan.financer:id/ll_chekuan_shangpaidiya"))
 				.click();// 上牌抵押地
 		AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/options3"))
 				.click();// 城市
-		/*
-		 * int width = driver.manage().window().getSize().width; int height =
-		 * driver.manage().window().getSize().height; TouchAction action1 = new
-		 * TouchAction(driver) .press(PointOption.point(width * 2 / 3, height -
-		 * 80)) .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
-		 * .moveTo(PointOption.point(width * 2 / 3, height - 280)) .release();
-		 * action1.perform();
-		 */
+
 		AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/btnSubmit"))
 				.click();// 城市确定
 
@@ -399,24 +397,49 @@ public class TestB {
 				By.id("com.kuaishoudan.financer:id/text_select"));
 		AppUtil.dfBy(driver, dyf.get(ksd.getPledge() - 1)).click();
 
-		// driver.findElement(By.id("com.kuaishoudan.financer:id/tv_chekuan_kouchuxiang")).sendKeys(""+ksd.getDeduction());//扣除款项
+		if (!(ksd.getDeduction() == 0)) {
+			driver.findElement(
+					By.id("com.kuaishoudan.financer:id/tv_chekuan_kouchuxiang"))
+					.sendKeys("" + ksd.getDeduction());// 扣除款项
 
+		}
 		AppUtil.swipeToUp(driver, 1000);// 向上滑动
 
 		AppUtil.uploadQk(driver, ksd.getImgcount());
 
-		// RequestPayout requestPyout = ksd.getRequestpayout();
-		/*
-		 * try {
-		 * 
-		 * // AppUtil.testFd(driver, devicename,requestPyout); //
-		 * AppUtil.testDy(driver,devicename, requestPyout); //
-		 * AppUtil.testZx(driver,devicename, requestPyout); } catch
-		 * (InterruptedException e1) { // TODO Auto-generated catch block //
-		 * e1.printStackTrace(); } catch (IOException e1) { // TODO
-		 * Auto-generated catch block // e1.printStackTrace(); }
-		 */
-		driver.findElement(By.id("com.kuaishoudan.financer:id/tv_toolbar_confirm")).click();// 确定
+		RequestPayout requestPyout = ksd.getRequestpayout();
+
+		try {
+			switch (ksd.getZx()) {
+			case 1:
+				AppUtil.testFd(driver, devicename, requestPyout);// 返点
+				break;
+			case 2:
+				AppUtil.testDy(driver, devicename, requestPyout);// 抵押费
+				break;
+			case 3:
+				AppUtil.testZx(driver, devicename, requestPyout);// 杂项
+
+				break;
+			case 4:
+				AppUtil.testFd(driver, devicename, requestPyout);// 返点
+				AppUtil.testDy(driver, devicename, requestPyout);// 抵押费
+				AppUtil.testZx(driver, devicename, requestPyout);// 杂项
+
+				break;
+			default:
+				System.out.println("default");
+			}
+		} catch (InterruptedException e1) { // TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		driver.findElement(
+				By.id("com.kuaishoudan.financer:id/tv_toolbar_confirm"))
+				.click();// 确定
 
 		try {
 			driver.findElement(By.id("com.kuaishoudan.financer:id/tv_confirm"))
@@ -451,7 +474,7 @@ public class TestB {
 
 			}
 			AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/tv_confirm"))
-			.click();// 申请请款确定
+					.click();// 申请请款确定
 		}
 
 		try {

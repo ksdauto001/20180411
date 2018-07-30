@@ -493,10 +493,10 @@ public class RandomValue {
 		ksd.setSqdk(sqdk);// 申请贷款sqdk
 		ksd.setHkqs(rzqx);// 融资期限rzqx
 		ksd.setRemark("beizhu");// 备注
-		ksd.setPurchase_tax("" + 0);// 购置税purchase_tax
-		ksd.setGps_charge("" + 0);// gps费gps_charge
-		ksd.setInsurance("" + 0);// 保险费insurance
-		ksd.setService_charge("" + 0);// 服务费service_charge
+		ksd.setPurchase_tax(purchase_tax);// 购置税purchase_tax
+		ksd.setGps_charge(gps_charge);// gps费gps_charge
+		ksd.setInsurance(insurance);// 保险费insurance
+		ksd.setService_charge(service_charge);// 服务费service_charge
 		ksd.setVin(g.getItemID(17));// 车架号
 		ksd.setRegisttype(registtype);// 上牌方1,2,3
 		ksd.setPledge(pledge);// 抵押方1,2,3
@@ -572,10 +572,10 @@ public class RandomValue {
 		ksd.setSqdk(sqdk);// 申请贷款sqdk 25
 		ksd.setHkqs(rzqx);// 融资期限rzqx0
 		ksd.setRemark("beizhu");// 备注
-		ksd.setPurchase_tax("" + 0);// 购置税purchase_tax
-		ksd.setGps_charge("" + 0);// gps费gps_charge
-		ksd.setInsurance("" + 0);// 保险费insurance
-		ksd.setService_charge("" + 0);// 服务费service_charge
+		ksd.setPurchase_tax(purchase_tax);// 购置税purchase_tax
+		ksd.setGps_charge(gps_charge);// gps费gps_charge
+		ksd.setInsurance(insurance);// 保险费insurance
+		ksd.setService_charge(service_charge);// 服务费service_charge
 		ksd.setVin(g.getItemID(17));// 车架号
 		ksd.setRegisttype(registtype);// 上牌方1,2,3
 		ksd.setPledge(pledge);// 抵押方1,2,3
@@ -611,6 +611,7 @@ public class RandomValue {
 					.getProperty("supp_account")));
 			ksd.setCommit_type(Integer.parseInt(properties
 					.getProperty("commit_type")));
+
 			String cartype00 = properties.getProperty("cartype");
 			if (!cartype00.equals("")) {
 				System.out.println("--------------------");
@@ -618,6 +619,34 @@ public class RandomValue {
 			}
 			ksd.setInit_statue(Integer.parseInt(properties
 					.getProperty("init_statue")));
+			String rla=	properties.getProperty("real_loan_amount");
+			if(!rla.equals("")){
+			ksd.setReal_loan_amount(rla);//车价贷款变化
+			}
+			String pt=properties.getProperty("purchase_tax");//购置税
+			if(!pt.equals("")){
+			ksd.setPurchase_tax(pt);
+			}
+			String gc=properties.getProperty("gps_charge");//GPS费
+			if(!gc.equals("")){
+			ksd.setGps_charge(gc);
+			}
+			String ice=properties.getProperty("insurance");//保险费
+			if(!ice.equals("")){
+			ksd.setInsurance(ice);
+			}
+			String sce=properties.getProperty("service_charge");//服务费
+			if(!sce.equals("")){
+			ksd.setService_charge(sce);
+			}
+			
+			String deduction=properties.getProperty("deduction");//APP扣除款项
+			if(!deduction.equals("")){
+				ksd.setDeduction(Double.parseDouble(deduction));			
+			}
+				
+			ksd.setZx(Integer.parseInt(properties.getProperty("zx")));
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -230,10 +230,7 @@ public class AppUtil {
 		int height = driver.manage().window().getSize().height;
 		// System.out.print(width+"@"+height);
 		for (int i = 0; i < 1; i++)
-		/*
-		 * driver.swipe(width / 2, height * 3 / 4, width / 2, height / 4,
-		 * during);
-		 */
+	
 		{
 			TouchAction action1 = new TouchAction(driver)
 					.press(PointOption.point(width / 2, height * 3 / 4))
@@ -1533,38 +1530,31 @@ public class AppUtil {
 			throws InterruptedException, IOException {
 
 		AppUtil.swipeToUp3(driver, 1000);// 向上滑动
-		Thread.sleep(1000);
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		Thread.sleep(500);
+
 		driver.findElements(By.id("com.kuaishoudan.financer:id/iv_is_show"))
 				.get(0).click();
 		AppUtil.swipeToUp(driver, 1000);// 向上滑动
 		// 车款融资额返点
 
-		/*
-		 * Runtime.getRuntime().exec( "adb -s " + devicename +
-		 * " shell input text " + RequestPyout.getFinancing_back_point());
-		 * Thread.sleep(500);
-		 */
-		driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"))
-				.get(0).sendKeys("0.16");
-		Thread.sleep(500);
-		/*
-		 * // GPS返点 Runtime.getRuntime().exec( "adb -s " + devicename +
-		 * " shell input text " + RequestPyout.getGps_back_point());
-		 * Thread.sleep(500);
-		 * driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"
-		 * )) .get(1).click(); Thread.sleep(500); // 保险返点
-		 * Runtime.getRuntime().exec( "adb -s " + devicename +
-		 * " shell input text " + RequestPyout.getInsurance_back_point());
-		 * Thread.sleep(500);
-		 * driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"
-		 * )) .get(2).click(); Thread.sleep(1500); // 服务费返点
-		 * Runtime.getRuntime().exec( "adb -s " + devicename +
-		 * " shell input text " + RequestPyout.getService_back_point());
-		 * Thread.sleep(500);
-		 * driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"
-		 * )) .get(3).click();
-		 */
+		Thread.sleep(1000);
+
+		List<AndroidElement> fds = driver.findElements(By
+				.id("com.kuaishoudan.financer:id/text_content"));
+		fds.get(0).sendKeys(RequestPyout.getFinancing_back_point());
+
+		// GPS返点
+
+		fds.get(1).sendKeys(RequestPyout.getGps_back_point());
+
+		// 保险返点
+
+		fds.get(2).sendKeys(RequestPyout.getInsurance_back_point());
+
+		// 服务费返点
+
+		fds.get(3).sendKeys(RequestPyout.getService_back_point());
+
 		Thread.sleep(500);
 		driver.findElements(By.id("com.kuaishoudan.financer:id/iv_is_show"))
 				.get(0).click();
@@ -1577,67 +1567,57 @@ public class AppUtil {
 			throws InterruptedException, IOException {
 
 		AppUtil.swipeToUp3(driver, 1000);// 向上滑动
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.findElements(By.id("com.kuaishoudan.financer:id/iv_is_show"))
-				.get(1).click();
+		Thread.sleep(500);
+	List<AndroidElement> ivts=	driver.findElements(By.id("com.kuaishoudan.financer:id/iv_is_show"));
+		System.out.println(ivts.size());
+	ivts.get(1).click();
 		AppUtil.swipeToUp(driver, 1000);// 向上滑动
-		Thread.sleep(2000);
+		Thread.sleep(500);
 
 		// 抵押费
-		Runtime.getRuntime().exec(
-				"adb -s " + devicename + " shell input text "
-						+ RequestPyout.getMortgage_free());
-		Thread.sleep(500);
-		driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"))
-				.get(0).click();
-		Thread.sleep(1500);
+	 
+	List<AndroidElement> dys=	driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"));
+				dys.get(0).sendKeys(RequestPyout.getMortgage_free() );
+ 
 		// 解押费
-		Runtime.getRuntime().exec(
-				"adb -s " + devicename + " shell input text "
-						+ RequestPyout.getSign_free());
-		Thread.sleep(500);
-		driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"))
-				.get(1).click();
-		Thread.sleep(1000);
+ 
+		dys.get(1).sendKeys(RequestPyout.getSign_free() );
+ 
 		// 上牌抵押地
-		driver.findElement(
+		df(driver,
 				By.id("com.kuaishoudan.financer:id/tv_chekuan_shangpaidiya"))
 				.click();
-		driver.findElement(By.id("com.kuaishoudan.financer:id/options3"))
+		df(driver,By.id("com.kuaishoudan.financer:id/options3"))
 				.click();// 城市
 		int width = driver.manage().window().getSize().width;
 		int height = driver.manage().window().getSize().height;
-		/*
-		 * driver.swipe(width * 2 / 3, height - 80, width * 2 / 3, height - 280,
-		 * 800);
-		 */
-		TouchAction action1 = new TouchAction(driver)
+ 
+		/*TouchAction action1 = new TouchAction(driver)
 				.press(PointOption.point(width * 2 / 3, height - 80))
 				.waitAction(WaitOptions.waitOptions(duration))
 				.moveTo(PointOption.point(width * 2 / 3, height - 280))
 				.release();
-		action1.perform();
+		action1.perform();*/
 
-		driver.findElement(By.id("com.kuaishoudan.financer:id/btnSubmit"))
-				.click();// 城市确定
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		df(driver, By.id("com.kuaishoudan.financer:id/btnSubmit")).click();// 城市确定
+ 
 
 		// 上牌方
-		driver.findElement(
+		df(driver,
 				By.id("com.kuaishoudan.financer:id/tv_chekuan_shangpaifang"))
 				.click();
 		driver.findElements(By.id("com.kuaishoudan.financer:id/text_select"))
 				.get(RequestPyout.getRegistration_party()).click();
 
 		// 抵押方
-		driver.findElement(
+		df(driver,
 				By.id("com.kuaishoudan.financer:id/tv_chekuan_diyafang"))
 				.click();
 		driver.findElements(By.id("com.kuaishoudan.financer:id/text_select"))
 				.get(RequestPyout.getRegistration_party()).click();
-
-		driver.findElements(By.id("com.kuaishoudan.financer:id/iv_is_show"))
-				.get(1).click();
+		Thread.sleep(500);
+//		driver.findElements(By.id("com.kuaishoudan.financer:id/iv_is_show"))
+		ivts.get(1).click();
 
 	}
 
@@ -1646,46 +1626,34 @@ public class AppUtil {
 	public static void testZx(AppiumDriver<AndroidElement> driver,
 			String devicename, RequestPayout RequestPyout)
 			throws InterruptedException, IOException {
-
+		Thread.sleep(300);
 		AppUtil.swipeToUp3(driver, 1000);// 向上滑动
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.findElements(By.id("com.kuaishoudan.financer:id/iv_is_show"))
-				.get(2).click();
+		Thread.sleep(500);
+		List<AndroidElement> ivts=	driver.findElements(By.id("com.kuaishoudan.financer:id/iv_is_show"))
+		;System.out.println(ivts.size());
+		ivts.get(2).click();
 		AppUtil.swipeToUp(driver, 1000);// 向上滑动
 		// GPS安装费
-		Runtime.getRuntime().exec(
-				"adb -s " + devicename + " shell input text "
-						+ RequestPyout.getGps_installation());
-		Thread.sleep(500);
-		driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"))
-				.get(0).click();
-		Thread.sleep(1500);
+
+		Thread.sleep(1000);
+		List<AndroidElement> zxs = driver.findElements(By
+				.id("com.kuaishoudan.financer:id/text_content"));
+		zxs.get(0).sendKeys(RequestPyout.getGps_installation());
+
 		// 前置利息
-		Runtime.getRuntime().exec(
-				"adb -s " + devicename + " shell input text "
-						+ RequestPyout.getInterest_on_pre());
-		Thread.sleep(500);
-		driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"))
-				.get(1).click();
-		Thread.sleep(1500);
+
+		zxs.get(1).sendKeys(RequestPyout.getInterest_on_pre());
+
 		// 退款
-		Runtime.getRuntime().exec(
-				"adb -s " + devicename + " shell input text "
-						+ RequestPyout.getRefund());
-		Thread.sleep(500);
-		driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"))
-				.get(2).click();
-		Thread.sleep(1500);
+
+		zxs.get(2).sendKeys(RequestPyout.getRefund());
+
 		// 车价贷款(返款)
-		Runtime.getRuntime().exec(
-				"adb -s " + devicename + " shell input text "
-						+ RequestPyout.getThe_car_loan());
+
+		zxs.get(3).sendKeys(RequestPyout.getThe_car_loan());
 		Thread.sleep(500);
-		driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"))
-				.get(3).click();
-		Thread.sleep(1500);
-		driver.findElements(By.id("com.kuaishoudan.financer:id/iv_is_show"))
-				.get(2).click();
+		//driver.findElements(By.id("com.kuaishoudan.financer:id/iv_is_show"))
+		ivts.get(2).click();
 
 	}
 

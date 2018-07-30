@@ -90,7 +90,7 @@ public class Teww {
 		Map<String, String> expect = CaseUtil.getAdvance(ksd);
 		Assert.assertEquals(actual, expect);*/
 		//ff();
-		 final Timer timer = new Timer();
+		/* final Timer timer = new Timer();
 		    TimerTask task = new TimerTask() {
 		        private int count;
 
@@ -109,7 +109,12 @@ public class Teww {
 		    timer.schedule(task, 0,300);// 1秒一次	    
 		    System.out.println(32);
 		    System.out.println(92);
-		    fa();
+		    fa();*/
+		double a=0;
+		String b="0";
+		if(a==Double.parseDouble(b)){
+			System.out.println("相等");
+		}
 	}
 
 	public static void fa(){
