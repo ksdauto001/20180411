@@ -1537,7 +1537,7 @@ public class AppUtil {
 		AppUtil.swipeToUp(driver, 1000);// 向上滑动
 		// 车款融资额返点
 
-		Thread.sleep(1000);
+		Thread.sleep(500);
 
 		List<AndroidElement> fds = driver.findElements(By
 				.id("com.kuaishoudan.financer:id/text_content"));
@@ -1635,7 +1635,7 @@ public class AppUtil {
 		AppUtil.swipeToUp(driver, 1000);// 向上滑动
 		// GPS安装费
 
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		List<AndroidElement> zxs = driver.findElements(By
 				.id("com.kuaishoudan.financer:id/text_content"));
 		zxs.get(0).sendKeys(RequestPyout.getGps_installation());

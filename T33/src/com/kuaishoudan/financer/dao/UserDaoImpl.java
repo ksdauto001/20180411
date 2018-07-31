@@ -53,7 +53,7 @@ public class UserDaoImpl {
 		 */
 		KSDCase ksd = RandomValue.getRandom();
 		;
-		ksd.setIdentitynum("340203198604260749");
+		ksd.setIdentitynum("653226200903048932");
 		ksd.setIdentitytype(1);
 		ksd.setCartype(0);
 		// getLoanname(ksd);
@@ -72,9 +72,11 @@ public class UserDaoImpl {
 		 * +list.get(i).getAccount()+list.get(i).getDesc()); }
 		 */
 		//int faf = getUser_Count(ksd);
-		List<Employee> fsds=getSpZxName(ksd);
+	/*	List<Employee> fsds=getSpZxName(ksd);
 		for(int i=0;i<fsds.size();i++)
-		System.out.println(fsds.get(i).getAccount());
+		System.out.println(fsds.get(i).getAccount());*/
+	int asd=	UserDaoImpl.getAdvanceStatue_id(ksd);
+	System.out.println(asd+"asd");
 	}
 
 	public static KSDCase getCustomer_KSD(String name) {

@@ -519,10 +519,11 @@ public class TestUser {
 
 	public void zxSp() {
 		if (ksd.getZxsp() == 1) {
+
 			List<Employee> zxnames = UserDaoImpl.getSpZxName(ksd);
 			String prename = "";
 			int count = zxnames.size();
-			for (int j = 0; j < count; j++)
+			for (int j = 0; j < count; j++) {
 				for (int i = 0; i < zxnames.size(); i++) {
 					Employee ep = zxnames.get(i);
 					System.out.println(ep.getAccount());
@@ -541,13 +542,14 @@ public class TestUser {
 						break;
 					} else if (ep.getDesc().equals("财务专员")) {
 						System.out.println(ep.getUsername());
-						WebSPUtil.testSP4(webdriver, ep.getAccount(), prename,
-								ksd); // 请款审批同意专员
+						WebSPUtil.zxSp2(webdriver, ep.getAccount(), ksd); // 请款审批同意专员
 						prename = ep.getUsername();
 						zxnames.remove(i);
 						break;
 					}
 				}
+			}
+
 		}
 
 	}

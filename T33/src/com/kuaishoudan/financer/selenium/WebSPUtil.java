@@ -437,7 +437,7 @@ public class WebSPUtil {
 	}
 	//杂项审批
 		public  static  boolean  zxSp2(WebDriver driver, String email,
-				String itename, KSDCase ksd){
+				 KSDCase ksd){
  
 			boolean flag = false;
 			login2(driver, email, ksd.getSp_password());// "!123456"
@@ -491,8 +491,7 @@ public class WebSPUtil {
 			}
 			WebUtil.logout(driver);
  
-			Assert.assertEquals(UserDaoImpl.getFinanStatue_id(ksd),
-						UserDaoImpl.getstatus_id("已放款"));
+			Assert.assertEquals(UserDaoImpl.getAdvanceStatue_id(ksd),11);
 	
 			
 			return flag;
