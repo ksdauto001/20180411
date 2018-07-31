@@ -960,7 +960,7 @@ public class AppUtil {
 			 // String statue = AppSPUtil.getActstatue(driver);
 			 // Assert.assertEquals(statue, "待分配");
 			 
-			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
+			Assert.assertEquals(UserDaoImpl.getFinanStatue_id(ksd),
 					UserDaoImpl.getstatus_id("待分配"));
 
 		}
@@ -1189,7 +1189,7 @@ public class AppUtil {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			 	int usestatue = UserDaoImpl.getFinanstatue_id(ksd);
+			 	int usestatue = UserDaoImpl.getFinanStatue_id(ksd);
 
 			  	if (usestatue == 1) {
 			/*	int ss= driver.findElements(By.id("com.kuaishoudan.financer:id/toolbar_confirm")).size();
@@ -1268,7 +1268,7 @@ public class AppUtil {
 		} else {// 个人贷款
 			ksd = addGr(driver, webdriver, devicename, i, ksd);
 		}
-		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
+		Assert.assertEquals(UserDaoImpl.getFinanStatue_id(ksd),
 				UserDaoImpl.getstatus_id("待分配"));
 		return ksd;
 	}

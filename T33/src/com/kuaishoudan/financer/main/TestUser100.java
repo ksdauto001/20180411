@@ -77,7 +77,7 @@ public class TestUser100 {
 		int count = ct.getCount();
 		ksd.setSssh("南郊2区");//南郊2区  北郊庭区1
 		ksd.setUsername("娄新");
-
+		ksd.setLoginemail("xuefl@jizhicar.com");
 		for (int i = 0; i < count; i++) {
 		//	ct.dfp();// 待分配app
 			long startTime = System.currentTimeMillis();    //获取开始时间
@@ -149,7 +149,8 @@ public class TestUser100 {
 				ct.sp4();
 				ct.sp5();
 				ct.sp6();*/
-				ct.sp7();
+			//	ct.sp7();
+				ct.ff();
 				break;
 			default:
 			}
@@ -162,7 +163,9 @@ public class TestUser100 {
 		ct.tearDown();
 
 	}
-
+	public void ff(){
+		WebSPUtil.zxSp1(webdriver, ksd,"xuefl@jizhicar.com");
+	}
 	public void back() {
 		AppUtil.goBack1(driver);
 	}

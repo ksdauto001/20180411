@@ -212,7 +212,7 @@ public class WebUtil {
 
 		clickItem(driver, ksd.getLoginname());
 
-		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
+		Assert.assertEquals(UserDaoImpl.getFinanStatue_id(ksd),
 				UserDaoImpl.getstatus_id("已分配"));
 
 		df(driver, By.linkText("开始录入")).click();
@@ -256,7 +256,7 @@ public class WebUtil {
 		df(driver, By.name("insurance")).sendKeys(ksd.getInsurance());// 保险费
 		df(driver, By.name("service_charge")).sendKeys(ksd.getService_charge());// 服务费
 
-		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
+		Assert.assertEquals(UserDaoImpl.getFinanStatue_id(ksd),
 				UserDaoImpl.getstatus_id("已录入"));
 
 		df(driver, By.id("review_sub")).click();// 确定按钮

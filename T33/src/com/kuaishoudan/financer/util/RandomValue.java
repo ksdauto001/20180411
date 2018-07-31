@@ -646,7 +646,7 @@ public class RandomValue {
 			}
 				
 			ksd.setZx(Integer.parseInt(properties.getProperty("zx")));
-			
+			ksd.setZxsp(Integer.parseInt(properties.getProperty("zxsp")) );
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

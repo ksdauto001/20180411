@@ -76,7 +76,7 @@ public class Test200 {
 			AppUtil.goBack1(driver);//
 			String statue = AppSPUtil.getActstatue(driver);
 			Assert.assertEquals(statue, "已放款");
-			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
+			Assert.assertEquals(UserDaoImpl.getFinanStatue_id(ksd),
 					UserDaoImpl.getstatus_id("已放款"));
 
 		} catch (InterruptedException e) {

@@ -86,7 +86,7 @@ public class Test4 {
 			statue = ZcjjUtil.getActstatue(driver);
 		}
 		Assert.assertEquals(statue, "待分配");
-		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
+		Assert.assertEquals(UserDaoImpl.getFinanStatue_id(ksd),
 				UserDaoImpl.getstatus_id("待分配"));
 	}
 
@@ -97,7 +97,7 @@ public class Test4 {
 		WebUtil.login(webdriver, ksd);// 登录
 		WebUtil.testDFP(webdriver, ksd);// 待分配
 		WebUtil.logout(webdriver);// 登出
-		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
+		Assert.assertEquals(UserDaoImpl.getFinanStatue_id(ksd),
 				UserDaoImpl.getstatus_id("已分配"));
 	}
 
@@ -108,7 +108,7 @@ public class Test4 {
 		WebUtil.login(webdriver, ksd);// 登录
 		WebUtil.testYFP(webdriver, ksd);// 已分配
 		WebUtil.logout(webdriver);// 登出
-		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
+		Assert.assertEquals(UserDaoImpl.getFinanStatue_id(ksd),
 				UserDaoImpl.getstatus_id("已录入"));
 
 	}
@@ -131,7 +131,7 @@ public class Test4 {
 		ksd = ZcjjUtil.testBCSQQK(driver, webdriver, ksd, devicename);
 		;// 请款// 请款
 		Assert.assertEquals(ksd.getStatue(), "已请款");
-		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
+		Assert.assertEquals(UserDaoImpl.getFinanStatue_id(ksd),
 				UserDaoImpl.getstatus_id("已请款"));
 
 	}
@@ -219,7 +219,7 @@ public class Test4 {
 			AppUtil.goBack1(driver);//
 			String statue = ZcjjUtil.getActstatue(driver);
 			Assert.assertEquals(statue, "已放款");
-			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
+			Assert.assertEquals(UserDaoImpl.getFinanStatue_id(ksd),
 					UserDaoImpl.getstatus_id("已放款"));
 
 		} catch (InterruptedException e) {
@@ -243,7 +243,7 @@ public class Test4 {
 			AppUtil.goBack1(driver);//
 			String statue = ZcjjUtil.getActstatue(driver);
 			Assert.assertEquals(statue, "已回款");
-			Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
+			Assert.assertEquals(UserDaoImpl.getFinanStatue_id(ksd),
 					UserDaoImpl.getstatus_id("已回款"));
 
 		} catch (InterruptedException e) {
@@ -280,7 +280,7 @@ public class Test4 {
 			statue = ZcjjUtil.getActstatue(driver);
 		}
 		Assert.assertEquals(statue, "已归档");
-		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
+		Assert.assertEquals(UserDaoImpl.getFinanStatue_id(ksd),
 				UserDaoImpl.getstatus_id("已归档"));
 
 	}

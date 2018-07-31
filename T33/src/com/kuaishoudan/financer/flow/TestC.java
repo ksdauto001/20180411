@@ -508,7 +508,7 @@ public class TestC {
 		 * Assert.assertEquals(ksd.getStatue(), "已请款");
 		 */
 
-		Assert.assertEquals(UserDaoImpl.getFinanstatue_id(ksd),
+		Assert.assertEquals(UserDaoImpl.getFinanStatue_id(ksd),
 				UserDaoImpl.getstatus_id("已请款"));
 
 		return ksd;

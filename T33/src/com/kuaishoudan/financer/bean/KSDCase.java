@@ -50,6 +50,7 @@ public class KSDCase {
 	int commit_type;// 再次进件 进件
 	String real_loan_amount;// 车价贷款额变化wei
 	int zx;// 杂项费用种类
+	int zxsp;//杂项审批
 	List<Integer> imgtypes;
 	RequestPayout requestpayout;
 
@@ -59,6 +60,14 @@ public class KSDCase {
 
 	public void setZx(int zx) {
 		this.zx = zx;
+	}
+
+	public int getZxsp() {
+		return zxsp;
+	}
+
+	public void setZxsp(int zxsp) {
+		this.zxsp = zxsp;
 	}
 
 	public String getReal_loan_amount() {

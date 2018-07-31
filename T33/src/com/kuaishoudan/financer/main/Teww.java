@@ -110,10 +110,18 @@ public class Teww {
 		    System.out.println(32);
 		    System.out.println(92);
 		    fa();*/
-		double a=0;
+	/*	double a=0;
 		String b="0";
 		if(a==Double.parseDouble(b)){
 			System.out.println("相等");
+		}*/
+		for(int i=0;i<3;i++){
+			for(int j=0;j<3;j++){
+				if(j==1){
+					break;
+				}
+			}
+			System.out.println(i);
 		}
 	}
 
