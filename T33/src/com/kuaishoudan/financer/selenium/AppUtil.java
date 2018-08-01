@@ -54,7 +54,7 @@ import com.kuaishoudan.financer.util.RandomValue;
 
 public class AppUtil {
 
-	public static AppiumDriver<AndroidElement> getDriver()
+	public static AndroidDriver<WebElement> getDriver()
 			throws MalformedURLException {
 
 		String apkName = "";
@@ -100,7 +100,7 @@ public class AppUtil {
 		capabilities.setCapability("app-package", "com.kuaishoudan.financer");
 		capabilities.setCapability("app-activity",
 				"com.kuaishoudan.financer.activity.act.WelcomeActivity");
-		AppiumDriver driver = new AndroidDriver<AndroidElement>(new URL(
+		AndroidDriver driver = new AndroidDriver<WebElement>(new URL(
 				"http://127.0.0.1:4723/wd/hub"), capabilities);
 		/*
 		 * driver = EventFiringWebDriverFactory.getEventFiringWebDriver(driver,
@@ -287,7 +287,7 @@ public class AppUtil {
 	 * @param k
 	 */
 
-	public static boolean createUser(AppiumDriver<AndroidElement> driver,
+	public static boolean createUser(AndroidDriver<WebElement> driver,
 			String devicename, int k, KSDCase ksd) {
 		boolean flag = false;
 
@@ -359,7 +359,7 @@ public class AppUtil {
 	 * @param devicename
 	 * @param k
 	 */
-	public static KSDCase addGr(AppiumDriver<AndroidElement> driver,
+	public static KSDCase addGr(AndroidDriver<WebElement> driver,
 			WebDriver webdriver, String devicename, int k, KSDCase ksd) {
 
 		String actualstatue = "";
@@ -638,7 +638,7 @@ public class AppUtil {
 	 * @param devicename
 	 * @param k
 	 */
-	public static KSDCase addQy(AppiumDriver<AndroidElement> driver,
+	public static KSDCase addQy(AndroidDriver<WebElement> driver,
 			WebDriver webdriver, String devicename, int k, KSDCase ksd) {
 
 		String actualstatue = "";
@@ -913,7 +913,7 @@ public class AppUtil {
 		return ksd;
 	}
 
-	public static KSDCase addTest(AppiumDriver<AndroidElement> driver,
+	public static KSDCase addTest(AndroidDriver<WebElement> driver,
 			WebDriver webdriver, String devicename, int i) {
 
 		KSDCase ksd = RandomValue.getRandom();
@@ -970,7 +970,7 @@ public class AppUtil {
 	}
 
 	// 再次进件
-	public static int zcjj(AppiumDriver<AndroidElement> driver, KSDCase ksd) {
+	public static int zcjj(AndroidDriver<WebElement> driver, KSDCase ksd) {
 
 		try {
 			Thread.sleep(200);
@@ -1005,7 +1005,7 @@ public class AppUtil {
 	 * @param driver
 	 * @return
 	 */
-	public static String upload(final AppiumDriver<AndroidElement> driver,
+	public static String upload(final AndroidDriver<WebElement> driver,
 			KSDCase ksd) throws org.openqa.selenium.TimeoutException {
 		String acstatue = "";
 		int imgcount = ksd.getImgcount();
@@ -1243,7 +1243,7 @@ public class AppUtil {
 		return acstatue;
 	}
 
-	public static KSDCase addZjjtest(AppiumDriver<AndroidElement> driver,
+	public static KSDCase addZjjtest(AndroidDriver<WebElement> driver,
 			WebDriver webdriver, String devicename, int i, KSDCase ksd) {
 		int gq = 0;
 		if (i == 0) {
@@ -1273,7 +1273,7 @@ public class AppUtil {
 		return ksd;
 	}
 
-	public static void login(AppiumDriver<AndroidElement> driver,
+	public static void login(AndroidDriver<WebElement> driver,
 			String devicename, KSDCase ksd) {
 
 		try {
@@ -1298,7 +1298,7 @@ public class AppUtil {
 	}
 
 	// 登出
-	public static void logout(AppiumDriver<AndroidElement> driver) {
+	public static void logout(AndroidDriver<WebElement> driver) {
 
 		df(driver, By.id("com.kuaishoudan.financer:id/toolbar_menu")).click();// 菜单
 
@@ -1310,7 +1310,7 @@ public class AppUtil {
 				.click();// 确定)
 	}
 
-	public static boolean ElementExist(AppiumDriver<AndroidElement> driver,
+	public static boolean ElementExist(AndroidDriver<WebElement> driver,
 			By locator) {
 		try {
 			driver.findElement(locator);
@@ -1326,7 +1326,7 @@ public class AppUtil {
 	 * 
 	 * @param driver
 	 */
-	public static String getStatue(AppiumDriver<AndroidElement> driver) {
+	public static String getStatue(AndroidDriver<WebElement> driver) {
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -1354,7 +1354,7 @@ public class AppUtil {
 	 * 
 	 * @param driver
 	 */
-	public static void look_status(AppiumDriver<AndroidElement> driver) {
+	public static void look_status(AndroidDriver<WebElement> driver) {
 		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
 		// driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back")).click();//返回按钮
 		/*
@@ -1376,7 +1376,7 @@ public class AppUtil {
 	 * 
 	 * @param driver
 	 */
-	public static void goBack1(AppiumDriver<AndroidElement> driver) {
+	public static void goBack1(AndroidDriver<WebElement> driver) {
 		try {
 			Thread.sleep(1500);
 		} catch (InterruptedException e) {
@@ -1401,7 +1401,7 @@ public class AppUtil {
 	 * 
 	 * @param driver
 	 */
-	public static void goBack0(AppiumDriver<AndroidElement> driver) {
+	public static void goBack0(AndroidDriver<WebElement> driver) {
 		driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
 		driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_back"))
 				.click();// 返回按钮
@@ -1414,7 +1414,7 @@ public class AppUtil {
 
 	}
 
-	public static String getIndexname(AppiumDriver<AndroidElement> driver) {
+	public static String getIndexname(AndroidDriver<WebElement> driver) {
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -1435,7 +1435,7 @@ public class AppUtil {
 	 * @param driver
 	 * @return
 	 */
-	public static String uploadQk(AppiumDriver<AndroidElement> driver,
+	public static String uploadQk(AndroidDriver<WebElement> driver,
 			int imgcount) {
 		String acstatue = "";
 		//imgcount=15;
@@ -1525,7 +1525,7 @@ public class AppUtil {
 	}
 
 	// 返点费用支出
-	public static void testFd(AppiumDriver<AndroidElement> driver,
+	public static void testFd(AndroidDriver<WebElement> driver,
 			String devicename, RequestPayout RequestPyout)
 			throws InterruptedException, IOException {
 
@@ -1539,7 +1539,7 @@ public class AppUtil {
 
 		Thread.sleep(500);
 
-		List<AndroidElement> fds = driver.findElements(By
+		List<WebElement> fds = driver.findElements(By
 				.id("com.kuaishoudan.financer:id/text_content"));
 		fds.get(0).sendKeys(RequestPyout.getFinancing_back_point());
 
@@ -1562,13 +1562,13 @@ public class AppUtil {
 
 	// 新车抵押费用支出
 
-	public static void testDy(AppiumDriver<AndroidElement> driver,
+	public static void testDy(AndroidDriver<WebElement> driver,
 			String devicename, RequestPayout RequestPyout)
 			throws InterruptedException, IOException {
 
 		AppUtil.swipeToUp3(driver, 1000);// 向上滑动
 		Thread.sleep(500);
-	List<AndroidElement> ivts=	driver.findElements(By.id("com.kuaishoudan.financer:id/iv_is_show"));
+	List<WebElement> ivts=	driver.findElements(By.id("com.kuaishoudan.financer:id/iv_is_show"));
 		System.out.println(ivts.size());
 	ivts.get(1).click();
 		AppUtil.swipeToUp(driver, 1000);// 向上滑动
@@ -1576,7 +1576,7 @@ public class AppUtil {
 
 		// 抵押费
 	 
-	List<AndroidElement> dys=	driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"));
+	List<WebElement> dys=	driver.findElements(By.id("com.kuaishoudan.financer:id/text_content"));
 				dys.get(0).sendKeys(RequestPyout.getMortgage_free() );
  
 		// 解押费
@@ -1623,20 +1623,20 @@ public class AppUtil {
 
 	// 新车杂项费用支出
 
-	public static void testZx(AppiumDriver<AndroidElement> driver,
+	public static void testZx(AndroidDriver<WebElement> driver,
 			String devicename, RequestPayout RequestPyout)
 			throws InterruptedException, IOException {
 		Thread.sleep(300);
 		AppUtil.swipeToUp3(driver, 1000);// 向上滑动
 		Thread.sleep(500);
-		List<AndroidElement> ivts=	driver.findElements(By.id("com.kuaishoudan.financer:id/iv_is_show"))
+		List<WebElement> ivts=	driver.findElements(By.id("com.kuaishoudan.financer:id/iv_is_show"))
 		;System.out.println(ivts.size());
 		ivts.get(2).click();
 		AppUtil.swipeToUp(driver, 1000);// 向上滑动
 		// GPS安装费
 
 		Thread.sleep(500);
-		List<AndroidElement> zxs = driver.findElements(By
+		List<WebElement> zxs = driver.findElements(By
 				.id("com.kuaishoudan.financer:id/text_content"));
 		zxs.get(0).sendKeys(RequestPyout.getGps_installation());
 

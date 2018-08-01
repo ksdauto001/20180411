@@ -43,7 +43,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 
 public class TestDisagree {
-	public AppiumDriver<AndroidElement> driver;
+	public AndroidDriver<WebElement> driver;
 	String devicename = "";
 	public WebDriver webdriver;
 	static KSDCase ksd = null;

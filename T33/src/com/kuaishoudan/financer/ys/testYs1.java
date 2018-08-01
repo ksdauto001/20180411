@@ -1,6 +1,7 @@
 package com.kuaishoudan.financer.ys;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 
 import java.io.BufferedReader;
@@ -31,7 +32,7 @@ import com.kuaishoudan.financer.util.RandomValue;
  */
 public class testYs1 {
 
-	public AppiumDriver<AndroidElement> driver;
+	public AndroidDriver<WebElement> driver;
 	String devicename = "";
 	public WebDriver webdriver;
 	KSDCase ksd = null;
@@ -151,7 +152,7 @@ public class testYs1 {
 	 * @param devicename
 	 * @param k
 	 */
-	public static KSDCase addGr(AppiumDriver<AndroidElement> driver,
+	public static KSDCase addGr(AndroidDriver<WebElement> driver,
 			WebDriver webdriver, String devicename, int k, KSDCase ksd) {
 
 		String actualstatue = "";
@@ -192,7 +193,7 @@ public class testYs1 {
 						By.id("com.kuaishoudan.financer:id/text_supplier"))
 						.click();// 所属商户
 				try {
-					AndroidElement supplier = driver.findElements(
+						WebElement supplier = driver.findElements(
 							By.id("com.kuaishoudan.financer:id/tv_name"))
 							.get(0);
 					ksd.setSssh(supplier.getText());
@@ -211,7 +212,7 @@ public class testYs1 {
 						.click();// 品牌车系
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 				try {
-					List<AndroidElement> clpps = driver.findElements(By
+					List<WebElement> clpps = driver.findElements(By
 							.id("com.kuaishoudan.financer:id/item_brand_item"));// 车辆品牌（奥迪）
 					for (int i = 0; i < clpps.size(); i++) {
 						String brand = clpps
@@ -242,7 +243,7 @@ public class testYs1 {
 						 * By.id("com.kuaishoudan.financer:id/item_series_item"
 						 * )) .get(1).click();// 车辆型号
 						 */
-						List<AndroidElement> seriess = driver.findElements(By
+						List<WebElement> seriess = driver.findElements(By
 								.id("com.kuaishoudan.financer:id/text_series"));// 车辆品牌（奥迪）
 						for (int i = 0; i < seriess.size(); i++) {
 							String series = seriess.get(i).getText();
@@ -294,9 +295,9 @@ public class testYs1 {
 				Thread.sleep(500);
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 				try {
-					List<AndroidElement> producs = driver.findElements(By
+					List<WebElement> producs = driver.findElements(By
 							.id("com.kuaishoudan.financer:id/text_product"));
-					for (AndroidElement product : producs) {
+					for (	WebElement product : producs) {
 						if (!product.getText().contains("平安租赁")) {
 							product.click();// 第一个产品
 							break;
@@ -324,7 +325,7 @@ public class testYs1 {
 						.click();// 费率
 				Thread.sleep(1000);
 				try {
-					List<AndroidElement> rates = driver.findElements(By
+					List<WebElement> rates = driver.findElements(By
 							.id("com.kuaishoudan.financer:id/text_select"));
 					Thread.sleep(500);
 					ksd.setRate(rates.get(0).getText());

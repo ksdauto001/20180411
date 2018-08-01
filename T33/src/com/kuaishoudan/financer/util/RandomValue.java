@@ -1,6 +1,7 @@
 package com.kuaishoudan.financer.util;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 
 import java.io.IOException;
@@ -19,6 +20,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+
+import org.openqa.selenium.WebElement;
 
 import com.kuaishoudan.financer.bean.KSDCase;
 import com.kuaishoudan.financer.bean.RequestPayout;
@@ -436,13 +439,13 @@ public class RandomValue {
 
 	}
 
-	public static KSDCase getKSD(AppiumDriver<AndroidElement> driver) {
+	public static KSDCase getKSD(AndroidDriver<WebElement> driver) {
 		KSDCase ksd = UserDaoImpl.getCustomer_KSD(AppUtil.getIndexname(driver));
 		return ksd;
 
 	}
 
-	public static KSDCase getRandom(AppiumDriver<AndroidElement> driver,
+	public static KSDCase getRandom(AndroidDriver<WebElement> driver,
 			KSDCase ksd) {
 
 		IdCardGenerator g = new IdCardGenerator();

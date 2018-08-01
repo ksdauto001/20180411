@@ -1,6 +1,7 @@
 package com.kuaishoudan.financer.test;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 
 import java.io.BufferedReader;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -34,7 +36,7 @@ import com.kuaishoudan.financer.util.RandomValue;
  */
 public class Test3 {
 
-	public AppiumDriver<AndroidElement> driver = null;
+	public AndroidDriver<WebElement> driver = null;
 	String devicename = "";
 	public WebDriver webdriver = null;
 	KSDCase ksd = null;

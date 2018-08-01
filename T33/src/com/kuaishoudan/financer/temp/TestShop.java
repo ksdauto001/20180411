@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.kuaishoudan.financer.bean.KSDCase;
 import com.kuaishoudan.financer.bean.ShopBeanCase;
@@ -22,7 +24,7 @@ public class TestShop {
 	 * @param args
 	 */
 	
-	public AppiumDriver<AndroidElement> driver;
+	public AndroidDriver<WebElement> driver;
 	String devicename = "";
 
 //	KSDCase ksd = null;

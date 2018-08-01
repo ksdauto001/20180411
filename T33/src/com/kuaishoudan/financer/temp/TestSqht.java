@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.kuaishoudan.financer.bean.KSDCase;
 import com.kuaishoudan.financer.selenium.AppSPUtil;
@@ -19,10 +20,11 @@ import com.kuaishoudan.financer.selenium.ZcjjUtil;
 import com.kuaishoudan.financer.util.RandomValue;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 
 public class TestSqht {
-	public AppiumDriver<AndroidElement> driver;
+	public AndroidDriver<WebElement> driver;
 	String devicename = "";
 	public WebDriver webdriver;
 	KSDCase ksd = null;
