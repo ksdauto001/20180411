@@ -115,14 +115,12 @@ public class Teww {
 		if(a==Double.parseDouble(b)){
 			System.out.println("相等");
 		}*/
-		for(int i=0;i<3;i++){
-			for(int j=0;j<3;j++){
-				if(j==1){
-					break;
-				}
-			}
-			System.out.println(i);
-		}
+		KSDCase ksd=new KSDCase();
+		ksd.setSqdk(24.368);
+		ksd.setPurchase_tax("1.1");
+		ksd.setInsurance("2.2");
+		ksd.setDeduction(2.5);ksd.setVin("11111111111111111110");
+		CaseUtil.getAdvance(ksd);
 	}
 
 	public static void fa(){

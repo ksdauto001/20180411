@@ -367,21 +367,23 @@ public class UserDaoImpl {
 
 				map.put("purchase_tax", decimalFormat.format(Double
 						.parseDouble(rs.getString("purchase_tax"))));
-				// map.put("gps_charge",
-				// ""+decimalFormat.format(Double.parseDouble(rs.getString("gps_charge"))));
+			/*	map.put("gps_charge",
+				""+decimalFormat.format(Double.parseDouble(rs.getString("gps_charge"))));*/
 				// System.out.println("dao==============="+""+decimalFormat.format(Double.parseDouble(rs.getString("gps_charge"))));
 				map.put("insurance", decimalFormat.format(Double.parseDouble(rs
 						.getString("insurance"))));
-				// map.put("service_charge",""+
-				// decimalFormat.format(Double.parseDouble(rs.getString("service_charge"))));
-				/*
-				 * map.put("deduction",
-				 * decimalFormat.format(Double.parseDouble(rs
-				 * .getString("deduction"))));
-				 */
-				// double
-				// toalcharge=rs.getDouble("car_loan_charge")+rs.getDouble("insurance")+rs.getDouble("purchase_tax")-rs.getDouble("deduction");
-				// map.put("toalcharge", decimalFormat.format(toalcharge));
+		/*		 map.put("service_charge",""+
+				decimalFormat.format(Double.parseDouble(rs.getString("service_charge"))));*/
+				
+				 map.put("deduction",
+				  decimalFormat.format(Double.parseDouble(rs
+				  .getString("deduction"))));
+			
+				map.put("car_loan_charge", ""+rs.getDouble("car_loan_charge"));//车价贷款额
+				 double toalcharge=rs.getDouble("car_loan_charge")+rs.getDouble("insurance")+rs.getDouble("purchase_tax")-rs.getDouble("deduction");
+				map.put("toalcharge", decimalFormat.format(toalcharge));//车价计算后
+/*				 System.out.println("1car_loan_charge"+rs.getDouble("car_loan_charge"));
+				 System.out.println("1toto"+decimalFormat.format(toalcharge));*/
 			}
 		} catch (SQLException e) {
 			System.out.println(e);
