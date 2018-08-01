@@ -484,8 +484,10 @@ public class RandomValue {
 		int rzqx = (int) (Math.random() * 4);
 		int registtype = (int) (1 + Math.random() * 3);
 		int pledge = (int) (1 + Math.random() * 3);
-
+		int ftype = (int) (Math.random() * 5);
+		String[] flows={"A","B","C","D","E"};
 		RequestPayout rp = RandomValue.getMoney();
+		ksd.setFlow(flows[ftype]);//flow
 		ksd.setQygr(loantype);// 2企业1个人
 		ksd.setBusinessname("qiyemc");// 企业名称
 		ksd.setBusinessid("yingyezzh");// 企业执照
@@ -556,9 +558,11 @@ public class RandomValue {
 		int rzqx = (int) (Math.random() * 4);
 		int registtype = (int) (1 + Math.random() * 3);
 		int pledge = (int) (1 + Math.random() * 3);
-
+		int ftype = (int) (Math.random() * 5);
+		String[] flows={"A","B","C","D","E"};
 		KSDCase ksd = new KSDCase();
 		RequestPayout rp = RandomValue.getMoney();
+		ksd.setFlow(flows[ftype]);//flow
 		ksd.setUsername(getChineseName());// 名字
 		ksd.setPhone(getTel());// 手机号
 		ksd.setAddress("address2");// 地址
@@ -607,14 +611,17 @@ public class RandomValue {
 			ksd.setLoginname(properties.getProperty("login_name"));
 			ksd.setLoginemail(properties.getProperty("login_email"));
 			ksd.setPwd(properties.getProperty("login_password"));
-			ksd.setFlow(properties.getProperty("flow"));
+		
 			ksd.setSp_password(properties.getProperty("sp_password"));
 			ksd.setSssh_id(Integer.parseInt(properties.getProperty("supplier")));
 			ksd.setSssh_account(Integer.parseInt(properties
 					.getProperty("supp_account")));
 			ksd.setCommit_type(Integer.parseInt(properties
 					.getProperty("commit_type")));
-
+			String flow=properties.getProperty("flow");
+			if(!flow.equals("")){
+				ksd.setFlow(flow);
+			}
 			String cartype00 = properties.getProperty("cartype");
 			if (!cartype00.equals("")) {
 				System.out.println("--------------------");

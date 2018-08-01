@@ -434,7 +434,7 @@ public class TestA {
 
 				break;
 			default:
-				System.out.println("default");
+			//	System.out.println("default");
 			}
 
 		} catch (InterruptedException e1) {

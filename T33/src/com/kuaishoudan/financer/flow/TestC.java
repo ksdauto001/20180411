@@ -428,7 +428,7 @@ public class TestC {
 				AppUtil.testZx(driver, devicename, requestPyout);// 杂项
 				break;
 			default:
-				System.out.println("default");
+				//System.out.println("default");
 			}
 		} catch (InterruptedException e1) { // TODO Auto-generated catch block
 			e1.printStackTrace();

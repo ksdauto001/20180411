@@ -429,7 +429,7 @@ public class TestB {
 
 				break;
 			default:
-				System.out.println("default");
+				//System.out.println("default");
 			}
 		} catch (InterruptedException e1) { // TODO Auto-generated catch block
 			e1.printStackTrace();

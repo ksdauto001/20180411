@@ -240,6 +240,8 @@ public class TestUser {
 				}
 			}
 
+		}catch (org.openqa.selenium.WebDriverException e) {
+			
 		}
 
 	}

@@ -77,7 +77,7 @@ public class AppUtil {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 
 		capabilities.setCapability("automationName", "uiautomator2");
-		capabilities.setCapability("newCommandTimeout", 4080);
+		capabilities.setCapability("newCommandTimeout", 400);
 		capabilities.setCapability("device", "Android");
 		capabilities.setCapability("platformName", "Android");
 		// 虚拟机
@@ -100,12 +100,12 @@ public class AppUtil {
 		capabilities.setCapability("app-package", "com.kuaishoudan.financer");
 		capabilities.setCapability("app-activity",
 				"com.kuaishoudan.financer.activity.act.WelcomeActivity");
-		AndroidDriver driver = new AndroidDriver<WebElement>(new URL(
+		AndroidDriver<WebElement> driver = new AndroidDriver<WebElement>(new URL(
 				"http://127.0.0.1:4723/wd/hub"), capabilities);
-		/*
-		 * driver = EventFiringWebDriverFactory.getEventFiringWebDriver(driver,
-		 * new AlertListener(), new ElementListener());
-		 */
+		
+	/*	   driver = EventFiringWebDriverFactory.getEventFiringWebDriver(driver,
+		   new AlertListener(), new ElementListener());*/
+		 
 
 		return driver;
 
@@ -380,6 +380,8 @@ public class AppUtil {
 			flag = true;
 			driver.findElement(
 					By.id("com.kuaishoudan.financer:id/toolbar_back")).click();
+		}catch (org.openqa.selenium.WebDriverException ex) {
+			
 		}
 		if (!flag) {
 			try {
@@ -657,6 +659,8 @@ public class AppUtil {
 			flag = true;
 			driver.findElement(
 					By.id("com.kuaishoudan.financer:id/toolbar_back")).click();
+		}catch (org.openqa.selenium.WebDriverException ex) {
+			
 		}
 		if (!flag) {
 			try {
