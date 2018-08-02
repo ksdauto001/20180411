@@ -509,18 +509,7 @@ public class TestA {
 		}
 		AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/toolbar_back"))
 				.click();// 返回
-
-		/*
-		 * String actualstatue = AppSPUtil.getActstatue(driver);
-		 * ksd.setStatue(actualstatue); Assert.assertEquals(ksd.getStatue(),
-		 * "已请款");
-		 */
-
-		Assert.assertEquals(UserDaoImpl.getFinanStatue_id(ksd),
-				UserDaoImpl.getstatus_id("已请款"));
-
-		Assert.assertEquals(UserDaoImpl.getRisk_type(ksd), 1);
-
+ 
 		return ksd;
 	}
 

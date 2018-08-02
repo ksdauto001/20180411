@@ -502,15 +502,6 @@ public class TestE {
 		AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/toolbar_back"))
 				.click();// 返回
 
-		/*
-		 * String actualstatue = AppSPUtil.getActstatue(driver);
-		 * ksd.setStatue(actualstatue); Assert.assertEquals(ksd.getStatue(),
-		 * "已请款");
-		 */
-
-		Assert.assertEquals(UserDaoImpl.getFinanStatue_id(ksd),
-				UserDaoImpl.getstatus_id("已请款"));
-
 		return ksd;
 	}
 
@@ -547,17 +538,13 @@ public class TestE {
 
 		flag = true;
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		Assert.assertEquals(UserDaoImpl.getRisk_type(ksd), 5);
-		Map<String, String> actual = UserDaoImpl.getAdvance(ksd);
-		Map<String, String> expect = CaseUtil.getAdvance(ksd);
-		Assert.assertEquals(actual, expect);
 		WebUtil.logout(driver);
+
 		return flag;
 	}
 }

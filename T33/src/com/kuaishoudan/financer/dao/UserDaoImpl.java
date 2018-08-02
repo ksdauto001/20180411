@@ -358,6 +358,7 @@ public class UserDaoImpl {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
+				map.put("vin", rs.getString("vin"));
 				map.put("name", rs.getString("user_name"));
 				map.put("car_type", rs.getString("car_type"));
 				map.put("series_name", rs.getString("series_name"));
@@ -367,14 +368,10 @@ public class UserDaoImpl {
 
 				map.put("purchase_tax", decimalFormat.format(Double
 						.parseDouble(rs.getString("purchase_tax"))));
-			/*	map.put("gps_charge",
-				""+decimalFormat.format(Double.parseDouble(rs.getString("gps_charge"))));*/
-				// System.out.println("dao==============="+""+decimalFormat.format(Double.parseDouble(rs.getString("gps_charge"))));
+ 
 				map.put("insurance", decimalFormat.format(Double.parseDouble(rs
 						.getString("insurance"))));
-		/*		 map.put("service_charge",""+
-				decimalFormat.format(Double.parseDouble(rs.getString("service_charge"))));*/
-				
+ 
 				 map.put("deduction",
 				  decimalFormat.format(Double.parseDouble(rs
 				  .getString("deduction"))));
@@ -384,6 +381,10 @@ public class UserDaoImpl {
 				map.put("toalcharge", decimalFormat.format(toalcharge));//车价计算后
 /*				 System.out.println("1car_loan_charge"+rs.getDouble("car_loan_charge"));
 				 System.out.println("1toto"+decimalFormat.format(toalcharge));*/
+				
+				 
+				 map.put("regitst_type",rs.getString("regitst_type"));
+				 map.put("pledge_type", rs.getString("pledge_type" ));
 			}
 		} catch (SQLException e) {
 			System.out.println(e);

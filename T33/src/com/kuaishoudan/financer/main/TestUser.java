@@ -315,10 +315,12 @@ public class TestUser {
 		case "A":
 			ksd = TestA.testBCSQQK(driver, webdriver, ksd, devicename);
 			employes = UserDaoImpl.getSpNameid(ksd, 1);
+ 
 			break;
 		case "B":
 			ksd = TestB.testBCSQQK(driver, webdriver, ksd, devicename);
 			employes = UserDaoImpl.getSpNameid(ksd, 1);
+
 			break;
 		case "C":
 			ksd = TestC.testBCSQQK(driver, webdriver, ksd, devicename);
@@ -337,7 +339,7 @@ public class TestUser {
 			System.out.println("default");
 
 		}
-
+		WebSPUtil.assertQK(ksd,flow);
 	}
 	
 	// 请款审批同意专员
@@ -397,6 +399,7 @@ public class TestUser {
 				}
 				itename = ep.getUsername();
 				employes.remove(i);
+				WebSPUtil.assertQK2(ksd,flow);
 				break;
 			} else if (ep.getDesc().equals("请款审核组长")) {
 				System.out.println(ep.getUsername());
@@ -423,6 +426,7 @@ public class TestUser {
 
 				itename = ep.getUsername();
 				employes.remove(i);
+				WebSPUtil.assertQK2(ksd,flow);
 				break;
 			} else if (ep.getDesc().equals("BD经理")) {
 				System.out.println(ep.getUsername());
@@ -432,6 +436,8 @@ public class TestUser {
 				employes.remove(i);
 				break;
 			}
+
+			
 		}
 
 	}
