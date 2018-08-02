@@ -77,7 +77,7 @@ public class AppUtil {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 
 		capabilities.setCapability("automationName", "uiautomator2");
-		capabilities.setCapability("newCommandTimeout", 400);
+		capabilities.setCapability("newCommandTimeout", 4000);
 		capabilities.setCapability("device", "Android");
 		capabilities.setCapability("platformName", "Android");
 		// 虚拟机

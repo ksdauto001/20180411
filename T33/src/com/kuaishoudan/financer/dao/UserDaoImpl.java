@@ -383,7 +383,7 @@ public class UserDaoImpl {
 				 System.out.println("1toto"+decimalFormat.format(toalcharge));*/
 				
 				 
-				 map.put("regitst_type",rs.getString("regitst_type"));
+				 map.put("regist_type",rs.getString("regist_type"));
 				 map.put("pledge_type", rs.getString("pledge_type" ));
 			}
 		} catch (SQLException e) {

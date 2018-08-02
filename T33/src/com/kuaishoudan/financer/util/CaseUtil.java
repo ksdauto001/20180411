@@ -97,7 +97,7 @@ public class CaseUtil {
 /*		 System.out.println("car_loan_charge"+car_loan_charge);
 		 System.out.println("toto"+toalcharge);*/
 		 
-		 map.put("regitst_type",""+ ksd.getRegisttype());
+		 map.put("regist_type",""+ ksd.getRegisttype());
 		 map.put("pledge_type", ""+ksd.getPledge());
 		return map;
 	}

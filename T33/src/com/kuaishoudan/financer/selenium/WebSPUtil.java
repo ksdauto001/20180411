@@ -497,15 +497,16 @@ public class WebSPUtil {
 		
 		}
 		public static void assertQK(KSDCase ksd,String flow){
-			switch (flow) {
-			case "A":
- 				Assert.assertEquals(UserDaoImpl.getRisk_type(ksd), 1);
-				break;
-			case "B": 
-				Assert.assertEquals(UserDaoImpl.getRisk_type(ksd), 2);
-				break;
+		switch (flow) {
+		case "A":
+			Assert.assertEquals(UserDaoImpl.getRisk_type(ksd), 1);
+			break;
+		case "B":
+			Assert.assertEquals(UserDaoImpl.getRisk_type(ksd), 2);
+			break;
+ 
 
-			}
+		}
 			Assert.assertEquals(UserDaoImpl.getFinanStatue_id(ksd),
 					UserDaoImpl.getstatus_id("已请款"));
 

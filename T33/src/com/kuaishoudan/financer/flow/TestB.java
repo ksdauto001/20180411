@@ -313,13 +313,18 @@ public class TestB {
 		ksd.setImgtypes(list2);
 		System.out.println("$$$" + countImg);
 		ksd.setImgcount(countImg);
-		if (ksd.getCommit_type() == 2) {
-			AppUtil.df(driver,
-					By.id("com.kuaishoudan.financer:id/text_product")).click();// 常规产品列表
-		} else {
+		try {
+			if (ksd.getCommit_type() == 2) {
+				AppUtil.df(driver,
+						By.id("com.kuaishoudan.financer:id/text_product")).click();// 常规产品列表
+			} else {
 
-			AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/text_name"))
-					.click();// 首页列表
+				AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/text_name"))
+						.click();// 首页列表
+			}
+		} catch (org.openqa.selenium.WebDriverException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
 		}
 		AppUtil.df(driver,
 				By.id("com.kuaishoudan.financer:id/tv_not_apply_compact"))

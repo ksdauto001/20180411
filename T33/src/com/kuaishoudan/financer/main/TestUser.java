@@ -192,6 +192,11 @@ public class TestUser {
 					});
 
 		} catch (org.openqa.selenium.TimeoutException e) {
+			int confirmsize=driver.findElements(By.id("com.kuaishoudan.financer:id/dialog_confirm")).size();//改权限
+			if(confirmsize==1){
+				driver.findElement(By.id("com.kuaishoudan.financer:id/dialog_confirm")).click();
+			}
+			Thread.sleep(200);
 
 			int acs = driver.findElements(
 					By.id("com.kuaishoudan.financer:id/btn_login")).size();
