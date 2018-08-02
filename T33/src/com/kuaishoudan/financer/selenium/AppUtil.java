@@ -488,7 +488,7 @@ public class AppUtil {
 
 				try {
 					try {
-						Thread.sleep(100);
+						Thread.sleep(200);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -522,6 +522,13 @@ public class AppUtil {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 
+				}catch (org.openqa.selenium.WebDriverException e) {
+						// TODO Auto-generated catch block
+					//	e.printStackTrace();
+					df(
+							driver,
+							By.id("com.kuaishoudan.financer:id/text_product"))
+							.click();// 第一个产品
 				}
 				// _________
 
@@ -786,7 +793,7 @@ public class AppUtil {
 
 				try {
 					try {
-						Thread.sleep(100);
+						Thread.sleep(200);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -821,6 +828,13 @@ public class AppUtil {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 
+				}catch (org.openqa.selenium.WebDriverException e) {
+					// TODO Auto-generated catch block
+				//	e.printStackTrace();
+				df(
+						driver,
+						By.id("com.kuaishoudan.financer:id/text_product"))
+						.click();// 第一个产品
 				}
 
 				try {

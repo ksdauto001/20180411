@@ -657,6 +657,19 @@ public class RandomValue {
 				
 			ksd.setZx(Integer.parseInt(properties.getProperty("zx")));
 			ksd.setZxsp(Integer.parseInt(properties.getProperty("zxsp")) );
+			
+			String carprice=properties.getProperty("carprice");//车辆价格
+			if(!carprice.equals("")){
+				ksd.setCarprice(Double.parseDouble(carprice));			
+			}
+			String sqdk=properties.getProperty("sqdk");//申请贷款
+			if(!sqdk.equals("")){
+				ksd.setSqdk(Double.parseDouble(sqdk));			
+			}
+			String rzqx=properties.getProperty("rzqx");//融资期限
+			if(!rzqx.equals("")){
+				ksd.setHkqs(Integer.parseInt(rzqx));			
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
