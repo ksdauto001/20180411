@@ -68,6 +68,8 @@ public class TestDisagree {
 			long startTime = System.currentTimeMillis(); // 获取开始时间
 			ct.dfp(i);// 待分配app
 			switch (ksd.getInit_statue()) {
+			case 0:
+				break;
 			case 1:
 				ct.webYfp();// 已分配
 				break;
@@ -482,7 +484,7 @@ public class TestDisagree {
 	public void sp6() {
 
 		// ksd = WebSPUtil.testSP6(webdriver, ksd); // 请款审批同意专员
-		AppSPUtil.sp6App(driver, ksd);
+		AppSPUtil.sp6App(driver,webdriver, ksd);
 
 	}
 

@@ -4,9 +4,12 @@ import io.appium.java_client.android.AndroidElement;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.MalformedURLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -115,12 +118,33 @@ public class Teww {
 		if(a==Double.parseDouble(b)){
 			System.out.println("相等");
 		}*/
-		KSDCase ksd=new KSDCase();
+	/*	KSDCase ksd=new KSDCase();
 		ksd.setSqdk(24.368);
 		ksd.setPurchase_tax("1.1");
 		ksd.setInsurance("2.2");
 		ksd.setDeduction(2.5);ksd.setVin("11111111111111111110");
-		CaseUtil.getAdvance(ksd);
+		CaseUtil.getAdvance(ksd);*/
+		DecimalFormat decimalFormat = new DecimalFormat(
+				"###################.#######");
+		double dew=22.727*10000 ;
+ 
+		 BigDecimal dsd=new BigDecimal( dew );
+ 
+		double d=dsd.setScale(0, RoundingMode.HALF_UP).doubleValue() ;
+
+ 
+		double car_loan_charge=227270;
+		KSDCase ksd=new KSDCase ();
+		ksd.setPurchase_tax("3987.39");
+		ksd.setInsurance("4074.77");
+		ksd.setDeduction( 55.54 );
+		System.out.println(ksd.getDeduction());
+		 BigDecimal fff=new BigDecimal( ksd.getDeduction() );
+		 double deduction= fff.setScale(2, RoundingMode.HALF_UP).doubleValue();
+		 double toalcharge=car_loan_charge+Double.parseDouble(ksd.getPurchase_tax())+Double.parseDouble(ksd.getInsurance())- deduction;
+		/* BigDecimal toalchargedecimal=new BigDecimal( toalcharge );
+		 double toalcharge2= toalchargedecimal.setScale(2, RoundingMode.HALF_UP).doubleValue();*/
+		 System.out.println(decimalFormat.format(toalcharge));
 	}
 
 	public static void fa(){

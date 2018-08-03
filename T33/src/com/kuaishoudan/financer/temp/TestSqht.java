@@ -251,7 +251,7 @@ public class TestSqht {
 	public void sp6() {
 
 		ksd = WebSPUtil.testSP6(webdriver, ksd); // 请款审批同意专员
-		AppSPUtil.sp6App(driver, ksd);
+		AppSPUtil.sp6App(driver,webdriver, ksd);
 
 	}
 

@@ -352,7 +352,7 @@ public class Test6 {
 	public void test14() {
 
 		ksd = WebSPUtil.testSP6(webdriver, ksd); // 请款审批同意专员
-		AppSPUtil.sp6App(driver, ksd);
+		AppSPUtil.sp6App(driver,webdriver, ksd);
 		List<Integer> lisss = ksd.getImgtypes();
 		for (int i = 0; i < lisss.size(); i++) {
 			System.out.println("##" + lisss.get(i));
@@ -368,7 +368,7 @@ public class Test6 {
 	public void test15() {
 		ksd.setImgcount(4);
 		ksd = WebDisAgree.testSP7(webdriver, ksd); // 请款审批同意专员
-		AppSPUtil.sp6App(driver, ksd);
+		AppSPUtil.sp6App(driver,webdriver, ksd);
 		ksd = WebSPUtil.testSP7(webdriver, ksd); // 请款审批同意专员
 
 		String statue = AppSPUtil.getActstatue(driver);
