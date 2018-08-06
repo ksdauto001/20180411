@@ -23,7 +23,10 @@ public class SpplierDaoImpl {
 
 		KSDCase ksd = RandomValue.getRandom();
 		;
-
+		List<String>fffs=getSuplier(ksd);
+		for(int i=0;i<fffs.size();i++){
+			System.out.println(fffs.get(i));
+		}
 	}
 
 	public static Map<String, String> getCustomer(KSDCase ksd) {
@@ -59,6 +62,35 @@ public class SpplierDaoImpl {
 		}
 		System.out.println(ff);
 		return map;
+	}
+	public static List<String> getSuplier(KSDCase ksd) {
+		String ff = "";
+		List<String> list  = new ArrayList<String>();
+		String sql = " SELECT ts.id,ts.`name`,ts.supplier_code FROM tb_supplier ts ,tb_employee e WHERE FIND_IN_SET(e.id, ts.follow_people) and ts.flag=3 and  e.`name`=? and e.position_desc like '%测试%' order by ts.start_with ";
+		DBUtil util = new DBUtil();
+		Connection conn = util.openConnection();
+ 
+		try {
+
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			 
+				pstmt.setString(1, ksd.getLoginname());
+		
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(3));
+			 
+				// System.out.println(rs.getString("name")+rs.getString("status")+rs.getString("phone")+rs.getString("id_type")+rs.getString("address"));
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+			e.printStackTrace();
+		} finally {
+			// util.closeConn(conn);
+		}
+
+		return list;
 	}
 
 }
