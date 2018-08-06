@@ -1,6 +1,6 @@
 package com.kuaishoudan.financer.bean;
 
-public class supplier {
+public class Supplier {
 
 	int  id;
 	String name;

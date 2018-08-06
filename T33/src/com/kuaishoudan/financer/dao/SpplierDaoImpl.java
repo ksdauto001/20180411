@@ -80,7 +80,7 @@ public class SpplierDaoImpl {
 
 			while (rs.next()) {
 				list.add(rs.getString(3));
-			 
+				
 				// System.out.println(rs.getString("name")+rs.getString("status")+rs.getString("phone")+rs.getString("id_type")+rs.getString("address"));
 			}
 		} catch (SQLException e) {
