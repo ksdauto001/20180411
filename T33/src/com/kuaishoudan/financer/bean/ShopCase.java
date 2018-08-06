@@ -5,7 +5,7 @@ package com.kuaishoudan.financer.bean;
  * @author apple
  *
  */
-public class ShopBeanCase {
+public class ShopCase {
 
 	// 新建商户界面
 	String shopname;// 商户名称

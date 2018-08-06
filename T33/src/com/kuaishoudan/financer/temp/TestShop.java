@@ -12,7 +12,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.kuaishoudan.financer.bean.KSDCase;
-import com.kuaishoudan.financer.bean.ShopBeanCase;
+ 
+import com.kuaishoudan.financer.bean.ShopCase;
 import com.kuaishoudan.financer.selenium.AppSPUtil;
 import com.kuaishoudan.financer.selenium.AppShopUtil;
 import com.kuaishoudan.financer.selenium.AppUtil;
@@ -28,7 +29,7 @@ public class TestShop {
 	String devicename = "";
 
 //	KSDCase ksd = null;
-	ShopBeanCase  shopBeanCase=new ShopBeanCase();
+	ShopCase  shopCase=new ShopCase();
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
        
@@ -68,8 +69,8 @@ public class TestShop {
 	//创建商户，备案信息
 	public void appCreateShop(){
 		try {
-		    shopBeanCase = RandomValue.getShop();
-			shopBeanCase = AppShopUtil.createShop(driver, shopBeanCase,devicename);
+		    shopCase = RandomValue.getShop();
+			shopCase = AppShopUtil.createShop(driver, shopCase,devicename);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

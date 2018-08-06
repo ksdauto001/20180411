@@ -25,7 +25,8 @@ import org.openqa.selenium.WebElement;
 
 import com.kuaishoudan.financer.bean.KSDCase;
 import com.kuaishoudan.financer.bean.RequestPayout;
-import com.kuaishoudan.financer.bean.ShopBeanCase;
+
+import com.kuaishoudan.financer.bean.ShopCase;
 import com.kuaishoudan.financer.dao.UserDaoImpl;
 import com.kuaishoudan.financer.selenium.AppUtil;
 import com.kuaishoudan.financer.selenium.WebUtil;
@@ -311,8 +312,8 @@ public class RandomValue {
 		return map;
 	}
 
-	public static ShopBeanCase getShop() {
-		ShopBeanCase shopBeanCase = new ShopBeanCase();
+	public static ShopCase getShop() {
+		ShopCase shopBeanCase = new ShopCase();
 
 		int businessType = (int) (Math.random() * 3);
 		int storeType = (int) (Math.random() * 4);

@@ -20,7 +20,8 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.kuaishoudan.financer.bean.KSDCase;
-import com.kuaishoudan.financer.bean.ShopBeanCase;
+import com.kuaishoudan.financer.bean.ShopCase;
+
 import com.kuaishoudan.financer.dao.UserDaoImpl;
 import com.kuaishoudan.financer.selenium.AppSPUtil;
 import com.kuaishoudan.financer.selenium.AppShopUtil;
@@ -80,7 +81,7 @@ public class Test9 {
 	@Test(priority = 2, invocationCount = 1, threadPoolSize = 1)
 	public void test2() throws Exception {
 
-		ShopBeanCase shopBeanCase = RandomValue.getShop();
+		ShopCase shopBeanCase = RandomValue.getShop();
 		shopBeanCase = AppShopUtil.createShop(driver, shopBeanCase, devicename);
 
 	}
