@@ -671,6 +671,8 @@ public class RandomValue {
 			if(!rzqx.equals("")){
 				ksd.setHkqs(Integer.parseInt(rzqx));			
 			}
+			ksd.setMgccar_phone(properties.getProperty("mgccar_phone"));//麦个车手机号
+			ksd.setMgccar_pwd(properties.getProperty("mgccar_pwd"));//麦个车密码
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
