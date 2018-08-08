@@ -1,12 +1,15 @@
 package com.kuaishoudan.mgccar;
 
+import io.appium.java_client.MobileDriver;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.DriverManager;
 import java.util.List;
 import java.util.Properties;
 
@@ -15,6 +18,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -49,14 +53,17 @@ public class Mgcc {
 */			
 	
 			Thread.sleep(400);
-			AppUtil.df(driver,By.id("com.kuaishoudan.mgccar:id/cb_no_remain")).click();//勾选不再提醒
+/*			AppUtil.df(driver,By.id("com.kuaishoudan.mgccar:id/cb_no_remain")).click();//勾选不再提醒
 			AppUtil.df(driver,
 					By.id("com.kuaishoudan.mgccar:id/dialog_update_cancel"))
 					.click();// 稍后升级
-
-			/*
-			 * mgcGJBXX(driver,ksd); mgcGCXX(driver,ksd);
-			 */
+//*/			AndroidDriver driver2=AppUtil.getDriver();
+		MobileDriver d=driver;
+		driver.launchApp();	
+		Thread.sleep(400);
+	 
+			  mgcGJBXX(driver,ksd); mgcGCXX(driver,ksd);
+			  driver2.launchApp();
 
 	
 		} catch (IOException e) {
@@ -70,7 +77,7 @@ public class Mgcc {
 	}
 	public void tearDown(){
 		driver.quit();
- 
+		
 		db.closeConn1();
 	}
 	public void setUp() throws IOException, InterruptedException {
@@ -170,7 +177,7 @@ public class Mgcc {
 		capabilities.setCapability("app-activity",
 				"com.kuaishoudan.mgccar.personal.activity.WelcomeActivity");
 		AndroidDriver<WebElement> driver = new AndroidDriver<WebElement>(
-				new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+				new URL("http://127.0.0.1:4725/wd/hub"), capabilities);
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
