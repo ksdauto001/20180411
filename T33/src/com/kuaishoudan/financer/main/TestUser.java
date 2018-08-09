@@ -17,6 +17,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -214,6 +215,11 @@ public class TestUser {
 					By.id("com.kuaishoudan.financer:id/btn_login")).size();
 			if (acs == 1) {
 				AppUtil.login(driver, devicename, ksd);// 登录
+
+			/*	WebDriverWait wait = new WebDriverWait(driver, 1);
+				WebElement target = wait.until(
+					     ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@text,'"+"快收单"+"')]")));
+					System.out.println(target.getText());*/
 			}
 			try {
 				new WebDriverWait(driver, 1)

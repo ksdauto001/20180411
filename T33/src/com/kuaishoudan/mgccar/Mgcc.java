@@ -20,6 +20,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.kuaishoudan.financer.bean.KSDCase;
@@ -58,14 +59,16 @@ public class Mgcc {
 					By.id("com.kuaishoudan.mgccar:id/dialog_update_cancel"))
 					.click();// 稍后升级
 //*/			AndroidDriver driver2=AppUtil.getDriver();
-		MobileDriver d=driver;
+	
+
+	MobileDriver d=driver;
 		driver.launchApp();	
 		Thread.sleep(400);
 	 
-			  mgcGJBXX(driver,ksd); mgcGCXX(driver,ksd);
+			//  mgcGJBXX(driver,ksd); mgcGCXX(driver,ksd);
 			  driver2.launchApp();
 
-	
+			  
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
