@@ -124,7 +124,7 @@ public class Teww {
 		ksd.setInsurance("2.2");
 		ksd.setDeduction(2.5);ksd.setVin("11111111111111111110");
 		CaseUtil.getAdvance(ksd);*/
-		DecimalFormat decimalFormat = new DecimalFormat(
+		/*DecimalFormat decimalFormat = new DecimalFormat(
 				"###################.#######");
 		double dew=22.727*10000 ;
  
@@ -142,9 +142,17 @@ public class Teww {
 		 BigDecimal fff=new BigDecimal( ksd.getDeduction() );
 		 double deduction= fff.setScale(2, RoundingMode.HALF_UP).doubleValue();
 		 double toalcharge=car_loan_charge+Double.parseDouble(ksd.getPurchase_tax())+Double.parseDouble(ksd.getInsurance())- deduction;
-		/* BigDecimal toalchargedecimal=new BigDecimal( toalcharge );
-		 double toalcharge2= toalchargedecimal.setScale(2, RoundingMode.HALF_UP).doubleValue();*/
-		 System.out.println(decimalFormat.format(toalcharge));
+		 BigDecimal toalchargedecimal=new BigDecimal( toalcharge );
+		 double toalcharge2= toalchargedecimal.setScale(2, RoundingMode.HALF_UP).doubleValue();
+	*/	
+		/*double ffa=23.4598;
+		  DecimalFormat df2 = new DecimalFormat("#.00");
+	     System.out.println(df2.format(ffa));*/
+	KSDCase	ksd = RandomValue.getRandom();
+		  DecimalFormat df2 = new DecimalFormat("#.00");
+		 ksd.setCarprice( Double.parseDouble(df2.format(ksd.getCarprice())));
+		 ksd.setSqdk( Double.parseDouble(df2.format(ksd.getSqdk())));
+		System.out.println( ksd.getCarprice()+","+ksd.getSqdk());
 	}
 
 	public static void fa(){
