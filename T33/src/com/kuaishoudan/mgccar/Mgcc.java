@@ -477,7 +477,7 @@ public class Mgcc {
 	/**
 	 * app请款(未完成)
 	 */
-	public static  void  mgcQk(){
+	public static  void  mgcQk(AndroidDriver<WebElement> driver, KSDCase ksd){
 		//账户名
 		AppUtil.df(driver, By.id("com.kuaishoudan.mgccar:id/edit_remark"))
 		.sendKeys(ksd.getRemark());
