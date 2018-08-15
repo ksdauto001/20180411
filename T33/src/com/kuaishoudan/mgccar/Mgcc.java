@@ -510,6 +510,15 @@ public class Mgcc {
 		
 	}
 	/**
+	 * 所需材料
+	 * @param driver
+	 * @param ksd
+	 */
+	public  static void sxcl(AndroidDriver<WebElement> driver, KSDCase ksd){
+		
+		
+	}
+	/**
 	 * 上传照片
 	 * 
 	 * @param driver
