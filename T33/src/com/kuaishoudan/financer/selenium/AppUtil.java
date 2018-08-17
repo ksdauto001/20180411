@@ -1,6 +1,7 @@
 package com.kuaishoudan.financer.selenium;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
@@ -11,6 +12,7 @@ import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -90,9 +92,9 @@ public class AppUtil {
 		// support Chinese
 		capabilities.setCapability("unicodeKeyboard", true);
 		capabilities.setCapability("resetKeyboard", true);
-
-		// capabilities.setCapability("autoLaunch", false);
-
+	//	if (devicetoken.contains("4") && appInstall == 1) {
+			//capabilities.setCapability("autoLaunch", false);// ------------
+	//	}
 		capabilities.setCapability("noSign", true);
 		capabilities.setCapability("noReset", true);
 
@@ -100,12 +102,13 @@ public class AppUtil {
 		capabilities.setCapability("app-package", "com.kuaishoudan.financer");
 		capabilities.setCapability("app-activity",
 				"com.kuaishoudan.financer.activity.act.WelcomeActivity");
-		AndroidDriver<WebElement> driver = new AndroidDriver<WebElement>(new URL(
-				"http://127.0.0.1:4723/wd/hub"), capabilities);
-		
-	/*	   driver = EventFiringWebDriverFactory.getEventFiringWebDriver(driver,
-		   new AlertListener(), new ElementListener());*/
-		 
+		AndroidDriver<WebElement> driver = new AndroidDriver<WebElement>(
+				new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+
+		/*
+		 * driver = EventFiringWebDriverFactory.getEventFiringWebDriver(driver,
+		 * new AlertListener(), new ElementListener());
+		 */
 
 		return driver;
 
@@ -1741,6 +1744,44 @@ public class AppUtil {
 		//driver.findElements(By.id("com.kuaishoudan.financer:id/iv_is_show"))
 		ivts.get(2).click();
 
+	}
+	
+	//备注
+	public void temp(){
+		/*	String devicetoken = "";
+		int appInstall = 1;// 1已安装
+		try {
+			Process process = Runtime.getRuntime().exec(
+					"adb shell getprop ro.product.model");
+			process.waitFor();
+			InputStreamReader isr = new InputStreamReader(
+					process.getInputStream());
+			BufferedReader br = new BufferedReader(isr);
+			devicetoken = br.readLine().trim();
+			System.out.println(devicetoken);
+			br.close();
+			Process process2 = Runtime.getRuntime().exec(
+					"adb shell dumpsys  package com.kuaishoudan.financer");
+			process.waitFor();
+			InputStreamReader isr2 = new InputStreamReader(
+					process2.getInputStream());
+			BufferedReader br2 = new BufferedReader(isr2);
+			String content = "";
+			while ((content = br2.readLine()) != null) {
+				String result = content.trim();
+			//	System.out.println(result);
+				if (result.contains("Unable to find package")) {
+					appInstall = 0;
+					break;
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 	}
 
 }
