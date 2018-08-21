@@ -46,15 +46,19 @@ public class Mgcc {
 		Mgcc mc = new Mgcc();
 		try {
 			mc.setUp();
- 	
-	
-			Thread.sleep(400);
- 
-	 
-			//  mgcGJBXX(driver,ksd); mgcGCXX(driver,ksd);
- 
 
-			  
+			int count = mc.getCount();
+
+			for (int i = 0; i < count; i++) {
+				Thread.sleep(400);
+
+				testJj(driver, ksd);// 进件
+
+				mgcGJBXX(driver, ksd);// 基本信息
+				mgcGCXX(driver, ksd);// 购车信息
+
+				upload(driver);// 上传照片
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -64,6 +68,10 @@ public class Mgcc {
 		}
 		mc.tearDown();
 	}
+	public int getCount() {
+		return WebUtil.getCount();
+	}
+
 	public void tearDown(){
 		driver.quit();
 		
@@ -170,7 +178,7 @@ public class Mgcc {
 		capabilities.setCapability("app-activity",
 				"com.kuaishoudan.mgccar.personal.activity.WelcomeActivity");
 		AndroidDriver<WebElement> driver = new AndroidDriver<WebElement>(
-				new URL("http://127.0.0.1:4725/wd/hub"), capabilities);
+				new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -232,6 +240,15 @@ public class Mgcc {
 		AppUtil.df(driver,By.id("com.kuaishoudan.mgccar:id/bind_no")).sendKeys(ksd.getUsername());//请输入姓名
 		AppUtil.df(driver,By.id("com.kuaishoudan.mgccar:id/tv_succed")).click();//完成
 	}
+	
+	public static void testJj(AndroidDriver<WebElement> driver, KSDCase ksd){
+		List<WebElement> pros=driver.findElements(By.id("com.kuaishoudan.mgccar:id/tv_produce_name"));
+		pros.get(2).click();//金融产品
+		AppUtil.df(driver, By.id("com.kuaishoudan.mgccar:id/tv_add")).click();//进件
+		
+		
+		
+	}
 	public static void mgcRegist() {
 
 		AppUtil.df(driver, By.id("com.kuaishoudan.mgccar:id/btn_registered"))
@@ -284,8 +301,8 @@ public class Mgcc {
 	}
 
 	public static void mgcGJBXX(AndroidDriver<WebElement> driver, KSDCase ksd) {
-		AppUtil.df(driver,
-				By.id("com.kuaishoudan.mgccar:id/tv_toolbar_confirm")).click();
+/*		AppUtil.df(driver,
+				By.id("com.kuaishoudan.mgccar:id/tv_toolbar_confirm")).click();*/
 		AppUtil.df(driver, By.id("com.kuaishoudan.mgccar:id/edit_name"))
 				.sendKeys(ksd.getUsername());
 		AppUtil.df(driver, By.id("com.kuaishoudan.mgccar:id/edit_phone"))
@@ -360,26 +377,49 @@ public class Mgcc {
 				.sendKeys("" + ksd.getSqdk());// 预估贷款额
 		AppUtil.df(driver, By.id("com.kuaishoudan.mgccar:id/text_periods"))
 				.click();
-
-		driver.findElements(By.id("com.kuaishoudan.mgccar:id/text_select"))
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		driver.findElements(By.id("com.kuaishoudan.mgccar:id/tv_title"))
 				.get(ksd.getHkqs()).click();// 还款期数
 		try {
-			Thread.sleep(200);
+			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		AppUtil.df(driver, By.id("com.kuaishoudan.mgccar:id/edit_remark"))
+		AppUtil.df(driver, By.id("com.kuaishoudan.mgccar:id/tv_rate"))
+				.click();// 费率
+		try {
+			Thread.sleep(300);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		driver.findElements( By.id("com.kuaishoudan.mgccar:id/tv_title")).get(1)
+					.click();
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+	driver.findElement(By.id("com.kuaishoudan.mgccar:id/edit_remark"))
 				.sendKeys(ksd.getRemark());// 备注.
 		int gq = ksd.getQygr();
 		if (gq == 2) {
 			AppUtil.df(driver, By.id("com.kuaishoudan.mgccar:id/cb_main"))
-					.click();// 企业进件
+					.click();// 企业进件代码
 			AppUtil.df(driver,
-					By.id("com.kuaishoudan.mgccar:id/edit_company_name"))
+					By.id("com.kuaishoudan.mgccar:id/et_company_name"))
 					.sendKeys(ksd.getBusinessname());// 企业名称.
-			AppUtil.df(driver, By.id("com.kuaishoudan.mgccar:id/tv_company_no"))
+			AppUtil.df(driver, By.id("com.kuaishoudan.mgccar:id/et_company_no"))
 					.sendKeys(ksd.getBusinessid());// 营业执照.
 		}
 		AppUtil.df(driver, By.id("com.kuaishoudan.mgccar:id/btn_next")).click();// 下一步
@@ -524,34 +564,34 @@ public class Mgcc {
 	 * @param driver
 	 * @return
 	 */
-	public static String upload(final AndroidDriver<WebElement> driver,
-			KSDCase ksd) throws org.openqa.selenium.TimeoutException {
+	public static String upload(final AndroidDriver<WebElement> driver) throws org.openqa.selenium.TimeoutException {
 		String acstatue = "";
-		int imgcount = ksd.getImgcount();
-		// imgcount=1;
-		int count1 = imgcount / 20;
-		int count2 = imgcount % 20;
+	//	int imgcount = ksd.getImgcount();
+		 int imgcount=2;
+		int count1 = imgcount / 10;
+		int count2 = imgcount % 10;
 		try {
-
-			for (int j = 0; j < count1; j++) {// 20
+			AppUtil.df(driver, By.id("com.kuaishoudan.mgccar:id/iv_add"))
+			.click();// 上传照片;
+			for (int j = 0; j < count1; j++) {// 10
 
 				if (j > 0) {
 
-					AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/btn_add"))
+					AppUtil.df(driver, By.id("com.kuaishoudan.mgccar:id/iv_add"))
 							.click();// 上传照片;
 
 				}
 
 				AppUtil.df(
 						driver,
-						By.id("com.kuaishoudan.financer:id/dialog_photo_select_btn_gallery"))
+						By.id("com.kuaishoudan.mgccar:id/tv_choose_img"))
 						.click();
 				// 从相册选择
 				List<WebElement> imgs =	AppUtil.dfs(driver,
-						By.id("com.kuaishoudan.financer:id/iv_thumb"));
-				for (int i = 0; i < 12; i++) {
+						By.id("com.kuaishoudan.mgccar:id/iv_thumb"));
+				for (int i = 0; i < 10; i++) {
 					if (i == 0 && j > 0) {
-						for (int k = 0; k < (j * 20); k++)
+						for (int k = 0; k < (j * 10); k++)
 
 							imgs.get(i).click();// 添加图片（驾驶证）
 
@@ -564,32 +604,10 @@ public class Mgcc {
 
 					imgs.get(i).click();// 添加图片（驾驶证）
 				}
-				AppUtil.swipeToUp3(driver, 800);// 向上滑动
-				Thread.sleep(200);
-				List<WebElement> ivts = AppUtil.dfs(driver,
-						By.id("com.kuaishoudan.financer:id/iv_check"));
-
-				List<WebElement> imgsss = AppUtil.dfs(driver,
-						By.id("com.kuaishoudan.financer:id/iv_thumb"));
-				System.out.println(ivts.size() + ",," + imgsss.size());
-				int ccc = imgsss.size() - ivts.size();
-				int m = 0;
-				for (int i = 0; i < ivts.size(); i++) {
-					if (m == 8) {
-						break;
-					}
-					if (ivts.get(i).getAttribute("selected").equals("false")) {
-						imgsss.get(i + ccc).click();
-						// 添加图片（驾驶证）
-
-						imgsss.get(i + ccc).click();// 添加图片（驾驶证）
-						m++;
-
-					}
-				}
-				AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/btn_ok")).click();
+			
+				AppUtil.df(driver, By.id("com.kuaishoudan.mgccar:id/btn_ok")).click();
 				// 两种证上传——确定按钮
-
+				Thread.sleep( 500);
 				AppUtil.swipeToUp2(driver, 1000);// 向上滑动
 				Thread.sleep(8500);
 
@@ -600,19 +618,19 @@ public class Mgcc {
 			} else {
 
 				if (count1 != 0) {
-					AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/btn_add"))
+					AppUtil.df(driver, By.id("com.kuaishoudan.mgccar:id/iv_add"))
 							.click();// 上传照片;
 
 				}
 				AppUtil.df(
 						driver,
-						By.id("com.kuaishoudan.financer:id/dialog_photo_select_btn_gallery"))
+						By.id("com.kuaishoudan.mgccar:id/tv_choose_img"))
 						.click();
 				// 从相册选择
 				
 				Thread.sleep(200);
 				List<WebElement> imgs = AppUtil.dfs(driver,
-						By.id("com.kuaishoudan.financer:id/iv_thumb"));
+						By.id("com.kuaishoudan.mgccar:id/iv_thumb"));
 				if (count2 == 0 && count1 == 0) {
 
 					imgs.get(0).click();// 添加图片（驾驶证）
@@ -632,57 +650,20 @@ public class Mgcc {
 
 						imgs.get(i).click();// 添加图片（驾驶证）
 					}
-				} else if (count2 > 12 && count2 < 21) {
-
-					for (int i = 0; i < 12; i++) {
-						if (i != 0)
-
-							imgs.get(i).click();// 添加图片（驾驶证）
-
-						imgs.get(i).click();// 添加图片（驾驶证）
-					}
-					AppUtil.swipeToUp3(driver, 800);// 向上滑动
-					Thread.sleep(200);
-					List<WebElement> ivts = AppUtil.dfs(driver,
-							By.id("com.kuaishoudan.financer:id/iv_check"));
-
-					List<WebElement> imgsss = AppUtil.dfs(driver,
-							By.id("com.kuaishoudan.financer:id/iv_thumb"));
-					// System.out.println(ivts.size()+",,"+imgsss.size());
-					int ccc = imgsss.size() - ivts.size();
-					int n = 0;
-					for (int i = 0; i < ivts.size(); i++) {
-						if (n == (count2 - 12)) {
-							break;
-						}
-						if (ivts.get(i).getAttribute("selected")
-								.equals("false")) {
-
-							imgsss.get(i + ccc).click();
-							// 添加图片（驾驶证）
-
-							imgsss.get(i + ccc).click();// 添加图片（驾驶证）
-							n++;
-						}
-					}
-
-				}
+				} 
 
 				//
-				AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/btn_ok")).click();
+				AppUtil.df(driver, By.id("com.kuaishoudan.mgccar:id/btn_ok")).click();
 				// 两种证上传——确定按钮
 
-				Thread.sleep(count2 * 400);
+				Thread.sleep(count2 * 600);
 
 			}
+
 			driver.findElement(
-					By.id("com.kuaishoudan.financer:id/toolbar_confirm"))
+					By.id("com.kuaishoudan.mgccar:id/tv_complain"))
 					.click();
-			// 上传完照片-确认按钮
-			driver.findElement(
-					By.id("com.kuaishoudan.financer:id/dialog_custom_confirm"))
-					.click();
-			// 提醒确定是
+			// 提交
 
 			Thread.sleep(1200);
 
@@ -693,71 +674,14 @@ public class Mgcc {
 		} catch (org.openqa.selenium.TimeoutException e) {
 			// System.out.println(e);
 		} catch (org.openqa.selenium.NoSuchElementException ex) {
-			// df(driver,By.id("com.kuaishoudan.financer:id/toolbar_back")).click();//返回按钮
-			// System.out.println(ex);
-			/*
-			 * String title=
-			 * driver.findElement(By.id("com.kuaishoudan.financer:id/toolbar_title"
-			 * )).getText().trim(); if (title.equals("拍摄资料")) {
-			 */
-			for (int j = 0; j < 5; j++) {
-				// System.out.println("@@@@@@@@@@@");
-				try {
-					Thread.sleep(500);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			 	int usestatue = UserDaoImpl.getFinanStatue_id(ksd);
-
-			  	if (usestatue == 1) {
-			/*	int ss= driver.findElements(By.id("com.kuaishoudan.financer:id/toolbar_confirm")).size();
-				if (ss==1) {*/
-					driver.findElement(
-							By.id("com.kuaishoudan.financer:id/toolbar_confirm"))
-							.click();
-					// 上传完照片-确认按钮
-					int size = driver
-							.findElements(
-									By.id("com.kuaishoudan.financer:id/dialog_custom_confirm"))
-							.size();
-					// System.out.println("size"+size);
-					if (size == 1) {
-						driver.findElement(
-								By.id("com.kuaishoudan.financer:id/dialog_custom_confirm"))
-								.click();
-						// 提醒确定是
-					}
-
-				} else {
-
-					break;
-				}
-				// }
-			}
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+			
 		} catch (org.openqa.selenium.WebDriverException e) {
 			System.out.println(e);
 			e.printStackTrace();
 		}
-		int countR = driver.findElements(
-				By.className("android.widget.RelativeLayout")).size();
-		// System.out.println("--==="+countR);
-		if (countR == 8) {
-
-			AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/tv_guide_know"))
-					.click();// 我知道了
-			AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/tv_guide_know"))
-					.click();// 我知道了
-
-		}
-		AppUtil.df(driver, By.id("com.kuaishoudan.financer:id/toolbar_back"))
+	
+	
+		AppUtil.df(driver, By.id("com.kuaishoudan.mgccar:id/iv_toolbar_back"))
 				.click();// 返回按钮
 		return acstatue;
 	}
